@@ -1,0 +1,8 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php/2019_USAMO_Problems/Problem_1",
+  "title": "2019 USAMO Problems/Problem 1",
+  "problem": "\\mathbb{N}\n\nf:\\mathbb{N}\\to\\mathbb{N}\n\nf(1000)\n\n\\underbrace{f(f(\\ldots f}_{f(n)\\text{ times}}(n)\\ldots))=\\frac{n^2}{f(f(n))}",
+  "solution": "f^r(x)\n\nf^{r-1}(x)\n\nf^1(x)=f(x)\n\n\\hfill \\break \\hfill \\break\n\nf(p)=f(q)\n\nf^2(p)=f^2(q)\n\nf^{f(p)}(p)=f^{f(q)}(q)\n\n\\implies p^2=f^2(p)\\cdot f^{f(p)}(p)=f^2(q)\\cdot f^{f(q)}(q)=q^2\n\n\\implies p=\\pm q\n\n\\implies p=q\n\np,q&gt;0\n\nf^r(b)=a\n\nf(a)=a\n\nf^r(b)=a=f^r(a)\n\nf^2(m)=f^{f(m)}(m)=m\n\nf(m)=m\n\nf(m)=k\n\nf^2(m)=m\n\nf(k)=m\n\nf^2(k)=k\n\n\\newline f^2(k)\\cdot f^{f(k)}(k)=k^2\n\nk\\neq0\n\nf^{f(k)}(k)=k\n\n\\implies f^m(k)=k\n\n\\implies f^{gcd(m, 2)}(k)=k\n\n\\implies f(k)=k\n\nf^2(m)\\cdot f^{f(m)}(m)=m^2\n\n(1) f^2(m)=k&lt;m\n\n(2) f^{f(m)}(m)=k&lt;m\n\n(3) f^2(m)=m\n\nf^{f(m)}(m)=m\n\nf(1000)\n\nf(1000)=x, f(x)=1000\n\nf(k)=k\n\n1000\n\nf^2(n)\\cdot f^{f(n)}(n)=n\\cdot n=n^2\n\nf(n)\n\nf^2(n)=n",
+  "answer": ""
+}
