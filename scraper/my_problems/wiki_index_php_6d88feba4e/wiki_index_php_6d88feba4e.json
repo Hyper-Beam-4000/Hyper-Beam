@@ -1,0 +1,8 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_USAMO_Problems/Problem_3",
+  "title": "2019 USAMO Problems/Problem 3",
+  "problem": "f(n)\\in K\n\nn\\in K",
+  "solution": "f(n)=k\n\nk\\in K\n\nf(n)=an+b\n\nb\\in K\n\nb&lt;a\n\nn\\in K\n\nf(n)\\notin K\n\nf(n)=k\\notin K\n\nf(n)=an\n\n\\lg a\n\n\\bmod\\ 1\n\n[\\lg 7,\\lg 8)\n\nx&gt;0\n\nn=a^{x-1}\n\nan\\notin K\n\nf(n)=an^x\n\nx&gt;1\n\nm\\in K\n\naxm\\notin K\n\nx\\ge10\n\n\\frac12ax(x-1)\n\n\\frac12ax(x-1)m^2\\notin K\n\nf(n)=a_0+a_1n+a_2n^2+...+a_xn^x\n\nm,y&gt;0\n\nf(m*10^y)\n\nax+b\n\na&gt;0\n\nb&gt;a\n\nf(n)\n\nf(10^y+m)=a10^{yx}+axm*10^{y(x-1)}+...+am^x\n\nf(10^y+m)=a10^{yx}+axm*10^{y(x-1)}+\\frac12ax(x-1)m^2*10^{y(x-2)}+...+am^x\n\nf(m*10^y)=a_xm^x*10^{yx}+...+a_1m*10^y+a_0",
+  "answer": ""
+}

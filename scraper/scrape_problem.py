@@ -5,6 +5,9 @@ Scrapes AoPS Wiki pages and outputs:
  - JSON metadata
  - LaTeX .tex file
  - Lean .lean skeleton
+
+Updates:
+ - Saves files into a dedicated subfolder per problem.
 """
 
 import argparse
@@ -233,9 +236,15 @@ SOLUTION_PLACEHOLDER
 # File writing
 # ----------------------------
 def save_problem(metadata: Dict[str, Any], outdir: str) -> Dict[str, str]:
-    ensure_dir(outdir)
+    # 1. Generate ID first
     pid = make_id_from_url(metadata["url"])
-    base = os.path.join(outdir, pid)
+    
+    # 2. Create the specific subfolder for this problem
+    problem_dir = os.path.join(outdir, pid)
+    ensure_dir(problem_dir)
+
+    # 3. Define the base path inside that subfolder
+    base = os.path.join(problem_dir, pid)
 
     json_path = base + ".json"
     tex_path = base + ".tex"

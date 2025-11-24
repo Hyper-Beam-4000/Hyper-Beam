@@ -1,1 +1,1 @@
-Usage: python scraper.py --url "https://artofproblemsolving.com/wiki/index.php/2019_USAMO_Problems/Problem_2" --out my_problems
+Usage: python scrape_problem.py --url "https://artofproblemsolving.com/wiki/index.php/2019_USAMO_Problems/Problem_2" --out my_problems

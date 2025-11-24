@@ -1,0 +1,8 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_USAMO_Problems/Problem_6",
+  "title": "2019 USAMO Problems/Problem 6",
+  "problem": "x,y,z\n\n2xyz=x+y+z\n\n\\frac{P(x)}{yz}+\\frac{P(y)}{zx}+\\frac{P(z)}{xy}=P(x-y)+P(y-z)+P(z-x)",
+  "solution": "P(x)=c\n\n\\dfrac{c(x+y+z)}{xyz}=3c\n\n2c=3c.\n\nc=0.\n\nx,y,z\n\n2xyz=x+y+z\n\nz=0.\n\nz=0,\n\ny=-x\n\nx(P(x)-P(-x))=0.\n\nz=\\dfrac{x+y}{2xy-1}.\n\n(2xy-1)^N\n\nA(x,y)=B(x,y)\n\nx, y\n\nx\\ne 0, y\\ne 0, x+y\\ne 0\n\n2xy-1\\ne 0.\n\ny=0,\n\nx^{N+1}(P(x)-P(-x))=0.\n\nP(x)\n\ncP(x)\n\ny=\\dfrac{1}{x}\n\nz=x+\\dfrac{1}{x}.\n\nP(x)=P(-x),\n\n2nx^{n-1}\n\nn&gt;2\n\nx^{n-1}\n\n(1+a_0)x.\n\nn&gt;2.\n\nn=2,\n\n4=1+a_0.\n\na_0=3.\n\nP(x)=c(x^2+3)\n\nxP(x)+yP(y)+zP(z)=xyz(P(x-y)+P(y-z)+P(z-x))\n\nxP(x)+yP(y)+\\dfrac{x+y}{2xy-1}P(\\dfrac{x+y}{2xy-1})=xy\\dfrac{x+y}{2xy-1}(P(x-y)+P(y-\\dfrac{x+y}{2xy-1})+P(\\dfrac{x+y}{2xy-1}-x)).\n\nP(x)=x^n+a_{n-2}x^{n-2}+\\cdots +a_2x^2+a_0,\n\nxP(x)+\\dfrac{1}{x}P\\left (\\dfrac{1}{x}\\right )+\\left ( x+\\dfrac{1}{x}\\right ) P\\left ( x+\\dfrac{1}{x}\\right ) =\\left (x+\\dfrac{1}{x}\\right )\\left ( P\\left (x-\\dfrac{1}{x}\\right )+P(-x)+P\\left (\\dfrac{1}{x}\\right )\\right ).\n\n\\left (x+\\dfrac{1}{x}\\right ) \\left (P\\left (x+\\dfrac{1}{x}\\right )-P\\left (x-\\dfrac{1}{x}\\right )\\right )=\\dfrac{1}{x}P(x)+xP\\left (\\dfrac{1}{x}\\right ).\n\nc_{n-1}x^{n-1}+c_{n-3}x^{n-3}+\\cdots+c_1x+c_{-1}x^{-1}+\\cdots+c_{-n+1}x^{-n+1}.",
+  "answer": ""
+}
