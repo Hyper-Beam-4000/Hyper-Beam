@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Competition Math Scraper (AoPS Fixed)
-Scrapes AoPS Wiki pages and outputs clean JSON, LaTeX, and Lean files.
+Competition Math Scraper (Split Files)
+Scrapes AoPS Wiki pages and outputs clean JSON, separate LaTeX files (Problem/Solution), and Lean.
 """
 
 import argparse
@@ -21,7 +21,7 @@ from tqdm import tqdm
 # ----------------------------
 # CONFIG
 # ----------------------------
-USER_AGENT = "compmath-scraper/1.0 (+https://example.org)"
+USER_AGENT = "compmath-scraper/1.1 (+https://example.org)"
 DEFAULT_DELAY = 1.0
 SESSION = requests.Session()
 SESSION.headers.update({"User-Agent": USER_AGENT})
@@ -72,14 +72,13 @@ def make_id_from_url(url: str) -> str:
 def extract_latex_from_html(html: str) -> str:
     soup = BeautifulSoup(html, "html.parser")
 
-    # 0. Pre-process explicit line breaks to preserve paragraph structure
-    # Replace <br> and </p> with special newline markers that we won't lose during text extraction
+    # 0. Pre-process explicit line breaks
     for br in soup.find_all("br"):
-        br.replace_with("\n")
+        br.replace_with("\n\n") # Double newline for paragraph break in LaTeX
     for p in soup.find_all("p"):
         p.append("\n\n")
 
-    # 1. AoPS Wiki specific: Math is in <img> tags with class "latex" or "latexcenter"
+    # 1. AoPS Wiki specific: Math is in <img> tags
     for img in soup.find_all("img", class_=re.compile(r"latex(center)?")):
         latex = img.get("alt")
         if latex:
@@ -92,27 +91,22 @@ def extract_latex_from_html(html: str) -> str:
             s.replace_with(f"${latex}$")
 
     # 3. Clean up HTML to get text
-    # separator=" " ensures "Let <img..>" becomes "Let $x$" not "Let$x$"
     text = soup.get_text(separator=" ", strip=True)
 
-    # 4. Post-process to fix excess whitespace from step 0
-    # Collapse multiple spaces into one
+    # 4. Post-process to fix excess whitespace
     text = re.sub(r'[ \t]+', ' ', text)
-    # Restore newlines (we might have spaces around them now like " \n ")
     text = re.sub(r'\s*\n\s*', '\n', text)
-    # Max 2 newlines
     text = re.sub(r'\n{3,}', '\n\n', text)
     
     return text.strip()
 
 # ----------------------------
-# Text Cleaning (Removes Footer Junk)
+# Text Cleaning
 # ----------------------------
 def clean_junk(text: str) -> str:
     if not text:
         return ""
     
-    # List of phrases that signal the end of the problem/solution content
     stop_phrases = [
         r"These problems are copyrighted",
         r"See also\s+20\d\d",
@@ -124,7 +118,6 @@ def clean_junk(text: str) -> str:
     for pat in stop_phrases:
         match = re.search(pat, text, re.IGNORECASE)
         if match:
-            # Cut off everything starting from the match
             text = text[:match.start()]
     
     return text.strip()
@@ -143,7 +136,6 @@ def parse_aops_wiki_problem(url: str, html: str) -> Dict[str, Any]:
     current = "intro"
     sections[current] = []
 
-    # Heuristic: split content by headers (h2, h3, etc.)
     for elem in content.find_all():
         if elem.name and elem.name.startswith("h") and elem.name != "h1":
             header = elem.get_text(strip=True).lower()
@@ -164,7 +156,6 @@ def parse_aops_wiki_problem(url: str, html: str) -> Dict[str, Any]:
     solution = sec_text(["solution", "proof"])
     answer = sec_text(["answer"])
 
-    # Fallback if no specific headers found
     if not problem and sections["intro"]:
         problem = clean_junk(extract_latex_from_html("".join(sections["intro"])))
 
@@ -218,7 +209,7 @@ theorem {lean_name} : Prop := by
   sorry
 """
 
-TEX_TEMPLATE = r"""\documentclass[12pt]{article}
+PROBLEM_TEX_TEMPLATE = r"""\documentclass[12pt]{article}
 \usepackage{amsmath,amssymb}
 
 \begin{document}
@@ -228,7 +219,17 @@ Source: {source}
 \subsection*{Problem}
 {problem}
 
-\subsection*{Solution / Answer}
+\end{document}
+"""
+
+SOLUTION_TEX_TEMPLATE = r"""\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{{title}}}
+Source: {source}
+
+\subsection*{Solution}
 {solution}
 
 \end{document}
@@ -244,19 +245,30 @@ def save_problem(metadata: Dict[str, Any], outdir: str) -> Dict[str, str]:
     base = os.path.join(problem_dir, pid)
 
     json_path = base + ".json"
-    tex_path = base + ".tex"
     lean_path = base + ".lean"
+    prob_tex_path = base + "_problem.tex"
+    sol_tex_path = base + "_solution.tex"
 
+    # JSON
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(metadata, f, indent=2, ensure_ascii=False)
 
-    tex = TEX_TEMPLATE.replace("{title}", metadata["title"]) \
-                      .replace("{source}", metadata["source"]) \
-                      .replace("{problem}", metadata.get("problem", "")) \
-                      .replace("{solution}", metadata.get("solution") or metadata.get("answer", ""))
-    with open(tex_path, "w", encoding="utf-8") as f:
-        f.write(tex)
+    # Problem TeX
+    prob_tex = PROBLEM_TEX_TEMPLATE.replace("{title}", metadata["title"]) \
+                                   .replace("{source}", metadata["source"]) \
+                                   .replace("{problem}", metadata.get("problem", ""))
+    with open(prob_tex_path, "w", encoding="utf-8") as f:
+        f.write(prob_tex)
 
+    # Solution TeX
+    sol_content = metadata.get("solution") or metadata.get("answer") or "No solution found."
+    sol_tex = SOLUTION_TEX_TEMPLATE.replace("{title}", metadata["title"]) \
+                                   .replace("{source}", metadata["source"]) \
+                                   .replace("{solution}", sol_content)
+    with open(sol_tex_path, "w", encoding="utf-8") as f:
+        f.write(sol_tex)
+
+    # Lean
     lean = LEAN_TEMPLATE.format(
         title=metadata["title"],
         source=metadata["source"],
@@ -268,7 +280,12 @@ def save_problem(metadata: Dict[str, Any], outdir: str) -> Dict[str, str]:
     with open(lean_path, "w", encoding="utf-8") as f:
         f.write(lean)
 
-    return {"json": json_path, "tex": tex_path, "lean": lean_path}
+    return {
+        "json": json_path,
+        "problem_tex": prob_tex_path,
+        "solution_tex": sol_tex_path,
+        "lean": lean_path
+    }
 
 # ----------------------------
 # Scraper wrapper
@@ -289,11 +306,11 @@ def scrape_url(url: str, delay: float, outdir: str) -> Optional[Dict[str, Any]]:
             data = parse_generic(url, html)
         
         print(f"[parsed] title='{data.get('title')}'")
-        print(f"[stats] Problem length: {len(data.get('problem', ''))} chars")
-        print(f"[stats] Solution length: {len(data.get('solution', ''))} chars")
+        print(f"[stats] Problem len: {len(data.get('problem', ''))}, Solution len: {len(data.get('solution', ''))}")
         
         paths = save_problem(data, outdir)
-        print(f"[saved] {paths['json']}")
+        print(f"[saved] {paths['problem_tex']}")
+        print(f"[saved] {paths['solution_tex']}")
         return data
     except Exception as e:
         print(f"[ERROR during processing] {e}")
