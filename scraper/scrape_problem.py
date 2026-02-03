@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Competition Math Scraper (Fixed for AoPS Images)
+Competition Math Scraper (AoPS Fixed)
+Scrapes AoPS Wiki pages and outputs clean JSON, LaTeX, and Lean files.
 """
 
 import argparse
@@ -60,39 +61,73 @@ def ensure_dir(path: str):
 def make_id_from_url(url: str) -> str:
     h = hashlib.sha1(url.encode("utf-8")).hexdigest()[:10]
     path = urlparse(url).path.strip("/")
-    # Clean up the path to make it filesystem friendly
     slug = re.sub(r"[^\w]+", "_", path)
     if not slug:
         slug = "root"
     return f"{slug}_{h}"
 
 # ----------------------------
-# LaTeX extraction (THE FIX)
+# LaTeX extraction
 # ----------------------------
 def extract_latex_from_html(html: str) -> str:
     soup = BeautifulSoup(html, "html.parser")
 
+    # 0. Pre-process explicit line breaks to preserve paragraph structure
+    # Replace <br> and </p> with special newline markers that we won't lose during text extraction
+    for br in soup.find_all("br"):
+        br.replace_with("\n")
+    for p in soup.find_all("p"):
+        p.append("\n\n")
+
     # 1. AoPS Wiki specific: Math is in <img> tags with class "latex" or "latexcenter"
-    # Example: <img alt="$f(n)$" class="latex" ... />
     for img in soup.find_all("img", class_=re.compile(r"latex(center)?")):
         latex = img.get("alt")
         if latex:
-            # Replace the <img> tag with the LaTeX text string
             img.replace_with(latex)
 
     # 2. Generic MathJax: <script type="math/tex">
     for s in soup.find_all("script", {"type": re.compile(r"math/tex")}):
         latex = s.get_text(strip=True)
         if latex:
-            # If the script tag content isn't wrapped in $, wrapping usually helps readability
-            # though some parsers might prefer raw. We'll wrap for consistency.
             s.replace_with(f"${latex}$")
 
-    # 3. Clean up generic HTML to get the full text
-    # separator=" " prevents words from gluing together when tags are removed
-    text = soup.get_text(separator="\n", strip=True)
+    # 3. Clean up HTML to get text
+    # separator=" " ensures "Let <img..>" becomes "Let $x$" not "Let$x$"
+    text = soup.get_text(separator=" ", strip=True)
+
+    # 4. Post-process to fix excess whitespace from step 0
+    # Collapse multiple spaces into one
+    text = re.sub(r'[ \t]+', ' ', text)
+    # Restore newlines (we might have spaces around them now like " \n ")
+    text = re.sub(r'\s*\n\s*', '\n', text)
+    # Max 2 newlines
+    text = re.sub(r'\n{3,}', '\n\n', text)
     
-    return text
+    return text.strip()
+
+# ----------------------------
+# Text Cleaning (Removes Footer Junk)
+# ----------------------------
+def clean_junk(text: str) -> str:
+    if not text:
+        return ""
+    
+    # List of phrases that signal the end of the problem/solution content
+    stop_phrases = [
+        r"These problems are copyrighted",
+        r"See also\s+20\d\d",
+        r"See also\s+AMC",
+        r"Mathematical Association of America",
+        r"Supported by"
+    ]
+    
+    for pat in stop_phrases:
+        match = re.search(pat, text, re.IGNORECASE)
+        if match:
+            # Cut off everything starting from the match
+            text = text[:match.start()]
+    
+    return text.strip()
 
 # ----------------------------
 # AoPS Wiki parser
@@ -108,40 +143,38 @@ def parse_aops_wiki_problem(url: str, html: str) -> Dict[str, Any]:
     current = "intro"
     sections[current] = []
 
-    # Simple heuristic to split content by headers
+    # Heuristic: split content by headers (h2, h3, etc.)
     for elem in content.find_all():
-        if elem.name and elem.name.startswith("h") and elem.name != "h1": # Skip h1 if it's main title
-             # h2, h3, etc. are section headers
+        if elem.name and elem.name.startswith("h") and elem.name != "h1":
             header = elem.get_text(strip=True).lower()
             current = header
             sections[current] = []
         elif elem.name in ["p", "ul", "ol", "div", "table", "dl"]:
-             # Add content to current section
-             # We use str(elem) because we need the HTML tags for the extractor
              sections.setdefault(current, []).append(str(elem))
 
     def sec_text(keys: List[str]) -> str:
         for key in sections:
             if any(k in key for k in keys):
                 html_block = "".join(sections[key])
-                return extract_latex_from_html(html_block)
+                raw_text = extract_latex_from_html(html_block)
+                return clean_junk(raw_text)
         return ""
 
     problem = sec_text(["problem", "statement", "question"])
     solution = sec_text(["solution", "proof"])
     answer = sec_text(["answer"])
 
-    # Fallback: if 'intro' has content but no 'problem' header found
+    # Fallback if no specific headers found
     if not problem and sections["intro"]:
-        problem = extract_latex_from_html("".join(sections["intro"]))
+        problem = clean_junk(extract_latex_from_html("".join(sections["intro"])))
 
     return {
         "source": "AoPS Wiki",
         "url": url,
         "title": title,
-        "problem": problem.strip(),
-        "solution": solution.strip(),
-        "answer": answer.strip(),
+        "problem": problem,
+        "solution": solution,
+        "answer": answer,
     }
 
 # ----------------------------
@@ -214,13 +247,9 @@ def save_problem(metadata: Dict[str, Any], outdir: str) -> Dict[str, str]:
     tex_path = base + ".tex"
     lean_path = base + ".lean"
 
-    # JSON
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(metadata, f, indent=2, ensure_ascii=False)
 
-    # TEX
-    # Basic escaping for LaTeX special chars in the *content* would be needed for a perfect compiler,
-    # but raw string injection is fine for a scraper skeleton.
     tex = TEX_TEMPLATE.replace("{title}", metadata["title"]) \
                       .replace("{source}", metadata["source"]) \
                       .replace("{problem}", metadata.get("problem", "")) \
@@ -228,7 +257,6 @@ def save_problem(metadata: Dict[str, Any], outdir: str) -> Dict[str, str]:
     with open(tex_path, "w", encoding="utf-8") as f:
         f.write(tex)
 
-    # LEAN
     lean = LEAN_TEMPLATE.format(
         title=metadata["title"],
         source=metadata["source"],
