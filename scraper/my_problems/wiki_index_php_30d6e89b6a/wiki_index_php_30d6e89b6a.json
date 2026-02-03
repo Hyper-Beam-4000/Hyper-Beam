@@ -1,8 +1,0 @@
-{
-  "source": "AoPS Wiki",
-  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_USAMO_Problems/Problem_5",
-  "title": "2019 USAMO Problems/Problem 5",
-  "problem": "\\frac{m}{n}\n\n\\frac{n}{m}\n\n\\frac{x+y}{2}\n\n\\frac{2xy}{x+y}\n\n(m,n)",
-  "solution": "m, n\n\nm+n=2^k\n\n\\frac{n(\\frac{m}{n})+(2^k-n)\\frac{n}{m}}{2^k}=\\frac{m+n}{2^k}=1\n\nm+n\\ne 2^k\n\nm+n\\equiv 0\\pmod{p}\n\nm\\equiv -n\\pmod{p}\n\n\\frac{m}{n}\\equiv \\frac{n}{m}\\equiv -1\\pmod{p}\n\n\\frac{-1+(-1)}{2}\\equiv -1\\pmod{p}\n\n\\frac{2(-1)(-1)}{-1+(-1)}\\equiv -1\\pmod{p}\n\n1\\equiv -1\\pmod{p}\n\n2\\equiv 0\\pmod{p}",
-  "answer": ""
-}

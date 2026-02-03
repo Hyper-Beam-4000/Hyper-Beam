@@ -1,8 +1,0 @@
-{
-  "source": "AoPS Wiki",
-  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_USAMO_Problems/Problem_2",
-  "title": "2019 USAMO Problems/Problem 2",
-  "problem": "ABCD\n\nAD^2 + BC^2 = AB^2\n\n\\overline{AB}\n\n\\angle APD = \\angle BPC\n\n\\overline{CD}",
-  "solution": "PE \\cap DC = M\n\nAP' \\cdot AB = AD^2\n\nBP' \\cdot AB = CD^2\n\nP = P'\n\nADP \\sim ABD\n\nBCP \\sim BAC\n\n\\measuredangle APD = \\measuredangle BDA = \\measuredangle BCA = \\measuredangle CPB\n\n\\square\n\n\\measuredangle PEA = \\measuredangle MEC = \\measuredangle BEN\n\n\\measuredangle MEC = \\measuredangle BEN",
-  "answer": ""
-}

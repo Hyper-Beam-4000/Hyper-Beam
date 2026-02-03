@@ -2,30 +2,27 @@
 """
 Competition Page Scraper
 Scrapes a main competition page (e.g., "2019 USAMO Problems") 
-to find all individual problem links, then feeds them to the 
-logic in scraper.py.
+to find links to dedicated problem pages (e.g. ".../Problem_1"), 
+then feeds them to the logic in scrape_problem.py.
 """
 
 import argparse
-import time
 import re
-from urllib.parse import urljoin
-import requests
+from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 
-# Import functionality from your existing script
-# This assumes your original file is named 'scraper.py' and is in the same folder.
+# UPDATED IMPORT: Now imports from your renamed file 'scrape_problem.py'
 import scrape_problem 
 
 def get_problem_links(comp_url: str, delay: float) -> list[str]:
     """
-    Fetches a competition page and extracts links that look like problem pages.
-    Target format: .../Problem_1, .../Problem_2, etc.
+    Fetches a competition page and extracts links to dedicated problem subpages.
+    Ignores anchor links (e.g. #Problem_1) that point to the current page.
     """
     print(f"[indexing] Fetching competition page: {comp_url}")
     
-    # Use the safe_request from scraper.py to respect robots.txt
+    # Use the safe_request from scrape_problem.py
     resp = scrape_problem.safe_request(comp_url, delay)
     if not resp:
         print("[error] Could not fetch competition page.")
@@ -33,27 +30,43 @@ def get_problem_links(comp_url: str, delay: float) -> list[str]:
 
     soup = BeautifulSoup(resp.text, "html.parser")
     
-    # Set to avoid duplicates
     problem_links = set()
     
-    # Logic: Find all links that end in /Problem_X
-    # This is specific to the AoPS Wiki naming convention
+    # Get the path of the current competition page (e.g. /wiki/index.php/2019_USAMO)
+    comp_path = urlparse(comp_url).path
+
     for a_tag in soup.find_all("a", href=True):
         href = a_tag["href"]
         
-        # Regex to match standard AoPS problem URLs (e.g., "Problem_1", "Problem_14")
-        # We verify it ends with digit to avoid "Problem_Distribution" or similar meta pages
-        if re.search(r"Problem_\d+$", href):
-            full_url = urljoin(comp_url, href)
-            problem_links.add(full_url)
+        # 1. CLEANUP: skip empty, javascript, or pure anchor links
+        if not href or href.startswith("javascript:") or href.startswith("#"):
+            continue
 
-    # Sort them so they process in order (Problem 1, 2, 3...)
-    # We sort based on the integer value of the problem number
-    try:
-        sorted_links = sorted(list(problem_links), key=lambda x: int(x.split("_")[-1]))
-    except:
-        # Fallback if naming is weird
-        sorted_links = sorted(list(problem_links))
+        # 2. RESOLVE: Make absolute URL
+        full_url = urljoin(comp_url, href)
+        parsed_url = urlparse(full_url)
+
+        # 3. FILTER:
+        # a) Must not have a query string or fragment (anchors) that confuse the scraper
+        if "#" in href: 
+            continue
+
+        # b) STRICT PATTERN MATCHING:
+        # We are looking for URLs that end in "/Problem_X"
+        if re.search(r"/Problem_\d+$", parsed_url.path):
+            
+            # c) Ensure it is not the competition page itself
+            if parsed_url.path != comp_path:
+                problem_links.add(full_url)
+
+    # Sort based on the integer value of the problem number
+    def get_prob_num(u):
+        try:
+            return int(u.split("Problem_")[-1])
+        except:
+            return 9999
+
+    sorted_links = sorted(list(problem_links), key=get_prob_num)
 
     return sorted_links
 
@@ -69,17 +82,18 @@ def main():
     links = get_problem_links(args.url, args.delay)
     
     if not links:
-        print("No problem links found. Check the URL or the site structure.")
+        print("No dedicated problem sub-pages found.")
+        print("Check if this competition page lists problems inline (anchors) or has subpages.")
         return
 
-    print(f"Found {len(links)} problems. Starting scrape...")
+    print(f"Found {len(links)} dedicated problem pages. Starting scrape...")
     print("-" * 40)
 
-    # 2. Iterate and use scraper.py logic
+    # 2. Iterate and use scrape_problem.py logic
     successful = 0
     for link in tqdm(links, desc="Processing Problems"):
         try:
-            # Re-use the scraper logic directly
+            # Re-use the scrape_problem logic directly
             result = scrape_problem.scrape_url(link, args.delay, args.out)
             if result:
                 successful += 1

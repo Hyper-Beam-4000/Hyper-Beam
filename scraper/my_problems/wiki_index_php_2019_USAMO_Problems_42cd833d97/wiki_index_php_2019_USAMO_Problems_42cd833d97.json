@@ -1,8 +1,0 @@
-{
-  "source": "AoPS Wiki",
-  "url": "https://artofproblemsolving.com/wiki/index.php/2019_USAMO_Problems#Problem_5",
-  "title": "2019 USAMO Problems",
-  "problem": "\\mathbb{N}\n\nf:\\mathbb{N}\\to\\mathbb{N}\n\nf(1000)\n\n\\underbrace{f(f(\\ldots f}_{f(n)\\text{ times}}(n)\\ldots))=\\frac{n^2}{f(f(n))}",
-  "solution": "",
-  "answer": ""
-}

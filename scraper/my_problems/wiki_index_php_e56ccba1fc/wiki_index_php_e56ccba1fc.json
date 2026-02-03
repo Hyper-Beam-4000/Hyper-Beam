@@ -1,8 +1,0 @@
-{
-  "source": "AoPS Wiki",
-  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_USAMO_Problems/Problem_4",
-  "title": "2019 USAMO Problems/Problem 4",
-  "problem": "(n+1)^2\n\nS_{i,j}\\subseteq\\{1,2,\\ldots,2n\\}\n\n0\\leq i,j\\leq n\n\n\\bullet\n\nS_{i,j}\n\nS_{i,j}\\subseteq S_{k,l}\n\n0\\leq i\\leq k\\leq n\n\n0\\leq j\\leq l\\leq n",
-  "solution": "(2n)!\n\nS_{1, 0}, S_{2, 0}... S_{n, 0}, S_{n, 1}, S_{n, 2}... S_{n, n}\n\nS_{1, 0}\n\n2n-1\n\nS_{2, 0}\n\n2n-2\n\nS_{3, 0}\n\nS_{n-1, 1}\n\nS_{n-1, 0}\n\nS_{n, 1}\n\nS_{n-1, 2}\n\nS_{n-1, j}\n\n(2n)!\\cdot 2^{\\left(n^2\\right)}",
-  "answer": ""
-}
