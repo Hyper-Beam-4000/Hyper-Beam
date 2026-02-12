@@ -75,6 +75,7 @@ def main():
     parser.add_argument("--url", type=str, required=True, help="URL of the competition main page")
     parser.add_argument("--out", type=str, default="scraped_problems", help="Output directory")
     parser.add_argument("--delay", type=float, default=1.0, help="Delay between requests")
+    parser.add_argument("--lean", action="store_true", help="Use LLM to translate to Lean (requires OPENAI_API_KEY in .env)")
     
     args = parser.parse_args()
 
@@ -94,7 +95,7 @@ def main():
     for link in tqdm(links, desc="Processing Problems"):
         try:
             # Re-use the scrape_problem logic directly
-            result = scrape_problem.scrape_url(link, args.delay, args.out)
+            result = scrape_problem.scrape_url(link, args.delay, args.out, args.lean)
             if result:
                 successful += 1
         except Exception as e:

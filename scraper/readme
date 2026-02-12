@@ -1,1 +1,43 @@
-Usage: python scrape_problem.py --url "https://artofproblemsolving.com/wiki/index.php/2019_USAMO_Problems/Problem_2" --out my_problems
+# Competition Math Scraper
+
+## Setup
+1. Create and activate a virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On macOS/Linux
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Create `.env` file with your OpenAI API key:
+   ```bash
+   cp .env.example .env
+   # Edit .env and add your actual API key
+   ```
+
+## Usage
+
+**Basic (template only):**
+```bash
+python scrape_problem.py --url "https://artofproblemsolving.com/wiki/index.php/2019_USAMO_Problems/Problem_2" --out scraped_problems
+```
+
+**With LLM translation to Lean:**
+```bash
+python scrape_problem.py --url "https://artofproblemsolving.com/wiki/index.php/2019_USAMO_Problems/Problem_2" --out scraped_problems --lean
+```
+
+**Scrape entire competition:**
+```bash
+python scrape_competition.py --url "https://artofproblemsolving.com/wiki/index.php/2019_USAMO_Problems" --out scraped_problems --lean
+```
+
+## Options
+- `--url`: Single problem URL
+- `--list`: File with multiple URLs
+- `--out`: Output directory (default: scraped_problems)
+- `--delay`: Delay between requests in seconds (default: 1.0)
+- `--lean`: Use OpenAI to translate to Lean 4 (requires API key in .env)

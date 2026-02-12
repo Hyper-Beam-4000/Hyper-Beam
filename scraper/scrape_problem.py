@@ -17,6 +17,11 @@ from typing import Optional, Dict, Any, List
 import requests
 from bs4 import BeautifulSoup
 from tqdm import tqdm
+from openai import OpenAI
+from dotenv import load_dotenv
+
+# Load .env file for API keys
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
 # ----------------------------
 # CONFIG
@@ -121,6 +126,73 @@ def clean_junk(text: str) -> str:
             text = text[:match.start()]
     
     return text.strip()
+
+# ----------------------------
+# LLM Translation
+# ----------------------------
+def strip_markdown_fences(code: str) -> str:
+    """Remove markdown code fences from LLM output if present."""
+    code = code.strip()
+    if code.startswith("```"):
+        lines = code.split("\n")
+        # Remove first line if it's ```lean or ```
+        if lines[0].startswith("```"):
+            lines = lines[1:]
+        # Remove last line if it's ```
+        if lines and lines[-1].strip() == "```":
+            lines = lines[:-1]
+        code = "\n".join(lines)
+    return code.strip()
+
+def translate_to_lean(problem: str, solution: str, title: str) -> Optional[str]:
+    """Translate LaTeX problem/solution to Lean 4 using OpenAI API."""
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    prompt = f"""You are an expert in formal mathematics and the Lean 4 theorem prover with deep knowledge of Mathlib.
+
+TASK: Translate this competition math problem into valid, compilable Lean 4 code.
+
+PROBLEM INFORMATION:
+Title: {title}
+Problem Statement: {problem}
+Solution Sketch: {solution}
+
+REQUIREMENTS:
+1. Output ONLY raw Lean 4 code - NO markdown code fences, NO backticks, NO explanatory text
+2. Start directly with "import" statements
+3. Use ONLY Lean 4 syntax (not Lean 3)
+4. Use "by" for proofs, NOT "begin...end"
+5. Import only from Mathlib (e.g., import Mathlib.Data.Nat.Basic)
+6. Write a well-formed theorem statement with proper types
+7. Use standard Mathlib tactics: intro, apply, rw, simp, ring, norm_num, constructor, exact, have, obtain
+8. Add comments explaining the proof strategy
+9. Use "sorry" for steps that are too complex, but structure the proof outline
+10. Ensure all syntax is valid - no hallucinated tactics or types
+
+EXAMPLE FORMAT:
+import Mathlib.Data.Nat.Prime
+import Mathlib.Tactic
+
+open Nat
+
+-- Problem: Prove that for all n, n + 0 = n
+theorem example_theorem (n : ℕ) : n + 0 = n := by
+  -- Use reflexivity since this is definitional
+  rfl
+
+YOUR LEAN 4 CODE (start directly with imports):"""
+    
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=4096,
+            temperature=0.3  # Lower temperature for more consistent output
+        )
+        lean_code = response.choices[0].message.content
+        return strip_markdown_fences(lean_code)
+    except Exception as e:
+        print(f"[LLM Error] {e}")
+        return None
 
 # ----------------------------
 # AoPS Wiki parser
@@ -238,7 +310,7 @@ Source: {source}
 # ----------------------------
 # File writing
 # ----------------------------
-def save_problem(metadata: Dict[str, Any], outdir: str) -> Dict[str, str]:
+def save_problem(metadata: Dict[str, Any], outdir: str, lean_code: Optional[str] = None) -> Dict[str, str]:
     pid = make_id_from_url(metadata["url"])
     problem_dir = os.path.join(outdir, pid)
     ensure_dir(problem_dir)
@@ -268,17 +340,21 @@ def save_problem(metadata: Dict[str, Any], outdir: str) -> Dict[str, str]:
     with open(sol_tex_path, "w", encoding="utf-8") as f:
         f.write(sol_tex)
 
-    # Lean
-    lean = LEAN_TEMPLATE.format(
-        title=metadata["title"],
-        source=metadata["source"],
-        url=metadata["url"],
-        problem=metadata.get("problem", ""),
-        solution=metadata.get("solution") or metadata.get("answer", ""),
-        lean_name=re.sub(r"[^\w]+", "_", pid)
-    )
-    with open(lean_path, "w", encoding="utf-8") as f:
-        f.write(lean)
+    # Lean - use LLM code if provided, otherwise template
+    if lean_code:
+        with open(lean_path, "w", encoding="utf-8") as f:
+            f.write(lean_code)
+    else:
+        lean = LEAN_TEMPLATE.format(
+            title=metadata["title"],
+            source=metadata["source"],
+            url=metadata["url"],
+            problem=metadata.get("problem", ""),
+            solution=metadata.get("solution") or metadata.get("answer", ""),
+            lean_name=re.sub(r"[^\w]+", "_", pid)
+        )
+        with open(lean_path, "w", encoding="utf-8") as f:
+            f.write(lean)
 
     return {
         "json": json_path,
@@ -290,7 +366,7 @@ def save_problem(metadata: Dict[str, Any], outdir: str) -> Dict[str, str]:
 # ----------------------------
 # Scraper wrapper
 # ----------------------------
-def scrape_url(url: str, delay: float, outdir: str) -> Optional[Dict[str, Any]]:
+def scrape_url(url: str, delay: float, outdir: str, use_lean: bool = False) -> Optional[Dict[str, Any]]:
     print(f"[scraping] {url}")
     resp = safe_request(url, delay)
     if not resp:
@@ -308,7 +384,12 @@ def scrape_url(url: str, delay: float, outdir: str) -> Optional[Dict[str, Any]]:
         print(f"[parsed] title='{data.get('title')}'")
         print(f"[stats] Problem len: {len(data.get('problem', ''))}, Solution len: {len(data.get('solution', ''))}")
         
-        paths = save_problem(data, outdir)
+        lean_code = None
+        if use_lean:
+            print("[LLM] Translating to Lean...")
+            lean_code = translate_to_lean(data.get("problem", ""), data.get("solution", ""), data.get("title", ""))
+        
+        paths = save_problem(data, outdir, lean_code)
         print(f"[saved] {paths['problem_tex']}")
         print(f"[saved] {paths['solution_tex']}")
         return data
@@ -327,6 +408,7 @@ def main():
     parser.add_argument("--list", type=str, help="File containing URLs")
     parser.add_argument("--out", type=str, default="scraped_problems")
     parser.add_argument("--delay", type=float, default=DEFAULT_DELAY)
+    parser.add_argument("--lean", action="store_true", help="Use LLM to translate to Lean (requires OPENAI_API_KEY in .env)")
 
     args = parser.parse_args()
 
@@ -347,7 +429,7 @@ def main():
     results = []
     for url in tqdm(urls, desc="Scraping"):
         try:
-            r = scrape_url(url, args.delay, args.out)
+            r = scrape_url(url, args.delay, args.out, args.lean)
             if r:
                 results.append(r)
         except Exception as e:
