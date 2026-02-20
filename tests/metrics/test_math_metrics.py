@@ -1,10 +1,124 @@
 import sys
 from pathlib import Path
 
-project_root = Path(__file__).parent.parent
+# Add project root to Python path so imports work when running directly
+project_root = Path(__file__).parent.parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
 from metrics.math_metrics import (
-    proof_embedding_similarity, proof_embedding_similarity_batch
+    proof_embedding_similarity, 
+    proof_embedding_similarity_batch,
+    extract_final_answer,
+    verify_answer_correctness,
+    rubric_based_scoring,
+    comprehensive_proof_evaluation
 )
+
+
+
+def test_gemini_3_Pro():
+    """Test Gemini 3 Pro using embedding similarity (baseline)."""
+    predicted_proof = gemini_pred
+    expected_proof = solution
+    similarity = proof_embedding_similarity(predicted_proof, expected_proof)
+    print(f"Embedding Similarity: {similarity}")
+
+def test_gpt_5_o1():
+    """Test GPT-5 o1 using embedding similarity (baseline)."""
+    predicted_proof = gpt_pred
+    expected_proof = solution
+    similarity = proof_embedding_similarity(predicted_proof, expected_proof)
+    print(f"Embedding Similarity: {similarity}")
+
+
+# ============================================================================
+# NEW INDUSTRY-STANDARD EVALUATION TESTS
+# ============================================================================
+
+def test_answer_extraction():
+    """Test answer extraction (MATH dataset style)."""
+    print("\n=== Answer Extraction Test ===")
+    
+    pred_answer = extract_final_answer(gemini_pred)
+    exp_answer = extract_final_answer(solution)
+    
+    print(f"Predicted answer: {pred_answer}")
+    print(f"Expected answer: {exp_answer}")
+    
+    is_correct, confidence = verify_answer_correctness(pred_answer, exp_answer, question)
+    print(f"Answer correct: {is_correct} (confidence: {confidence:.2f})")
+
+
+def test_rubric_scoring():
+    """Test rubric-based scoring (ProofBench style)."""
+    print("\n=== Rubric-Based Scoring Test ===")
+    
+    results = rubric_based_scoring(
+        predicted_proof=gemini_pred,
+        expected_proof=solution,
+        problem_statement=question
+    )
+    
+    print(f"Total Score: {results['total_score']}/7.0")
+    print(f"Normalized Score: {results['normalized_score']:.4f}")
+    print(f"Rubric Scale (0-7): {results['rubric_scale_score']:.2f}")
+    print(f"Final Answer Correct: {results['final_answer_correct']}")
+    print("\nBreakdown:")
+    for component, score in results['breakdown'].items():
+        print(f"  {component}: {score:.2f}")
+
+
+def test_comprehensive_evaluation():
+    """Test comprehensive multi-metric evaluation."""
+    print("\n=== Comprehensive Evaluation Test ===")
+    print("Evaluating Gemini 3 Pro prediction:\n")
+    
+    results = comprehensive_proof_evaluation(
+        predicted_proof=gemini_pred,
+        expected_proof=solution,
+        problem_statement=question,
+        use_embeddings=True
+    )
+    
+    print(f"Overall Score: {results['overall_score']:.4f} (0-1 scale)")
+    print(f"Overall Score: {results['overall_score_0_7']:.2f} (0-7 ProofBench scale)")
+    
+    print("\n--- Answer Verification (MATH dataset style) ---")
+    ans_ver = results['answer_verification']
+    print(f"Predicted: {ans_ver['predicted_answer']}")
+    print(f"Expected: {ans_ver['expected_answer']}")
+    print(f"Correct: {ans_ver['is_correct']} (confidence: {ans_ver['confidence']:.2f})")
+    
+    print("\n--- Rubric Scoring (ProofBench style) ---")
+    rubric = results['rubric_scoring']
+    print(f"Score: {rubric['rubric_scale_score']:.2f}/7.0")
+    print(f"Normalized: {rubric['normalized_score']:.4f}")
+    
+    print("\n--- Embedding Similarity (baseline) ---")
+    print(f"Similarity: {results['embedding_similarity']:.4f}")
+
+
+def test_comparison_gemini_vs_gpt():
+    """Compare Gemini and GPT predictions using all metrics."""
+    print("\n=== Comparison: Gemini 3 Pro vs GPT-5 o1 ===\n")
+    
+    for name, pred in [("Gemini 3 Pro", gemini_pred), ("GPT-5 o1", gpt_pred)]:
+        print(f"\n{name}:")
+        print("-" * 50)
+        
+        results = comprehensive_proof_evaluation(
+            predicted_proof=pred,
+            expected_proof=solution,
+            problem_statement=question,
+            use_embeddings=True
+        )
+        
+        print(f"Overall Score: {results['overall_score_0_7']:.2f}/7.0")
+        print(f"Answer Correct: {results['answer_verification']['is_correct']}")
+        print(f"Rubric Score: {results['rubric_scoring']['rubric_scale_score']:.2f}/7.0")
+        print(f"Embedding Similarity: {results['embedding_similarity']:.4f}")
+        
 
 question = r"\\mathbb{N}\n\nf:\\mathbb{N}\\to\\mathbb{N}\n\nf(1000)\n\n\\underbrace{f(f(\\ldots f}_{f(n)\\text{ times}}(n)\\ldots))=\\frac{n^2}{f(f(n))}"
 solution = r"f^r(x)\n\nf^{r-1}(x)\n\nf^1(x)=f(x)\n\n\\hfill \\break \\hfill \\break\n\nf(p)=f(q)\n\nf^2(p)=f^2(q)\n\nf^{f(p)}(p)=f^{f(q)}(q)\n\n\\implies p^2=f^2(p)\\cdot f^{f(p)}(p)=f^2(q)\\cdot f^{f(q)}(q)=q^2\n\n\\implies p=\\pm q\n\n\\implies p=q\n\np,q&gt;0\n\nf^r(b)=a\n\nf(a)=a\n\nf^r(b)=a=f^r(a)\n\nf^2(m)=f^{f(m)}(m)=m\n\nf(m)=m\n\nf(m)=k\n\nf^2(m)=m\n\nf(k)=m\n\nf^2(k)=k\n\n\\newline f^2(k)\\cdot f^{f(k)}(k)=k^2\n\nk\\neq0\n\nf^{f(k)}(k)=k\n\n\\implies f^m(k)=k\n\n\\implies f^{gcd(m, 2)}(k)=k\n\n\\implies f(k)=k\n\nf^2(m)\\cdot f^{f(m)}(m)=m^2\n\n(1) f^2(m)=k&lt;m\n\n(2) f^{f(m)}(m)=k&lt;m\n\n(3) f^2(m)=m\n\nf^{f(m)}(m)=m\n\nf(1000)\n\nf(1000)=x, f(x)=1000\n\nf(k)=k\n\n1000\n\nf^2(n)\\cdot f^{f(n)}(n)=n\\cdot n=n^2\n\nf(n)\n\nf^2(n)=n",
@@ -132,14 +246,14 @@ f(m)=m\ \forall m\in\mathbb{N}
 f(1000)=1000
 \square"""
 
-def test_gemini_3_Pro():
-    predicted_proof = gemini_pred
-    expected_proof = solution
-    similarity = proof_embedding_similarity(predicted_proof, expected_proof)
-    print(similarity)
 
-def test_gpt_5_o1():
-    predicted_proof = gpt_pred
-    expected_proof = solution
-    similarity = proof_embedding_similarity(predicted_proof, expected_proof)
-    print(similarity)
+if __name__ == "__main__":
+    # Run baseline tests
+    test_gemini_3_Pro()
+    test_gpt_5_o1()
+    
+    # Run new industry-standard tests
+    # test_answer_extraction()
+    # test_rubric_scoring()
+    # test_comprehensive_evaluation()
+    # test_comparison_gemini_vs_gpt()
