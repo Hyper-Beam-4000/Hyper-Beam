@@ -36,6 +36,16 @@ npm i
 npm run dev
 ```
 
+### Local auth (localhost)
+
+To sign in and access protected pages (Dashboard, Submit) when running on localhost without relying on Supabase, set in your `.env`:
+
+```bash
+VITE_USE_LOCAL_AUTH=true
+```
+
+Sign-in and sign-up then use **localStorage** only: accounts and session are stored in the browser. You can create an account and sign in to reach `/dashboard` and `/submit`. When you deploy to AWS, set `VITE_USE_LOCAL_AUTH=false` or remove it to use Supabase auth.
+
 **Edit a file directly in GitHub**
 
 - Navigate to the desired file(s).

@@ -8,6 +8,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Trophy, Loader2 } from "lucide-react";
+import {
+  isLocalAuthMode,
+  findLocalAccount,
+  addLocalAccount,
+  setLocalUser,
+  createLocalUserId,
+} from "@/lib/localAuth";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -22,6 +29,33 @@ const Auth = () => {
     const email = formData.get("signup-email") as string;
     const password = formData.get("signup-password") as string;
     const teamName = formData.get("team-name") as string;
+
+    if (isLocalAuthMode()) {
+      const existing = findLocalAccount(email);
+      if (existing) {
+        setLoading(false);
+        toast({
+          title: "Sign up failed",
+          description: "An account with this email already exists. Sign in instead.",
+          variant: "destructive",
+        });
+        return;
+      }
+      const id = createLocalUserId();
+      addLocalAccount({ id, email, team_name: teamName });
+      setLocalUser({
+        id,
+        email,
+        user_metadata: { team_name: teamName },
+      });
+      setLoading(false);
+      toast({
+        title: "Account created!",
+        description: "You can now submit to contests (local dev).",
+      });
+      navigate("/");
+      return;
+    }
 
     const { error } = await supabase.auth.signUp({
       email,
@@ -43,7 +77,6 @@ const Auth = () => {
         variant: "destructive",
       });
     } else {
-      // Update profile with team name
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         await supabase
@@ -51,7 +84,6 @@ const Auth = () => {
           .update({ team_name: teamName })
           .eq("id", user.id);
       }
-
       toast({
         title: "Account created!",
         description: "You can now submit to contests.",
@@ -67,6 +99,40 @@ const Auth = () => {
     const formData = new FormData(e.currentTarget);
     const email = formData.get("signin-email") as string;
     const password = formData.get("signin-password") as string;
+
+    if (isLocalAuthMode()) {
+      const account = findLocalAccount(email);
+      if (!account) {
+        setLoading(false);
+        toast({
+          title: "Sign in failed",
+          description: "No account with this email. Create an account first.",
+          variant: "destructive",
+        });
+        return;
+      }
+      if (!password || password.length < 6) {
+        setLoading(false);
+        toast({
+          title: "Sign in failed",
+          description: "Please enter your password (min 6 characters).",
+          variant: "destructive",
+        });
+        return;
+      }
+      setLocalUser({
+        id: account.id,
+        email: account.email,
+        user_metadata: { team_name: account.team_name },
+      });
+      setLoading(false);
+      toast({
+        title: "Welcome back!",
+        description: "You've successfully signed in (local dev).",
+      });
+      navigate("/");
+      return;
+    }
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
