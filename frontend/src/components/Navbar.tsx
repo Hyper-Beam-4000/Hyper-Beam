@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Trophy, BarChart3, Upload, Archive, Menu, LogOut, LogIn } from "lucide-react";
+import { Trophy, BarChart3, Upload, Archive, Menu, LogOut, LogIn, BookOpen, User } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -12,17 +12,17 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
 
   const isActive = (path: string) => location.pathname === path;
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    toast({
-      title: "Signed out",
-      description: "You've been successfully signed out.",
-    });
+    try {
+      if (supabase) await supabase.auth.signOut();
+    } catch (_) {}
+    logout();
+    toast({ title: "Signed out", description: "You've been successfully signed out." });
     navigate("/");
   };
 
@@ -38,12 +38,21 @@ const Navbar = () => {
         </Button>
       </Link>
       <Link to="/leaderboard">
-        <Button 
+        <Button
           variant={isActive("/leaderboard") ? "secondary" : "ghost"}
           className={mobile ? "w-full justify-start" : ""}
         >
           <BarChart3 className="h-4 w-4 mr-2" />
           Leaderboard
+        </Button>
+      </Link>
+      <Link to="/problems">
+        <Button
+          variant={isActive("/problems") ? "secondary" : "ghost"}
+          className={mobile ? "w-full justify-start" : ""}
+        >
+          <BookOpen className="h-4 w-4 mr-2" />
+          Problems
         </Button>
       </Link>
       <Link to="/dashboard">
@@ -88,10 +97,16 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-2">
             <NavLinks />
             {user ? (
-              <Button variant="ghost" onClick={handleLogout}>
-                <LogOut className="h-4 w-4 mr-2" />
-                Sign Out
-              </Button>
+              <>
+                <Button variant="ghost" className="gap-2">
+                  <User className="h-4 w-4" />
+                  {user.email || "Account"}
+                </Button>
+                <Button variant="ghost" onClick={handleLogout}>
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Sign Out
+                </Button>
+              </>
             ) : (
               <Link to="/auth">
                 <Button variant="default">
@@ -113,10 +128,16 @@ const Navbar = () => {
               <div className="flex flex-col gap-2 mt-8">
                 <NavLinks mobile />
                 {user ? (
-                  <Button variant="ghost" onClick={handleLogout} className="w-full justify-start">
-                    <LogOut className="h-4 w-4 mr-2" />
-                    Sign Out
-                  </Button>
+                  <>
+                    <Button variant="ghost" className="w-full justify-start gap-2">
+                      <User className="h-4 w-4" />
+                      {user.email || "Account"}
+                    </Button>
+                    <Button variant="ghost" onClick={handleLogout} className="w-full justify-start">
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Sign Out
+                    </Button>
+                  </>
                 ) : (
                   <Link to="/auth">
                     <Button variant="default" className="w-full justify-start">

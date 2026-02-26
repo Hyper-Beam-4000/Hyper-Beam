@@ -1,0 +1,10 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2023_USAMO_Problems/Problem_6",
+  "title": "2023 USAMO Problems/Problem 6",
+  "problem": "Let ABC be a triangle with incenter $I$ and excenters $I_a$ , $I_b$ , $I_c$ opposite $A$ , $B$ , and $C$ , respectively. Given an arbitrary point $D$ on the circumcircle of $\\triangle ABC$ that does not lie on any of the lines $II_{a}$ , $I_{b}I_{c}$ , or $BC$ , suppose the circumcircles of $\\triangle DIIa$ and $\\triangle DI_bI_c$ intersect at two distinct points $D$ and $F$ . If $E$ is the intersection of lines $DF$ and $BC$ , prove that $\\angle BAD = \\angle EAC$ .",
+  "solution": "https://youtube.com/watch?v=LAuyU2OuVzE ~r00tsOfUnity",
+  "answer": "",
+  "year": 2023,
+  "scraped_at": "2026-02-25T23:48:26.902983+00:00"
+}

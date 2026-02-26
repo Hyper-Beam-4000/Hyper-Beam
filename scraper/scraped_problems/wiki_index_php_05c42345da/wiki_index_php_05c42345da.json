@@ -1,0 +1,10 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2022_USAMO_Problems/Problem_1",
+  "title": "2022 USAMO Problems/Problem 1",
+  "problem": "Let $a$ and $b$ be positive integers. The cells of an $(a+b+1)\\times (a+b+1)$ grid are colored amber and bronze such that there are at least $a^2+ab-b$ amber cells and at least $b^2+ab-a$ bronze cells. Prove that it is possible to choose $a$ amber cells and $b$ bronze cells such that no two of the $a+b$ chosen cells lie in the same row or column.",
+  "solution": "https://www.youtube.com/watch?v=137-z4WahKQ",
+  "answer": "",
+  "year": 2022,
+  "scraped_at": "2026-02-25T23:46:47.435095+00:00"
+}

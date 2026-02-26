@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2021 USAMO Problems/Problem 6}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Let $M_1$ , $M_2$ , and $M_3$ be the midpoints of $CE$ , $AE$ , $AC$ and $N_1$ , $N_2$ , and $N_3$ be the midpoints of $DF$ , $BF$ , and $BD$ . Also, let $H$ be the orthocenter of $XYZ$ . Note that we can use parallel sides to see that $X$ , $Z$ , and $M_3$ are collinear. Thus we have \[\text{Pow}(M_3,(XYZ)) = M_3Z \cdot M_3X = \frac 14 AB \cdot DE\] by midlines. Applying this argument cyclically, and noting the condition $AB \cdot DE = BC \cdot EF = CD \cdot FA$ , $M_1$ , $M_2$ , $M_3$ , $N_1$ , $N_2$ , $N_3$ all lie on a circle concentric with $(XYZ)$ . Next, realize that basic orthocenter properties imply that the circumcenter $O_1$ of $(ACE)$ is the orthocenter of $\triangle M_1M_2M_3$ , and likewise the circumcenter $O_2$ of $(BDF)$ is the orthocenter of $\triangle N_1N_2N_3$ . The rest is just complex numbers; toss on the complex plane so that the circumcenter of $\triangle XYZ$ is the origin. Then we have \[o_1 = m_1+m_2+m_3 = (c+e)/2+(a+e)/2+(a+c)/2=a+c+e\] \[o_2 = n_1+n_2+n_3 = (b+d)/2+(d+f)/2+(b+f)/2=b+d+f\] \[h = x+y+z = (a+d)/2+(b+e)/2+(c+f)/2=(a+b+c+d+e+f)/2.\] Note that from the above we have $h=\frac{o_1+o_2}{2}$ , so $H$ is the midpoint of segment $O_1O_2$ . In particular, $H$ , $O_1$ , and $O_2$ are collinear, as required. ~ Leo.Euler
+
+\end{document}

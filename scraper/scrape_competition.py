@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 from tqdm import tqdm
 
 # UPDATED IMPORT: Now imports from your renamed file 'scrape_problem.py'
-import scrape_problem 
+from scraper import scrape_problem
 
 def get_problem_links(comp_url: str, delay: float) -> list[str]:
     """
@@ -75,7 +75,7 @@ def main():
     parser.add_argument("--url", type=str, required=True, help="URL of the competition main page")
     parser.add_argument("--out", type=str, default="scraped_problems", help="Output directory")
     parser.add_argument("--delay", type=float, default=1.0, help="Delay between requests")
-    parser.add_argument("--lean", action="store_true", help="Use LLM to translate to Lean (requires OPENAI_API_KEY in .env)")
+    parser.add_argument("--lean", action="store_true", help="Use LLM to translate to Lean (uses AWS Bedrock credentials in backend/.env)")
     
     args = parser.parse_args()
 

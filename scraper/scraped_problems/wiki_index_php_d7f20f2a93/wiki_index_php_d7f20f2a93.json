@@ -1,0 +1,10 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2021_USAMO_Problems/Problem_1",
+  "title": "2021 USAMO Problems/Problem 1",
+  "problem": "Rectangles $BCC_{1}B_{2}$ , $CAA_{1}C_{2}$ , and $ABB_{1}A_{2}$ are erected outside an acute triangle $ABC$ . Suppose that \\[\\angle BC_{1}C + \\angle CA_{1}A + \\angle AB_{1}B = 180^{\\circ}.\\] Prove that lines $B_{1}C_{2}$ , $C_{1}A_{2}$ , and $A_{1}B_{2}$ are concurrent.",
+  "solution": "Let $D$ be the second point of intersection of the circles $AB_1B$ and $AA_1C.$ Then: \\begin{align*} \\angle ADB &= 180^\\circ – \\angle AB_1B,&\\angle ADC &= 180^\\circ – \\angle AA_1C\\\\ \\angle BDC &= 360^\\circ – \\angle ADB – \\angle ADC\\\\ &= 360^\\circ – (180^\\circ – \\angle AB_1B) – (180^\\circ – \\angle AA_1C)\\\\ &= \\angle AB_1B + \\angle AA_1C\\\\ \\angle BDC + \\angle BC_1C &= 180^\\circ \\end{align*} Therefore, $BDCC_1B_2$ is cyclic with diameters $BC_1$ and $CB_2$ , and thus $\\angle CDB_2 = 90^\\circ.$ Similarly, $\\angle CDA_1 = 90^\\circ$ , meaning points $A_1$ , $D$ , and $B_2$ are collinear. Similarly, the points $A_2, D, C_1$ and $C_2, D, B_1$ are collinear. (After USAMO 2021 Solution Notes – Evan Chen) vladimir.shelomovskii@gmail.com, vvsss",
+  "answer": "",
+  "year": 2021,
+  "scraped_at": "2026-02-25T23:45:36.783523+00:00"
+}

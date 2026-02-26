@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2019 USAMO Problems/Problem 4}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Note that there are $(2n)!$ ways to choose $S_{1, 0}, S_{2, 0}... S_{n, 0}, S_{n, 1}, S_{n, 2}... S_{n, n}$ , because there are $2n$ ways to choose which number $S_{1, 0}$ is, $2n-1$ ways to choose which number to append to make $S_{2, 0}$ , $2n-2$ ways to choose which number to append to make $S_{3, 0}$ , etc. After that, note that $S_{n-1, 1}$ contains the $n-1$ in $S_{n-1, 0}$ and 1 other element chosen from the 2 elements in $S_{n, 1}$ not in $S_{n-1, 0}$ so there are 2 ways for $S_{n-1, 1}$ . By the same logic there are 2 ways for $S_{n-1, 2}$ as well so $2^n$ total ways for all $S_{n-1, j}$ , so doing the same thing $n-1$ more times yields a final answer of $(2n)!\cdot 2^{\left(n^2\right)}$ . -Stormersyle
+
+\end{document}

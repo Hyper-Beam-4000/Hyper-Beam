@@ -12,6 +12,8 @@ import Dashboard from "./pages/Dashboard";
 import Submit from "./pages/Submit";
 import Archive from "./pages/Archive";
 import Auth from "./pages/Auth";
+import Problems from "./pages/Problems";
+import ProblemDetail from "./pages/ProblemDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +29,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Contest />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/problems" element={<Problems />} />
+            <Route path="/problems/:id" element={<ProblemDetail />} />
             <Route path="/auth" element={<Auth />} />
             <Route
               path="/dashboard"

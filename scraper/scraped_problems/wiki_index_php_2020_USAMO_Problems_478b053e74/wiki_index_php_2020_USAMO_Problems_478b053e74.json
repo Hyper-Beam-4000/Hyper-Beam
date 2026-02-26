@@ -1,0 +1,10 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php/2020_USAMO_Problems",
+  "title": "2020 USAMO Problems",
+  "problem": "Let $ABC$ be a fixed acute triangle inscribed in a circle $\\omega$ with center $O$ . A variable point $X$ is chosen on minor arc $AB$ of $\\omega$ , and segments $CX$ and $AB$ meet at $D$ . Denote by $O_1$ and $O_2$ the circumcenters of triangles $ADX$ and $BDX$ , respectively. Determine all points $X$ for which the area of triangle $OO_1O_2$ is minimized. Solution",
+  "solution": "",
+  "answer": "",
+  "year": 2020,
+  "scraped_at": "2026-02-25T23:30:12.398808+00:00"
+}

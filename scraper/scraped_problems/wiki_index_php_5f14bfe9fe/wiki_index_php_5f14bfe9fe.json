@@ -1,0 +1,10 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2022_USAMO_Problems/Problem_5",
+  "title": "2022 USAMO Problems/Problem 5",
+  "problem": "A function $f: \\mathbb{R}\\to \\mathbb{R}$ is $\\textit{essentially increasing}$ if $f(s)\\leq f(t)$ holds whenever $s\\leq t$ are real numbers such that $f(s)\\neq 0$ and $f(t)\\neq 0$ . Find the smallest integer $k$ such that for any 2022 real numbers $x_1,x_2,\\ldots , x_{2022},$ there exist $k$ essentially increasing functions $f_1,\\ldots, f_k$ such that \\[f_1(n) + f_2(n) + \\cdots + f_k(n) = x_n\\qquad \\text{for every } n= 1,2,\\ldots 2022.\\]",
+  "solution": "Coming soon.",
+  "answer": "",
+  "year": 2022,
+  "scraped_at": "2026-02-25T23:47:23.576910+00:00"
+}

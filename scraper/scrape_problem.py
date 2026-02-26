@@ -10,18 +10,32 @@ import re
 import time
 import json
 import hashlib
+import sys
 from urllib.parse import urlparse
 import urllib.robotparser as robotparser
 from typing import Optional, Dict, Any, List
 
+from datetime import datetime, timezone
+
 import requests
 from bs4 import BeautifulSoup
 from tqdm import tqdm
-from openai import OpenAI
-from dotenv import load_dotenv
 
-# Load .env file for API keys
-load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+# Ensure project root on sys.path so we can import backend.* when run from scraper/
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+try:
+    from backend.services.dynamo_repository import save_problem_record
+except Exception:
+    save_problem_record = None
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+except ImportError:
+    pass
 
 # ----------------------------
 # CONFIG
@@ -30,6 +44,7 @@ USER_AGENT = "compmath-scraper/1.1 (+https://example.org)"
 DEFAULT_DELAY = 1.0
 SESSION = requests.Session()
 SESSION.headers.update({"User-Agent": USER_AGENT})
+PERSIST_TO_DDB = os.getenv("SCRAPER_PERSIST_TO_DDB", "false").lower() == "true"
 
 # ----------------------------
 # Politeness
@@ -145,8 +160,7 @@ def strip_markdown_fences(code: str) -> str:
     return code.strip()
 
 def translate_to_lean(problem: str, solution: str, title: str) -> Optional[str]:
-    """Translate LaTeX problem/solution to Lean 4 using OpenAI API."""
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    """Translate LaTeX problem/solution to Lean 4 using AWS Bedrock (or OpenAI fallback)."""
     prompt = f"""You are an expert in formal mathematics and the Lean 4 theorem prover with deep knowledge of Mathlib.
 
 TASK: Translate this competition math problem into valid, compilable Lean 4 code.
@@ -180,18 +194,22 @@ theorem example_theorem (n : ℕ) : n + 0 = n := by
   rfl
 
 YOUR LEAN 4 CODE (start directly with imports):"""
-    
+
+    # SageMaker endpoint — primary
     try:
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=4096,
-            temperature=0.3  # Lower temperature for more consistent output
-        )
-        lean_code = response.choices[0].message.content
+        from backend.services.sagemaker_client import sagemaker_chat
+        lean_code = sagemaker_chat(prompt, max_tokens=4096, temperature=0.3)
         return strip_markdown_fences(lean_code)
     except Exception as e:
-        print(f"[LLM Error] {e}")
+        print(f"[LLM Error] SageMaker call failed: {e}")
+
+    # OpenAI fallback if available
+    try:
+        from backend.services.openai_client import openai_chat
+        lean_code = openai_chat(prompt, max_tokens=4096, temperature=0.3)
+        return strip_markdown_fences(lean_code)
+    except Exception as e:
+        print(f"[LLM Error] OpenAI call failed: {e}")
         return None
 
 # ----------------------------
@@ -231,6 +249,10 @@ def parse_aops_wiki_problem(url: str, html: str) -> Dict[str, Any]:
     if not problem and sections["intro"]:
         problem = clean_junk(extract_latex_from_html("".join(sections["intro"])))
 
+    # Extract year from title
+    year_match = re.search(r'\b(19|20)\d{2}\b', title)
+    year = int(year_match.group(0)) if year_match else None
+
     return {
         "source": "AoPS Wiki",
         "url": url,
@@ -238,6 +260,8 @@ def parse_aops_wiki_problem(url: str, html: str) -> Dict[str, Any]:
         "problem": problem,
         "solution": solution,
         "answer": answer,
+        "year": year,
+        "scraped_at": datetime.now(timezone.utc).isoformat(),
     }
 
 # ----------------------------
@@ -392,6 +416,16 @@ def scrape_url(url: str, delay: float, outdir: str, use_lean: bool = False) -> O
         paths = save_problem(data, outdir, lean_code)
         print(f"[saved] {paths['problem_tex']}")
         print(f"[saved] {paths['solution_tex']}")
+
+        # Optional: persist to DynamoDB
+        if PERSIST_TO_DDB and save_problem_record:
+            try:
+                pid = make_id_from_url(data["url"])
+                save_problem_record(pid, data, lean_code)
+                print(f"[dynamo] stored PROBLEM#{pid}")
+            except Exception as db_exc:
+                print(f"[dynamo] failed to store problem: {db_exc}")
+
         return data
     except Exception as e:
         print(f"[ERROR during processing] {e}")
@@ -404,19 +438,22 @@ def scrape_url(url: str, delay: float, outdir: str, use_lean: bool = False) -> O
 # ----------------------------
 def main():
     parser = argparse.ArgumentParser(description="Competition Math Scraper")
+    parser.add_argument("urls_file", nargs="?", help="Text file with one URL per line")
     parser.add_argument("--url", type=str, help="Single page to scrape")
-    parser.add_argument("--list", type=str, help="File containing URLs")
+    parser.add_argument("--list", type=str, help="File containing URLs (same as positional)")
     parser.add_argument("--out", type=str, default="scraped_problems")
     parser.add_argument("--delay", type=float, default=DEFAULT_DELAY)
-    parser.add_argument("--lean", action="store_true", help="Use LLM to translate to Lean (requires OPENAI_API_KEY in .env)")
+    parser.add_argument("--lean", action="store_true", help="Use LLM to translate to Lean (uses AWS Bedrock credentials in backend/.env)")
 
     args = parser.parse_args()
 
     urls = []
+    list_path = args.list or args.urls_file
+
     if args.url:
         urls.append(args.url.strip())
-    if args.list:
-        with open(args.list, "r", encoding="utf-8") as f:
+    if list_path:
+        with open(list_path, "r", encoding="utf-8") as f:
             for line in f:
                 line = line.strip()
                 if line and not line.startswith("#"):

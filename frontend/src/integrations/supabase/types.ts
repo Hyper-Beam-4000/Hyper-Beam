@@ -14,6 +14,192 @@ export type Database = {
   }
   public: {
     Tables: {
+      contests: {
+        Row: {
+          id: string
+          name: string
+          description: string | null
+          start_date: string | null
+          end_date: string | null
+          is_active: boolean | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          description?: string | null
+          start_date?: string | null
+          end_date?: string | null
+          is_active?: boolean | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          description?: string | null
+          start_date?: string | null
+          end_date?: string | null
+          is_active?: boolean | null
+          created_at?: string
+        }
+        Relationships: []
+      }
+      contest_problems: {
+        Row: {
+          contest_id: string
+          problem_id: string
+        }
+        Insert: {
+          contest_id: string
+          problem_id: string
+        }
+        Update: {
+          contest_id?: string
+          problem_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contest_problems_contest_id_fkey"
+            columns: ["contest_id"]
+            isOneToOne: false
+            referencedRelation: "contests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contest_problems_problem_id_fkey"
+            columns: ["problem_id"]
+            isOneToOne: false
+            referencedRelation: "problems"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      evaluation_results: {
+        Row: {
+          id: string
+          submission_id: string
+          problem_id: string
+          model_response: string | null
+          overall_score: number | null
+          answer_correctness: number | null
+          rubric_score: number | null
+          reasoning_alignment: number | null
+          embedding_similarity: number | null
+          proof_technique_match: number | null
+          concept_coverage: number | null
+          lean_compiles: boolean | null
+          lean_sorry_free: boolean | null
+          llm_judge_score: number | null
+          errors: Json | null
+          evaluated_at: string
+        }
+        Insert: {
+          id?: string
+          submission_id: string
+          problem_id: string
+          model_response?: string | null
+          overall_score?: number | null
+          answer_correctness?: number | null
+          rubric_score?: number | null
+          reasoning_alignment?: number | null
+          embedding_similarity?: number | null
+          proof_technique_match?: number | null
+          concept_coverage?: number | null
+          lean_compiles?: boolean | null
+          lean_sorry_free?: boolean | null
+          llm_judge_score?: number | null
+          errors?: Json | null
+          evaluated_at?: string
+        }
+        Update: {
+          id?: string
+          submission_id?: string
+          problem_id?: string
+          model_response?: string | null
+          overall_score?: number | null
+          answer_correctness?: number | null
+          rubric_score?: number | null
+          reasoning_alignment?: number | null
+          embedding_similarity?: number | null
+          proof_technique_match?: number | null
+          concept_coverage?: number | null
+          lean_compiles?: boolean | null
+          lean_sorry_free?: boolean | null
+          llm_judge_score?: number | null
+          errors?: Json | null
+          evaluated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "evaluation_results_submission_id_fkey"
+            columns: ["submission_id"]
+            isOneToOne: false
+            referencedRelation: "submissions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "evaluation_results_problem_id_fkey"
+            columns: ["problem_id"]
+            isOneToOne: false
+            referencedRelation: "problems"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      problems: {
+        Row: {
+          id: string
+          external_id: string
+          source: string
+          source_url: string | null
+          title: string | null
+          competition: string | null
+          problem_number: number | null
+          problem_latex: string | null
+          solution_latex: string | null
+          answer: string | null
+          lean_code: string | null
+          difficulty: string | null
+          published_date: string | null
+          scraped_at: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          external_id: string
+          source?: string
+          source_url?: string | null
+          title?: string | null
+          competition?: string | null
+          problem_number?: number | null
+          problem_latex?: string | null
+          solution_latex?: string | null
+          answer?: string | null
+          lean_code?: string | null
+          difficulty?: string | null
+          published_date?: string | null
+          scraped_at?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          external_id?: string
+          source?: string
+          source_url?: string | null
+          title?: string | null
+          competition?: string | null
+          problem_number?: number | null
+          problem_latex?: string | null
+          solution_latex?: string | null
+          answer?: string | null
+          lean_code?: string | null
+          difficulty?: string | null
+          published_date?: string | null
+          scraped_at?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -40,48 +226,71 @@ export type Database = {
       }
       submissions: {
         Row: {
-          answer_prediction_score: number | null
-          api_endpoint: string
-          created_at: string
-          description: string | null
           id: string
-          is_active: boolean | null
-          model_name: string
-          overall_score: number | null
-          problem_solving_score: number | null
-          self_repair_score: number | null
-          step_reasoning_score: number | null
           user_id: string
+          model_name: string
+          api_endpoint: string
+          description: string | null
+          is_active: boolean | null
+          created_at: string
+          overall_score: number | null
+          contest_id: string | null
+          evaluation_status: string | null
+          training_cutoff_date: string | null
+          answer_correctness: number | null
+          rubric_score: number | null
+          reasoning_alignment: number | null
+          embedding_similarity: number | null
+          proof_technique_match: number | null
+          concept_coverage: number | null
         }
         Insert: {
-          answer_prediction_score?: number | null
-          api_endpoint: string
-          created_at?: string
-          description?: string | null
           id?: string
-          is_active?: boolean | null
-          model_name: string
-          overall_score?: number | null
-          problem_solving_score?: number | null
-          self_repair_score?: number | null
-          step_reasoning_score?: number | null
           user_id: string
+          model_name: string
+          api_endpoint: string
+          description?: string | null
+          is_active?: boolean | null
+          created_at?: string
+          overall_score?: number | null
+          contest_id?: string | null
+          evaluation_status?: string | null
+          training_cutoff_date?: string | null
+          answer_correctness?: number | null
+          rubric_score?: number | null
+          reasoning_alignment?: number | null
+          embedding_similarity?: number | null
+          proof_technique_match?: number | null
+          concept_coverage?: number | null
         }
         Update: {
-          answer_prediction_score?: number | null
-          api_endpoint?: string
-          created_at?: string
-          description?: string | null
           id?: string
-          is_active?: boolean | null
-          model_name?: string
-          overall_score?: number | null
-          problem_solving_score?: number | null
-          self_repair_score?: number | null
-          step_reasoning_score?: number | null
           user_id?: string
+          model_name?: string
+          api_endpoint?: string
+          description?: string | null
+          is_active?: boolean | null
+          created_at?: string
+          overall_score?: number | null
+          contest_id?: string | null
+          evaluation_status?: string | null
+          training_cutoff_date?: string | null
+          answer_correctness?: number | null
+          rubric_score?: number | null
+          reasoning_alignment?: number | null
+          embedding_similarity?: number | null
+          proof_technique_match?: number | null
+          concept_coverage?: number | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "submissions_contest_id_fkey"
+            columns: ["contest_id"]
+            isOneToOne: false
+            referencedRelation: "contests"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

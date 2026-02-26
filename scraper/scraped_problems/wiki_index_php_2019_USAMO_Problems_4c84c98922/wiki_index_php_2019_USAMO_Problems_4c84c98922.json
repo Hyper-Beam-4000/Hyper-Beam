@@ -1,0 +1,10 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php/2019_USAMO_Problems",
+  "title": "2019 USAMO Problems",
+  "problem": "Let $\\mathbb{N}$ be the set of positive integers. A function $f:\\mathbb{N}\\to\\mathbb{N}$ satisfies the equation \\[\\underbrace{f(f(\\ldots f}_{f(n)\\text{ times}}(n)\\ldots))=\\frac{n^2}{f(f(n))}\\] for all positive integers $n$ . Given this information, determine all possible values of $f(1000)$ . Solution",
+  "solution": "",
+  "answer": "",
+  "year": 2019,
+  "scraped_at": "2026-02-25T23:29:58.164428+00:00"
+}

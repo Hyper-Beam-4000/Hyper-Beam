@@ -237,26 +237,17 @@ def llm_judge_evaluate(
     Sends a structured prompt to the LLM and gets 0-10 scores on 5 dimensions:
     correctness, completeness, clarity, rigor, elegance.
 
-    Opt-in: off by default. Requires OPENAI_API_KEY environment variable.
+    Opt-in: off by default. Tries AWS Bedrock first, then falls back to OpenAI.
 
     Args:
         predicted: Predicted proof text
         reference: Reference proof text
         problem: Problem statement
-        model: LLM model to use
+        model: LLM model to use (for OpenAI fallback)
 
     Returns:
         Normalized score (0-1) or None if unavailable
     """
-    api_key = os.environ.get("OPENAI_API_KEY")
-    if not api_key:
-        return None
-
-    try:
-        from openai import OpenAI
-    except ImportError:
-        return None
-
     prompt = f"""You are an expert mathematics proof evaluator. Score the predicted proof against the reference proof on these dimensions (0-10 each):
 
 1. **Correctness**: Are all mathematical claims and steps valid?
@@ -277,19 +268,8 @@ Predicted Proof:
 Respond ONLY with a JSON object in this exact format:
 {{"correctness": <0-10>, "completeness": <0-10>, "clarity": <0-10>, "rigor": <0-10>, "elegance": <0-10>}}"""
 
-    try:
-        client = OpenAI(api_key=api_key)
-        response = client.chat.completions.create(
-            model=model,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.0,
-            max_tokens=100,
-        )
-
-        content = response.choices[0].message.content.strip()
-        scores = json.loads(content)
-
-        # Weighted combination (correctness matters most)
+    def _parse_scores(content: str) -> Optional[float]:
+        scores = json.loads(content.strip())
         weights = {
             'correctness': 0.35,
             'completeness': 0.25,
@@ -297,13 +277,25 @@ Respond ONLY with a JSON object in this exact format:
             'rigor': 0.15,
             'elegance': 0.10,
         }
-
         weighted_sum = sum(
             weights[dim] * scores.get(dim, 0) / 10.0
             for dim in weights
         )
         return round(max(0.0, min(1.0, weighted_sum)), 4)
 
+    # SageMaker (preferred)
+    try:
+        from backend.services.sagemaker_client import sagemaker_chat
+        content = sagemaker_chat(prompt, max_tokens=100, temperature=0.0)
+        return _parse_scores(content)
+    except Exception:
+        pass
+
+    # OpenAI fallback
+    try:
+        from backend.services.openai_client import openai_chat
+        content = openai_chat(prompt, max_tokens=100, temperature=0.0)
+        return _parse_scores(content)
     except Exception:
         return None
 
@@ -453,7 +445,7 @@ def score_question(
         predicted_lean: Predicted Lean 4 proof code (optional)
         expected_lean: Reference Lean 4 proof code (optional)
         weights: Custom metric weights (default: DEFAULT_WEIGHTS)
-        use_llm_judge: Whether to use LLM-as-judge (requires OPENAI_API_KEY)
+        use_llm_judge: Whether to use LLM-as-judge (uses AWS Bedrock)
         category: Problem category for breakdown tracking
 
     Returns:

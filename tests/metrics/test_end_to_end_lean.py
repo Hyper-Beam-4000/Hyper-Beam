@@ -2,7 +2,7 @@
 End-to-End Lean Proof Comparison Test
 
 Takes a competition math question + predicted answer + reference solution,
-translates both to Lean 4 via OpenAI GPT-4o, then runs the full Lean
+translates both to Lean 4 via AWS Bedrock (Claude), then runs the full Lean
 comparison and unified scoring pipeline.  Prints every step verbosely.
 
 Run:
@@ -25,9 +25,10 @@ project_root = Path(__file__).parent.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-# Load .env from scraper/ (where the OpenAI key lives)
+# Load AWS creds (prefer backend/.env, fallback to scraper/.env)
 try:
     from dotenv import load_dotenv
+    load_dotenv(os.path.join(project_root, "backend", ".env"))
     load_dotenv(os.path.join(project_root, "scraper", ".env"))
 except ImportError:
     pass
@@ -88,7 +89,7 @@ def print_structure(label: str, s: LeanProofStructure) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Lean Translation via OpenAI
+# Lean Translation via Bedrock
 # ---------------------------------------------------------------------------
 LEAN_TRANSLATION_PROMPT = """You are an expert in formal mathematics and the Lean 4 theorem prover with deep knowledge of Mathlib.
 
@@ -140,18 +141,13 @@ def strip_markdown_fences(code: str) -> str:
 
 def translate_to_lean(problem: str, solution: str, title: str = "Competition Problem") -> str:
     """
-    Translate a LaTeX problem + solution to Lean 4 via OpenAI GPT-4o.
+    Translate a LaTeX problem + solution to Lean 4 via AWS SageMaker endpoint, with OpenAI fallback.
 
     Returns the Lean 4 code string, or raises if the API is unavailable.
     """
-    from openai import OpenAI
 
-    api_key = os.environ.get("OPENAI_API_KEY")
-    if not api_key or api_key == "ATTACH_YOUR_OPENAI_API_KEY_HERE":
-        raise EnvironmentError(
-            "OPENAI_API_KEY not set (or still placeholder).  "
-            "Set it in scraper/.env or export it in your shell."
-        )
+    from backend.services.sagemaker_client import sagemaker_chat
+    from backend.services.openai_client import openai_chat
 
     prompt = LEAN_TRANSLATION_PROMPT.format(
         title=title,
@@ -159,23 +155,21 @@ def translate_to_lean(problem: str, solution: str, title: str = "Competition Pro
         solution=solution,
     )
 
-    print(f"    [API] Calling OpenAI GPT-4o  (temperature=0.3) ...")
+    print("    [API] Calling SageMaker endpoint (temperature=0.3) ...")
     t0 = time.time()
 
-    client = OpenAI(api_key=api_key)
-    response = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=4096,
-        temperature=0.3,
-    )
+    try:
+        lean_code = strip_markdown_fences(
+            sagemaker_chat(prompt, max_tokens=4096, temperature=0.3)
+        )
+    except Exception:
+        print("    [API] SageMaker unavailable, falling back to OpenAI...")
+        lean_code = strip_markdown_fences(
+            openai_chat(prompt, max_tokens=4096, temperature=0.3)
+        )
 
     elapsed = time.time() - t0
-    lean_code = strip_markdown_fences(response.choices[0].message.content)
-
-    usage = response.usage
-    print(f"    [API] Done in {elapsed:.1f}s  "
-          f"(prompt={usage.prompt_tokens} completion={usage.completion_tokens} tokens)")
+    print(f"    [API] Done in {elapsed:.1f}s")
 
     return lean_code
 
@@ -250,7 +244,7 @@ def test_end_to_end_lean_comparison():
     """
     End-to-end: question -> Lean translation -> parse -> compare -> score.
 
-    Requires OPENAI_API_KEY.  If missing, falls back to pre-built Lean
+    Requires AWS Bedrock credentials.  If missing, falls back to pre-built Lean
     proofs so the structural comparison / scoring pipeline still runs.
     """
 
@@ -295,7 +289,7 @@ def test_end_to_end_lean_comparison():
 
     except (EnvironmentError, ImportError, Exception) as exc:
         api_available = False
-        print(f"\n    [SKIP] OpenAI API not available: {exc}")
+        print(f"\n    [SKIP] Bedrock not available: {exc}")
         print("    [FALLBACK] Using pre-built Lean proofs for pipeline demo.\n")
 
         ref_lean = textwrap.dedent("""\

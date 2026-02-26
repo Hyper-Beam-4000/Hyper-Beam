@@ -1,0 +1,10 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php/2023_USAMO_Problems",
+  "title": "2023 USAMO Problems",
+  "problem": "In an acute triangle $ABC$ , let $M$ be the midpoint of $\\overline{BC}$ . Let $P$ be the foot of the perpendicular from $C$ to $AM$ . Suppose the circumcircle of triangle $ABP$ intersects line $BC$ at two distinct points $B$ and $Q$ . Let $N$ be the midpoint of $\\overline{AQ}$ . Prove that $NB=NC$ . Solution",
+  "solution": "",
+  "answer": "",
+  "year": 2023,
+  "scraped_at": "2026-02-25T23:30:41.064995+00:00"
+}

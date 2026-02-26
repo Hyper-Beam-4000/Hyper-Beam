@@ -1,0 +1,12 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2022 USAMO Problems/Problem 6}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+(but 4044 seems to be the wrong answer?)
+To answer this question, we need to consider how friendships on Mathbook are formed. If two users have at least two friends in common, then they will be able to become friends with each other. This means that the minimum number of friendships that must already exist in order for every user to eventually become friends with every other user is the smallest number of friendships that guarantees that each pair of users has at least two friends in common. One way to guarantee that each pair of users has at least two friends in common is to create a complete graph, where each user is friends with every other user. In this case, each pair of users has exactly $2022 - 2 = 2020$ friends in common. However, this is not the minimum number of friendships required, since some pairs of users may have more than two friends in common without forming a complete graph. To find the minimum number of friendships required, we can use the fact that a friendship between two users implies that they share all of their mutual friends. In other words, if two users are friends, then they must have at least two friends in common. This means that if we want to guarantee that each pair of users has at least two friends in common, we can do so by ensuring that each user has at least two friends. Therefore, the minimum number of friendships that must already exist in order for every user to eventually become friends with every other user is $2 \cdot 2022 = \boxed{4044}$ .
+
+\end{document}

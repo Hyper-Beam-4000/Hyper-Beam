@@ -8,11 +8,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Trophy, Loader2 } from "lucide-react";
+import { login, register } from "@/lib/api";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Auth = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const { setAuthFromToken } = useAuth();
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,41 +26,19 @@ const Auth = () => {
     const password = formData.get("signup-password") as string;
     const teamName = formData.get("team-name") as string;
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${window.location.origin}/`,
-        data: {
-          team_name: teamName,
-        },
-      },
-    });
-
-    setLoading(false);
-
-    if (error) {
+    try {
+      const res = await register(email, password, teamName);
+      setAuthFromToken(res.token);
+      toast({ title: "Account created!", description: "You can now submit to contests." });
+      navigate("/");
+    } catch (error: any) {
       toast({
         title: "Sign up failed",
-        description: error.message,
+        description: error.message || "Unknown error",
         variant: "destructive",
       });
-    } else {
-      // Update profile with team name
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        await supabase
-          .from("profiles")
-          .update({ team_name: teamName })
-          .eq("id", user.id);
-      }
-
-      toast({
-        title: "Account created!",
-        description: "You can now submit to contests.",
-      });
-      navigate("/");
     }
+    setLoading(false);
   };
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -68,26 +49,19 @@ const Auth = () => {
     const email = formData.get("signin-email") as string;
     const password = formData.get("signin-password") as string;
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    setLoading(false);
-
-    if (error) {
+    try {
+      const res = await login(email, password);
+      setAuthFromToken(res.token);
+      toast({ title: "Welcome back!", description: "You've successfully signed in." });
+      navigate("/");
+    } catch (error: any) {
       toast({
         title: "Sign in failed",
-        description: error.message,
+        description: error.message || "Unknown error",
         variant: "destructive",
       });
-    } else {
-      toast({
-        title: "Welcome back!",
-        description: "You've successfully signed in.",
-      });
-      navigate("/");
     }
+    setLoading(false);
   };
 
   return (

@@ -1,60 +1,85 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, Users, Lock, Calculator } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Users, Lock, Calculator } from "lucide-react";
 import { useEffect, useState } from "react";
+import { fetchContests, fetchLeaderboard, type Contest, type LeaderboardEntry, type LeaderboardResponse } from "@/lib/api";
 import { supabase } from "@/integrations/supabase/client";
 
-interface Submission {
-  id: string;
-  model_name: string;
-  created_at: string;
-  profiles: {
-    team_name: string | null;
-    email: string;
-  } | null;
-}
-
 const Leaderboard = () => {
-  const [submissions, setSubmissions] = useState<Submission[]>([]);
+  const [contests, setContests] = useState<Contest[]>([]);
+  const [selectedContest, setSelectedContest] = useState<string>("");
+  const [leaderboard, setLeaderboard] = useState<LeaderboardResponse | null>(null);
   const [loading, setLoading] = useState(true);
+  const [usingFallback, setUsingFallback] = useState(false);
+
+  // Fallback data for when API isn't available
+  const [fallbackSubmissions, setFallbackSubmissions] = useState<any[]>([]);
 
   useEffect(() => {
-    const fetchSubmissions = async () => {
-      const { data, error } = await supabase
-        .from("submissions")
-        .select("id, model_name, created_at, is_active, user_id")
-        .eq("is_active", true)
-        .order("created_at", { ascending: false });
+    loadContests();
+  }, []);
 
-      if (error) {
-        console.error("Error fetching submissions:", error);
-        setLoading(false);
-        return;
+  useEffect(() => {
+    if (selectedContest) {
+      loadLeaderboard(selectedContest);
+    }
+  }, [selectedContest]);
+
+  const loadContests = async () => {
+    try {
+      const data = await fetchContests();
+      setContests(data.contests);
+      if (data.contests.length > 0) {
+        const active = data.contests.find((c) => c.is_active) || data.contests[0];
+        setSelectedContest(active.id);
       }
+    } catch {
+      // API not available — fall back to direct Supabase query
+      setUsingFallback(true);
+      loadFallbackSubmissions();
+    }
+  };
 
-      // Fetch profiles for each submission
-      const submissionsWithProfiles = await Promise.all(
-        (data || []).map(async (submission) => {
+  const loadLeaderboard = async (contestId: string) => {
+    setLoading(true);
+    try {
+      const data = await fetchLeaderboard(contestId);
+      setLeaderboard(data);
+    } catch {
+      setUsingFallback(true);
+      loadFallbackSubmissions();
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loadFallbackSubmissions = async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("submissions")
+      .select("id, model_name, created_at, is_active, user_id, evaluation_status, overall_score")
+      .eq("is_active", true)
+      .order("created_at", { ascending: false });
+
+    if (!error && data) {
+      const withProfiles = await Promise.all(
+        data.map(async (sub) => {
           const { data: profile } = await supabase
             .from("profiles")
             .select("team_name, email")
-            .eq("id", submission.user_id)
+            .eq("id", sub.user_id)
             .single();
-
-          return {
-            ...submission,
-            profiles: profile,
-          };
+          return { ...sub, profiles: profile };
         })
       );
+      setFallbackSubmissions(withProfiles);
+    }
+    setLoading(false);
+  };
 
-      setSubmissions(submissionsWithProfiles as any);
-      setLoading(false);
-    };
-
-    fetchSubmissions();
-  }, []);
+  const contestEnded = leaderboard?.contest_ended ?? false;
 
   return (
     <div className="min-h-screen bg-background">
@@ -65,33 +90,62 @@ const Leaderboard = () => {
             <h1 className="text-4xl font-bold">Math Benchmark Leaderboard</h1>
           </div>
           <p className="text-muted-foreground text-lg">
-            Current active submissions - scores will be revealed after the contest ends
+            {contestEnded
+              ? "Final results — full metric breakdown visible"
+              : "Current active submissions — scores will be revealed after the contest ends"
+            }
           </p>
         </div>
 
-        <Card className="mb-6 bg-muted/50 border-2 border-primary/20">
-          <CardContent className="pt-6">
-            <div className="flex items-start gap-3">
-              <Lock className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-              <div>
-                <h3 className="font-semibold mb-1">Scores Hidden During Contest</h3>
-                <p className="text-sm text-muted-foreground">
-                  To prevent gaming the system, all performance metrics are hidden until the contest concludes. 
-                  Only submission existence and timing are visible during the active period.
-                </p>
+        {/* Contest selector */}
+        {contests.length > 0 && (
+          <div className="mb-6">
+            <Select value={selectedContest} onValueChange={setSelectedContest}>
+              <SelectTrigger className="w-[300px]">
+                <SelectValue placeholder="Select contest" />
+              </SelectTrigger>
+              <SelectContent>
+                {contests.map((c) => (
+                  <SelectItem key={c.id} value={c.id}>
+                    {c.name} {c.is_active ? "(Active)" : ""}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
+
+        {!contestEnded && (
+          <Card className="mb-6 bg-muted/50 border-2 border-primary/20">
+            <CardContent className="pt-6">
+              <div className="flex items-start gap-3">
+                <Lock className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold mb-1">Scores Hidden During Contest</h3>
+                  <p className="text-sm text-muted-foreground">
+                    To prevent gaming the system, all performance metrics are hidden until the contest concludes.
+                    Only submission existence and timing are visible during the active period.
+                  </p>
+                </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        )}
 
         <Card className="shadow-elevation-medium">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Users className="h-5 w-5" />
-              Active Submissions ({submissions.length})
+              {usingFallback
+                ? `Active Submissions (${fallbackSubmissions.length})`
+                : `${leaderboard?.contest_name || "Leaderboard"} (${leaderboard?.entries.length ?? 0})`
+              }
             </CardTitle>
             <CardDescription>
-              Teams that have submitted models to the current contest
+              {contestEnded
+                ? "Final rankings with full metric breakdown"
+                : "Teams that have submitted models to the current contest"
+              }
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -99,49 +153,122 @@ const Leaderboard = () => {
               <div className="text-center py-12">
                 <p className="text-muted-foreground">Loading submissions...</p>
               </div>
-            ) : submissions.length === 0 ? (
-              <div className="text-center py-12">
-                <Users className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                <p className="text-muted-foreground">No submissions yet</p>
-                <p className="text-sm text-muted-foreground">
-                  Be the first to submit your model!
-                </p>
-              </div>
-            ) : (
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-[80px]">#</TableHead>
-                      <TableHead>Team</TableHead>
-                      <TableHead>Model Name</TableHead>
-                      <TableHead>Submitted</TableHead>
-                      <TableHead className="text-center">Status</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {submissions.map((submission, index) => (
-                      <TableRow key={submission.id} className="hover:bg-muted/50 transition-colors">
-                        <TableCell className="font-medium text-center">
-                          {index + 1}
-                        </TableCell>
-                        <TableCell className="font-semibold">
-                          {submission.profiles?.team_name || "Anonymous"}
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant="outline">{submission.model_name}</Badge>
-                        </TableCell>
-                        <TableCell className="text-muted-foreground">
-                          {new Date(submission.created_at).toLocaleDateString()}
-                        </TableCell>
-                        <TableCell className="text-center">
-                          <Badge className="bg-success">Submitted</Badge>
-                        </TableCell>
+            ) : usingFallback ? (
+              // Fallback rendering (direct Supabase)
+              fallbackSubmissions.length === 0 ? (
+                <div className="text-center py-12">
+                  <Users className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
+                  <p className="text-muted-foreground">No submissions yet</p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="w-[80px]">#</TableHead>
+                        <TableHead>Team</TableHead>
+                        <TableHead>Model Name</TableHead>
+                        <TableHead>Submitted</TableHead>
+                        <TableHead className="text-center">Status</TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
+                    </TableHeader>
+                    <TableBody>
+                      {fallbackSubmissions.map((sub, index) => (
+                        <TableRow key={sub.id}>
+                          <TableCell className="font-medium text-center">{index + 1}</TableCell>
+                          <TableCell className="font-semibold">
+                            {sub.profiles?.team_name || "Anonymous"}
+                          </TableCell>
+                          <TableCell><Badge variant="outline">{sub.model_name}</Badge></TableCell>
+                          <TableCell className="text-muted-foreground">
+                            {new Date(sub.created_at).toLocaleDateString()}
+                          </TableCell>
+                          <TableCell className="text-center">
+                            <Badge className="bg-success">Submitted</Badge>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              )
+            ) : (
+              // API-powered rendering
+              (leaderboard?.entries.length ?? 0) === 0 ? (
+                <div className="text-center py-12">
+                  <Users className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
+                  <p className="text-muted-foreground">No submissions yet</p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="w-[80px]">#</TableHead>
+                        <TableHead>Team</TableHead>
+                        <TableHead>Model Name</TableHead>
+                        <TableHead>Submitted</TableHead>
+                        {contestEnded && (
+                          <>
+                            <TableHead className="text-center">Overall</TableHead>
+                            <TableHead className="text-center">Answer</TableHead>
+                            <TableHead className="text-center">Rubric</TableHead>
+                            <TableHead className="text-center">Reasoning</TableHead>
+                            <TableHead className="text-center">Embedding</TableHead>
+                            <TableHead className="text-center">Technique</TableHead>
+                            <TableHead className="text-center">Coverage</TableHead>
+                          </>
+                        )}
+                        {!contestEnded && (
+                          <TableHead className="text-center">Status</TableHead>
+                        )}
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {leaderboard!.entries.map((entry) => (
+                        <TableRow key={`${entry.rank}-${entry.model_name}`}>
+                          <TableCell className="font-medium text-center">{entry.rank}</TableCell>
+                          <TableCell className="font-semibold">{entry.team}</TableCell>
+                          <TableCell><Badge variant="outline">{entry.model_name}</Badge></TableCell>
+                          <TableCell className="text-muted-foreground">
+                            {new Date(entry.submitted_at).toLocaleDateString()}
+                          </TableCell>
+                          {contestEnded && (
+                            <>
+                              <TableCell className="text-center font-semibold">
+                                {entry.overall_score?.toFixed(3) ?? "-"}
+                              </TableCell>
+                              <TableCell className="text-center">
+                                {entry.answer_correctness?.toFixed(3) ?? "-"}
+                              </TableCell>
+                              <TableCell className="text-center">
+                                {entry.rubric_score?.toFixed(3) ?? "-"}
+                              </TableCell>
+                              <TableCell className="text-center">
+                                {entry.reasoning_alignment?.toFixed(3) ?? "-"}
+                              </TableCell>
+                              <TableCell className="text-center">
+                                {entry.embedding_similarity?.toFixed(3) ?? "-"}
+                              </TableCell>
+                              <TableCell className="text-center">
+                                {entry.proof_technique_match?.toFixed(3) ?? "-"}
+                              </TableCell>
+                              <TableCell className="text-center">
+                                {entry.concept_coverage?.toFixed(3) ?? "-"}
+                              </TableCell>
+                            </>
+                          )}
+                          {!contestEnded && (
+                            <TableCell className="text-center">
+                              <Badge className="bg-success">Submitted</Badge>
+                            </TableCell>
+                          )}
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              )
             )}
           </CardContent>
         </Card>

@@ -4,13 +4,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Upload, Link as LinkIcon, AlertCircle, CheckCircle2, Archive } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Upload, Link as LinkIcon, AlertCircle, CheckCircle2, Archive, Play, FileUp } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
+import { triggerEvaluation, uploadResults } from "@/lib/api";
 
 const archivedContests: Record<string, { name: string; period: string }> = {
   "1": { name: "Q3 2025 LLM Benchmark Challenge", period: "August 1 - September 30, 2025" },
@@ -25,7 +25,16 @@ interface Submission {
   api_endpoint: string;
   created_at: string;
   is_active: boolean;
+  evaluation_status: string | null;
 }
+
+const statusBadge: Record<string, { label: string; className: string }> = {
+  pending: { label: "Pending", className: "bg-gray-500/20 text-gray-700" },
+  queued: { label: "Queued", className: "bg-yellow-500/20 text-yellow-700" },
+  running: { label: "Running", className: "bg-blue-500/20 text-blue-700" },
+  completed: { label: "Completed", className: "bg-green-500/20 text-green-700" },
+  failed: { label: "Failed", className: "bg-red-500/20 text-red-700" },
+};
 
 const Submit = () => {
   const { toast } = useToast();
@@ -34,96 +43,34 @@ const Submit = () => {
   const [loading, setLoading] = useState(false);
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [activeSubmission, setActiveSubmission] = useState<string | null>(null);
+  const [evaluating, setEvaluating] = useState<string | null>(null);
+  const [uploading, setUploading] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const archiveContestId = searchParams.get("archive");
   const archiveContest = archiveContestId ? archivedContests[archiveContestId] : null;
 
   useEffect(() => {
-    if (user) {
-      fetchSubmissions();
-    }
+    // Supabase submissions are disabled in this demo
   }, [user]);
 
-  const fetchSubmissions = async () => {
-    const { data, error } = await supabase
-      .from("submissions")
-      .select("*")
-      .eq("user_id", user?.id)
-      .order("created_at", { ascending: false });
-
-    if (error) {
-      console.error("Error fetching submissions:", error);
-    } else {
-      setSubmissions(data || []);
-      const active = data?.find((s) => s.is_active);
-      if (active) {
-        setActiveSubmission(active.id);
-      }
-    }
-  };
+  const fetchSubmissions = async () => {};
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-
-    const formData = new FormData(e.currentTarget);
-    const modelName = formData.get("model-name") as string;
-    const apiEndpoint = formData.get("api-endpoint") as string;
-    const description = formData.get("description") as string;
-
-    const { error } = await supabase.from("submissions").insert({
-      user_id: user?.id,
-      model_name: modelName,
-      api_endpoint: apiEndpoint,
-      description: description || null,
-      is_active: submissions.length === 0, // First submission is automatically active
-    });
-
-    setLoading(false);
-
-    if (error) {
-      toast({
-        title: "Submission Failed",
-        description: error.message,
-        variant: "destructive",
-      });
-    } else {
-      toast({
-        title: "Submission Received",
-        description: "Your model API has been registered for evaluation.",
-      });
-      (e.target as HTMLFormElement).reset();
-      fetchSubmissions();
-    }
+    toast({ title: "Submissions disabled in this demo", description: "Backend Supabase submissions are not configured." , variant: "destructive"});
   };
 
   const handleSetActive = async (submissionId: string) => {
-    // Deactivate all submissions
-    await supabase
-      .from("submissions")
-      .update({ is_active: false })
-      .eq("user_id", user?.id);
+    toast({ title: "Submissions disabled", description: "Cannot set active submission in demo mode.", variant: "destructive" });
+  };
 
-    // Activate selected submission
-    const { error } = await supabase
-      .from("submissions")
-      .update({ is_active: true })
-      .eq("id", submissionId);
+  const handleEvaluate = async (_submissionId: string) => {
+    toast({ title: "Evaluations disabled", description: "Cannot trigger evaluation without submissions in demo mode.", variant: "destructive" });
+  };
 
-    if (error) {
-      toast({
-        title: "Error",
-        description: error.message,
-        variant: "destructive",
-      });
-    } else {
-      setActiveSubmission(submissionId);
-      toast({
-        title: "Active Submission Updated",
-        description: "This submission is now your active leaderboard entry.",
-      });
-      fetchSubmissions();
-    }
+  const handleUpload = async (_submissionId: string, _file: File) => {
+    toast({ title: "Uploads disabled", description: "Cannot upload results in demo mode.", variant: "destructive" });
   };
 
   return (
@@ -141,26 +88,12 @@ const Submit = () => {
             </h1>
           </div>
           <p className="text-muted-foreground text-lg">
-            {archiveContest 
+            {archiveContest
               ? "Submit your model for non-competitive evaluation against historical results"
               : "Submit your model API endpoint for evaluation"
             }
           </p>
         </div>
-
-        {archiveContest && (
-          <div className="mb-6 p-4 rounded-lg bg-primary/10 border border-primary/20">
-            <div className="flex items-start gap-3">
-              <Archive className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-              <div>
-                <h3 className="font-semibold mb-1">{archiveContest.name}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {archiveContest.period} • Non-competitive submission - results won't appear on the official leaderboard
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Submission Form */}
@@ -175,12 +108,7 @@ const Submit = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
                   <Label htmlFor="model-name">Model Name</Label>
-                  <Input
-                    id="model-name"
-                    name="model-name"
-                    placeholder="e.g., GPT-Eval-v1.3"
-                    required
-                  />
+                  <Input id="model-name" name="model-name" placeholder="e.g., GPT-Eval-v1.3" required />
                 </div>
 
                 <div className="space-y-2">
@@ -202,6 +130,19 @@ const Submit = () => {
                 </div>
 
                 <div className="space-y-2">
+                  <Label htmlFor="training-cutoff">Training Cutoff Date</Label>
+                  <Input
+                    id="training-cutoff"
+                    name="training-cutoff"
+                    type="date"
+                    placeholder="YYYY-MM-DD"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Problems published before this date will be excluded to prevent data contamination
+                  </p>
+                </div>
+
+                <div className="space-y-2">
                   <Label htmlFor="description">Description (Optional)</Label>
                   <Textarea
                     id="description"
@@ -217,10 +158,10 @@ const Submit = () => {
                     <div>
                       <h4 className="font-semibold mb-1">API Requirements</h4>
                       <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>• Endpoint must accept POST requests with JSON payload</li>
-                        <li>• Must return evaluation results in specified format</li>
-                        <li>• Authentication headers will be provided during setup</li>
-                        <li>• Response time should be under 30 seconds per request</li>
+                        <li>- Endpoint must accept POST requests with JSON payload</li>
+                        <li>- Must return evaluation results in specified format</li>
+                        <li>- Response time should be under 120 seconds per request</li>
+                        <li>- Alternatively, upload a results JSON file below</li>
                       </ul>
                     </div>
                   </div>
@@ -242,7 +183,7 @@ const Submit = () => {
             <CardHeader>
               <CardTitle>Your Submissions</CardTitle>
               <CardDescription>
-                Select which submission appears on the leaderboard
+                Select active submission, trigger evaluation, or upload results
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -260,49 +201,86 @@ const Submit = () => {
                   onValueChange={handleSetActive}
                 >
                   <div className="space-y-4">
-                    {submissions.map((submission) => (
-                      <div
-                        key={submission.id}
-                        className={`p-4 rounded-lg border-2 transition-all ${
-                          submission.is_active
-                            ? "border-primary bg-primary/5"
-                            : "border-border bg-card hover:border-primary/30"
-                        }`}
-                      >
-                        <div className="flex items-start gap-3">
-                          <RadioGroupItem
-                            value={submission.id}
-                            id={`submission-${submission.id}`}
-                            className="mt-1"
-                          />
-                          <label
-                            htmlFor={`submission-${submission.id}`}
-                            className="flex-1 cursor-pointer"
-                          >
-                            <div className="flex items-center justify-between mb-2">
-                              <div className="flex items-center gap-2">
-                                <span className="font-semibold">
-                                  {submission.model_name}
-                                </span>
-                                {submission.is_active && (
-                                  <Badge className="bg-success">
-                                    <CheckCircle2 className="h-3 w-3 mr-1" />
-                                    Active
-                                  </Badge>
-                                )}
+                    {submissions.map((submission) => {
+                      const status = statusBadge[submission.evaluation_status || "pending"] || statusBadge.pending;
+                      return (
+                        <div
+                          key={submission.id}
+                          className={`p-4 rounded-lg border-2 transition-all ${
+                            submission.is_active
+                              ? "border-primary bg-primary/5"
+                              : "border-border bg-card hover:border-primary/30"
+                          }`}
+                        >
+                          <div className="flex items-start gap-3">
+                            <RadioGroupItem
+                              value={submission.id}
+                              id={`submission-${submission.id}`}
+                              className="mt-1"
+                            />
+                            <label
+                              htmlFor={`submission-${submission.id}`}
+                              className="flex-1 cursor-pointer"
+                            >
+                              <div className="flex items-center justify-between mb-2">
+                                <div className="flex items-center gap-2">
+                                  <span className="font-semibold">{submission.model_name}</span>
+                                  {submission.is_active && (
+                                    <Badge className="bg-success">
+                                      <CheckCircle2 className="h-3 w-3 mr-1" />
+                                      Active
+                                    </Badge>
+                                  )}
+                                  <Badge className={status.className}>{status.label}</Badge>
+                                </div>
                               </div>
-                            </div>
-                            <p className="text-sm text-muted-foreground mb-1 truncate">
-                              {submission.api_endpoint}
-                            </p>
-                            <div className="text-xs text-muted-foreground">
-                              Submitted:{" "}
-                              {new Date(submission.created_at).toLocaleDateString()}
-                            </div>
-                          </label>
+                              <p className="text-sm text-muted-foreground mb-1 truncate">
+                                {submission.api_endpoint}
+                              </p>
+                              <div className="text-xs text-muted-foreground mb-3">
+                                Submitted: {new Date(submission.created_at).toLocaleDateString()}
+                              </div>
+                            </label>
+                          </div>
+
+                          {/* Action buttons */}
+                          <div className="flex gap-2 ml-7">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              disabled={evaluating === submission.id || submission.evaluation_status === "running"}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handleEvaluate(submission.id);
+                              }}
+                            >
+                              <Play className="h-3 w-3 mr-1" />
+                              {evaluating === submission.id ? "Starting..." : "Evaluate"}
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              disabled={uploading === submission.id}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                // Open file picker
+                                const input = document.createElement("input");
+                                input.type = "file";
+                                input.accept = ".json";
+                                input.onchange = (ev) => {
+                                  const file = (ev.target as HTMLInputElement).files?.[0];
+                                  if (file) handleUpload(submission.id, file);
+                                };
+                                input.click();
+                              }}
+                            >
+                              <FileUp className="h-3 w-3 mr-1" />
+                              {uploading === submission.id ? "Uploading..." : "Upload Results"}
+                            </Button>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </RadioGroup>
               )}
