@@ -4,6 +4,9 @@ Unified Model Scoring System
 Combines all evaluation metrics with graceful degradation when some
 metrics are unavailable. Supports per-question scoring, model-level
 aggregation, model comparison, and export.
+
+Frontend-friendly: all outputs are JSON-serializable dicts that map
+directly to the EvaluationResult / LeaderboardEntry interfaces.
 """
 
 import json
@@ -23,12 +26,35 @@ from typing import Optional, List, Dict, Any, Tuple
 
 @dataclass
 class QuestionScore:
-    """Per-question evaluation results."""
+    """Per-question evaluation results.
+
+    Designed to serialize cleanly into the frontend EvaluationResult shape.
+    """
+    problem_id: str = ""
     metric_values: Dict[str, float] = field(default_factory=dict)
     available_metrics: List[str] = field(default_factory=list)
     weights_used: Dict[str, float] = field(default_factory=dict)
     overall_score: float = 0.0
     errors: List[str] = field(default_factory=list)
+    category: str = ""
+
+    def to_frontend_dict(self) -> Dict[str, Any]:
+        """Return a dict matching the frontend EvaluationResult interface."""
+        mv = self.metric_values
+        return {
+            "problem_id": self.problem_id,
+            "overall_score": self.overall_score,
+            "answer_correctness": mv.get("answer_correctness"),
+            "rubric_score": mv.get("rubric_score"),
+            "reasoning_alignment": mv.get("reasoning_alignment"),
+            "embedding_similarity": mv.get("embedding_similarity"),
+            "proof_technique_match": mv.get("proof_technique_match"),
+            "concept_coverage": mv.get("concept_coverage"),
+            "lean_compiles": mv.get("lean_compiles") == 1.0 if "lean_compiles" in mv else None,
+            "lean_comparison": mv.get("lean_comparison"),
+            "semantic_structure": mv.get("semantic_structure"),
+            "errors": self.errors,
+        }
 
 
 @dataclass
@@ -46,27 +72,74 @@ class ModelScore:
     num_questions: int = 0
     question_scores: List[QuestionScore] = field(default_factory=list)
 
+    def to_frontend_dict(self) -> Dict[str, Any]:
+        """Return a dict matching the frontend LeaderboardEntry shape."""
+        return {
+            "model_name": self.model_name,
+            "overall_score": self.mean_score,
+            "answer_correctness": self.per_metric_means.get("answer_correctness"),
+            "rubric_score": self.per_metric_means.get("rubric_score"),
+            "reasoning_alignment": self.per_metric_means.get("reasoning_alignment"),
+            "embedding_similarity": self.per_metric_means.get("embedding_similarity"),
+            "proof_technique_match": self.per_metric_means.get("proof_technique_match"),
+            "concept_coverage": self.per_metric_means.get("concept_coverage"),
+            "num_questions": self.num_questions,
+            "accuracy": self.accuracy,
+        }
+
 
 # ============================================================================
-# DEFAULT WEIGHTS
+# WEIGHT PRESETS
 # ============================================================================
 
+# Default weights — balanced for Lean-focused autoformalization evaluation.
+# Embedding similarity and semantic structure are weighted higher than before
+# because well-generated Lean solutions share deep structural patterns.
 DEFAULT_WEIGHTS: Dict[str, float] = {
-    'answer_correctness':     0.25,
-    'rubric_score':           0.20,
-    'lean_compiles':          0.10,
-    'reasoning_alignment':    0.10,
-    'llm_judge_score':        0.10,
-    'lean_sorry_free':        0.05,
-    'lean_comparison':        0.05,
-    'embedding_similarity':   0.05,
-    'proof_technique_match':  0.05,
-    'concept_coverage':       0.05,
+    "answer_correctness":     0.22,
+    "rubric_score":           0.17,
+    "embedding_similarity":   0.17,
+    "semantic_structure":     0.12,
+    "lean_compiles":          0.12,
+    "reasoning_alignment":    0.08,
+    "lean_comparison":        0.06,
+    "proof_technique_match":  0.03,
+    "concept_coverage":       0.03,
+}
+
+# Preset for when no Lean code is provided (pure LaTeX evaluation).
+LATEX_ONLY_WEIGHTS: Dict[str, float] = {
+    "answer_correctness":     0.30,
+    "rubric_score":           0.22,
+    "embedding_similarity":   0.18,
+    "semantic_structure":     0.10,
+    "reasoning_alignment":    0.10,
+    "proof_technique_match":  0.05,
+    "concept_coverage":       0.05,
+}
+
+# Preset that maximizes weight on formal verification.
+LEAN_HEAVY_WEIGHTS: Dict[str, float] = {
+    "lean_compiles":          0.30,
+    "lean_comparison":        0.15,
+    "answer_correctness":     0.15,
+    "embedding_similarity":   0.12,
+    "rubric_score":           0.12,
+    "semantic_structure":     0.06,
+    "reasoning_alignment":    0.05,
+    "proof_technique_match":  0.03,
+    "concept_coverage":       0.02,
+}
+
+WEIGHT_PRESETS: Dict[str, Dict[str, float]] = {
+    "default": DEFAULT_WEIGHTS,
+    "latex_only": LATEX_ONLY_WEIGHTS,
+    "lean_heavy": LEAN_HEAVY_WEIGHTS,
 }
 
 
 # ============================================================================
-# NEW METRIC IMPLEMENTATIONS
+# INDIVIDUAL METRIC IMPLEMENTATIONS
 # ============================================================================
 
 def reasoning_alignment_score(predicted: str, reference: str) -> float:
@@ -79,11 +152,9 @@ def reasoning_alignment_score(predicted: str, reference: str) -> float:
         Float 0-1 alignment score
     """
     def _split_steps(text: str) -> List[str]:
-        """Split proof text into individual reasoning steps."""
         lines = [l.strip() for l in text.split('\n') if l.strip()]
         steps = []
         for line in lines:
-            # Split on logical connectors if line is long
             if len(line) > 150:
                 sub = re.split(r'(?:therefore|thus|hence|implies|so that)\b', line, flags=re.IGNORECASE)
                 steps.extend(s.strip() for s in sub if s.strip())
@@ -97,14 +168,11 @@ def reasoning_alignment_score(predicted: str, reference: str) -> float:
     if not pred_steps or not ref_steps:
         return 0.0
 
-    # Compute alignment using SequenceMatcher
     matcher = SequenceMatcher(None, pred_steps, ref_steps)
     alignment_score = matcher.ratio()
 
-    # Penalize order inversions
-    # Find matched pairs and check ordering
     matching_blocks = matcher.get_matching_blocks()
-    if len(matching_blocks) > 2:  # More than just the sentinel
+    if len(matching_blocks) > 2:
         positions = [(block.a, block.b) for block in matching_blocks if block.size > 0]
         inversions = 0
         for i in range(len(positions)):
@@ -138,10 +206,6 @@ PROOF_TECHNIQUES = {
 def proof_technique_match_score(predicted: str, reference: str) -> float:
     """
     Detect proof techniques used in both proofs and compute overlap.
-    Uses regex-based detection of 12 common proof techniques.
-
-    Returns:
-        Float 0-1 technique match score
     """
     def _detect_techniques(text: str) -> set:
         text_lower = text.lower()
@@ -155,16 +219,12 @@ def proof_technique_match_score(predicted: str, reference: str) -> float:
     ref_tech = _detect_techniques(reference)
 
     if not pred_tech and not ref_tech:
-        return 1.0  # Neither uses identifiable techniques — neutral
+        return 1.0
 
     if not pred_tech or not ref_tech:
-        return 0.3  # One has techniques, other doesn't
+        return 0.3
 
-    # Jaccard similarity
     jaccard = len(pred_tech & ref_tech) / len(pred_tech | ref_tech)
-
-    # Primary technique bonus: if both share the first/main technique
-    # (approximate by checking if any technique matches)
     primary_bonus = 0.2 if pred_tech & ref_tech else 0.0
 
     return min(1.0, jaccard + primary_bonus)
@@ -192,9 +252,6 @@ def concept_coverage_score(predicted: str, reference: str) -> float:
     """
     Detect mathematical concept categories in both proofs and compute
     F1 score on coverage.
-
-    Returns:
-        Float 0-1 concept coverage F1 score
     """
     def _detect_concepts(text: str) -> set:
         text_lower = text.lower()
@@ -208,12 +265,11 @@ def concept_coverage_score(predicted: str, reference: str) -> float:
     ref_concepts = _detect_concepts(reference)
 
     if not pred_concepts and not ref_concepts:
-        return 1.0  # Neither has identifiable concepts — neutral
+        return 1.0
 
     if not ref_concepts:
         return 0.5
 
-    # F1 score
     tp = len(pred_concepts & ref_concepts)
     precision = tp / len(pred_concepts) if pred_concepts else 0.0
     recall = tp / len(ref_concepts) if ref_concepts else 0.0
@@ -221,83 +277,54 @@ def concept_coverage_score(predicted: str, reference: str) -> float:
     if precision + recall == 0:
         return 0.0
 
-    f1 = 2 * precision * recall / (precision + recall)
-    return f1
+    return 2 * precision * recall / (precision + recall)
 
 
-def llm_judge_evaluate(
-    predicted: str,
-    reference: str,
-    problem: str,
-    model: str = "gpt-4o",
-) -> Optional[float]:
+def semantic_structure_score(predicted: str, reference: str) -> float:
     """
-    Use an LLM as an expert judge to evaluate proof quality.
+    Combined semantic structure metric: blends LaTeX structural similarity
+    with logical flow analysis to capture how well the predicted proof
+    mirrors the reference proof's argument shape.
 
-    Sends a structured prompt to the LLM and gets 0-10 scores on 5 dimensions:
-    correctness, completeness, clarity, rigor, elegance.
-
-    Opt-in: off by default. Tries AWS Bedrock first, then falls back to OpenAI.
-
-    Args:
-        predicted: Predicted proof text
-        reference: Reference proof text
-        problem: Problem statement
-        model: LLM model to use (for OpenAI fallback)
+    This is a composite of:
+    - Line-category sequence alignment (EQUATION/DEFINITION/CONCLUSION/...)
+    - Logical flow quality (connectors, equation density, length)
 
     Returns:
-        Normalized score (0-1) or None if unavailable
+        Float 0-1 score
     """
-    prompt = f"""You are an expert mathematics proof evaluator. Score the predicted proof against the reference proof on these dimensions (0-10 each):
+    struct_sim = latex_structural_similarity(predicted, reference)
+    flow_pred = _logical_flow_quality(predicted)
+    flow_ref = _logical_flow_quality(reference)
+    # Penalize if predicted flow quality is much worse than reference
+    flow_ratio = flow_pred / max(flow_ref, 0.01)
+    flow_score = min(1.0, flow_ratio)
 
-1. **Correctness**: Are all mathematical claims and steps valid?
-2. **Completeness**: Does the proof address all necessary cases and steps?
-3. **Clarity**: Is the proof well-organized and easy to follow?
-4. **Rigor**: Are claims properly justified with appropriate level of formality?
-5. **Elegance**: Is the proof efficient and well-crafted?
+    return 0.7 * struct_sim + 0.3 * flow_score
 
-Problem Statement:
-{problem}
 
-Reference Proof:
-{reference}
+def _logical_flow_quality(proof: str) -> float:
+    """Rate the logical flow quality of a proof (0-1)."""
+    lines = [l.strip() for l in proof.split('\n') if l.strip()]
+    if len(lines) < 2:
+        return 0.3
 
-Predicted Proof:
-{predicted}
+    connectors = ['implies', 'therefore', 'thus', 'hence', 'so', 'since', 'because',
+                  'if', 'then', 'let', 'assume', 'contradiction', '\\implies', '\\Rightarrow']
+    has_connectors = any(any(c in line.lower() for c in connectors) for line in lines)
 
-Respond ONLY with a JSON object in this exact format:
-{{"correctness": <0-10>, "completeness": <0-10>, "clarity": <0-10>, "rigor": <0-10>, "elegance": <0-10>}}"""
+    has_equations = sum(1 for line in lines if '=' in line or '\\sim' in line or '\\equiv' in line)
+    equation_ratio = has_equations / len(lines)
 
-    def _parse_scores(content: str) -> Optional[float]:
-        scores = json.loads(content.strip())
-        weights = {
-            'correctness': 0.35,
-            'completeness': 0.25,
-            'clarity': 0.15,
-            'rigor': 0.15,
-            'elegance': 0.10,
-        }
-        weighted_sum = sum(
-            weights[dim] * scores.get(dim, 0) / 10.0
-            for dim in weights
-        )
-        return round(max(0.0, min(1.0, weighted_sum)), 4)
+    score = 0.3
+    if has_connectors:
+        score += 0.3
+    if equation_ratio > 0.3:
+        score += 0.2
+    if len(lines) >= 5:
+        score += 0.2
 
-    # SageMaker (preferred)
-    try:
-        from backend.services.sagemaker_client import sagemaker_chat
-        content = sagemaker_chat(prompt, max_tokens=100, temperature=0.0)
-        return _parse_scores(content)
-    except Exception:
-        pass
-
-    # OpenAI fallback
-    try:
-        from backend.services.openai_client import openai_chat
-        content = openai_chat(prompt, max_tokens=100, temperature=0.0)
-        return _parse_scores(content)
-    except Exception:
-        return None
+    return min(score, 1.0)
 
 
 # Line categories for LaTeX structural similarity
@@ -306,7 +333,7 @@ _LINE_CATEGORIES = [
     ('DEFINITION', re.compile(r'^\s*(?:let|define|set|denote)\b', re.IGNORECASE)),
     ('CONCLUSION', re.compile(r'^\s*(?:therefore|thus|hence|so|qed|\\square|\\blacksquare)\b', re.IGNORECASE)),
     ('CONNECTOR', re.compile(r'^\s*(?:since|because|by|from|using|implies|if|then|assume|suppose)\b', re.IGNORECASE)),
-    ('ASSERTION', re.compile(r'.+')),  # Default catch-all
+    ('ASSERTION', re.compile(r'.+')),
 ]
 
 
@@ -314,9 +341,6 @@ def latex_structural_similarity(predicted: str, reference: str) -> float:
     """
     Categorize proof lines as EQUATION/ASSERTION/CONNECTOR/DEFINITION/CONCLUSION,
     then compare sequences via SequenceMatcher.
-
-    Returns:
-        Float 0-1 structural similarity score
     """
     def _categorize_lines(text: str) -> List[str]:
         categories = []
@@ -335,7 +359,6 @@ def latex_structural_similarity(predicted: str, reference: str) -> float:
 
     if not pred_cats and not ref_cats:
         return 1.0
-
     if not pred_cats or not ref_cats:
         return 0.0
 
@@ -345,15 +368,11 @@ def latex_structural_similarity(predicted: str, reference: str) -> float:
 def classify_errors(predicted: str, reference: str) -> List[str]:
     """
     Heuristic error classification for a predicted proof vs reference.
-
-    Returns:
-        List of error category strings
     """
     errors = []
     pred_lower = predicted.lower()
     ref_lower = reference.lower()
 
-    # Check for wrong answer
     from metrics.math_metrics import extract_final_answer, verify_answer_correctness
     pred_ans = extract_final_answer(predicted)
     ref_ans = extract_final_answer(reference)
@@ -361,7 +380,6 @@ def classify_errors(predicted: str, reference: str) -> List[str]:
     if not is_correct:
         errors.append('wrong_answer')
 
-    # Check for wrong technique
     pred_tech = {
         name for name, pattern in PROOF_TECHNIQUES.items()
         if re.search(pattern, pred_lower)
@@ -373,25 +391,21 @@ def classify_errors(predicted: str, reference: str) -> List[str]:
     if pred_tech and ref_tech and not (pred_tech & ref_tech):
         errors.append('wrong_technique')
 
-    # Missing case analysis
     ref_cases = len(re.findall(r'\bcase\b', ref_lower))
     pred_cases = len(re.findall(r'\bcase\b', pred_lower))
     if ref_cases > 1 and pred_cases < ref_cases:
         errors.append('missing_case')
 
-    # Logical gap detection
     ref_steps = len([l for l in reference.split('\n') if l.strip()])
     pred_steps = len([l for l in predicted.split('\n') if l.strip()])
     if pred_steps < ref_steps * 0.5 and ref_steps > 5:
         errors.append('logical_gap')
 
-    # Incomplete proof
     conclusion_markers = ['therefore', 'thus', 'hence', '\\square', 'qed', '\\blacksquare']
     has_conclusion = any(m in pred_lower for m in conclusion_markers)
     if not has_conclusion and len(predicted.strip()) > 50:
         errors.append('incomplete')
 
-    # Sorry in Lean (if applicable)
     if 'sorry' in pred_lower:
         errors.append('sorry_present')
 
@@ -411,7 +425,6 @@ def _redistribute_weights(
     """
     available_weight = sum(weights.get(m, 0) for m in available_metrics)
     if available_weight <= 0:
-        # Equal distribution fallback
         n = len(available_metrics) if available_metrics else 1
         return {m: 1.0 / n for m in available_metrics}
 
@@ -432,8 +445,9 @@ def score_question(
     predicted_lean: Optional[str] = None,
     expected_lean: Optional[str] = None,
     weights: Optional[Dict[str, float]] = None,
-    use_llm_judge: bool = False,
+    weight_preset: Optional[str] = None,
     category: Optional[str] = None,
+    problem_id: str = "",
 ) -> QuestionScore:
     """
     Score a single predicted proof against a reference using all available metrics.
@@ -445,14 +459,19 @@ def score_question(
         predicted_lean: Predicted Lean 4 proof code (optional)
         expected_lean: Reference Lean 4 proof code (optional)
         weights: Custom metric weights (default: DEFAULT_WEIGHTS)
-        use_llm_judge: Whether to use LLM-as-judge (uses AWS Bedrock)
+        weight_preset: Name of a weight preset ("default", "latex_only", "lean_heavy")
         category: Problem category for breakdown tracking
+        problem_id: Problem identifier for tracking
 
     Returns:
         QuestionScore with all metric values and overall score
     """
-    w = weights or DEFAULT_WEIGHTS.copy()
-    result = QuestionScore()
+    if weight_preset and weight_preset in WEIGHT_PRESETS:
+        w = WEIGHT_PRESETS[weight_preset].copy()
+    else:
+        w = weights or DEFAULT_WEIGHTS.copy()
+
+    result = QuestionScore(problem_id=problem_id, category=category or "")
     metric_values: Dict[str, float] = {}
     available: List[str] = []
 
@@ -476,6 +495,21 @@ def score_question(
     except Exception as e:
         result.errors.append(f'rubric_score: {e}')
 
+    # --- Embedding similarity ---
+    try:
+        from metrics.math_metrics import proof_embedding_similarity
+        metric_values['embedding_similarity'] = proof_embedding_similarity(predicted, expected)
+        available.append('embedding_similarity')
+    except Exception as e:
+        result.errors.append(f'embedding_similarity: {e}')
+
+    # --- Semantic structure (composite: latex structure + logical flow) ---
+    try:
+        metric_values['semantic_structure'] = semantic_structure_score(predicted, expected)
+        available.append('semantic_structure')
+    except Exception as e:
+        result.errors.append(f'semantic_structure: {e}')
+
     # --- Lean compiles (binary) ---
     if predicted_lean:
         try:
@@ -483,10 +517,6 @@ def score_question(
             lean_result = verify_lean_proof(predicted_lean)
             metric_values['lean_compiles'] = 1.0 if lean_result['is_valid'] else 0.0
             available.append('lean_compiles')
-
-            # Lean sorry-free (binary)
-            metric_values['lean_sorry_free'] = 1.0 if not lean_result['has_sorry'] else 0.0
-            available.append('lean_sorry_free')
         except Exception as e:
             result.errors.append(f'lean_compiles: {e}')
 
@@ -507,14 +537,6 @@ def score_question(
     except Exception as e:
         result.errors.append(f'reasoning_alignment: {e}')
 
-    # --- Embedding similarity ---
-    try:
-        from metrics.math_metrics import proof_embedding_similarity
-        metric_values['embedding_similarity'] = proof_embedding_similarity(predicted, expected)
-        available.append('embedding_similarity')
-    except Exception as e:
-        result.errors.append(f'embedding_similarity: {e}')
-
     # --- Proof technique match ---
     try:
         metric_values['proof_technique_match'] = proof_technique_match_score(predicted, expected)
@@ -529,20 +551,9 @@ def score_question(
     except Exception as e:
         result.errors.append(f'concept_coverage: {e}')
 
-    # --- LLM judge (opt-in) ---
-    if use_llm_judge and problem:
-        try:
-            llm_score = llm_judge_evaluate(predicted, expected, problem)
-            if llm_score is not None:
-                metric_values['llm_judge_score'] = llm_score
-                available.append('llm_judge_score')
-        except Exception as e:
-            result.errors.append(f'llm_judge_score: {e}')
-
     # Redistribute weights among available metrics
     redistributed = _redistribute_weights(w, available)
 
-    # Compute overall score
     overall = sum(
         redistributed.get(m, 0) * metric_values.get(m, 0)
         for m in available
@@ -572,12 +583,10 @@ def score_model(
 
     overall_scores = [q.overall_score for q in question_scores]
 
-    # Basic stats
     mean = statistics.mean(overall_scores)
     median = statistics.median(overall_scores)
     std = statistics.stdev(overall_scores) if len(overall_scores) > 1 else 0.0
 
-    # Accuracy: fraction with answer_correctness == 1.0
     correct_count = sum(
         1 for q in question_scores
         if q.metric_values.get('answer_correctness', 0) == 1.0
@@ -598,6 +607,20 @@ def score_model(
         ]
         if values:
             per_metric_means[metric] = round(statistics.mean(values), 4)
+
+    # Per-category breakdown
+    per_category: Dict[str, List[float]] = {}
+    for q in question_scores:
+        cat = q.category or "uncategorized"
+        per_category.setdefault(cat, []).append(q.overall_score)
+
+    per_category_breakdown = {
+        cat: {
+            "mean": round(statistics.mean(scores), 4),
+            "count": len(scores),
+        }
+        for cat, scores in per_category.items()
+    }
 
     # Bootstrap 95% CI
     random.seed(42)
@@ -625,6 +648,7 @@ def score_model(
         confidence_interval_95=(round(ci_lower, 4), round(ci_upper, 4)),
         accuracy=round(accuracy, 4),
         per_metric_means=per_metric_means,
+        per_category_breakdown=per_category_breakdown,
         error_analysis=dict(error_counts),
         num_questions=len(question_scores),
         question_scores=question_scores,
@@ -661,7 +685,6 @@ def compare_models(
     """
     from scipy.stats import wilcoxon
 
-    # Rankings
     ranked = sorted(
         model_scores.items(),
         key=lambda x: x[1].mean_score,
@@ -669,7 +692,6 @@ def compare_models(
     )
     rankings = {name: rank + 1 for rank, (name, _) in enumerate(ranked)}
 
-    # Pairwise significance tests
     significance = {}
     model_names = list(model_scores.keys())
     for i in range(len(model_names)):
@@ -679,7 +701,6 @@ def compare_models(
             scores_a = [q.overall_score for q in model_scores[name_a].question_scores]
             scores_b = [q.overall_score for q in model_scores[name_b].question_scores]
 
-            # Need same length for paired test
             min_len = min(len(scores_a), len(scores_b))
             if min_len < 5:
                 significance[f'{name_a}_vs_{name_b}'] = {
@@ -729,7 +750,9 @@ def score_batch(
     predicted_leans: Optional[List[str]] = None,
     expected_leans: Optional[List[str]] = None,
     weights: Optional[Dict[str, float]] = None,
-    use_llm_judge: bool = False,
+    weight_preset: Optional[str] = None,
+    categories: Optional[List[str]] = None,
+    problem_ids: Optional[List[str]] = None,
 ) -> ModelScore:
     """
     Convenience wrapper: score all question pairs and aggregate.
@@ -746,7 +769,9 @@ def score_batch(
             predicted_lean=predicted_leans[i] if predicted_leans else None,
             expected_lean=expected_leans[i] if expected_leans else None,
             weights=weights,
-            use_llm_judge=use_llm_judge,
+            weight_preset=weight_preset,
+            category=categories[i] if categories else None,
+            problem_id=problem_ids[i] if problem_ids else f"q_{i}",
         )
         question_scores.append(q)
 
@@ -764,17 +789,11 @@ def export_scores(
 ) -> None:
     """
     Export model scores to a file.
-
-    Args:
-        model_scores: Dict mapping model names to ModelScore objects
-        path: Output file path
-        format: "json", "csv", or "summary"
     """
     if format == "json":
         data = {}
         for name, score in model_scores.items():
             score_dict = asdict(score)
-            # Remove question_scores for cleaner export
             score_dict.pop('question_scores', None)
             data[name] = score_dict
 

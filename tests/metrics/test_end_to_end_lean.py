@@ -393,7 +393,6 @@ def test_end_to_end_lean_comparison():
         problem=PROBLEM_STATEMENT,
         predicted_lean=pred_lean,
         expected_lean=ref_lean,
-        use_llm_judge=False,  # off by default; flip to True if you want it
     )
     elapsed = time.time() - t0
 
@@ -427,7 +426,6 @@ def test_end_to_end_lean_comparison():
     print(f"    Answer correct    : {q_score.metric_values.get('answer_correctness', 'N/A')}")
     print(f"    Rubric score      : {q_score.metric_values.get('rubric_score', 'N/A')}")
     print(f"    Lean compiles     : {q_score.metric_values.get('lean_compiles', 'N/A')}")
-    print(f"    Lean sorry-free   : {q_score.metric_values.get('lean_sorry_free', 'N/A')}")
     print(f"    Lean comparison   : {q_score.metric_values.get('lean_comparison', 'N/A')}")
     print(f"    Embedding sim.    : {q_score.metric_values.get('embedding_similarity', 'N/A')}")
     print(f"    Reasoning align.  : {q_score.metric_values.get('reasoning_alignment', 'N/A')}")

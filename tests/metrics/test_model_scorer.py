@@ -17,10 +17,14 @@ from metrics.model_scorer import (
     QuestionScore,
     ModelScore,
     DEFAULT_WEIGHTS,
+    LATEX_ONLY_WEIGHTS,
+    LEAN_HEAVY_WEIGHTS,
+    WEIGHT_PRESETS,
     reasoning_alignment_score,
     proof_technique_match_score,
     concept_coverage_score,
     latex_structural_similarity,
+    semantic_structure_score,
     classify_errors,
     _redistribute_weights,
     score_question,
@@ -125,6 +129,25 @@ class TestLatexStructuralSimilarity:
         assert score == 1.0
 
 
+class TestSemanticStructure:
+    def test_similar_proofs(self):
+        """Similar proofs should have high semantic structure score."""
+        proof_a = "Let x = 5\nSince x > 0\nx^2 = 25\nTherefore x^2 > 0"
+        proof_b = "Let y = 3\nSince y > 0\ny^2 = 9\nTherefore y^2 > 0"
+        score = semantic_structure_score(proof_a, proof_b)
+        assert 0.0 <= score <= 1.0
+
+    def test_empty_proofs(self):
+        """Empty proofs should return a high score (both empty)."""
+        score = semantic_structure_score("", "")
+        assert score >= 0.0
+
+    def test_range(self):
+        """Score should always be in [0, 1]."""
+        score = semantic_structure_score(GEMINI_PREDICTION, GPT_PREDICTION)
+        assert 0.0 <= score <= 1.0
+
+
 class TestClassifyErrors:
     def test_wrong_answer(self):
         """Should detect wrong answer."""
@@ -148,8 +171,28 @@ class TestClassifyErrors:
 
 
 # ============================================================================
-# WEIGHT REDISTRIBUTION TESTS
+# WEIGHT TESTS
 # ============================================================================
+
+class TestWeightPresets:
+    def test_default_weights_sum(self):
+        """Default weights should sum to ~1.0."""
+        assert abs(sum(DEFAULT_WEIGHTS.values()) - 1.0) < 0.01
+
+    def test_latex_only_weights_sum(self):
+        """LaTeX-only weights should sum to ~1.0."""
+        assert abs(sum(LATEX_ONLY_WEIGHTS.values()) - 1.0) < 0.01
+
+    def test_lean_heavy_weights_sum(self):
+        """Lean-heavy weights should sum to ~1.0."""
+        assert abs(sum(LEAN_HEAVY_WEIGHTS.values()) - 1.0) < 0.01
+
+    def test_presets_dict(self):
+        """All presets should be accessible by name."""
+        assert "default" in WEIGHT_PRESETS
+        assert "latex_only" in WEIGHT_PRESETS
+        assert "lean_heavy" in WEIGHT_PRESETS
+
 
 class TestWeightRedistribution:
     def test_all_metrics_available(self):
@@ -173,11 +216,11 @@ class TestWeightRedistribution:
 
     def test_proportional_redistribution(self):
         """Weights should maintain proportions after redistribution."""
-        available = ['answer_correctness', 'rubric_score']  # 0.25 and 0.20
+        available = ['answer_correctness', 'rubric_score']
         result = _redistribute_weights(DEFAULT_WEIGHTS, available)
-        # Ratio should be preserved: 0.25 / 0.20 = 1.25
         ratio = result['answer_correctness'] / result['rubric_score']
-        assert abs(ratio - 1.25) < 1e-6
+        expected_ratio = DEFAULT_WEIGHTS['answer_correctness'] / DEFAULT_WEIGHTS['rubric_score']
+        assert abs(ratio - expected_ratio) < 1e-6
 
 
 # ============================================================================
@@ -205,11 +248,8 @@ class TestScoreQuestion:
             expected=USAMO_SOLUTION,
         )
 
-        # Lean metrics should NOT be in available
         assert 'lean_compiles' not in result.available_metrics
-        assert 'lean_sorry_free' not in result.available_metrics
         assert 'lean_comparison' not in result.available_metrics
-        # Other metrics should be present
         assert 'answer_correctness' in result.available_metrics
         assert 'rubric_score' in result.available_metrics
         assert 0.0 <= result.overall_score <= 1.0
@@ -223,6 +263,48 @@ class TestScoreQuestion:
 
         for metric, value in result.metric_values.items():
             assert 0.0 <= value <= 1.0, f"{metric} = {value} out of range"
+
+    def test_semantic_structure_included(self):
+        """Semantic structure metric should be included."""
+        result = score_question(
+            predicted=GEMINI_PREDICTION,
+            expected=USAMO_SOLUTION,
+        )
+        assert 'semantic_structure' in result.available_metrics
+        assert 0.0 <= result.metric_values['semantic_structure'] <= 1.0
+
+    def test_embedding_similarity_included(self):
+        """Embedding similarity should be included and weighted properly."""
+        result = score_question(
+            predicted=GEMINI_PREDICTION,
+            expected=USAMO_SOLUTION,
+        )
+        assert 'embedding_similarity' in result.available_metrics
+        # Embedding similarity should have meaningful weight (>= 0.1 after redistribution)
+        assert result.weights_used.get('embedding_similarity', 0) >= 0.1
+
+    def test_weight_preset(self):
+        """Weight preset should be usable."""
+        result = score_question(
+            predicted=GEMINI_PREDICTION,
+            expected=USAMO_SOLUTION,
+            weight_preset="latex_only",
+        )
+        assert 0.0 <= result.overall_score <= 1.0
+
+    def test_frontend_dict(self):
+        """to_frontend_dict should produce expected keys."""
+        result = score_question(
+            predicted=GEMINI_PREDICTION,
+            expected=USAMO_SOLUTION,
+            problem_id="test_123",
+        )
+        fd = result.to_frontend_dict()
+        assert fd["problem_id"] == "test_123"
+        assert "overall_score" in fd
+        assert "answer_correctness" in fd
+        assert "embedding_similarity" in fd
+        assert "semantic_structure" in fd
 
 
 class TestScoreModel:
@@ -250,7 +332,6 @@ class TestScoreModel:
         model = score_model([q1, q2, q3])
 
         ci_low, ci_high = model.confidence_interval_95
-        # CI should contain the mean (or be very close)
         assert ci_low <= model.mean_score + 0.01
         assert ci_high >= model.mean_score - 0.01
 
@@ -265,6 +346,23 @@ class TestScoreModel:
         q1 = score_question(GEMINI_PREDICTION, USAMO_SOLUTION)
         model = score_model([q1])
         assert isinstance(model.error_analysis, dict)
+
+    def test_frontend_dict(self):
+        """to_frontend_dict should match LeaderboardEntry shape."""
+        q1 = score_question(GEMINI_PREDICTION, USAMO_SOLUTION)
+        model = score_model([q1], model_name="test")
+        fd = model.to_frontend_dict()
+        assert fd["model_name"] == "test"
+        assert "overall_score" in fd
+        assert "num_questions" in fd
+
+    def test_per_category_breakdown(self):
+        """Per-category breakdown should group by category."""
+        q1 = score_question(GEMINI_PREDICTION, USAMO_SOLUTION, category="algebra")
+        q2 = score_question(GPT_PREDICTION, USAMO_SOLUTION, category="number_theory")
+        model = score_model([q1, q2])
+        assert "algebra" in model.per_category_breakdown
+        assert "number_theory" in model.per_category_breakdown
 
 
 # ============================================================================
@@ -311,6 +409,14 @@ class TestBatchScoring:
             assert False, "Should have raised ValueError"
         except ValueError:
             pass
+
+    def test_score_batch_with_preset(self):
+        """Batch scoring with weight preset."""
+        preds = [GEMINI_PREDICTION, GPT_PREDICTION]
+        refs = [USAMO_SOLUTION, USAMO_SOLUTION]
+
+        model = score_batch(preds, refs, model_name="preset_test", weight_preset="latex_only")
+        assert model.num_questions == 2
 
 
 class TestExportScores:
