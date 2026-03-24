@@ -8,98 +8,103 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 220 25% 98%;
-    --foreground: 240 20% 10%;
+    /* Derived from the HyperBeam logo:
+       Navy "HYPERBEAM" text  → primary
+       Teal owl body          → secondary
+       Amber owl eyes         → accent
+    */
+    --background: 213 30% 97%;
+    --foreground: 213 40% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 240 20% 10%;
+    --card-foreground: 213 40% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 20% 10%;
+    --popover-foreground: 213 40% 12%;
 
-    --primary: 250 70% 55%;
+    --primary: 213 62% 28%;
     --primary-foreground: 0 0% 100%;
-    
-    --secondary: 190 85% 50%;
-    --secondary-foreground: 240 20% 10%;
 
-    --muted: 220 15% 94%;
-    --muted-foreground: 240 10% 50%;
+    --secondary: 197 68% 48%;
+    --secondary-foreground: 0 0% 100%;
 
-    --accent: 45 95% 60%;
-    --accent-foreground: 240 20% 10%;
+    --muted: 213 20% 93%;
+    --muted-foreground: 213 15% 48%;
+
+    --accent: 38 92% 58%;
+    --accent-foreground: 213 40% 12%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    
-    --success: 142 76% 45%;
+
+    --success: 142 76% 40%;
     --success-foreground: 0 0% 100%;
 
-    --border: 220 15% 88%;
-    --input: 220 15% 88%;
-    --ring: 250 70% 55%;
+    --border: 213 20% 86%;
+    --input: 213 20% 86%;
+    --ring: 213 62% 28%;
 
     --radius: 0.75rem;
-    
-    --chart-1: 250 70% 55%;
-    --chart-2: 190 85% 50%;
-    --chart-3: 45 95% 60%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 60%;
 
-    --gradient-hero: linear-gradient(135deg, hsl(250 70% 55%) 0%, hsl(280 65% 60%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 20% 98%) 100%);
-    --gradient-accent: linear-gradient(90deg, hsl(190 85% 50%) 0%, hsl(250 70% 55%) 100%);
-    
-    --shadow-elevation-low: 0 1px 3px hsla(240 20% 10% / 0.08);
-    --shadow-elevation-medium: 0 4px 12px hsla(240 20% 10% / 0.12);
-    --shadow-elevation-high: 0 12px 40px hsla(240 20% 10% / 0.16);
-    
+    --chart-1: 213 62% 28%;
+    --chart-2: 197 68% 48%;
+    --chart-3: 38 92% 58%;
+    --chart-4: 213 45% 50%;
+    --chart-5: 20 80% 55%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(213 62% 28%) 0%, hsl(197 68% 38%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(213 25% 97%) 100%);
+    --gradient-accent: linear-gradient(90deg, hsl(197 68% 48%) 0%, hsl(213 62% 28%) 100%);
+
+    --shadow-elevation-low: 0 1px 3px hsla(213 40% 12% / 0.08);
+    --shadow-elevation-medium: 0 4px 12px hsla(213 40% 12% / 0.12);
+    --shadow-elevation-high: 0 12px 40px hsla(213 40% 12% / 0.16);
+
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .dark {
-    --background: 240 20% 8%;
-    --foreground: 220 15% 95%;
+    --background: 213 35% 9%;
+    --foreground: 213 20% 94%;
 
-    --card: 240 18% 12%;
-    --card-foreground: 220 15% 95%;
+    --card: 213 30% 13%;
+    --card-foreground: 213 20% 94%;
 
-    --popover: 240 18% 12%;
-    --popover-foreground: 220 15% 95%;
+    --popover: 213 30% 13%;
+    --popover-foreground: 213 20% 94%;
 
-    --primary: 250 70% 60%;
+    --primary: 213 62% 52%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 190 85% 55%;
+    --secondary: 197 68% 52%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 15% 16%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 213 25% 18%;
+    --muted-foreground: 213 15% 60%;
 
-    --accent: 45 95% 65%;
-    --accent-foreground: 240 20% 10%;
+    --accent: 38 92% 62%;
+    --accent-foreground: 213 40% 12%;
 
     --destructive: 0 75% 55%;
     --destructive-foreground: 0 0% 100%;
-    
-    --success: 142 70% 50%;
+
+    --success: 142 70% 48%;
     --success-foreground: 0 0% 100%;
 
-    --border: 240 15% 18%;
-    --input: 240 15% 18%;
-    --ring: 250 70% 60%;
-    
-    --chart-1: 250 70% 60%;
-    --chart-2: 190 85% 55%;
-    --chart-3: 45 95% 65%;
-    --chart-4: 280 65% 65%;
-    --chart-5: 340 75% 65%;
-    
-    --gradient-hero: linear-gradient(135deg, hsl(250 70% 55%) 0%, hsl(280 65% 60%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(240 18% 14%) 0%, hsl(240 18% 12%) 100%);
-    --gradient-accent: linear-gradient(90deg, hsl(190 85% 50%) 0%, hsl(250 70% 55%) 100%);
-    
+    --border: 213 25% 20%;
+    --input: 213 25% 20%;
+    --ring: 213 62% 52%;
+
+    --chart-1: 213 62% 52%;
+    --chart-2: 197 68% 52%;
+    --chart-3: 38 92% 62%;
+    --chart-4: 213 45% 58%;
+    --chart-5: 20 80% 60%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(213 62% 35%) 0%, hsl(197 68% 42%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(213 30% 15%) 0%, hsl(213 30% 13%) 100%);
+    --gradient-accent: linear-gradient(90deg, hsl(197 68% 48%) 0%, hsl(213 62% 35%) 100%);
+
     --shadow-elevation-low: 0 1px 3px hsla(0 0% 0% / 0.3);
     --shadow-elevation-medium: 0 4px 12px hsla(0 0% 0% / 0.4);
     --shadow-elevation-high: 0 12px 40px hsla(0 0% 0% / 0.5);

@@ -160,7 +160,7 @@ def strip_markdown_fences(code: str) -> str:
     return code.strip()
 
 def translate_to_lean(problem: str, solution: str, title: str) -> Optional[str]:
-    """Translate LaTeX problem/solution to Lean 4 using AWS Bedrock (or OpenAI fallback)."""
+    """Translate LaTeX problem/solution to Lean 4 using OpenAI."""
     prompt = f"""You are an expert in formal mathematics and the Lean 4 theorem prover with deep knowledge of Mathlib.
 
 TASK: Translate this competition math problem into valid, compilable Lean 4 code.
@@ -195,18 +195,9 @@ theorem example_theorem (n : ℕ) : n + 0 = n := by
 
 YOUR LEAN 4 CODE (start directly with imports):"""
 
-    # SageMaker endpoint — primary
-    try:
-        from backend.services.sagemaker_client import sagemaker_chat
-        lean_code = sagemaker_chat(prompt, max_tokens=4096, temperature=0.3)
-        return strip_markdown_fences(lean_code)
-    except Exception as e:
-        print(f"[LLM Error] SageMaker call failed: {e}")
-
-    # OpenAI fallback if available
     try:
         from backend.services.openai_client import openai_chat
-        lean_code = openai_chat(prompt, max_tokens=4096, temperature=0.3)
+        lean_code = openai_chat(prompt, model="gpt-4o", max_tokens=4096, temperature=0.3)
         return strip_markdown_fences(lean_code)
     except Exception as e:
         print(f"[LLM Error] OpenAI call failed: {e}")
@@ -301,7 +292,6 @@ LEAN_TEMPLATE = """-- {title}
 import Mathlib.Tactic
 
 theorem {lean_name} : Prop := by
-  -- TODO: translate LaTeX statement into Lean and complete proof
   sorry
 """
 
@@ -412,7 +402,10 @@ def scrape_url(url: str, delay: float, outdir: str, use_lean: bool = False) -> O
         if use_lean:
             print("[LLM] Translating to Lean...")
             lean_code = translate_to_lean(data.get("problem", ""), data.get("solution", ""), data.get("title", ""))
-        
+
+        if lean_code:
+            data["lean_code"] = lean_code
+
         paths = save_problem(data, outdir, lean_code)
         print(f"[saved] {paths['problem_tex']}")
         print(f"[saved] {paths['solution_tex']}")
@@ -443,7 +436,7 @@ def main():
     parser.add_argument("--list", type=str, help="File containing URLs (same as positional)")
     parser.add_argument("--out", type=str, default="scraped_problems")
     parser.add_argument("--delay", type=float, default=DEFAULT_DELAY)
-    parser.add_argument("--lean", action="store_true", help="Use LLM to translate to Lean (uses AWS Bedrock credentials in backend/.env)")
+    parser.add_argument("--lean", action="store_true", help="Use OpenAI to translate to Lean 4 (requires OPENAI_API_KEY in backend/.env)")
 
     args = parser.parse_args()
 

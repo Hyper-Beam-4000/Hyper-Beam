@@ -18,7 +18,11 @@ OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
 API_SECRET_KEY: str = os.getenv("API_SECRET_KEY", "changeme")
 
 # Data & queues
-DDB_TABLE: str = os.getenv("DDB_TABLE", "hyperbeam-main")
+DDB_TABLE: str = os.getenv("DDB_TABLE", "hyperbeam-main")          # legacy single-table fallback
+DDB_TABLE_PROBLEM: str = os.getenv("DDB_TABLE_PROBLEM", "hyperbeam-problem")
+DDB_TABLE_SCORE: str = os.getenv("DDB_TABLE_SCORE", "hyperbeam-score")
+DDB_TABLE_SUBMISSION: str = os.getenv("DDB_TABLE_SUBMISSION", "hyperbeam-submission")
+DDB_TABLE_USER: str = os.getenv("DDB_TABLE_USER", "hyperbeam-user")
 SQS_SCRAPE_QUEUE: str = os.getenv("SQS_SCRAPE_QUEUE", "hyperbeam-scrape-jobs")
 SQS_SCORE_QUEUE: str = os.getenv("SQS_SCORE_QUEUE", "hyperbeam-score-jobs")
 

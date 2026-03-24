@@ -1,0 +1,14 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2025 USAMO Problems/Problem 2}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+We proceed by contradiction. Assume that all roots of $P(x)$ are real. Let the distinct roots be $r_1, r_2, \ldots, r_n$ , all nonzero since the constant term is nonzero. Consider any subset of $k$ roots $\{r_{i_1}, r_{i_2}, \ldots, r_{i_k}\}$ and form the polynomial: \[Q(x) = \prod_{j=1}^k (x - r_{i_j}) =a_{k} x^k + a_{k-1}x^{k-1} + \cdots + a_0\] By Vieta's formulas: $a_0 = (-1)^k \prod_{j=1}^k r_{i_j} \neq 0$ $a_{k-1} = -\sum_{j=1}^k r_{i_j}$ $a_{k-2} = \sum_{1\leq m<n\leq k} r_{i_m}r_{i_n}$ The given condition requires that $a_0a_1\cdots a_k = 0$ . Since $a_0 \neq 0$ , at least one other coefficient must be zero. Case $k=2$ :
+For any pair of roots $(r_i, r_j)$ , we have: \[Q(x) = x^2 - (r_i+r_j)x + r_ir_j\] The condition implies $-r_ir_j(r_i+r_j) = 0$ , so $r_i + r_j = 0$ for all pairs. But with $n \geq 3$ , considering three roots $r_1, r_2, r_3$ gives: \[r_1 + r_2 = 0 \quad \text{and} \quad r_1 + r_3 = 0 \implies r_2 = r_3\] contradicting distinct roots.
+In General:
+For any $k$ roots, some symmetric sum must be zero. For $k=3$ , this would require: \[r_i + r_j + r_m = 0 \quad \text{for all triples}\] which leads to contradictions for any $n \geq 4$ as it would force roots to be equal. Thus, our initial assumption is false, and $P(x)$ must have at least one nonreal root.~Jonathan
+
+\end{document}

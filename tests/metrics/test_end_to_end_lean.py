@@ -2,7 +2,7 @@
 End-to-End Lean Proof Comparison Test
 
 Takes a competition math question + predicted answer + reference solution,
-translates both to Lean 4 via AWS Bedrock (Claude), then runs the full Lean
+translates both to Lean 4 via OpenAI (gpt-4o), then runs the full Lean
 comparison and unified scoring pipeline.  Prints every step verbosely.
 
 Run:
@@ -25,7 +25,7 @@ project_root = Path(__file__).parent.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-# Load AWS creds (prefer backend/.env, fallback to scraper/.env)
+# Load env (prefer backend/.env, fallback to scraper/.env)
 try:
     from dotenv import load_dotenv
     load_dotenv(os.path.join(project_root, "backend", ".env"))
@@ -89,7 +89,7 @@ def print_structure(label: str, s: LeanProofStructure) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Lean Translation via Bedrock
+# Lean Translation via OpenAI
 # ---------------------------------------------------------------------------
 LEAN_TRANSLATION_PROMPT = """You are an expert in formal mathematics and the Lean 4 theorem prover with deep knowledge of Mathlib.
 
@@ -141,12 +141,10 @@ def strip_markdown_fences(code: str) -> str:
 
 def translate_to_lean(problem: str, solution: str, title: str = "Competition Problem") -> str:
     """
-    Translate a LaTeX problem + solution to Lean 4 via AWS SageMaker endpoint, with OpenAI fallback.
+    Translate a LaTeX problem + solution to Lean 4 via OpenAI (gpt-4o).
 
     Returns the Lean 4 code string, or raises if the API is unavailable.
     """
-
-    from backend.services.sagemaker_client import sagemaker_chat
     from backend.services.openai_client import openai_chat
 
     prompt = LEAN_TRANSLATION_PROMPT.format(
@@ -155,18 +153,12 @@ def translate_to_lean(problem: str, solution: str, title: str = "Competition Pro
         solution=solution,
     )
 
-    print("    [API] Calling SageMaker endpoint (temperature=0.3) ...")
+    print("    [API] Calling OpenAI gpt-4o (temperature=0.3) ...")
     t0 = time.time()
 
-    try:
-        lean_code = strip_markdown_fences(
-            sagemaker_chat(prompt, max_tokens=4096, temperature=0.3)
-        )
-    except Exception:
-        print("    [API] SageMaker unavailable, falling back to OpenAI...")
-        lean_code = strip_markdown_fences(
-            openai_chat(prompt, max_tokens=4096, temperature=0.3)
-        )
+    lean_code = strip_markdown_fences(
+        openai_chat(prompt, model="gpt-4o", max_tokens=4096, temperature=0.3)
+    )
 
     elapsed = time.time() - t0
     print(f"    [API] Done in {elapsed:.1f}s")
@@ -244,8 +236,8 @@ def test_end_to_end_lean_comparison():
     """
     End-to-end: question -> Lean translation -> parse -> compare -> score.
 
-    Requires AWS Bedrock credentials.  If missing, falls back to pre-built Lean
-    proofs so the structural comparison / scoring pipeline still runs.
+    Requires OPENAI_API_KEY in backend/.env.  If missing, falls back to pre-built
+    Lean proofs so the structural comparison / scoring pipeline still runs.
     """
 
     heading("END-TO-END LEAN PROOF COMPARISON TEST")
@@ -289,7 +281,7 @@ def test_end_to_end_lean_comparison():
 
     except (EnvironmentError, ImportError, Exception) as exc:
         api_available = False
-        print(f"\n    [SKIP] Bedrock not available: {exc}")
+        print(f"\n    [SKIP] OpenAI not available: {exc}")
         print("    [FALLBACK] Using pre-built Lean proofs for pipeline demo.\n")
 
         ref_lean = textwrap.dedent("""\

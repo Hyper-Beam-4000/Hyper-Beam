@@ -1,40 +1,46 @@
 import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Nat.Prime
-import Mathlib.Data.Nat.Log
-import Mathlib.Data.Nat.Pow
+import Mathlib.Data.Polynomial
 import Mathlib.Tactic
 
-open Nat
+open Polynomial
 
--- Theorem: Let K be the set of all positive integers that do not contain the digit 7 in their base-10 representation.
--- We want to find all polynomials f with nonnegative integer coefficients such that f(n) ∈ K whenever n ∈ K.
-theorem polynomial_in_K (f : ℕ → ℕ) (a : ℕ) (b : ℕ) (h : ∀ n ∈ K, f n ∈ K) : 
-  (∃ k ∈ K, f n = k) ∨ (∃ a' : ℕ, a' = 10^k ∧ b ∈ K ∧ b < a') := by
-  -- We will prove that the only polynomials satisfying the condition are of the specified forms.
-  
-  -- Case 1: f is a constant polynomial
-  have h_const : ∀ k ∈ K, f n = k → f n ∈ K := by
-    intro k hk h_eq
-    exact h_eq
+-- Define the set K of positive integers not containing the digit 7
+def K (n : ℕ) : Prop :=
+  ∀ d ∈ n.digits 10, d ≠ 7
 
-  -- Case 2: f is a linear polynomial of the form f(n) = a*n + b
-  have h_linear : ∀ a b, (a ≠ 0) → (∃ m ∈ K, a * m ∉ K) := by
-    intro a b ha
-    -- If a is not a power of 10, we can find an n in K such that a*n contains a 7.
-    have : ¬ (∃ k, a = 10^k) := by
-      intro h
-      -- If a is a power of 10, we can show that it does not lead to a contradiction.
-      obtain ⟨k, rfl⟩ := h
-      -- If a is a power of 10, we can analyze the case further.
-      -- We will show that for large enough n, a*n will contain a 7.
-      sorry
-
-  -- General case for polynomials
-  have h_poly : ∀ (p : ℕ → ℕ), (∃ m ∈ K, p m ∉ K) → (∃ a b, p n = a*n + b) := by
-    intro p hp
-    -- We can express the polynomial in terms of its coefficients and analyze each term.
+-- The main theorem: Characterize polynomials with nonnegative integer coefficients
+-- such that f(n) ∈ K whenever n ∈ K
+theorem characterize_polynomials (f : Polynomial ℕ) :
+  (∀ n, K n → K (f.eval n)) ↔
+  (∃ (k : ℕ), K k ∧ f = Polynomial.C k) ∨
+  (∃ (a b : ℕ), a > 0 ∧ b < a ∧ K b ∧ f = Polynomial.C a * Polynomial.X + Polynomial.C b) := by
+  constructor
+  · intro h
+    -- Case 1: f is a constant polynomial
+    by_cases hc : f.degree = 0
+    · obtain ⟨k, hk⟩ := exists_eq_C_of_degree_eq_zero hc
+      left
+      use k
+      constructor
+      · -- Show k ∈ K
+        specialize h 1 (by simp [K])
+        rw [hk, eval_C] at h
+        exact h
+      · exact hk
+    -- Case 2: f is a non-constant polynomial
+    right
+    -- Assume f is of the form an + b
     sorry
-
-  -- Combine the cases to conclude the proof
-  -- We will show that if any polynomial does not fit the forms stated, we can find a contradiction.
-  sorry
+  · intro h
+    cases h
+    · -- Case: f is a constant polynomial
+      obtain ⟨k, hk, rfl⟩ := h
+      intro n hn
+      rw [eval_C]
+      exact hk
+    · -- Case: f is of the form an + b
+      obtain ⟨a, b, ha, hb, hbK, rfl⟩ := h
+      intro n hn
+      rw [eval_add, eval_mul, eval_C, eval_X]
+      -- Show that an + b ∈ K
+      sorry

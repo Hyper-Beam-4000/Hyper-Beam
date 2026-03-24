@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { BookOpen, Filter } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -10,33 +9,25 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import { fetchProblems, type Problem } from "@/lib/api";
 
-const DIFFICULTY_OPTIONS = ["AMC", "AIME", "USAMO", "IMO", "Putnam"];
-
-const difficultyColor: Record<string, string> = {
-  AMC: "bg-green-500/20 text-green-700 border-green-500/30",
-  AIME: "bg-blue-500/20 text-blue-700 border-blue-500/30",
-  USAMO: "bg-orange-500/20 text-orange-700 border-orange-500/30",
-  IMO: "bg-red-500/20 text-red-700 border-red-500/30",
-  Putnam: "bg-purple-500/20 text-purple-700 border-purple-500/30",
-};
+const USAMO_YEARS = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
 
 const Problems = () => {
   const [problems, setProblems] = useState<Problem[]>([]);
   const [loading, setLoading] = useState(true);
   const [competition, setCompetition] = useState<string>("");
-  const [difficulty, setDifficulty] = useState<string>("");
+  const [year, setYear] = useState<string>("");
 
   useEffect(() => {
     loadProblems();
-  }, [competition, difficulty]);
+  }, [competition, year]);
 
   const loadProblems = async () => {
     setLoading(true);
     try {
-      const params: Record<string, string> = {};
-      if (competition) params.competition = competition;
-      if (difficulty) params.difficulty = difficulty;
-      const data = await fetchProblems(params);
+      const data = await fetchProblems({
+        competition: competition || undefined,
+        year: year ? Number(year) : undefined,
+      });
       setProblems(data.problems);
     } catch (err) {
       console.error("Failed to fetch problems:", err);
@@ -65,27 +56,23 @@ const Problems = () => {
             <Filter className="h-4 w-4 text-muted-foreground" />
             <span className="text-sm text-muted-foreground">Filters:</span>
           </div>
-          <Select value={competition} onValueChange={(v) => setCompetition(v === "all" ? "" : v)}>
+          <Select value={competition || "all"} onValueChange={(v) => setCompetition(v === "all" ? "" : v)}>
             <SelectTrigger className="w-[200px]">
               <SelectValue placeholder="Competition" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Competitions</SelectItem>
-              <SelectItem value="AMC">AMC</SelectItem>
-              <SelectItem value="AIME">AIME</SelectItem>
               <SelectItem value="USAMO">USAMO</SelectItem>
-              <SelectItem value="IMO">IMO</SelectItem>
-              <SelectItem value="Putnam">Putnam</SelectItem>
             </SelectContent>
           </Select>
-          <Select value={difficulty} onValueChange={(v) => setDifficulty(v === "all" ? "" : v)}>
-            <SelectTrigger className="w-[200px]">
-              <SelectValue placeholder="Difficulty" />
+          <Select value={year || "all"} onValueChange={(v) => setYear(v === "all" ? "" : v)}>
+            <SelectTrigger className="w-[160px]">
+              <SelectValue placeholder="Year" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Difficulties</SelectItem>
-              {DIFFICULTY_OPTIONS.map((d) => (
-                <SelectItem key={d} value={d}>{d}</SelectItem>
+              <SelectItem value="all">All Years</SelectItem>
+              {USAMO_YEARS.map((y) => (
+                <SelectItem key={y} value={String(y)}>{y}</SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -108,19 +95,13 @@ const Problems = () => {
               <Link key={problem.id} to={`/problems/${problem.id}`}>
                 <Card className="shadow-elevation-medium hover:shadow-elevation-high transition-all cursor-pointer h-full">
                   <CardHeader className="pb-3">
-                    <div className="flex items-start justify-between gap-2">
-                      <CardTitle className="text-lg leading-tight line-clamp-2">
-                        {problem.title || "Untitled Problem"}
-                      </CardTitle>
-                    </div>
+                    <CardTitle className="text-lg leading-tight line-clamp-2">
+                      {problem.title || "Untitled Problem"}
+                    </CardTitle>
                     <div className="flex gap-2 flex-wrap">
-                      {problem.competition && (
-                        <Badge variant="outline">{problem.competition}</Badge>
-                      )}
-                      {problem.difficulty && (
-                        <Badge className={difficultyColor[problem.difficulty] || ""}>
-                          {problem.difficulty}
-                        </Badge>
+                      <Badge variant="outline">USAMO</Badge>
+                      {problem.year && (
+                        <Badge variant="secondary">{problem.year}</Badge>
                       )}
                     </div>
                   </CardHeader>
@@ -139,11 +120,6 @@ const Problems = () => {
                         "No problem text available"
                       )}
                     </div>
-                    {problem.problem_number && (
-                      <p className="text-xs text-muted-foreground mt-3">
-                        Problem #{problem.problem_number}
-                      </p>
-                    )}
                   </CardContent>
                 </Card>
               </Link>

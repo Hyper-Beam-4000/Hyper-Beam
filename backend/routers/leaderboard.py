@@ -1,83 +1,56 @@
-"""Leaderboard API — aggregated rankings per contest."""
+"""Leaderboard API — aggregated rankings from DynamoDB submissions."""
 
-from datetime import datetime, timezone
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 
 router = APIRouter(tags=["leaderboard"])
+
+try:
+    from backend.services import dynamo_repository as ddb
+except Exception:
+    ddb = None
 
 
 @router.get("/leaderboard/{contest_id}")
 async def get_leaderboard(contest_id: str):
     """
-    Get leaderboard for a contest.
-    During active contest: rank + team + model name only (scores hidden).
-    After contest ends: full metric breakdown.
+    Get leaderboard for a contest from DynamoDB.
+    Returns all completed submissions ranked by overall_score.
     """
-    try:
-        from backend.db import get_client
-        db = get_client()
-    except Exception:
-        # Supabase not configured; return empty leaderboard
-        return {"contest_id": contest_id, "contest_name": "", "contest_ended": True, "entries": []}
+    if not ddb:
+        return {"contest_id": contest_id, "contest_name": "Hyper Beam", "contest_ended": True, "entries": []}
 
-    contest = db.table("contests").select("*").eq("id", contest_id).execute()
-    if not contest.data:
-        raise HTTPException(status_code=404, detail="Contest not found")
+    submissions = ddb.list_all_submissions(limit=500)
 
-    contest_data = contest.data[0]
-    end_date = contest_data.get("end_date")
-    contest_ended = False
-    if end_date:
-        contest_ended = datetime.fromisoformat(end_date.replace("Z", "+00:00")) < datetime.now(timezone.utc)
-
-    # Fetch active submissions for this contest with profiles
-    subs = (
-        db.table("submissions")
-        .select("id, model_name, user_id, overall_score, evaluation_status, "
-                "answer_correctness, rubric_score, reasoning_alignment, "
-                "embedding_similarity, proof_technique_match, concept_coverage, "
-                "created_at, is_active")
-        .eq("contest_id", contest_id)
-        .eq("is_active", True)
-        .order("overall_score", desc=True)
-        .execute()
-    )
+    completed = [
+        s for s in submissions
+        if s.get("evaluation_status") == "completed" and s.get("overall_score") is not None
+    ]
+    completed.sort(key=lambda s: float(s.get("overall_score") or 0), reverse=True)
 
     entries = []
-    for rank, sub in enumerate(subs.data or [], start=1):
-        # Fetch team name
-        profile = (
-            db.table("profiles")
-            .select("team_name, email")
-            .eq("id", sub["user_id"])
-            .execute()
-        )
-        team = (profile.data[0]["team_name"] if profile.data else None) or "Anonymous"
-
-        entry = {
+    for rank, sub in enumerate(completed, start=1):
+        pm = sub.get("per_metric_means") or {}
+        entries.append({
             "rank": rank,
-            "team": team,
-            "model_name": sub["model_name"],
-            "evaluation_status": sub["evaluation_status"],
-            "submitted_at": sub["created_at"],
-        }
-
-        if contest_ended:
-            entry.update({
-                "overall_score": sub["overall_score"],
-                "answer_correctness": sub["answer_correctness"],
-                "rubric_score": sub["rubric_score"],
-                "reasoning_alignment": sub["reasoning_alignment"],
-                "embedding_similarity": sub["embedding_similarity"],
-                "proof_technique_match": sub["proof_technique_match"],
-                "concept_coverage": sub["concept_coverage"],
-            })
-
-        entries.append(entry)
+            "team": sub.get("model_name", "Unknown"),
+            "model_name": sub.get("model_name", "Unknown"),
+            "evaluation_status": sub.get("evaluation_status"),
+            "submitted_at": sub.get("created_at", ""),
+            "overall_score": float(sub.get("overall_score") or 0),
+            "answer_correctness": pm.get("answer_correctness"),
+            "rubric_score": pm.get("rubric_score"),
+            "reasoning_alignment": pm.get("reasoning_alignment"),
+            "embedding_similarity": pm.get("embedding_similarity"),
+            "proof_technique_match": pm.get("proof_technique_match"),
+            "concept_coverage": pm.get("concept_coverage"),
+            "semantic_structure": pm.get("semantic_structure"),
+            "lean_compiles": pm.get("lean_compiles"),
+            "lean_comparison": pm.get("lean_comparison"),
+        })
 
     return {
         "contest_id": contest_id,
-        "contest_name": contest_data["name"],
-        "contest_ended": contest_ended,
+        "contest_name": "Hyper Beam — USAMO Benchmark",
+        "contest_ended": True,
         "entries": entries,
     }

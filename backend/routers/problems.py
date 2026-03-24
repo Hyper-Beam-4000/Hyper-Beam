@@ -25,28 +25,36 @@ router = APIRouter(tags=["problems"])
 
 @router.get("/problems")
 async def list_problems(
-    limit: int = Query(50, ge=1, le=200),
+    limit: int = Query(200, ge=1, le=500),
     last_key: Optional[str] = Query(None, description="Opaque pagination key"),
+    competition: Optional[str] = Query(None, description="Filter by competition (e.g. USAMO)"),
+    year: Optional[int] = Query(None, description="Filter by year"),
 ):
     """List problems. Dynamo scan (paginated); Supabase fallback with offset if Dynamo absent."""
     if ddb:
         lek = None
         if last_key:
-            # Expect last_key as base16 sha or dict; keep simple: not used currently
-            # Could be JSON string of LastEvaluatedKey
             import json
             lek = json.loads(last_key)
         items, next_key = ddb.list_problems(limit=limit, last_evaluated_key=lek)
+
+        # Filter in-memory (small dataset)
+        if competition and competition.upper() != "ALL":
+            items = [i for i in items if competition.upper() in (i.get("title") or "").upper()]
+        if year:
+            items = [i for i in items if i.get("year") == year]
+
         problems = [
             {
-                "id": item.get("problem_id"),
+                "id": item.get("id"),
                 "title": item.get("title"),
                 "source": item.get("source"),
                 "url": item.get("url"),
+                "year": item.get("year"),
                 "problem_text": _strip_trailing_solution(item.get("problem_text")),
                 "solution_text": item.get("solution_text"),
-                "problem_latex": _strip_trailing_solution(item.get("problem_text")),   # for frontend backward-compat
-                "solution_latex": item.get("solution_text"), # for frontend backward-compat
+                "problem_latex": _strip_trailing_solution(item.get("problem_text")),
+                "solution_latex": item.get("solution_text"),
                 "lean_code": item.get("lean_code"),
                 "scraped_at": item.get("scraped_at"),
                 "published_at": item.get("published_at"),
@@ -72,7 +80,7 @@ async def get_problem(problem_id: str):
         if not item:
             raise HTTPException(status_code=404, detail="Problem not found")
         return {
-            "id": item.get("problem_id"),
+            "id": item.get("id"),
             "title": item.get("title"),
             "source": item.get("source"),
             "url": item.get("url"),

@@ -1,3 +1,20 @@
+# ── Pre-GPT baseline (models definitely trained on these) ──────────────────
+https://artofproblemsolving.com/wiki/index.php?title=2017_USAMO_Problems/Problem_1
+https://artofproblemsolving.com/wiki/index.php?title=2017_USAMO_Problems/Problem_2
+https://artofproblemsolving.com/wiki/index.php?title=2017_USAMO_Problems/Problem_3
+https://artofproblemsolving.com/wiki/index.php?title=2017_USAMO_Problems/Problem_4
+https://artofproblemsolving.com/wiki/index.php?title=2017_USAMO_Problems/Problem_5
+https://artofproblemsolving.com/wiki/index.php?title=2017_USAMO_Problems/Problem_6
+
+# ── Early GPT era (GPT-1 released mid-2018) ────────────────────────────────
+https://artofproblemsolving.com/wiki/index.php?title=2018_USAMO_Problems/Problem_1
+https://artofproblemsolving.com/wiki/index.php?title=2018_USAMO_Problems/Problem_2
+https://artofproblemsolving.com/wiki/index.php?title=2018_USAMO_Problems/Problem_3
+https://artofproblemsolving.com/wiki/index.php?title=2018_USAMO_Problems/Problem_4
+https://artofproblemsolving.com/wiki/index.php?title=2018_USAMO_Problems/Problem_5
+https://artofproblemsolving.com/wiki/index.php?title=2018_USAMO_Problems/Problem_6
+
+# ── Likely in training data (2019–2023) ────────────────────────────────────
 https://artofproblemsolving.com/wiki/index.php?title=2019_USAMO_Problems/Problem_1
 https://artofproblemsolving.com/wiki/index.php?title=2019_USAMO_Problems/Problem_2
 https://artofproblemsolving.com/wiki/index.php?title=2019_USAMO_Problems/Problem_3
@@ -28,3 +45,17 @@ https://artofproblemsolving.com/wiki/index.php?title=2023_USAMO_Problems/Problem
 https://artofproblemsolving.com/wiki/index.php?title=2023_USAMO_Problems/Problem_4
 https://artofproblemsolving.com/wiki/index.php?title=2023_USAMO_Problems/Problem_5
 https://artofproblemsolving.com/wiki/index.php?title=2023_USAMO_Problems/Problem_6
+
+# ── Post-cutoff / held-out test data (2024–2025) ──────────────────────────
+https://artofproblemsolving.com/wiki/index.php?title=2024_USAMO_Problems/Problem_1
+https://artofproblemsolving.com/wiki/index.php?title=2024_USAMO_Problems/Problem_2
+https://artofproblemsolving.com/wiki/index.php?title=2024_USAMO_Problems/Problem_3
+https://artofproblemsolving.com/wiki/index.php?title=2024_USAMO_Problems/Problem_4
+https://artofproblemsolving.com/wiki/index.php?title=2024_USAMO_Problems/Problem_5
+https://artofproblemsolving.com/wiki/index.php?title=2024_USAMO_Problems/Problem_6
+https://artofproblemsolving.com/wiki/index.php?title=2025_USAMO_Problems/Problem_1
+https://artofproblemsolving.com/wiki/index.php?title=2025_USAMO_Problems/Problem_2
+https://artofproblemsolving.com/wiki/index.php?title=2025_USAMO_Problems/Problem_3
+https://artofproblemsolving.com/wiki/index.php?title=2025_USAMO_Problems/Problem_4
+https://artofproblemsolving.com/wiki/index.php?title=2025_USAMO_Problems/Problem_5
+https://artofproblemsolving.com/wiki/index.php?title=2025_USAMO_Problems/Problem_6

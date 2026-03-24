@@ -1,36 +1,58 @@
-import Mathlib.Geometry.Euclidean.Basic
-import Mathlib.Geometry.Euclidean.Circle
-import Mathlib.Geometry.Euclidean.Triangle
-import Mathlib.Data.Complex.Basic
+import Mathlib.Geometry.Euclidean.Circumcenter
+import Mathlib.Geometry.Euclidean.Orthocenter
+import Mathlib.Geometry.Euclidean.Midpoint
+import Mathlib.Data.Real.Basic
+import Mathlib.Tactic
 
 open EuclideanGeometry
 
--- Problem: Let ABCDEF be a convex hexagon satisfying certain parallel conditions and products.
--- Prove that the circumcenters of triangles ACE and BDF, and the orthocenter of triangle XYZ are collinear.
+-- Problem: Prove that the circumcenter of triangle ACE, the circumcenter of triangle BDF, 
+-- and the orthocenter of triangle XYZ are collinear under given conditions.
+theorem usamo_2021_p6 (A B C D E F X Y Z O1 O2 H : Point)
+  (h1 : Parallel (Line.mk A B) (Line.mk D E))
+  (h2 : Parallel (Line.mk B C) (Line.mk E F))
+  (h3 : Parallel (Line.mk C D) (Line.mk F A))
+  (h4 : dist A B * dist D E = dist B C * dist E F)
+  (h5 : dist B C * dist E F = dist C D * dist F A)
+  (hX : X = midpoint A D)
+  (hY : Y = midpoint B E)
+  (hZ : Z = midpoint C F)
+  (hO1 : O1 = circumcenter A C E)
+  (hO2 : O2 = circumcenter B D F)
+  (hH : H = orthocenter X Y Z) :
+  Collinear O1 O2 H := by
+  -- Introduce midpoints M1, M2, M3 for triangle ACE
+  let M1 := midpoint C E
+  let M2 := midpoint A E
+  let M3 := midpoint A C
 
-theorem collinearity_of_centers (A B C D E F : ℂ) : 
-  (∃ X Y Z : ℂ, 
-    midpoint A D = X ∧ midpoint B E = Y ∧ midpoint C F = Z ∧
-    (AB ∥ DE) ∧ (BC ∥ EF) ∧ (CD ∥ FA) ∧ 
-    (AB * DE = BC * EF) ∧ (BC * EF = CD * FA)) → 
-  collinear (circumcenter (triangle A C E)) (circumcenter (triangle B D F)) (orthocenter (triangle X Y Z)) := by
-  -- Introduce the points and their midpoints
-  intro ⟨X, Y, Z, h_midpoints, h_parallel, h_products⟩
-  
-  -- Use the properties of midpoints and parallel lines to establish collinearity
-  have h_collinear_midpoints : collinear X Y Z := sorry -- Prove that X, Y, Z are collinear
-  
-  -- Establish circumcenters and orthocenter
-  let O1 := circumcenter (triangle A C E)
-  let O2 := circumcenter (triangle B D F)
-  let H := orthocenter (triangle X Y Z)
+  -- Introduce midpoints N1, N2, N3 for triangle BDF
+  let N1 := midpoint D F
+  let N2 := midpoint B F
+  let N3 := midpoint B D
 
-  -- Use properties of circumcenters and orthocenters
-  have h_circumcenter_properties : O1 = (X + Y + Z) / 3 := sorry -- Prove O1's properties
-  have h_orthocenter_properties : H = (X + Y + Z) / 3 := sorry -- Prove H's properties
+  -- Use the given parallel conditions to establish collinearity of midpoints
+  have hM3_collinear : Collinear X Z M3 := by
+    sorry -- Use parallel conditions and midpoints properties
 
-  -- Show that H is the midpoint of O1 and O2
-  have h_midpoint : H = (O1 + O2) / 2 := sorry -- Prove that H is the midpoint of O1 and O2
+  -- Establish the power of point relations
+  have hPowerM3 : pow M3 (circumcircle X Y Z) = (dist M3 Z * dist M3 X) := by
+    sorry -- Use midline and power of point theorem
 
-  -- Conclude that O1, O2, and H are collinear
-  exact collinear_of_midpoint h_midpoint h_collinear_midpoints
+  -- Show that M1, M2, M3, N1, N2, N3 lie on a circle concentric with (XYZ)
+  have hCircle : Concentric (circumcircle M1 M2 M3) (circumcircle X Y Z) := by
+    sorry -- Use cyclic nature and given conditions
+
+  -- Use the properties of orthocenters and circumcenters
+  have hO1_orthocenter : O1 = orthocenter M1 M2 M3 := by
+    sorry -- Use properties of circumcenters and orthocenters
+
+  have hO2_orthocenter : O2 = orthocenter N1 N2 N3 := by
+    sorry -- Use properties of circumcenters and orthocenters
+
+  -- Use complex numbers to show that H is the midpoint of O1O2
+  have hComplex : H = (O1 + O2) / 2 := by
+    sorry -- Use complex number representation and midpoint calculation
+
+  -- Conclude that H, O1, O2 are collinear
+  exact collinear_of_midpoint H O1 O2 hComplex

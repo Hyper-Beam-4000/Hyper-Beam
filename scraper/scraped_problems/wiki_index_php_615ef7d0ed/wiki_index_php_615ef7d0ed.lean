@@ -1,48 +1,46 @@
 import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Set.Basic
-import Mathlib.Data.Nat.Gcd
+import Mathlib.Tactic
 
-open Nat Set
+open Nat
 
--- Problem: Given a finite set S of positive integers with a unique gcd property, find all possible values for the number of elements of S.
-theorem unique_gcd_property (S : Set ℕ) (hS : ∀ s ∈ S, s > 0) 
-  (hUnique : ∀ s ∈ S, ∀ d ∣ s, ∃! t ∈ S, gcd s t = d) : 
-  ∃ n : ℕ, n = card S ∧ n ≤ 2 := by
-  -- We will show that the size of S can only be 1 or 2.
-  -- First, we consider the case where S has only one element.
-  obtain ⟨s, hs⟩ : ∃ s ∈ S, True := exists_mem_of_ne_empty (hS) 
-  -- If S has one element, the only divisor is itself.
-  have hDiv : ∀ d ∣ s, d = s := by
-    intro d hd
-    -- The only divisor of s must be s itself
-    exact (gcd_eq_right_iff.mp (hUnique s hs d hd)).symm
-  -- This shows that the unique element t must also be s.
-  -- Thus, card S = 1 is valid.
-  have hCard1 : card S = 1 := by
-    -- We can conclude that S has exactly one element
-    exact card_eq_one_of_singleton (hs)
+-- Problem: Find all possible values for the number of elements of a set S with the given properties
+theorem usamo_2021_p4 (S : Finset ℕ) (h : ∀ s ∈ S, ∀ d ∣ s, ∃! t ∈ S, gcd s t = d) : 
+  S.card = 1 := by
+  -- Strategy: Show that if S has more than one element, it leads to a contradiction
+  by_contra h_card
+  -- Assume that S has more than one element
+  have h_nontrivial : S.card > 1 := by
+    rw [Finset.card_pos] at h_card
+    exact h_card
 
-  -- Now we consider the case where S has two elements.
-  -- Let S = {s₁, s₂} with s₁ < s₂.
-  obtain ⟨s₁, hs₁, s₂, hs₂, hDiff⟩ : ∃ s₁ s₂ ∈ S, s₁ ≠ s₂ := sorry
-  -- We will analyze the divisors of s₁ and s₂.
-  -- We need to show that the gcd properties hold for both elements.
-  have hGcd : ∀ d ∣ s₁, ∃! t ∈ S, gcd s₁ t = d := by
-    intro d hd
-    -- Use the unique property to find t for s₁
-    obtain ⟨t₁, ht₁⟩ := hUnique s₁ hs₁ d hd
-    exact ht₁
+  -- Obtain two distinct elements from S
+  obtain ⟨a, ha⟩ := Finset.exists_mem_of_card_gt_one h_nontrivial
+  obtain ⟨b, hb, hne⟩ := Finset.exists_ne_of_card_gt_one h_nontrivial ha
 
-  have hGcd₂ : ∀ d ∣ s₂, ∃! t ∈ S, gcd s₂ t = d := by
-    intro d hd
-    -- Similarly for s₂
-    obtain ⟨t₂, ht₂⟩ := hUnique s₂ hs₂ d hd
-    exact ht₂
+  -- Consider the divisors of a
+  have h_div_a : ∀ d ∣ a, ∃! t ∈ S, gcd a t = d := h a ha
 
-  -- We will show that the only possible sizes for S are 1 or 2.
-  -- If we find a contradiction, we can conclude the proof.
-  -- This will involve showing that any additional element would violate the unique gcd property.
-  sorry
+  -- Consider the divisor 1 of a
+  have h_div_1 : ∃! t ∈ S, gcd a t = 1 := h_div_a 1 (one_dvd a)
 
-  -- Thus, we conclude that the only possible values for the number of elements of S are 1 or 2.
-  exact ⟨2, rfl, nat.le_refl 2⟩
+  -- Since gcd a a = a, a cannot be the unique element with gcd a t = 1
+  have h_gcd_a_a : gcd a a = a := gcd_self a
+  have h_a_ne_1 : a ≠ 1 := by
+    intro h_eq
+    rw [h_eq] at h_gcd_a_a
+    have : gcd 1 a = 1 := gcd_one_right a
+    rw [h_gcd_a_a] at this
+    exact Nat.not_lt_zero 1 (lt_of_le_of_ne (Nat.zero_le 1) (ne.symm this))
+
+  -- Therefore, there must be another element t ≠ a such that gcd a t = 1
+  obtain ⟨t, htS, h_gcd⟩ := h_div_1
+  have h_t_ne_a : t ≠ a := by
+    intro h_eq
+    rw [h_eq] at h_gcd
+    exact h_a_ne_1 h_gcd
+
+  -- This contradicts the uniqueness condition for the divisor 1
+  exact h_gcd (gcd_one_right a) ha
+
+  -- Conclude that S must have exactly one element
+  exact absurd h_nontrivial (lt_irrefl 1)

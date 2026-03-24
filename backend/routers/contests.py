@@ -11,20 +11,26 @@ except Exception:
     ddb = None
 
 
-def _demo_contest():
+DEMO_CONTEST_META = {
+    "id": "demo-contest",
+    "name": "Hyper Beam — USAMO Benchmark",
+    "description": "54 USAMO problems (2017–2025) evaluated across 9 multi-dimensional metrics.",
+    "start_date": "2026-02-24",
+    "end_date": "2026-04-18T23:59:00-12:00",
+    "is_active": True,
+}
+
+
+def _demo_contest_full():
+    """Full contest with problem list — only used for the detail endpoint."""
     if not ddb:
         return None
     problems, _ = ddb.list_problems(limit=1000)
     return {
-        "id": "demo-contest",
-        "name": "Hyper Beam Demo Contest",
-        "description": "All scraped USAMO problems (2019-2023).",
-        "start_date": "2026-02-24",
-        "end_date": "2026-03-03",
-        "is_active": True,
+        **DEMO_CONTEST_META,
         "problems": [
             {
-                "id": p.get("problem_id"),
+                "id": p.get("id"),
                 "title": p.get("title"),
                 "competition": p.get("source"),
                 "problem_number": None,
@@ -39,31 +45,19 @@ def _demo_contest():
 
 @router.get("/contests")
 async def list_contests(active: Optional[bool] = Query(None)):
-    """List contests; if Supabase missing, return a demo contest covering all problems."""
-    demo = _demo_contest()
-    if demo:
-        if active is None or active:
-            return {"contests": [demo]}
-        return {"contests": []}
-
-    from backend.db import get_client
-    db = get_client()
-    query = db.table("contests").select("*")
-
-    if active is not None:
-        query = query.eq("is_active", active)
-
-    query = query.order("created_at", desc=True)
-    result = query.execute()
-    return {"contests": result.data}
+    """List contests — returns lightweight metadata only (no problem scan)."""
+    # Always return the demo contest metadata without hitting DynamoDB
+    if active is None or active:
+        return {"contests": [DEMO_CONTEST_META]}
+    return {"contests": []}
 
 
 @router.get("/contests/{contest_id}")
 async def get_contest(contest_id: str):
     """Get contest detail including its problem list."""
-    demo = _demo_contest()
-    if demo and contest_id == "demo-contest":
-        return demo
+    if contest_id == "demo-contest":
+        full = _demo_contest_full()
+        return full if full else DEMO_CONTEST_META
 
     from backend.db import get_client
     db = get_client()

@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Trophy, BarChart3, Upload, Archive, Menu, LogOut, LogIn, BookOpen, User } from "lucide-react";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/hyperbeam.png";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useAuth } from "@/contexts/AuthContext";
@@ -53,15 +53,6 @@ const Navbar = () => {
         >
           <BookOpen className="h-4 w-4 mr-2" />
           Problems
-        </Button>
-      </Link>
-      <Link to="/dashboard">
-        <Button 
-          variant={isActive("/dashboard") ? "secondary" : "ghost"}
-          className={mobile ? "w-full justify-start" : ""}
-        >
-          <BarChart3 className="h-4 w-4 mr-2" />
-          Dashboard
         </Button>
       </Link>
       <Link to="/submit">

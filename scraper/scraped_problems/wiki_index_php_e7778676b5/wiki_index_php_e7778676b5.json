@@ -1,0 +1,11 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2017_USAMO_Problems/Problem_2",
+  "title": "2017 USAMO Problems/Problem 2",
+  "problem": "Let $m_1, m_2, \\ldots, m_n$ be a collection of $n$ positive integers, not necessarily distinct. For any sequence of integers $A = (a_1, \\ldots, a_n)$ and any permutation $w = w_1, \\ldots, w_n$ of $m_1, \\ldots, m_n$ , define an $A$ -inversion of $w$ to be a pair of entries $w_i, w_j$ with $i < j$ for which one of the following conditions holds: \\[a_i \\ge w_i > w_j,\\] \\[w_j > a_i \\ge w_i,\\] or \\[w_i > w_j > a_i.\\] Show that, for any two sequences of integers $A = (a_1, \\ldots, a_n)$ and $B = (b_1, \\ldots, b_n)$ , and for any positive integer $k$ , the number of permutations of $m_1, \\ldots, m_n$ having exactly $k$ $A$ -inversions is equal to the number of permutations of $m_1, \\ldots, m_n$ having exactly $k$ $B$ -inversions.",
+  "solution": "",
+  "answer": "",
+  "year": 2017,
+  "scraped_at": "2026-03-24T05:39:24.640883+00:00",
+  "lean_code": "import Mathlib.Data.List.Perm\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic\n\nopen List\n\n-- Define what it means for a pair to be an A-inversion\ndef is_A_inversion (A : List ℤ) (w : List ℤ) (i j : ℕ) : Prop :=\n  i < j ∧ ((A.get! i ≥ w.get! i ∧ w.get! i > w.get! j) ∨ \n           (w.get! j > A.get! i ∧ A.get! i ≥ w.get! i) ∨ \n           (w.get! i > w.get! j ∧ w.get! j > A.get! i))\n\n-- Count the number of A-inversions in a permutation\ndef count_A_inversions (A w : List ℤ) : ℕ :=\n  (List.range w.length).bind (λ i, \n    (List.range w.length).filter (λ j, is_A_inversion A w i j)).length\n\n-- The main theorem statement\ntheorem usamo_2017_p2 (m : List ℕ) (A B : List ℤ) (k : ℕ) :\n    (∃ w : List ℤ, w ~ m ∧ count_A_inversions A w = k) ↔ \n    (∃ w : List ℤ, w ~ m ∧ count_A_inversions B w = k) := by\n  -- Introduce the variables and assumptions\n  intro\n  -- The proof will rely on showing a bijection between permutations with k A-inversions and k B-inversions\n  -- Step 1: Show that the number of A-inversions is invariant under certain transformations\n  -- Step 2: Construct a bijection between permutations with k A-inversions and k B-inversions\n  -- Step 3: Use the invariance and bijection to conclude the proof\n  sorry"
+}

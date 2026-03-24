@@ -3,28 +3,34 @@ import Mathlib.Tactic
 
 open Nat
 
--- Problem: Determine the smallest positive number of beams that can be placed in a 2020 x 2020 x 2020 cube
-theorem minimum_beams : ∃ n : ℕ, n > 0 ∧ n = 3030 := by
-  -- We need to show that at least 3030 beams are required to satisfy the conditions.
-  -- The problem states that we need 2020 beams from each of the three perspectives (xy, xz, yz).
-  -- Each beam can contribute to two faces, so we divide the total by 2.
-  
-  have h1 : 3 * 2020 / 2 = 3030 := by
-    -- Calculate the minimum number of beams needed
-    simp [Nat.div_eq_of_eq_mul_right (by norm_num: 0 < 2), Nat.mul_assoc]
+-- Problem: Find the smallest positive number of beams that can be placed in a 2020 x 2020 x 2020 cube
+-- such that each beam touches either the face of the cube or another beam on all its long faces.
 
-  -- We need to show that this number is achievable.
-  -- Construct a specific arrangement of beams that satisfies the conditions.
-  obtain ⟨n, hn⟩ : ∃ n : ℕ, n = 3030 := by
-    use 3030
-    -- Show that n is greater than 0
-    norm_num
+theorem usamo_2020_problem_2 : ∃ n : ℕ, n = 3030 ∧ 
+  (∀ m : ℕ, m < 3030 → ¬(m satisfies the beam placement conditions)) := by
+  -- We need to show that 3030 beams can satisfy the conditions and that fewer beams cannot.
+  constructor
+  -- First, show that 3030 beams can satisfy the conditions.
+  · have h1 : 3030 satisfies the beam placement conditions := by
+      -- Outline of the solution:
+      -- 1. Consider beams in three directions: x-dir, y-dir, and z-dir.
+      -- 2. Place beams such that each beam's long faces are either on the cube's surface or touching another beam.
+      -- 3. Use a pattern to ensure that all beams are supported.
+      sorry
+    exact h1
 
-  -- Conclude that there exists a positive number of beams satisfying the conditions.
-  exact ⟨n, hn, rfl⟩
+  -- Now, show that fewer than 3030 beams cannot satisfy the conditions.
+  · intro m
+    intro h2 : m < 3030
+    -- Assume for contradiction that m beams can satisfy the conditions.
+    -- We will show a contradiction.
+    have h3 : ¬(m satisfies the beam placement conditions) := by
+      -- Outline of the argument:
+      -- 1. Each beam must have its long faces supported by either the cube surface or another beam.
+      -- 2. Calculate the minimum number of beams required to support all faces.
+      -- 3. Show that fewer than 3030 beams cannot provide the necessary support.
+      sorry
+    exact h3
 
-  -- The proof strategy involves showing that the arrangement of beams can be made
-  -- to meet the requirements of touching the cube's faces and each other appropriately.
-  -- The specific arrangement can be constructed as outlined in the problem statement.
-  -- The proof is complete, but the explicit construction of the beams is omitted for brevity.
-  sorry
+  -- Conclude the proof by combining the two parts.
+  exact ⟨3030, ⟨h1, h3⟩⟩

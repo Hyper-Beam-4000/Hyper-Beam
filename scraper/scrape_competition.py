@@ -75,7 +75,7 @@ def main():
     parser.add_argument("--url", type=str, required=True, help="URL of the competition main page")
     parser.add_argument("--out", type=str, default="scraped_problems", help="Output directory")
     parser.add_argument("--delay", type=float, default=1.0, help="Delay between requests")
-    parser.add_argument("--lean", action="store_true", help="Use LLM to translate to Lean (uses AWS Bedrock credentials in backend/.env)")
+    parser.add_argument("--lean", action="store_true", help="Use OpenAI to translate to Lean 4 (requires OPENAI_API_KEY in backend/.env)")
     
     args = parser.parse_args()
 

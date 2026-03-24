@@ -1,36 +1,46 @@
-import Mathlib.Geometry.Euclidean.Basic
-import Mathlib.Geometry.Euclidean.Circle
+import Mathlib.Geometry.Euclidean.Circumcenter
 import Mathlib.Geometry.Euclidean.Triangle
-import Mathlib.Data.Real.Basic
+import Mathlib.Tactic
 
-open Euclidean
+open EuclideanGeometry
 
--- Problem: Determine all points X on minor arc AB of circle ω such that the area of triangle OO₁O₂ is minimized.
-theorem minimize_area_OO₁O₂ (A B C O : Point) (X : Point) (D : Point) (O₁ O₂ : Point) (h : is_acute_triangle A B C) : 
-  area (triangle O O₁ O₂) ≤ area (triangle A B C) / 4 := by
-  -- Let E be the midpoint of AD and F be the midpoint of BD
-  let E := midpoint A D
-  let F := midpoint B D
-  
-  -- Show that O₁O₂ ≥ EF
-  have h_O₁O₂_ge_EF : dist O₁ O₂ ≥ dist E F := by
-    -- Use the triangle inequality and properties of midpoints
+-- Problem: Determine all points X for which the area of triangle OO1O2 is minimized
+theorem usamo2020_p1 (A B C O X : Point) (h : IsAcuteTriangle A B C) (hX : X ∈ MinorArc A B) :
+  let D := LineSegment C X ∩ LineSegment A B
+  let O1 := Circumcenter (Triangle.mk A D X)
+  let O2 := Circumcenter (Triangle.mk B D X)
+  -- The area of triangle OO1O2 is minimized when CX ⊥ AB
+  (Area (Triangle.mk O O1 O2) = minArea) ↔ (LineSegment C X ⊥ LineSegment A B) := by
+  -- Introduce variables and assumptions
+  intro D O1 O2
+  -- Define midpoint E of AD and midpoint F of BD
+  let E := Midpoint A D
+  let F := Midpoint B D
+  -- Establish that EF = AB / 2
+  have hEF : Distance E F = Distance A B / 2 := by
+    -- Use midpoint properties
     sorry
-  
-  -- Establish the relationship between angles
-  have h_angle_relationship : ∠O O₁ O₂ = ∠A X C := by
-    -- Use cyclic quadrilateral properties
+  -- Show that O1O2 ≥ EF
+  have hO1O2 : Distance O1 O2 ≥ Distance E F := by
+    -- Use properties of circumcenters
     sorry
-  
-  -- Show that triangle ABC is similar to triangle O₂ O₁ O
-  have h_similarity : triangle A B C ~ triangle O₂ O₁ O := by
-    -- Use angle-angle similarity criterion
+  -- Establish angle relations
+  have hAngle : Angle O O1 O2 = Angle A X C := by
+    -- Use cyclic properties and perpendicularity
     sorry
-  
-  -- The area of triangle OO₁O₂ is minimized if CX ⊥ AB
-  have h_area_minimized : area (triangle O O₁ O₂) ≤ (dist E F) ^ 2 / (dist A B) ^ 2 * area (triangle A B C) := by
-    -- Use the area ratio and properties of triangles
+  -- Show similarity of triangles
+  have hSim : Triangle.mk A B C ∼ Triangle.mk O2 O1 O := by
+    -- Use angle-angle similarity
     sorry
-
-  -- Conclude that the area of triangle OO₁O₂ is minimized
-  exact h_area_minimized
+  -- Minimize area condition
+  have hMinArea : Area (Triangle.mk O O1 O2) = minArea ↔ Distance O1 O2 = Distance E F := by
+    -- Relate area to side lengths and similarity
+    sorry
+  -- Conclude that CX ⊥ AB minimizes the area
+  constructor
+  · intro hMin
+    -- Use established conditions to show perpendicularity
+    sorry
+  · intro hPerp
+    -- Use perpendicularity to show area minimization
+    sorry

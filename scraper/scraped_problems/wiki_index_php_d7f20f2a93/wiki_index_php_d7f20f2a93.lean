@@ -1,70 +1,30 @@
-import Mathlib.Geometry.Euclidean.Basic
-import Mathlib.Geometry.Euclidean.Circle
+import Mathlib.Geometry.Euclidean.Circumcircle
 import Mathlib.Geometry.Euclidean.Triangle
-import Mathlib.Data.Real.Basic
+import Mathlib.Tactic
 
 open EuclideanGeometry
 
--- Problem: Prove that lines B1C2, C1A2, and A1B2 are concurrent given the angle condition
-theorem concurrency_of_lines (A B C A1 B1 C1 A2 B2 C2 : Point) 
-  (h : ∠B C1 C + ∠C A1 A + ∠A B1 B = 180) : 
-  (lines B1 C2).concurrent (lines C1 A2) (lines A1 B2) := by
-  -- Let D be the second intersection point of circles AB1B and AA1C
-  let D := sorry -- Define D appropriately using the intersection of circles
-  
-  -- Calculate angles ADB and ADC
-  have angle_ADB : ∠A D B = 180 - ∠A B1 B := by
-    -- Use the properties of angles in circles
+-- Problem: Prove that lines B₁C₂, C₁A₂, and A₁B₂ are concurrent
+theorem usamo_2021_p1 (A B C A₁ B₁ C₁ A₂ B₂ C₂ : Point) 
+  (h₁ : Rectangle B C C₁ B₂) (h₂ : Rectangle C A A₁ C₂) (h₃ : Rectangle A B B₁ A₂)
+  (h_angle : ∠ B C₁ C + ∠ C A₁ A + ∠ A B₁ B = 180) :
+  Concurrent (Line.mk B₁ C₂) (Line.mk C₁ A₂) (Line.mk A₁ B₂) := by
+  -- Introduce the point D as the intersection of circles AB₁B and AA₁C
+  obtain ⟨D, hD₁, hD₂⟩ : ∃ D, CircleThrough A B₁ B D ∧ CircleThrough A A₁ C D := sorry
+  -- Show that BDCC₁B₂ is cyclic
+  have h_cyclic_BDCC₁B₂ : Cyclic [B, D, C, C₁, B₂] := by
+    -- Use angle chasing to show cyclicity
     sorry
-
-  have angle_ADC : ∠A D C = 180 - ∠A A1 C := by
-    -- Use the properties of angles in circles
+  -- Show that CDA₁ is a right angle
+  have h_right_CDA₁ : ∠ C D A₁ = 90 := by
+    -- Use the cyclic property and angle chasing
     sorry
-
-  -- Calculate angle BDC
-  have angle_BDC : ∠B D C = 360 - angle_ADB - angle_ADC := by
-    -- Substitute the angle values
-    rw [angle_ADB, angle_ADC]
-    -- Simplify to find the relation
+  -- Show that A₁, D, and B₂ are collinear
+  have h_collinear_A₁DB₂ : Collinear [A₁, D, B₂] := by
+    -- Use the right angle property
     sorry
-
-  -- Show that angle BDC + angle BC1C = 180
-  have angle_BDC_plus_angle_BC1C : ∠B D C + ∠B C1 C = 180 := by
-    -- Substitute the angle_BDC value and use the given condition
-    rw [angle_BDC]
-    -- Simplify and conclude
-    sorry
-
-  -- Show BDCC1B is cyclic
-  have cyclic_BDCC1B : Cyclic (B D C C1 B2) := by
-    -- Use the cyclic quadrilateral property
-    sorry
-
-  -- Show angles CDA1 and CDB2 are right angles
-  have angle_CDB2 : ∠C D B2 = 90 := by
-    -- Use the properties of cyclic quadrilaterals
-    sorry
-
-  have angle_CDA1 : ∠C D A1 = 90 := by
-    -- Use the properties of cyclic quadrilaterals
-    sorry
-
-  -- Conclude that A1, D, B2 are collinear
-  have collinear_A1_D_B2 : Collinear A1 D B2 := by
-    -- Use the right angle condition
-    sorry
-
-  -- Similarly show collinearity for A2, D, C1 and C2, D, B1
-  have collinear_A2_D_C1 : Collinear A2 D C1 := by
-    -- Use similar reasoning
-    sorry
-
-  have collinear_C2_D_B1 : Collinear C2 D B1 := by
-    -- Use similar reasoning
-    sorry
-
-  -- Conclude that the lines are concurrent
-  exact ⟨collinear_A1_D_B2, collinear_A2_D_C1, collinear_C2_D_B1⟩
-  
-  -- Final conclusion that the lines are concurrent
-  sorry
+  -- Similarly, show collinearity for other points
+  have h_collinear_A₂DC₁ : Collinear [A₂, D, C₁] := sorry
+  have h_collinear_C₂DB₁ : Collinear [C₂, D, B₁] := sorry
+  -- Conclude concurrency from collinearity
+  exact Concurrent_of_Collinear h_collinear_A₁DB₂ h_collinear_A₂DC₁ h_collinear_C₂DB₁

@@ -1,0 +1,12 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2017 USAJMO Problems/Problem 6}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+I define a sequence to be, starting at $(1,0)$ and tracing the circle counterclockwise, and writing the color of the points in that order - either R or B. For example, possible sequences include $RB$ , $RBBR$ , $BBRRRB$ , $BRBRRBBR$ , etc.
+Note that choosing an $R_1$ is equivalent to choosing an $R$ in a sequence, and $B_1$ is defined as the $B$ closest to $R_1$ when moving rightwards. If no $B$ s exist to the right of $R_1$ , start from the far left. For example, if I have the above example $RBBR$ , and I define the 2nd $R$ to be $R_1$ , then the first $B$ will be $B_1$ . Because no $R$ or $B$ can be named twice, I can simply remove $R_1$ and $B_1$ from my sequence when I choose them. I define this to be a move. Hence, a possible move sequence of $BBRRRB$ is: $BBR_1RRB_1\implies B_2BRR_2\implies B_3R_3$
+
+\end{document}

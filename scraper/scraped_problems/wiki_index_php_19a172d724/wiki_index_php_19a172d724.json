@@ -6,5 +6,6 @@
   "solution": "https://www.youtube.com/watch?v=Fbs9ncZuwGM",
   "answer": "",
   "year": 2023,
-  "scraped_at": "2026-02-25T23:48:16.679567+00:00"
+  "scraped_at": "2026-03-24T05:44:24.686913+00:00",
+  "lean_code": "import Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic\n\nopen Nat\n\n-- Problem: Determine for which n it is possible to transform any row-valid arrangement into a column-valid arrangement\ntheorem usamo_2023_p5 (n : ℕ) (h : n ≥ 3) : \n  (∀ (A : Matrix (Fin n) (Fin n) ℕ), \n    (∀ i, ∃ a d, ∀ j, A i j = a + j * d) →\n    (∀ j, ∃ b e, ∀ i, A i j = b + i * e)) ↔ n = 3 := by\n  -- We need to show that the condition holds if and only if n = 3.\n  constructor\n  · -- First, assume the condition holds for all row-valid matrices and show n = 3.\n    intro h_all\n    -- Consider the specific case where n = 3.\n    have h3 : n = 3 := by\n      -- Construct a specific row-valid matrix for n = 3 and show it can be made column-valid.\n      sorry\n    exact h3\n  · -- Now, assume n = 3 and show the condition holds for all row-valid matrices.\n    intro hn3\n    intro A h_row_valid\n    -- Use the fact that n = 3 to construct column-valid permutations.\n    have h_col_valid : ∀ j, ∃ b e, ∀ i, A i j = b + i * e := by\n      -- Construct the column permutations explicitly for n = 3.\n      sorry\n    exact h_col_valid"
 }

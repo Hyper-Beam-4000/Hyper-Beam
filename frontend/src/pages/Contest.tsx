@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Clock, Calendar, Award, TrendingUp, Calculator, Target, ListChecks, CheckCircle } from "lucide-react";
+import { Clock, Calendar, Award, TrendingUp, Calculator, Target, ListChecks, CheckCircle, Layers, BookOpen, Code2, GitCompareArrows } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchContests, type Contest as ContestType } from "@/lib/api";
@@ -67,27 +67,57 @@ const ContestPage = () => {
   const evaluationMetrics = [
     {
       name: "Answer Correctness",
-      weight: "25%",
+      weight: "22%",
       icon: Target,
-      description: "Symbolic verification of final answers using SymPy equivalence checking",
+      description: "Binary symbolic verification of the final answer using SymPy equivalence checking",
     },
     {
-      name: "Rubric Scoring",
-      weight: "20%",
+      name: "Rubric Score",
+      weight: "17%",
       icon: ListChecks,
-      description: "Fine-grained 0-7 ProofBench-style scoring across answer, steps, logic, rigor",
+      description: "0–7 ProofBench-style rubric across answer accuracy, reasoning steps, logic, and rigor",
     },
     {
-      name: "Reasoning Alignment",
-      weight: "10%",
+      name: "Embedding Similarity",
+      weight: "17%",
       icon: TrendingUp,
-      description: "Step-by-step reasoning comparison with order-inversion penalty",
+      description: "Semantic cosine similarity between predicted and reference proofs via sentence-transformers",
+    },
+    {
+      name: "Semantic Structure",
+      weight: "12%",
+      icon: Layers,
+      description: "Structural overlap of mathematical objects, quantifiers, and logical connectives between proofs",
     },
     {
       name: "Lean Compilation",
-      weight: "10%",
+      weight: "12%",
       icon: CheckCircle,
-      description: "Formal verification — does the Lean 4 proof compile and is it sorry-free?",
+      description: "Formal verification — whether the generated Lean 4 proof compiles and is sorry-free",
+    },
+    {
+      name: "Reasoning Alignment",
+      weight: "8%",
+      icon: GitCompareArrows,
+      description: "Step-by-step alignment of mathematical reasoning with an order-inversion penalty",
+    },
+    {
+      name: "Lean Comparison",
+      weight: "6%",
+      icon: Code2,
+      description: "Structural similarity of Lean 4 tactic sequences, imports, and theorem statement shape",
+    },
+    {
+      name: "Proof Technique Match",
+      weight: "3%",
+      icon: Award,
+      description: "Overlap of high-level proof strategies (induction, contradiction, construction, etc.)",
+    },
+    {
+      name: "Concept Coverage",
+      weight: "3%",
+      icon: BookOpen,
+      description: "Breadth of mathematical concepts covered relative to the reference solution",
     },
   ];
 
@@ -236,18 +266,16 @@ const ContestPage = () => {
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-3">
-              {["AMC", "AIME", "USAMO", "Putnam", "IMO", "University Competitions"].map(
-                (source) => (
-                  <Badge key={source} variant="outline" className="px-4 py-2 text-sm">
-                    {source}
-                  </Badge>
-                )
-              )}
+              {["USAMO 2017–2025"].map((source) => (
+                <Badge key={source} variant="outline" className="px-4 py-2 text-sm">
+                  {source}
+                </Badge>
+              ))}
             </div>
             <p className="text-sm text-muted-foreground mt-4">
-              Problems are continuously collected from periodic contests to ensure
-              contamination-free evaluation. Anti-contamination filtering uses model
-              training cutoff dates.
+              54 problems from the USA Mathematical Olympiad (2017–2025), grouped by training-data era.
+              Problems from 2024–2025 serve as post-cutoff held-out test data for most current models.
+              Anti-contamination filtering uses submitted model training cutoff dates.
             </p>
           </CardContent>
         </Card>

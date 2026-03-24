@@ -42,8 +42,11 @@ export interface Problem {
   title?: string | null;
   source?: string | null;
   url?: string | null;
+  year?: number | null;
   problem_text?: string | null;
   solution_text?: string | null;
+  problem_latex?: string | null;
+  solution_latex?: string | null;
   lean_code?: string | null;
   scraped_at?: string | null;
   published_at?: string | null;
@@ -54,10 +57,14 @@ export interface Problem {
 export async function fetchProblems(params?: {
   limit?: number;
   last_key?: string;
+  competition?: string;
+  year?: number;
 }): Promise<{ problems: Problem[]; next_key?: string }> {
   const query = new URLSearchParams();
   if (params?.limit) query.set("limit", String(params.limit));
   if (params?.last_key) query.set("last_key", params.last_key);
+  if (params?.competition) query.set("competition", params.competition);
+  if (params?.year) query.set("year", String(params.year));
   const qs = query.toString();
   return apiFetch(`/api/problems${qs ? `?${qs}` : ""}`);
 }
@@ -136,6 +143,9 @@ export interface LeaderboardEntry {
   embedding_similarity?: number | null;
   proof_technique_match?: number | null;
   concept_coverage?: number | null;
+  semantic_structure?: number | null;
+  lean_compiles?: number | null;
+  lean_comparison?: number | null;
 }
 
 export interface LeaderboardResponse {
@@ -151,8 +161,49 @@ export async function fetchLeaderboard(contestId: string): Promise<LeaderboardRe
 
 // ----- Submissions -----
 
+export interface Submission {
+  id: string;
+  model_name: string;
+  api_endpoint: string;
+  contest_id?: string;
+  evaluation_status?: string | null;
+  overall_score?: number | null;
+  training_cutoff_date?: string | null;
+  description?: string | null;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export async function createSubmission(data: {
+  model_name: string;
+  api_endpoint: string;
+  training_cutoff_date?: string;
+  description?: string;
+}): Promise<{ submission_id: string; status: string }> {
+  return apiFetch("/api/submissions", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+}
+
+export async function listSubmissions(): Promise<{ submissions: Submission[] }> {
+  return apiFetch("/api/submissions");
+}
+
+export async function fetchProgress(submissionId: string): Promise<{ scored: number; total: number; pct: number }> {
+  return apiFetch(`/api/submissions/${submissionId}/progress`);
+}
+
 export async function triggerEvaluation(submissionId: string): Promise<{ status: string }> {
   return apiFetch(`/api/submissions/${submissionId}/evaluate`, { method: "POST" });
+}
+
+export async function cancelEvaluation(submissionId: string): Promise<{ status: string }> {
+  return apiFetch(`/api/submissions/${submissionId}/cancel`, { method: "POST" });
+}
+
+export async function deleteSubmission(submissionId: string): Promise<{ status: string }> {
+  return apiFetch(`/api/submissions/${submissionId}`, { method: "DELETE" });
 }
 
 export async function uploadResults(

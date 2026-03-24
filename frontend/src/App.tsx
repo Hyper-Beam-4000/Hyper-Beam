@@ -8,7 +8,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
 import Contest from "./pages/Contest";
 import Leaderboard from "./pages/Leaderboard";
-import Dashboard from "./pages/Dashboard";
 import Submit from "./pages/Submit";
 import Archive from "./pages/Archive";
 import Auth from "./pages/Auth";
@@ -32,14 +31,6 @@ const App = () => (
             <Route path="/problems" element={<Problems />} />
             <Route path="/problems/:id" element={<ProblemDetail />} />
             <Route path="/auth" element={<Auth />} />
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
             <Route
               path="/submit"
               element={
