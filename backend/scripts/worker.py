@@ -11,7 +11,9 @@ from typing import Any, Dict
 import boto3
 from botocore.exceptions import ClientError
 
+# Add both backend/ (for `from config import ...`) and project root (for `from backend.* import ...`)
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
 from config import (  # type: ignore
     AWS_REGION,
@@ -50,6 +52,22 @@ def handle_scrape(payload: Dict[str, Any]):
     delay = float(payload.get("delay", 1.0))
     print(f"[scrape] url={url} lean={lean} out={out}")
     scrape_problem.scrape_url(url, delay=delay, outdir=out, use_lean=lean)
+
+
+def handle_evaluate(payload: Dict[str, Any]):
+    """
+    Process an evaluate job: runs the full evaluation pipeline for a submission.
+    Expected payload: {"type": "evaluate", "submission_id": "...", "contest_id": "..."}
+    """
+    from backend.services.evaluation import evaluate_submission
+
+    submission_id = payload.get("submission_id")
+    contest_id = payload.get("contest_id", "demo-contest")
+    if not submission_id:
+        print("[evaluate] missing submission_id")
+        return
+    print(f"[evaluate] submission={submission_id} contest={contest_id}")
+    evaluate_submission(submission_id, contest_id)
 
 
 def handle_score(payload: Dict[str, Any]):
@@ -97,6 +115,8 @@ def main(queue: str, poll_seconds: int):
                 job_type = payload.get("type")
                 if job_type == "scrape":
                     handle_scrape(payload)
+                elif job_type == "evaluate":
+                    handle_evaluate(payload)
                 elif job_type == "score":
                     handle_score(payload)
                 else:

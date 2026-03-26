@@ -24,13 +24,24 @@ async def get_evaluations(submission_id: str):
         # Normalize response
         normalized = []
         for idx, r in enumerate(results):
+            mv = r.get("metric_values") or {}
             normalized.append({
                 "id": f"{submission_id}-{idx}",
                 "submission_id": submission_id,
                 "problem_id": r.get("problem_id"),
                 "model_response": r.get("model_response"),
                 "overall_score": r.get("overall_score"),
-                "metric_values": r.get("metric_values"),
+                "metric_values": mv,
+                # Flatten metric_values so the frontend can read them directly
+                "answer_correctness": mv.get("answer_correctness"),
+                "rubric_score": mv.get("rubric_score"),
+                "reasoning_alignment": mv.get("reasoning_alignment"),
+                "embedding_similarity": mv.get("embedding_similarity"),
+                "proof_technique_match": mv.get("proof_technique_match"),
+                "concept_coverage": mv.get("concept_coverage"),
+                "lean_compiles": mv.get("lean_compiles"),
+                "lean_comparison": mv.get("lean_comparison"),
+                "semantic_structure": mv.get("semantic_structure"),
                 "errors": r.get("errors"),
                 "evaluated_at": r.get("evaluated_at"),
             })

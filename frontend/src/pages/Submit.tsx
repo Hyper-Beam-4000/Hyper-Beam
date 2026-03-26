@@ -5,8 +5,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Upload, Link as LinkIcon, AlertCircle, CheckCircle2, Play, FileUp, Square, RotateCcw, Trash2 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Upload, Link as LinkIcon, AlertCircle, CheckCircle2, Play, Download, Square, RotateCcw, Trash2 } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import {
   createSubmission,
@@ -15,7 +15,7 @@ import {
   cancelEvaluation,
   deleteSubmission,
   fetchProgress,
-  uploadResults,
+  fetchEvaluations,
   type Submission,
 } from "@/lib/api";
 
@@ -35,7 +35,7 @@ const Submit = () => {
   const [evaluating, setEvaluating] = useState<string | null>(null);
   const [cancelling, setCancelling] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
-  const [uploading, setUploading] = useState<string | null>(null);
+  const [downloading, setDownloading] = useState<string | null>(null);
   const [progress, setProgress] = useState<Record<string, { scored: number; total: number; pct: number }>>({});
 
   // Form state
@@ -44,32 +44,38 @@ const Submit = () => {
   const [trainingCutoff, setTrainingCutoff] = useState("");
   const [description, setDescription] = useState("");
 
+  // Keep a ref so the polling interval always sees the latest submissions
+  // without needing to be in the dependency array (which would reset the timer).
+  const submissionsRef = useRef<Submission[]>([]);
+  useEffect(() => {
+    submissionsRef.current = submissions;
+  }, [submissions]);
+
   useEffect(() => {
     loadSubmissions();
-  }, []);
-
-  // Poll every 4s while any submission is active; also fetch progress
-  useEffect(() => {
-    const active = submissions.filter((s) =>
-      s.evaluation_status === "running" || s.evaluation_status === "queued"
-    );
-    if (active.length === 0) return;
 
     const tick = async () => {
-      await loadSubmissions();
-      const results = await Promise.all(
-        active.map((s) => fetchProgress(s.id).then((p) => ({ id: s.id, p })))
+      const active = submissionsRef.current.filter((s) =>
+        s.evaluation_status === "running" || s.evaluation_status === "queued"
       );
+      if (active.length === 0) return;
+
+      // Fetch status + progress in parallel; don't await status before progress
+      const [, progressResults] = await Promise.all([
+        loadSubmissions(),
+        Promise.all(active.map((s) => fetchProgress(s.id).then((p) => ({ id: s.id, p })))),
+      ]);
+
       setProgress((prev) => {
         const next = { ...prev };
-        results.forEach(({ id, p }) => { next[id] = p; });
+        progressResults.forEach(({ id, p }) => { next[id] = p; });
         return next;
       });
     };
 
     const id = setInterval(tick, 4000);
     return () => clearInterval(id);
-  }, [submissions]);
+  }, []); // runs once — interval is stable, reads submissions via ref
 
   const loadSubmissions = async () => {
     try {
@@ -143,19 +149,21 @@ const Submit = () => {
     }
   };
 
-  const handleUpload = async (submissionId: string, file: File) => {
-    setUploading(submissionId);
+  const handleDownload = async (sub: Submission) => {
+    setDownloading(sub.id);
     try {
-      const result = await uploadResults(submissionId, file);
-      toast({
-        title: "Upload complete",
-        description: `Processed ${result.processed} results.`,
-      });
-      await loadSubmissions();
+      const data = await fetchEvaluations(sub.id);
+      const blob = new Blob([JSON.stringify(data.results, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${sub.model_name.replace(/\s+/g, "_")}_results.json`;
+      a.click();
+      URL.revokeObjectURL(url);
     } catch (err: any) {
-      toast({ title: "Upload failed", description: err.message, variant: "destructive" });
+      toast({ title: "Download failed", description: err.message, variant: "destructive" });
     } finally {
-      setUploading(null);
+      setDownloading(null);
     }
   };
 
@@ -212,6 +220,39 @@ const Submit = () => {
                     Must accept POST with OpenAI-compatible JSON (messages array) or{" "}
                     <code className="bg-muted px-1 rounded">{"{ prompt }"}</code>. Returns response within 120s.
                   </p>
+                  <select
+                    className="w-full text-xs rounded-md border border-input bg-background px-3 py-1.5 text-muted-foreground"
+                    defaultValue=""
+                    onChange={(e) => {
+                      if (e.target.value) {
+                        const base = (import.meta.env.VITE_API_URL || "http://localhost:8000").replace(/\/$/, "");
+                        setApiEndpoint(`${base}${e.target.value}`);
+                        e.target.value = "";
+                      }
+                    }}
+                  >
+                    <option value="" disabled>Built-in proxies — select to fill endpoint</option>
+                    <optgroup label="OpenAI">
+                      <option value="/api/openai-proxy">GPT-4o-mini</option>
+                      <option value="/api/openai-proxy/gpt-4o">GPT-4o</option>
+                      <option value="/api/openai-proxy/o3-mini">o3-mini (reasoning)</option>
+                      <option value="/api/openai-proxy/o4-mini">o4-mini (reasoning)</option>
+                    </optgroup>
+                    <optgroup label="Google (free)">
+                      <option value="/api/gemini-proxy">Gemini 2.5 Flash</option>
+                    </optgroup>
+                    <optgroup label="Anthropic">
+                      <option value="/api/anthropic-proxy">Claude 3.5 Haiku</option>
+                    </optgroup>
+                    <optgroup label="Groq (free)">
+                      <option value="/api/groq-proxy/llama-3.3-70b-versatile">Llama 3.3 70B</option>
+                      <option value="/api/groq-proxy/deepseek-r1-distill-llama-70b">DeepSeek-R1 70B</option>
+                      <option value="/api/groq-proxy/mixtral-8x7b-32768">Mixtral 8x7B</option>
+                    </optgroup>
+                    <optgroup label="Testing">
+                      <option value="/api/mock-model">Mock (pipeline test)</option>
+                    </optgroup>
+                  </select>
                 </div>
 
                 <div className="space-y-2">
@@ -244,7 +285,7 @@ const Submit = () => {
                     <ul className="text-sm text-muted-foreground space-y-1">
                       <li>POST requests with JSON — OpenAI-compatible or simple prompt format</li>
                       <li>120 second response timeout per problem</li>
-                      <li>Alternatively, upload a pre-computed results JSON file</li>
+                      <li>Download your results as JSON once evaluation completes</li>
                     </ul>
                   </div>
                 </div>
@@ -265,7 +306,7 @@ const Submit = () => {
             <CardHeader>
               <CardTitle>Your Submissions</CardTitle>
               <CardDescription>
-                Trigger evaluation or upload pre-computed results
+                Trigger evaluation and download results when complete
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -362,25 +403,18 @@ const Submit = () => {
                             </Button>
                           )}
 
-                          {/* Upload Results */}
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            disabled={uploading === sub.id}
-                            onClick={() => {
-                              const input = document.createElement("input");
-                              input.type = "file";
-                              input.accept = ".json";
-                              input.onchange = (ev) => {
-                                const file = (ev.target as HTMLInputElement).files?.[0];
-                                if (file) handleUpload(sub.id, file);
-                              };
-                              input.click();
-                            }}
-                          >
-                            <FileUp className="h-3 w-3 mr-1" />
-                            {uploading === sub.id ? "Uploading..." : "Upload Results"}
-                          </Button>
+                          {/* Download Results — completed only */}
+                          {sub.evaluation_status === "completed" && (
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              disabled={downloading === sub.id}
+                              onClick={() => handleDownload(sub)}
+                            >
+                              <Download className="h-3 w-3 mr-1" />
+                              {downloading === sub.id ? "Downloading..." : "Download Results"}
+                            </Button>
+                          )}
                         </div>
                       </div>
                     );

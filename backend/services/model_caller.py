@@ -3,12 +3,29 @@
 import httpx
 
 
-async def call_model_api(endpoint: str, prompt: str, timeout: float = 120.0) -> str:
+_REASONING_MODELS = ("o3", "o4", "o1")  # prefixes that identify slow reasoning models
+_SLOW_MODELS = ("gemini",)  # models that are slow on long math problems
+
+
+def _pick_timeout(endpoint: str) -> float:
+    """Return a generous timeout for reasoning/slow models, default otherwise."""
+    lower = endpoint.lower()
+    if any(m in lower for m in _REASONING_MODELS):
+        return 600.0  # 10 min — reasoning models can take 3-5+ min per problem
+    if any(m in lower for m in _SLOW_MODELS):
+        return 300.0  # 5 min — Gemini 2.5 Flash is slow on complex USAMO problems
+    return 120.0
+
+
+async def call_model_api(endpoint: str, prompt: str, timeout: float | None = None) -> str:
     """
     Send a prompt to a model's API endpoint and return the text response.
 
     Tries OpenAI-compatible format first, then falls back to simple prompt format.
     """
+    if timeout is None:
+        timeout = _pick_timeout(endpoint)
+
     headers = {"Content-Type": "application/json"}
 
     # Chat-compatible payload (OpenAI-style; works with Bedrock-compatible gateways too)

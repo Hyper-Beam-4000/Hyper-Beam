@@ -2,15 +2,18 @@
 
 import uuid
 from typing import Optional
-from fastapi import APIRouter, HTTPException, BackgroundTasks
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-
-from backend.services.evaluation import evaluate_submission
 
 try:
     from backend.services import dynamo_repository as ddb
 except Exception:
     ddb = None
+
+try:
+    from backend.services import queue_client as sqs
+except Exception:
+    sqs = None
 
 router = APIRouter(tags=["submissions"])
 
@@ -52,10 +55,12 @@ async def list_submissions():
 
 
 @router.post("/submissions/{submission_id}/evaluate")
-async def trigger_evaluation(submission_id: str, background_tasks: BackgroundTasks):
-    """Trigger (or restart) evaluation for a submission."""
+async def trigger_evaluation(submission_id: str):
+    """Trigger (or restart) evaluation for a submission via SQS."""
     if not ddb:
         raise HTTPException(status_code=503, detail="DynamoDB not available")
+    if not sqs:
+        raise HTTPException(status_code=503, detail="SQS not available")
 
     submission = ddb.get_submission(submission_id)
     if not submission:
@@ -68,7 +73,11 @@ async def trigger_evaluation(submission_id: str, background_tasks: BackgroundTas
     contest_id = submission.get("contest_id", CONTEST_ID)
     ddb.update_submission_status(submission_id, "queued")
 
-    background_tasks.add_task(evaluate_submission, submission_id, contest_id)
+    sqs.enqueue_score_job({
+        "type": "evaluate",
+        "submission_id": submission_id,
+        "contest_id": contest_id,
+    })
     return {"status": "queued", "submission_id": submission_id}
 
 
@@ -78,8 +87,25 @@ async def get_progress(submission_id: str):
     if not ddb:
         return {"scored": 0, "total": 0, "pct": 0}
 
+    from datetime import date
+
     scored = len(ddb.list_evaluations(submission_id))
+
+    submission = ddb.get_submission(submission_id)
+    training_cutoff = submission.get("training_cutoff_date") if submission else None
+
     problems, _ = ddb.list_problems(limit=500)
+    if training_cutoff:
+        try:
+            cutoff_date = date.fromisoformat(training_cutoff)
+            problems = [
+                p for p in problems
+                if not p.get("year")
+                or date(int(p["year"]), 1, 1) > cutoff_date
+            ]
+        except ValueError:
+            pass  # malformed cutoff — fall back to all problems
+
     total = sum(1 for p in problems if p.get("problem_text"))
     pct = round(scored / total * 100) if total else 0
     return {"scored": scored, "total": total, "pct": pct}

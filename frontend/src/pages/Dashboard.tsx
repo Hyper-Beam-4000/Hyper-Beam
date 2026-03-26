@@ -274,8 +274,10 @@ const Dashboard = () => {
                       <TableHead className="text-center">Answer</TableHead>
                       <TableHead className="text-center">Rubric</TableHead>
                       <TableHead className="text-center">Reasoning</TableHead>
+                      <TableHead className="text-center">Semantic</TableHead>
                       <TableHead className="text-center">Embedding</TableHead>
-                      <TableHead className="text-center">Lean</TableHead>
+                      <TableHead className="text-center">Lean ✓</TableHead>
+                      <TableHead className="text-center">Lean Cmp</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -302,12 +304,18 @@ const Dashboard = () => {
                           {result.reasoning_alignment?.toFixed(3) ?? "-"}
                         </TableCell>
                         <TableCell className="text-center">
+                          {result.semantic_structure?.toFixed(3) ?? "-"}
+                        </TableCell>
+                        <TableCell className="text-center">
                           {result.embedding_similarity?.toFixed(3) ?? "-"}
                         </TableCell>
                         <TableCell className="text-center">
                           {result.lean_compiles != null
-                            ? result.lean_compiles ? "Compiles" : "Fails"
+                            ? result.lean_compiles ? "✓" : "✗"
                             : "-"}
+                        </TableCell>
+                        <TableCell className="text-center">
+                          {result.lean_comparison?.toFixed(3) ?? "-"}
                         </TableCell>
                       </TableRow>
                     ))}

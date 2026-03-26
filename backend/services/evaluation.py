@@ -40,6 +40,21 @@ def evaluate_submission(submission_id: str, contest_id: str) -> None:
         model_name = submission.get("model_name", "unknown")
         training_cutoff = submission.get("training_cutoff_date")
 
+        # If running as a worker on the same machine as the API, rewrite the
+        # public-IP URL to localhost so the connection doesn't go through AWS's
+        # internet gateway (which drops long-idle TCP connections mid-response).
+        import os, re as _re
+        self_url = os.environ.get("WORKER_API_SELF_URL", "")
+        if self_url and api_endpoint:
+            # Replace scheme+host+port portion if it matches any known public addresses
+            # e.g. http://54.221.97.240:8000/... → http://localhost:8000/...
+            api_endpoint = _re.sub(
+                r"^https?://[^/]+",
+                self_url.rstrip("/"),
+                api_endpoint,
+            ) if not api_endpoint.startswith(("http://localhost", "http://127.")) else api_endpoint
+            print(f"[evaluation] endpoint rewritten to: {api_endpoint}")
+
         # Fetch all problems from DynamoDB
         problems_raw, _ = ddb.list_problems(limit=500)
 
@@ -69,14 +84,26 @@ def evaluate_submission(submission_id: str, contest_id: str) -> None:
             ddb.update_submission_status(submission_id, "completed")
             return
 
+        # Throttle for free-tier rate limits (Gemini: 10 RPM, Groq: ~30 RPM)
+        import time
+        if "gemini" in api_endpoint:
+            inter_request_delay = 7.0   # ~8 RPM, safely under 10 RPM
+        elif "groq" in api_endpoint:
+            inter_request_delay = 2.5   # ~24 RPM, safely under 30 RPM
+        else:
+            inter_request_delay = 0.0
+
         # Score each problem
         per_metric_lists: dict = {}
-        for problem in problems:
+        for i, problem in enumerate(problems):
             # Check for cancellation before each problem
             current = ddb.get_submission(submission_id)
             if current and current.get("evaluation_status") == "cancelled":
                 print(f"[evaluation] {submission_id} cancelled by user")
                 return
+
+            if inter_request_delay > 0 and i > 0:
+                time.sleep(inter_request_delay)
 
             try:
                 mv = _evaluate_single_problem(api_endpoint, problem, submission_id, model_name)
@@ -85,7 +112,9 @@ def evaluate_submission(submission_id: str, contest_id: str) -> None:
                         if v is not None:
                             per_metric_lists.setdefault(k, []).append(float(v))
             except Exception as e:
-                print(f"[evaluation] problem {problem.get('id')} failed: {e}")
+                import traceback
+                print(f"[evaluation] problem {problem.get('id')} failed: {type(e).__name__}: {e}")
+                traceback.print_exc()
 
         # Aggregate
         def _mean(key):
@@ -116,6 +145,15 @@ def evaluate_submission(submission_id: str, contest_id: str) -> None:
             ddb.update_submission_status(submission_id, "failed")
 
 
+def _extract_lean_block(text: str) -> str | None:
+    """Extract the first ```lean ... ``` fenced block from a model response."""
+    import re
+    match = re.search(r"```lean\s*\n(.*?)```", text, re.DOTALL)
+    if match:
+        return match.group(1).strip()
+    return None
+
+
 def _evaluate_single_problem(
     api_endpoint: str,
     problem: dict,
@@ -142,11 +180,13 @@ def _evaluate_single_problem(
     prompt = format_problem_prompt(problem_latex)
     model_response = asyncio.run(call_model_api(api_endpoint, prompt))
 
+    predicted_lean = _extract_lean_block(model_response)
+
     q_score = score_question(
         predicted=model_response,
         expected=solution_latex,
         problem=problem_latex,
-        predicted_lean=None,
+        predicted_lean=predicted_lean,
         expected_lean=lean_code,
     )
 

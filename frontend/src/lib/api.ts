@@ -111,6 +111,8 @@ export interface EvaluationResult {
   concept_coverage: number | null;
   lean_compiles: boolean | null;
   lean_sorry_free: boolean | null;
+  lean_comparison: number | null;
+  semantic_structure: number | null;
   llm_judge_score: number | null;
   errors: unknown;
   evaluated_at: string;
