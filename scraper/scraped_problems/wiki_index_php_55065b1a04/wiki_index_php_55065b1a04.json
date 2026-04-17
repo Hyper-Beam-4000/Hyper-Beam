@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2023_AMC_12B_Problems/Problem_22",
+  "title": "2023 AMC 12B Problems/Problem 22",
+  "problem": "A real-valued function $f$ has the property that for all real numbers $a$ and $b,$ \\[f(a + b) + f(a - b) = 2f(a) f(b).\\] Which one of the following cannot be the value of $f(1)?$ $\\textbf{(A) } 0 \\qquad \\textbf{(B) } 1 \\qquad \\textbf{(C) } -1 \\qquad \\textbf{(D) } 2 \\qquad \\textbf{(E) } -2$",
+  "solution": "Substituting $a = b$ we get \\[f(2a) + f(0) = 2f(a)^2\\] Substituting $a= 0$ we find \\[2f(0) = 2f(0)^2 \\implies f(0) \\in \\{0, 1\\}.\\] This gives \\[f(2a) = 2f(a)^2 - f(0) \\geq 0-1\\] Plugging in $a = \\frac{1}{2}$ implies $f(1) \\geq -1$ , so answer choice $\\boxed{\\textbf{(E) -2}}$ is impossible. ~AtharvNaphade",
+  "answer": "",
+  "year": 2023,
+  "competition": "AMC 12B",
+  "problem_number": 22,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12B",
+    "2023",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:29:54.018907+00:00"
+}

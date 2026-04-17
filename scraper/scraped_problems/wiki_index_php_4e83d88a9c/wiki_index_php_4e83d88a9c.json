@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2024_AMC_12B_Problems/Problem_11",
+  "title": "2024 AMC 12B Problems/Problem 11",
+  "problem": "Let $x_n = \\sin^2(n^{\\circ})$ . What is the mean of $x_1,x_2,x_3,\\dots,x_{90}$ ? $\\textbf{(A) } \\frac{11}{45} \\qquad\\textbf{(B) } \\frac{22}{45} \\qquad\\textbf{(C) } \\frac{89}{180} \\qquad\\textbf{(D) } \\frac{1}{2} \\qquad\\textbf{(E) } \\frac{91}{180}$",
+  "solution": "Add up $x_1$ with $x_{89}$ , $x_2$ with $x_{88}$ , and $x_i$ with $x_{90-i}$ . Notice \\[x_i+x_{90-i}=\\sin^2(i^{\\circ})+\\sin^2((90-i)^{\\circ})=\\sin^2(i^{\\circ})+\\cos^2(i^{\\circ})=1\\] by the Pythagorean identity. Since we can pair up $1$ with $89$ and keep going until $44$ with $46$ , we get \\[x_1+x_2+\\dots+x_{90}=44+x_{45}+x_{90}=44+\\left(\\frac{\\sqrt{2}}{2}\\right)^2+1^2=\\frac{91}{2}\\] Hence the mean is $\\boxed{\\textbf{(E) }\\frac{91}{180}}$ ~kafuu_chino",
+  "answer": "",
+  "year": 2024,
+  "competition": "AMC 12B",
+  "problem_number": 11,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12B",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:31:05.187804+00:00"
+}

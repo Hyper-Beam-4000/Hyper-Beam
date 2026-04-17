@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2021 AIME II Problems/Problem 9}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+This solution refers to the Remarks section. By the Euclidean Algorithm, we have \[\gcd\left(2^m+1,2^m-1\right)=\gcd\left(2,2^m-1\right)=1.\] We are given that $\gcd\left(2^m+1,2^n-1\right)>1.$ Multiplying both sides by $\gcd\left(2^m-1,2^n-1\right)$ gives \begin{align*} \gcd\left(2^m+1,2^n-1\right)\cdot\gcd\left(2^m-1,2^n-1\right)&>\gcd\left(2^m-1,2^n-1\right) \\ \gcd\left(\left(2^m+1\right)\left(2^m-1\right),2^n-1\right)&>\gcd\left(2^m-1,2^n-1\right) \hspace{12mm} &&\text{by }\textbf{Claim 1} \\ \gcd\left(2^{2m}-1,2^n-1\right)&>\gcd\left(2^m-1,2^n-1\right) \\ 2^{\gcd(2m,n)}-1&>2^{\gcd(m,n)}-1 &&\text{by }\textbf{Claim 2} \\ \gcd(2m,n)&>\gcd(m,n), \end{align*} which implies that $n$ must have more factors of $2$ than $m$ does. We construct the following table for the first $30$ positive integers: \[\begin{array}{c|c|c} && \\ [-2.5ex] \boldsymbol{\#}\textbf{ of Factors of }\boldsymbol{2} & \textbf{Numbers} & \textbf{Count} \\ \hline && \\ [-2.25ex] 0 & 1,3,5,7,9,11,13,15,17,19,21,23,25,27,29 & 15 \\ && \\ [-2.25ex] 1 & 2,6,10,14,18,22,26,30 & 8 \\ && \\ [-2.25ex] 2 & 4,12,20,28 & 4 \\ && \\ [-2.25ex] 3 & 8,24 & 2 \\ && \\ [-2.25ex] 4 & 16 & 1 \\ \end{array}\] To count the ordered pairs $(m,n),$ we perform casework on the number of factors of $2$ that $m$ has: If $m$ has $0$ factors of $2,$ then $m$ has $15$ options and $n$ has $8+4+2+1=15$ options. So, this case has $15\cdot15=225$ ordered pairs. If $m$ has $1$ factor of $2,$ then $m$ has $8$ options and $n$ has $4+2+1=7$ options. So, this case has $8\cdot7=56$ ordered pairs. If $m$ has $2$ factors of $2,$ then $m$ has $4$ options and $n$ has $2+1=3$ options. So, this case has $4\cdot3=12$ ordered pairs. If $m$ has $3$ factors of $2,$ then $m$ has $2$ options and $n$ has $1$ option. So, this case has $2\cdot1=2$ ordered pairs. Together, the answer is $225+56+12+2=\boxed{295}.$ ~Lcz ~MRENTHUSIASM
+
+\end{document}

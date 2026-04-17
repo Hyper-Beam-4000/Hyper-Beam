@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12B_Problems/Problem_3",
+  "title": "2025 AMC 12B Problems/Problem 3",
+  "problem": "What is the value of $i(i-1)(i-2)(i-3)$ , where $i = \\sqrt{-1}$ ? $\\textbf{(A)}~6-5i \\qquad \\textbf{(B)}~-10i \\qquad \\textbf{(C)}~10i \\qquad \\textbf{(D)}~-10 \\qquad \\textbf{(E)}~10$",
+  "solution": "We find that $i(i-3)=-1-3i$ and $(i-1)(i-2)=-1-3i+2=1-3i$ , so\n\\begin{align}\ni(i-1)(i-2)(i-3)&=i(i-3)\\cdot (i-1)(i-2)\\\\\n&=(-1-3i)(1-3i)\\\\\n&=-(1+3i)(1-3i)\\\\\n&=-(1^2-(3i)^2)\\\\\n&=-(1+9)\\\\\n&=\\boxed{\\textbf{(D)}~-10 }\n\\end{align} ~ eevee9406",
+  "answer": "",
+  "year": 2025,
+  "competition": "AMC 12B",
+  "problem_number": 3,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12B",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:32:16.463924+00:00"
+}

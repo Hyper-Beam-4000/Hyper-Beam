@@ -1,0 +1,18 @@
+-- 2020 AMC 12B Problems/Problem 2
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2020_AMC_12B_Problems/Problem_2
+
+-- Problem (LaTeX):
+/-
+What is the value of the following expression? \[\frac{100^2-7^2}{70^2-11^2} \cdot \frac{(70-11)(70+11)}{(100-7)(100+7)}\] $\textbf{(A) } 1 \qquad \textbf{(B) } \frac{9951}{9950} \qquad \textbf{(C) } \frac{4780}{4779} \qquad \textbf{(D) } \frac{108}{107} \qquad \textbf{(E) } \frac{81}{80}$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Using difference of squares to factor the left term, we get \[\frac{100^2-7^2}{70^2-11^2} \cdot \frac{(70-11)(70+11)}{(100-7)(100+7)} = \frac{(100-7)(100+7)}{(70-11)(70+11)} \cdot \frac{(70-11)(70+11)}{(100-7)(100+7)}.\] Cancelling all the terms, we get $\boxed{\textbf{(A) } 1}$ as the answer.
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_22abd9c1b8 : Prop := by
+  sorry

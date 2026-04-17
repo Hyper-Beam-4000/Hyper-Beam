@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2022_AMC_12B_Problems/Problem_10",
+  "title": "2022 AMC 12B Problems/Problem 10",
+  "problem": "Regular hexagon $ABCDEF$ has side length $2$ . Let $G$ be the midpoint of $\\overline{AB}$ , and let $H$ be the midpoint of $\\overline{DE}$ . What is the perimeter of $GCHF$ ? $\\textbf{(A)}\\ 4\\sqrt3 \\qquad \\textbf{(B)}\\ 8 \\qquad \\textbf{(C)}\\ 4\\sqrt5 \\qquad \\textbf{(D)}\\ 4\\sqrt7 \\qquad \\textbf{(E)}\\ 12$",
+  "solution": "Let the center of the hexagon be $O$ . $\\triangle AOB$ , $\\triangle BOC$ , $\\triangle COD$ , $\\triangle DOE$ , $\\triangle EOF$ , and $\\triangle FOA$ are all equilateral triangles with side length $2$ . Thus, $CO = 2$ , and $GO = \\sqrt{AO^2 - AG^2} = \\sqrt{3}$ . By symmetry, $\\angle COG = 90^{\\circ}$ . Thus, by the Pythagorean theorem, $CG = \\sqrt{2^2 + \\sqrt{3}^2} = \\sqrt{7}$ . Because $CO = OF$ and $GO = OH$ , $CG = HC = FH = GF = \\sqrt{7}$ . Thus, the solution to our problem is $\\sqrt{7} + \\sqrt{7} + \\sqrt{7} + \\sqrt{7} = \\boxed{\\textbf{(D)}\\ 4\\sqrt7}$ . ~mathboy100",
+  "answer": "Like the previous solutions, note that $\\triangle{GAF}, \\triangle{FEH}, \\triangle{HDC},$ and $\\triangle{CBG}$ are all congruent by SAS. It follows that quadrilateral $GCHF$ is a rhombus. Recall the Pythagorean Theorem, which states $a^2+b^2=c^2$ for all right triangles, where $c$ is the hypotenuse of the triangle. However, by drawing a quick diagram of an obtuse triangle, we can see that $a^2+b^2<c^2$ , in any given obtuse triangle. Since $ABCDEF$ is a regular hexagon, all of its angles are obtuse. It follows that $\\triangle{GAF}$ is an obtuse triangle. Using the extended Pythagorean Theorem for obtuse triangles, we have: \\[AG^2+AF^2<GF^2 \\implies 1^2+2^2<GF^2 \\implies \\sqrt{5}<GF\\] Since $GCHF$ is a rhombus, the perimeter is $4GF$ . This eliminates all answer choices but $D$ and $E$ , since in all of those options $GF<\\sqrt{5}$ . Lastly, $E$ is eliminated due to the triangle inequality, as $1+2$ is not greater than $12/4=3$ . Hence, the answer is $\\boxed{\\textbf{(D)}\\ 4\\sqrt7}$ . ~SwordOfJustice",
+  "year": 2022,
+  "competition": "AMC 12B",
+  "problem_number": 10,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12B",
+    "2022",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:28:14.739107+00:00"
+}

@@ -1,0 +1,18 @@
+-- 2018 AMC 10A Problems/Problem 23
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_AMC_12A_Problems/Problem_17
+
+-- Problem (LaTeX):
+/-
+Farmer Pythagoras has a field in the shape of a right triangle. The right triangle's legs have lengths $3$ and $4$ units. In the corner where those sides meet at a right angle, he leaves a small unplanted square $S$ so that from the air it looks like the right angle symbol. The rest of the field is planted. The shortest distance from $S$ to the hypotenuse is $2$ units. What fraction of the field is planted? [asy] /* Edited by MRENTHUSIASM */ size(160); pair A, B, C, D, F; A = origin; B = (4,0); C = (0,3); D = (2/7,2/7); F = foot(D,B,C); fill(A--(2/7,0)--D--(0,2/7)--cycle, lightgray); draw(A--B--C--cycle); draw((2/7,0)--D--(0,2/7)); label("$4$", midpoint(A--B), N); label("$3$", midpoint(A--C), E); label("$2$", midpoint(D--F), SE); label("$S$", midpoint(A--D)); draw(D--F, dashed); [/asy] $\textbf{(A) } \frac{25}{27} \qquad \textbf{(B) } \frac{26}{27} \qquad \textbf{(C) } \frac{73}{75} \qquad \textbf{(D) } \frac{145}{147} \qquad \textbf{(E) } \frac{74}{75}$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Note that the hypotenuse of the field is $5,$ and the area of the field is $6.$ Let $x$ be the side-length of square $S.$ We partition the field into a red triangle, a yellow triangle, and a green triangle, as shown below: [asy] /* Edited by MRENTHUSIASM */ size(180); pair A, B, C, D, F; A = origin; B = (4,0); C = (0,3); D = (2/7,2/7); F = foot(D,B,C); fill(A--D--C--cycle, red); fill(A--D--B--cycle, yellow); fill(B--D--C--cycle, green); draw(A--B--C--cycle); label("$5$", midpoint(B--C), NE); label("$4$", midpoint(A--B), S); label("$3$", midpoint(A--C), W); label("$2$", midpoint(D--F), SE); label("$S$", midpoint(A--D)); label("$x$", midpoint((0,2/7)--D), N); label("$x$", midpoint((2/7,0)--D), E); draw((2/7,0)--D--(0,2/7)); draw(A--D^^B--D^^C--D, dashed); draw(D--F, dashed); [/asy] Let the brackets denote areas. By area addition, we set up an equation for $x:$ \begin{align*} [\text{Red Triangle}]+[\text{Yellow Triangle}]+[\text{Green Triangle}]&=[\text{Field}] \\ \frac{3x}{2}+\frac{4x}{2}+\frac{5\cdot2}{2}&=6, \end{align*} from which $x=\frac27.$ Therefore, the answer is \[\frac{[\text{Field}]-[S]}{[\text{Field}]}=\frac{6-x^2}{6}=\boxed{\textbf{(D) } \frac{145}{147}}.\] ~MRENTHUSIASM
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_e81047d57d : Prop := by
+  sorry

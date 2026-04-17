@@ -1,58 +1,18 @@
-import Mathlib.Geometry.Euclidean.Circumcenter
-import Mathlib.Geometry.Euclidean.Orthocenter
-import Mathlib.Geometry.Euclidean.Midpoint
-import Mathlib.Data.Real.Basic
+-- 2021 USAMO Problems/Problem 6
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2021_USAMO_Problems/Problem_6
+
+-- Problem (LaTeX):
+/-
+Let $ABCDEF$ be a convex hexagon satisfying $\overline{AB} \parallel \overline{DE}$ , $\overline{BC} \parallel \overline{EF}$ , $\overline{CD} \parallel \overline{FA}$ , and \[AB \cdot DE = BC \cdot EF = CD \cdot FA.\] Let $X$ , $Y$ , and $Z$ be the midpoints of $\overline{AD}$ , $\overline{BE}$ , and $\overline{CF}$ . Prove that the circumcenter of $\triangle ACE$ , the circumcenter of $\triangle BDF$ , and the orthocenter of $\triangle XYZ$ are collinear.
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $M_1$ , $M_2$ , and $M_3$ be the midpoints of $CE$ , $AE$ , $AC$ and $N_1$ , $N_2$ , and $N_3$ be the midpoints of $DF$ , $BF$ , and $BD$ . Also, let $H$ be the orthocenter of $XYZ$ . Note that we can use parallel sides to see that $X$ , $Z$ , and $M_3$ are collinear. Thus we have \[\text{Pow}(M_3,(XYZ)) = M_3Z \cdot M_3X = \frac 14 AB \cdot DE\] by midlines. Applying this argument cyclically, and noting the condition $AB \cdot DE = BC \cdot EF = CD \cdot FA$ , $M_1$ , $M_2$ , $M_3$ , $N_1$ , $N_2$ , $N_3$ all lie on a circle concentric with $(XYZ)$ . Next, realize that basic orthocenter properties imply that the circumcenter $O_1$ of $(ACE)$ is the orthocenter of $\triangle M_1M_2M_3$ , and likewise the circumcenter $O_2$ of $(BDF)$ is the orthocenter of $\triangle N_1N_2N_3$ . The rest is just complex numbers; toss on the complex plane so that the circumcenter of $\triangle XYZ$ is the origin. Then we have \[o_1 = m_1+m_2+m_3 = (c+e)/2+(a+e)/2+(a+c)/2=a+c+e\] \[o_2 = n_1+n_2+n_3 = (b+d)/2+(d+f)/2+(b+f)/2=b+d+f\] \[h = x+y+z = (a+d)/2+(b+e)/2+(c+f)/2=(a+b+c+d+e+f)/2.\] Note that from the above we have $h=\frac{o_1+o_2}{2}$ , so $H$ is the midpoint of segment $O_1O_2$ . In particular, $H$ , $O_1$ , and $O_2$ are collinear, as required. ~ Leo.Euler
+-/
+
 import Mathlib.Tactic
 
-open EuclideanGeometry
-
--- Problem: Prove that the circumcenter of triangle ACE, the circumcenter of triangle BDF, 
--- and the orthocenter of triangle XYZ are collinear under given conditions.
-theorem usamo_2021_p6 (A B C D E F X Y Z O1 O2 H : Point)
-  (h1 : Parallel (Line.mk A B) (Line.mk D E))
-  (h2 : Parallel (Line.mk B C) (Line.mk E F))
-  (h3 : Parallel (Line.mk C D) (Line.mk F A))
-  (h4 : dist A B * dist D E = dist B C * dist E F)
-  (h5 : dist B C * dist E F = dist C D * dist F A)
-  (hX : X = midpoint A D)
-  (hY : Y = midpoint B E)
-  (hZ : Z = midpoint C F)
-  (hO1 : O1 = circumcenter A C E)
-  (hO2 : O2 = circumcenter B D F)
-  (hH : H = orthocenter X Y Z) :
-  Collinear O1 O2 H := by
-  -- Introduce midpoints M1, M2, M3 for triangle ACE
-  let M1 := midpoint C E
-  let M2 := midpoint A E
-  let M3 := midpoint A C
-
-  -- Introduce midpoints N1, N2, N3 for triangle BDF
-  let N1 := midpoint D F
-  let N2 := midpoint B F
-  let N3 := midpoint B D
-
-  -- Use the given parallel conditions to establish collinearity of midpoints
-  have hM3_collinear : Collinear X Z M3 := by
-    sorry -- Use parallel conditions and midpoints properties
-
-  -- Establish the power of point relations
-  have hPowerM3 : pow M3 (circumcircle X Y Z) = (dist M3 Z * dist M3 X) := by
-    sorry -- Use midline and power of point theorem
-
-  -- Show that M1, M2, M3, N1, N2, N3 lie on a circle concentric with (XYZ)
-  have hCircle : Concentric (circumcircle M1 M2 M3) (circumcircle X Y Z) := by
-    sorry -- Use cyclic nature and given conditions
-
-  -- Use the properties of orthocenters and circumcenters
-  have hO1_orthocenter : O1 = orthocenter M1 M2 M3 := by
-    sorry -- Use properties of circumcenters and orthocenters
-
-  have hO2_orthocenter : O2 = orthocenter N1 N2 N3 := by
-    sorry -- Use properties of circumcenters and orthocenters
-
-  -- Use complex numbers to show that H is the midpoint of O1O2
-  have hComplex : H = (O1 + O2) / 2 := by
-    sorry -- Use complex number representation and midpoint calculation
-
-  -- Conclude that H, O1, O2 are collinear
-  exact collinear_of_midpoint H O1 O2 hComplex
+theorem wiki_index_php_8bcb39bce3 : Prop := by
+  sorry

@@ -1,0 +1,19 @@
+-- 2022 AMC 12B Problems/Problem 11
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2022_AMC_12B_Problems/Problem_11
+
+-- Problem (LaTeX):
+/-
+Let $f(n) = \left( \frac{-1+i\sqrt{3}}{2} \right)^n + \left( \frac{-1-i\sqrt{3}}{2} \right)^n$ , where $i = \sqrt{-1}$ . What is $f(2022)$ ? $\textbf{(A)}\ -2 \qquad \textbf{(B)}\ -1 \qquad \textbf{(C)}\ 0 \qquad \textbf{(D)}\ \sqrt{3} \qquad \textbf{(E)}\ 2$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Converting both summands to exponential form, \begin{align*} -1 + i\sqrt{3} &= 2e^{\frac{2\pi i}{3}}, \\ -1 - i\sqrt{3} &= 2e^{-\frac{2\pi i}{3}} = 2e^{\frac{4\pi i}{3}}. \end{align*} Notice that the two terms in the problem are two of the third roots of unity (that is, both of them equal $1$ when raised to the power of $3$ ).
+When we replace the summands with their exponential form, we get \[f(n) = \left(e^{\frac{2\pi i}{3}}\right)^n + \left(e^{\frac{4\pi i}{3}}\right)^n.\] When we substitute $n = 2022$ , we get \[f(2022) = \left(e^{\frac{2\pi i}{3}}\right)^{2022} + \left(e^{\frac{4\pi i}{3}}\right)^{2022}.\] We can rewrite $2022$ as $3 \cdot 674$ , how does that help? \[f(2022) = \left(e^{\frac{2\pi i}{3}}\right)^{3 \cdot 674} + \left(e^{\frac{4\pi i}{3}}\right)^{3 \cdot 674} = \left(\left(e^{\frac{2\pi i}{3}}\right)^{3}\right)^{674} + \left(\left(e^{\frac{4\pi i}{3}}\right)^{3}\right)^{674} = 1^{674} + 1^{674} = \boxed{\textbf{(E)} \ 2}.\] Since any third root of unity must cube to $1$ . ~ zoomanTV
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_adf0c438c5 : Prop := by
+  sorry

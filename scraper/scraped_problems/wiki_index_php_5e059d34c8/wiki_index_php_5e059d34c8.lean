@@ -1,0 +1,18 @@
+-- 2017 AIME I Problems/Problem 6
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2017_AIME_I_Problems/Problem_6
+
+-- Problem (LaTeX):
+/-
+A circle is circumscribed around an isosceles triangle whose two congruent angles have degree measure $x$ . Two points are chosen independently and uniformly at random on the circle, and a chord is drawn between them. The probability that the chord intersects the triangle is $\frac{14}{25}$ . Find the difference between the largest and smallest possible values of $x$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+The probability that the chord doesn't intersect the triangle is $\frac{11}{25}$ . The only way this can happen is if the two points are chosen on the same arc between two of the triangle vertices. The probability that a point is chosen on one of the arcs opposite one of the base angles is $\frac{2x}{360}=\frac{x}{180}$ (this comes from the Central Angle Theorem, which states that the central angle from two points on a circle is always twice the inscribed angle from those two points), and the probability that a point is chosen on the arc between the two base angles is $\frac{180-2x}{180}$ . Therefore, we can write \[2\left(\frac{x}{180}\right)^2+\left(\frac{180-2x}{180}\right)^2=\frac{11}{25}\] This simplifies to \[x^2-120x+3024=0\] (Note that the simplification is quite tedious) Which factors as \[(x-84)(x-36)=0\] So $x=84, 36$ . The difference between these is $\boxed{048}$ . Note: We actually do not need to spend time factoring $x^2 - 120x + 3024$ . Since the problem asks for $|x_1 - x_2|$ , where $x_1$ and $x_2$ are the roots of the quadratic, we can utilize Vieta's by noting that $(x_1 - x_2) ^ 2 = (x_1 + x_2) ^ 2 - 4x_1x_2$ . Vieta's gives us $x_1 + x_2 = 120,$ and $x_1x_2 = 3024.$ Plugging this into the above equation and simplifying gives us $(x_1 - x_2) ^ 2 = 2304,$ or $|x_1 - x_2| = 48$ . Our answer is then $\boxed{048}$ . Another note: Letting $y = x/180$ , the first equation turns into $2y^2 + (1-2y)^2 = 11/25$ , heavily simplifying the otherwise messy simplification, and you can use the aforementioned note to find $|y_1 - y_2| = 4/15$ . Using $x = 180y$ , $|x_1 - x_2| = 180|y_1 - y_2|$ , so the answer is $180(4/15) = \boxed{048}$
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_5e059d34c8 : Prop := by
+  sorry

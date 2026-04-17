@@ -1,0 +1,18 @@
+-- 2022 AMC 10A Problems/Problem 7
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2022_AMC_12A_Problems/Problem_4
+
+-- Problem (LaTeX):
+/-
+The least common multiple of a positive integer $n$ and $18$ is $180$ , and the greatest common divisor of $n$ and $45$ is $15$ . What is the sum of the digits of $n$ ? $\textbf{(A) } 3 \qquad \textbf{(B) } 6 \qquad \textbf{(C) } 8 \qquad \textbf{(D) } 9 \qquad \textbf{(E) } 12$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Note that \begin{align*} 18 &= 2\cdot3^2, \\ 180 &= 2^2\cdot3^2\cdot5, \\ 45 &= 3^2\cdot5 \\ 15 &= 3\cdot5. \end{align*} Let $n = 2^a\cdot3^b\cdot5^c.$ It follows that: From the least common multiple condition, we have \[\operatorname{lcm}(n,18) = \operatorname{lcm}(2^a\cdot3^b\cdot5^c,2\cdot3^2) = 2^{\max(a,1)}\cdot3^{\max(b,2)}\cdot5^{\max(c,0)} = 2^2\cdot3^2\cdot5,\] from which $a=2, b\in\{0,1,2\},$ and $c=1.$ From the greatest common divisor condition, we have \[\gcd(n,45) = \gcd(2^2\cdot3^b\cdot5,3^2\cdot5) = 2^{\min(2,0)}\cdot3^{\min(b,2)}\cdot5^{\min(1,1)} = 3\cdot5,\] from which $b=1.$ Together, we conclude that $n=2^2\cdot3\cdot5=60.$ The sum of its digits is $6+0=\boxed{\textbf{(B) } 6}.$ ~MRENTHUSIASM ~USAMO333
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_dfbf3e6158 : Prop := by
+  sorry

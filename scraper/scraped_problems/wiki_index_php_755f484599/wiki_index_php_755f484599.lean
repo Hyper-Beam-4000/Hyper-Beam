@@ -1,0 +1,18 @@
+-- 2025 AIME I Problems/Problem 4
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2025_AIME_I_Problems/Problem_4
+
+-- Problem (LaTeX):
+/-
+Find the number of ordered pairs $(x,y)$ , where both $x$ and $y$ are integers between $-100$ and $100$ inclusive, such that $12x^2-xy-6y^2=0$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+We begin by factoring, $12x^2-xy-6y^2=(3x+2y)(4x-3y)=0.$ Since the RHS is $0$ we have two options, $\underline{\text{Case 1:}}\text{ } 3x+2y = 0$ In this case we have, $y=\frac{-3x}{2}.$ Using the bounding on $y$ we have, \[-100\le\frac{-3x}{2}\le 100.\] \[\frac{200}{3}\ge x \ge \frac{-200}{3}.\] In addition in order for $y$ to be integer $2 | x,$ so we substitute $x=2k.$ \[\frac{200}{3}\ge 2k \ge \frac{-200}{3}.\] \[\frac{100}{3}\ge k \ge \frac{-100}{3}.\] From this we have solutions starting from $-33$ to $33$ which is $67$ solutions. $\underline{\text{Case 2: }}\text{ } 4x-3y = 0$ On the other hand, we have, $y=\frac{4x}{3}.$ From bounds we have, \[-100\le\frac{4x}{3}\le 100.\] \[-75 \le x \le 75.\] In this case, for $y$ to be integer $3 | x,$ so we substitute $x=3t.$ \[-75 \le 3t \le 75.\] \[-25 \le t \le 25.\] This gives us $51$ solutions. Finally we overcount one case which is the intersection of the $2$ lines (which are $y=\frac{-3x}{2}$ and $y=\frac{4x}{3}$ ) or the point $(0,0).$ Therefore our answer is $67+51-1=\boxed{117}$ ~ mathkiddus
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_755f484599 : Prop := by
+  sorry

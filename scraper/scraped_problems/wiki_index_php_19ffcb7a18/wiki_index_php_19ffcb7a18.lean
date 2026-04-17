@@ -1,0 +1,18 @@
+-- 2024 AMC 10A Problems/Problem 15
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2024_AMC_12A_Problems/Problem_9
+
+-- Problem (LaTeX):
+/-
+Let $M$ be the greatest integer such that both $M+1213$ and $M+3773$ are perfect squares. What is the units digit of $M$ ? $\textbf{(A) }1\qquad\textbf{(B) }2\qquad\textbf{(C) }3\qquad\textbf{(D) }6\qquad\textbf{(E) }8$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $M+1213=P^2$ and $M+3773=Q^2$ for some positive integers $P$ and $Q.$ We subtract the first equation from the second, then apply the difference of squares: \[(Q+P)(Q-P)=2560.\] Note that $Q+P$ and $Q-P$ have the same parity, and $Q+P>Q-P.$ We wish to maximize both $P$ and $Q,$ so we maximize $Q+P$ and minimize $Q-P.$ It follows that \begin{align*} Q+P&=1280, \\ Q-P&=2, \end{align*} from which $(P,Q)=(639,641).$ Finally, we get $M=P^2-1213=Q^2-3773\equiv1-3\equiv8\pmod{10},$ so the units digit of $M$ is $\boxed{\textbf{(E) }8}.$ ~MRENTHUSIASM ~Tacos_are_yummy_1 ~minor edit
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_19ffcb7a18 : Prop := by
+  sorry

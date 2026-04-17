@@ -1,44 +1,23 @@
-import Mathlib.Geometry.Euclidean.Circumcircle
-import Mathlib.Geometry.Euclidean.Triangle
-import Mathlib.Data.Real.Basic
+-- 2023 USAMO Problems/Problem 1
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2023_USAMO_Problems/Problem_1
+
+-- Problem (LaTeX):
+/-
+In an acute triangle $ABC$ , let $M$ be the midpoint of $\overline{BC}$ . Let $P$ be the foot of the perpendicular from $C$ to $AM$ . Suppose that the circumcircle of triangle $ABP$ intersects line $BC$ at two distinct points $B$ and $Q$ . Let $N$ be the midpoint of $\overline{AQ}$ . Prove that $NB=NC$ . Contents 1 Solution 1 2 Solution 2 3 Solution 3 4 See also Solution 1 Let $X$ be the foot from $A$ to $\overline{BC}$ . By definition, $\angle AXM = \angle MPC = 90^{\circ}$ . Thus, $\triangle AXM \sim \triangle CPM$ , and $\triangle BMP \sim \triangle AMQ$ . From this, we have $\frac{MP}{MX} = \frac{MC}{MA} = \frac{MP}{MQ}$ , as $MC=MB$ . Thus, $M$ is also the midpoint of $XQ$ . Now, $NB = NC$ if $N$ lies on the perpendicular bisector of $\overline{BC}$ . As $N$ lies on the perpendicular bisector of $\overline{XQ}$ , which is also the perpendicular bisector of $\overline{BC}$ (as $M$ is also the midpoint of $XQ$ ), we are done.
+~ Martin2001
+~ SomebodyST (minor edits) Solution 2 We are going to use barycentric coordinates on $\triangle ABC$ . Let $A=(1,0,0)$ , $B=(0,1,0)$ , $C=(0,0,1)$ , and $a=BC$ , $b=CA$ , $c=AB$ . We have $M=\left(0,\frac{1}{2},\frac{1}{2}\right)$ and $P=(x:1:1)$ so $\overrightarrow{CP}=\left(\frac{x}{x+2},\frac{1}{x+2},\frac{1}{x+2}-1\right)$ and $\overrightarrow{AM}=\left(-1,\frac{1}{2},\frac{1}{2}\right)$ . Since $\overleftrightarrow{CP}\perp\overleftrightarrow{AM}$ , it follows that \begin{align*} a^2\left(\frac{1}{2}\cdot\frac{1}{x+2}+\frac{1}{2}\left(\frac{1}{x+2}-1\right)\right)+b^2\left(\frac{1}{2}\cdot\frac{x}{x+2}-\left(\frac{1}{x+2}-1\right)\right)\\ +c^2\left(\frac{1}{2}\cdot\frac{x}{x+2}-\frac{1}{x+2}\right)=0. \end{align*} Solving this gives \[ x=\frac{2b^2-2c^2}{a^2-3b^2-c^2} \] so \[ P=\left(\frac{b^2-c^2}{a^2-2b^2-2c^2},\frac{a^2-3b^2-c^2}{2a^2-4b^2-4c^2},\frac{a^2-3b^2-c^2}{2a^2-4b^2-4c^2}\right). \] The equation for $(ABP)$ is \[ -a^2yz-b^2zx-c^2xy+ux+vy+wz=0. \] Plugging in $A$ and $B$ gives $u=v=0$ . Plugging in $P$ gives \begin{align*} -a^2\left(\frac{a^2-3b^2-c^2}{2a^2-4b^2-4c^2}\right)^2-b^2\cdot\frac{a^2-3b^2-c^2}{2a^2-4b^2-4c^2}\cdot\frac{b^2-c^2}{a^2-2b^2-2c^2}\\ -c^2\cdot\frac{b^2-c^2}{a^2-2b^2-2c^2}\cdot\frac{a^2-3b^2-c^2}{2a^2-4b^2-4c^2}+w\cdot\frac{a^2-3b^2-c^2}{2a^2-4b^2-4c^2}=0 \end{align*} so \[ w=\frac{2b^4-2c^4+a^4-3a^2b^2-a^2c^2}{2a^2-4b^2-4c^2}=\frac{a^2}{2}-\frac{b^2}{2}+\frac{c^2}{2}. \] Now let $Q=(0,t,1-t)$ where \begin{align*} -a^2t(1-t)+w(1-t)&=0\\ \implies t&=\frac{w}{a^2} \end{align*} so $Q=\left(0,\frac{w}{a^2},1-\frac{w}{a^2}\right)$ . It follows that $N=\left(\frac{1}{2},\frac{w}{2a^2},1-\frac{w}{2a^2}\right)$ . It suffices to prove that $\overleftrightarrow{ON}\perp\overleftrightarrow{BC}$ . Setting $\overrightarrow{O}=0$ , we get $\overrightarrow{N}=\left(\frac{1}{2},\frac{w}{2a^2},1-\frac{w}{2a^2}\right)$ . Furthermore we have $\overrightarrow{CB}=(0,1,-1)$ so it suffices to prove that \begin{align*} a^2\left(-\frac{w}{2a^2}+\frac{1}{2}-\frac{u}{2a^2}\right)+b^2\left(-\frac{1}{2}\right)+c^2\left(\frac{1}{2}\right)=0\\ \implies w=\frac{a^2}{2}-\frac{b^2}{2}+\frac{c^2}{2} \end{align*} which is valid. $\square$ ~KevinYang2.71 Solution 3 Let $X$ be the foot from $A$ to $BC.$ Note that $\angle AXC=\angle APC,$ so $(AXPC)$ is cyclic. Furthermore, $AP$ is the radical axis of $(ABP)$ and $(AXPC),$ so since $M$ lies on $AP,$ we must have that $BM\cdot MQ=CM\cdot MX,$ so $M$ is the midpoint of $QX.$ Therefore, $MN\parallel AX\perp BC,$ so we are done.
+~krithikrokcs
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $X$ be the foot from $A$ to $\overline{BC}$ . By definition, $\angle AXM = \angle MPC = 90^{\circ}$ . Thus, $\triangle AXM \sim \triangle CPM$ , and $\triangle BMP \sim \triangle AMQ$ . From this, we have $\frac{MP}{MX} = \frac{MC}{MA} = \frac{MP}{MQ}$ , as $MC=MB$ . Thus, $M$ is also the midpoint of $XQ$ . Now, $NB = NC$ if $N$ lies on the perpendicular bisector of $\overline{BC}$ . As $N$ lies on the perpendicular bisector of $\overline{XQ}$ , which is also the perpendicular bisector of $\overline{BC}$ (as $M$ is also the midpoint of $XQ$ ), we are done.
+~ Martin2001
+~ SomebodyST (minor edits)
+-/
+
 import Mathlib.Tactic
 
-open EuclideanGeometry
-
--- Problem: In an acute triangle ABC, let M be the midpoint of BC. Let P be the foot of the perpendicular from C to AM.
--- Suppose that the circumcircle of triangle ABP intersects line BC at two distinct points B and Q.
--- Let N be the midpoint of AQ. Prove that NB = NC.
-
-theorem usamo_2023_p1 (A B C M P Q N : Point) (hABC : Triangle A B C)
-  (hM : Midpoint M B C) (hP : Foot P C (Line.mk A M))
-  (hCirc : Circle (Circumcircle A B P) ∩ Line.mk B C = {B, Q})
-  (hN : Midpoint N A Q) : dist N B = dist N C := by
-  -- Introduce necessary properties and assumptions
-  have hAM : Line.mk A M ⊥ Line.mk C P := by
-    apply Foot.perpendicular
-    exact hP
-
-  -- Use the property of the circumcircle and intersection
-  have hCircProp : ∀ X, X ∈ Circle (Circumcircle A B P) ↔ dist X A = dist X B := by
-    sorry
-
-  -- Establish similarity of triangles
-  have hSim1 : Similar (Triangle.mk A X M) (Triangle.mk C P M) := by
-    sorry
-
-  have hSim2 : Similar (Triangle.mk B M P) (Triangle.mk A M Q) := by
-    sorry
-
-  -- Use midpoints and similarity to establish necessary equalities
-  have hMidXQ : Midpoint M X Q := by
-    sorry
-
-  -- Conclude using the perpendicular bisector property
-  have hPerpBisect : Line.mk N M ⊥ Line.mk B C := by
-    sorry
-
-  -- Finally, show NB = NC using the perpendicular bisector property
-  exact dist_eq_of_perp_bisector N B C hPerpBisect
-
--- Note: The proof uses properties of midpoints, perpendiculars, and circumcircles.
--- The steps marked with "sorry" require detailed geometric reasoning and calculations.
+theorem wiki_index_php_aa65347548 : Prop := by
+  sorry

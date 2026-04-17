@@ -6,6 +6,13 @@
   "solution": "https://artofproblemsolving.com/wiki/index.php/File:2025_USAMO_PROBLEM_5_1.jpg https://artofproblemsolving.com/wiki/index.php/File:2025_USAMO_PROBLEM_5_2.jpg",
   "answer": "",
   "year": 2025,
-  "scraped_at": "2026-03-24T05:45:58.824894+00:00",
-  "lean_code": "import Mathlib.Data.Nat.Basic\nimport Mathlib.Data.Nat.Binomial\nimport Mathlib.Data.Int.Basic\nimport Mathlib.Tactic\n\nopen Nat\n\n-- Problem: Determine all positive integers k such that\n-- (1 / (n + 1)) * ∑ i in range (n + 1), (binom n i)^k is an integer for all positive n.\n\ntheorem usamo_2025_problem_5 (k : ℕ) : (∀ n : ℕ, n > 0 → (1 / (n + 1) : ℚ) * ∑ i in Finset.range (n + 1), (Nat.choose n i)^k ∈ ℤ) ↔ k = 1 := by\n  constructor\n  -- First, show that if the condition holds for all n, then k = 1.\n  · intro h\n    -- Consider the case n = 1\n    specialize h 1 (by norm_num)\n    -- Calculate the sum for n = 1: ∑ i in {0, 1}, (binom 1 i)^k = 2^k\n    have h1 : ∑ i in Finset.range 2, (Nat.choose 1 i)^k = 2^k := by\n      simp [Nat.choose]\n      norm_num\n    -- The expression becomes (1 / 2) * 2^k ∈ ℤ, which implies 2^(k - 1) ∈ ℤ\n    rw [h1] at h\n    have h2 : (1 / 2 : ℚ) * 2^k = 2^(k - 1) := by\n      field_simp\n      ring\n    rw [h2] at h\n    -- Since 2^(k - 1) is an integer, k - 1 must be ≥ 0, so k ≥ 1\n    have : k ≥ 1 := by\n      sorry\n    -- Consider the case n = 2\n    specialize h 2 (by norm_num)\n    -- Calculate the sum for n = 2: ∑ i in {0, 1, 2}, (binom 2 i)^k = 3^k\n    have h3 : ∑ i in Finset.range 3, (Nat.choose 2 i)^k = 3^k := by\n      simp [Nat.choose]\n      norm_num\n    -- The expression becomes (1 / 3) * 3^k ∈ ℤ, which implies 3^(k - 1) ∈ ℤ\n    rw [h3] at h\n    have h4 : (1 / 3 : ℚ) * 3^k = 3^(k - 1) := by\n      field_simp\n      ring\n    rw [h4] at h\n    -- Since 3^(k - 1) is an integer, k - 1 must be ≥ 0, so k ≥ 1\n    have : k ≥ 1 := by\n      sorry\n    -- If k > 1, then 3^(k - 1) is not an integer, contradiction\n    -- Thus, k = 1\n    exact sorry\n  -- Now, show that if k = 1, the condition holds for all n.\n  · intro hk\n    intro n hn\n    -- If k = 1, the expression becomes (1 / (n + 1)) * ∑ i in range (n + 1), binom n i\n    rw [hk]\n    -- This is the well-known binomial theorem result: ∑ i in range (n + 1), binom n i = 2^n\n    have : ∑ i in Finset.range (n + 1), Nat.choose n i = 2^n := by\n      exact Nat.sum_range_choose n\n    -- Therefore, (1 / (n + 1)) * 2^n is an integer for all n\n    rw [this]\n    -- Use the fact that 2^n is divisible by n + 1 for n > 0\n    have : (1 / (n + 1) : ℚ) * 2^n ∈ ℤ := by\n      sorry\n    exact this"
+  "competition": "USAMO",
+  "problem_number": 5,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "USAMO",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:20:14.014571+00:00"
 }

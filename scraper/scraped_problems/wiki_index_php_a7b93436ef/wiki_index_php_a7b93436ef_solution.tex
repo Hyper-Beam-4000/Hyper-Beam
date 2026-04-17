@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2024 AMC 12A Problems/Problem 7}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Let us find an expression for the $x$ - and $y$ -components of $\overrightarrow{BP_i}$ . Note that $AP_1+P_1P_2+\dots+P_{2023}P_{2024}+P_{2024}C=AC=2$ , so $AP_1=P_1P_2=\dots=P_{2023}P_{2024}=P_{2024}C=\dfrac2{2025}$ . All of the vectors $\overrightarrow{AP_1},\overrightarrow{P_1P_2},$ and so on up to $\overrightarrow{P_{2024}C}$ are equal; moreover, they equal $\textbf v=\left\langle\dfrac1{\sqrt2}\cdot\dfrac2{2025},-\dfrac1{\sqrt2}\cdot\dfrac2{2025}\right\rangle=\left\langle\dfrac{\sqrt2}{2025},-\dfrac{\sqrt2}{2025}\right\rangle$ . We now note that $\overrightarrow{AP_i}=i\textbf v=\left\langle\dfrac{i\sqrt2}{2025},-\dfrac{i\sqrt2}{2025}\right\rangle$ ( $i$ copies of $\textbf v$ added together). Furthermore, note that $\overrightarrow{BP_i}=\overrightarrow{BA}+\overrightarrow{AP_i}=\left\langle0,\sqrt2\right\rangle+\left\langle\dfrac{i\sqrt2}{2025},-\dfrac{i\sqrt2}{2025}\right\rangle=\left\langle\dfrac{i\sqrt2}{2025},\sqrt2-\dfrac{i\sqrt2}{2025}\right\rangle.$ We want $\sum_{i=1}^{2024}\overrightarrow{BP_i}$ 's length, which can be determined from the $x$ - and $y$ -components. Note that the two values should actually be the same - in this problem, everything is symmetric with respect to the line $x=y$ , so the magnitudes of the $x$ - and $y$ -components should be identical. The $x$ -component is easier to calculate. \[\sum_{i=1}^{2024}\left(\overrightarrow{BP_i}\right)_x=\sum_{i=1}^{2024}\dfrac{i\sqrt2}{2025}=\dfrac{\sqrt2}{2025}\sum_{i=1}^{2024}i=\dfrac{\sqrt2}{2025}\cdot\dfrac{2024\cdot2025}2=1012\sqrt2.\] One can similarly evaulate the $y$ -component and obtain an identical answer; thus, our desired length is $\sqrt{\left(1012\sqrt2\right)^2+\left(1012\sqrt2\right)^2}=\sqrt{4\cdot1012^2}=\boxed{\textbf{(D) }2024}$ . ~Technodoggo
+
+\end{document}

@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2020 AMC 10B Problems/Problem 14}}
+Source: AoPS Wiki
+
+\subsection*{Problem}
+As shown in the figure below, six semicircles lie in the interior of a regular hexagon with side length 2 so that the diameters of the semicircles coincide with the sides of the hexagon. What is the area of the shaded region ---- inside the hexagon but outside all of the semicircles? $\textbf{(A) } 6\sqrt3 - 3\pi \qquad \textbf{(B) } \frac{9\sqrt3}{2} - 2\pi \qquad \textbf{(C) } \frac{3\sqrt3}{2} - \frac{\pi}{3} \qquad \textbf{(D) } 3\sqrt3 - \pi \qquad \textbf{(E) } \frac{9\sqrt3}{2} - \pi$ [asy] size(140); fill((1,0)--(3,0)--(4,sqrt(3))--(3,2sqrt(3))--(1,2sqrt(3))--(0,sqrt(3))--cycle,gray(0.4)); fill(arc((2,0),1,180,0)--(2,0)--cycle,white); fill(arc((3.5,sqrt(3)/2),1,60,240)--(3.5,sqrt(3)/2)--cycle,white); fill(arc((3.5,3sqrt(3)/2),1,120,300)--(3.5,3sqrt(3)/2)--cycle,white); fill(arc((2,2sqrt(3)),1,180,360)--(2,2sqrt(3))--cycle,white); fill(arc((0.5,3sqrt(3)/2),1,240,420)--(0.5,3sqrt(3)/2)--cycle,white); fill(arc((0.5,sqrt(3)/2),1,300,480)--(0.5,sqrt(3)/2)--cycle,white); draw((1,0)--(3,0)--(4,sqrt(3))--(3,2sqrt(3))--(1,2sqrt(3))--(0,sqrt(3))--(1,0)); draw(arc((2,0),1,180,0)--(2,0)--cycle); draw(arc((3.5,sqrt(3)/2),1,60,240)--(3.5,sqrt(3)/2)--cycle); draw(arc((3.5,3sqrt(3)/2),1,120,300)--(3.5,3sqrt(3)/2)--cycle); draw(arc((2,2sqrt(3)),1,180,360)--(2,2sqrt(3))--cycle); draw(arc((0.5,3sqrt(3)/2),1,240,420)--(0.5,3sqrt(3)/2)--cycle); draw(arc((0.5,sqrt(3)/2),1,300,480)--(0.5,sqrt(3)/2)--cycle); label("$2$",(3.5,3sqrt(3)/2),NE); [/asy]
+
+\end{document}

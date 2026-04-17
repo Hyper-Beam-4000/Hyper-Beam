@@ -6,6 +6,13 @@
   "solution": "Let $X$ be the foot from $A$ to $\\overline{BC}$ . By definition, $\\angle AXM = \\angle MPC = 90^{\\circ}$ . Thus, $\\triangle AXM \\sim \\triangle CPM$ , and $\\triangle BMP \\sim \\triangle AMQ$ . From this, we have $\\frac{MP}{MX} = \\frac{MC}{MA} = \\frac{MP}{MQ}$ , as $MC=MB$ . Thus, $M$ is also the midpoint of $XQ$ . Now, $NB = NC$ if $N$ lies on the perpendicular bisector of $\\overline{BC}$ . As $N$ lies on the perpendicular bisector of $\\overline{XQ}$ , which is also the perpendicular bisector of $\\overline{BC}$ (as $M$ is also the midpoint of $XQ$ ), we are done.\n~ Martin2001\n~ SomebodyST (minor edits)",
   "answer": "",
   "year": 2023,
-  "scraped_at": "2026-03-24T05:43:51.458193+00:00",
-  "lean_code": "import Mathlib.Geometry.Euclidean.Circumcircle\nimport Mathlib.Geometry.Euclidean.Triangle\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Tactic\n\nopen EuclideanGeometry\n\n-- Problem: In an acute triangle ABC, let M be the midpoint of BC. Let P be the foot of the perpendicular from C to AM.\n-- Suppose that the circumcircle of triangle ABP intersects line BC at two distinct points B and Q.\n-- Let N be the midpoint of AQ. Prove that NB = NC.\n\ntheorem usamo_2023_p1 (A B C M P Q N : Point) (hABC : Triangle A B C)\n  (hM : Midpoint M B C) (hP : Foot P C (Line.mk A M))\n  (hCirc : Circle (Circumcircle A B P) ∩ Line.mk B C = {B, Q})\n  (hN : Midpoint N A Q) : dist N B = dist N C := by\n  -- Introduce necessary properties and assumptions\n  have hAM : Line.mk A M ⊥ Line.mk C P := by\n    apply Foot.perpendicular\n    exact hP\n\n  -- Use the property of the circumcircle and intersection\n  have hCircProp : ∀ X, X ∈ Circle (Circumcircle A B P) ↔ dist X A = dist X B := by\n    sorry\n\n  -- Establish similarity of triangles\n  have hSim1 : Similar (Triangle.mk A X M) (Triangle.mk C P M) := by\n    sorry\n\n  have hSim2 : Similar (Triangle.mk B M P) (Triangle.mk A M Q) := by\n    sorry\n\n  -- Use midpoints and similarity to establish necessary equalities\n  have hMidXQ : Midpoint M X Q := by\n    sorry\n\n  -- Conclude using the perpendicular bisector property\n  have hPerpBisect : Line.mk N M ⊥ Line.mk B C := by\n    sorry\n\n  -- Finally, show NB = NC using the perpendicular bisector property\n  exact dist_eq_of_perp_bisector N B C hPerpBisect\n\n-- Note: The proof uses properties of midpoints, perpendiculars, and circumcircles.\n-- The steps marked with \"sorry\" require detailed geometric reasoning and calculations."
+  "competition": "USAMO",
+  "problem_number": 1,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "USAMO",
+    "2023",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:19:53.088791+00:00"
 }

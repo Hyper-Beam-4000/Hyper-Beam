@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2025 AMC 12A Problems/Problem 5}}
+Source: AoPS Wiki
+
+\subsection*{Problem}
+In the figure below, the outside square contains infinitely many squares, each of them with the same center and sides parallel to the outside square. The ratio of the side length of a square to the side length of the next inner square is $k,$ where $0 < k < 1.$ The spaces between squares are alternately shaded, as shown in the figure (which is not necessarily drawn to scale). [asy] unitsize(1cm); int n = 25; real s = 6; real ratio = 0.767; real a = s; for (int i = 0; i < n; ++i) { real b = a * ratio; // Draw current square draw(box((-a/2,-a/2),(a/2,a/2))); if (i % 2 == 1) { fill(box((-a/2,-a/2),(a/2,a/2)), gray(1)); } else { fill(box((-a/2,-a/2),(a/2,a/2)), lightred); } a = b; } draw(box((-a/2,-a/2),(a/2,a/2))); [/asy] The area of the shaded portion of the figure is $64\%$ of the area of the original square. What is $k?$ $\textbf{(A) } \frac 35 \qquad \textbf{(B) } \frac {16}{25} \qquad \textbf{(C) } \frac 23 \qquad \textbf{(D) } \frac 34 \qquad \textbf{(E) } \frac 45$
+
+\end{document}

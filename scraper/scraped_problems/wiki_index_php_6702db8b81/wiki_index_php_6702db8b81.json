@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2017_AIME_II_Problems/Problem_2",
+  "title": "2017 AIME II Problems/Problem 2",
+  "problem": "The teams $T_1$ , $T_2$ , $T_3$ , and $T_4$ are in the playoffs. In the semifinal matches, $T_1$ plays $T_4$ , and $T_2$ plays $T_3$ . The winners of those two matches will play each other in the final match to determine the champion. When $T_i$ plays $T_j$ , the probability that $T_i$ wins is $\\frac{i}{i+j}$ , and the outcomes of all the matches are independent. The probability that $T_4$ will be the champion is $\\frac{p}{q}$ , where $p$ and $q$ are relatively prime positive integers. Find $p+q$ .",
+  "solution": "There are two scenarios in which $T_4$ wins. The first scenario is where $T_4$ beats $T_1$ , $T_3$ beats $T_2$ , and $T_4$ beats $T_3$ , and the second scenario is where $T_4$ beats $T_1$ , $T_2$ beats $T_3$ , and $T_4$ beats $T_2$ . Consider the first scenario. The probability $T_4$ beats $T_1$ is $\\frac{4}{4+1}$ , the probability $T_3$ beats $T_2$ is $\\frac{3}{3+2}$ , and the probability $T_4$ beats $T_3$ is $\\frac{4}{4+3}$ . Therefore the first scenario happens with probability $\\frac{4}{4+1}\\cdot\\frac{3}{3+2}\\cdot\\frac{4}{4+3}$ . Consider the second scenario. The probability $T_4$ beats $T_1$ is $\\frac{4}{1+4}$ , the probability $T_2$ beats $T_3$ is $\\frac{2}{2+3}$ , and the probability $T_4$ beats $T_2$ is $\\frac{4}{4+2}$ . Therefore the second scenario happens with probability $\\frac{4}{1+4}\\cdot\\frac{2}{2+3}\\cdot\\frac{4}{4+2}$ . By summing these two probabilities, the probability that $T_4$ wins is $\\frac{4}{4+1}\\cdot\\frac{3}{3+2}\\cdot\\frac{4}{4+3}+\\frac{4}{1+4}\\cdot\\frac{2}{2+3}\\cdot\\frac{4}{4+2}$ . Because this expression is equal to $\\frac{256}{525}$ , the answer is $256+525=\\boxed{781}$ .",
+  "answer": "",
+  "year": 2017,
+  "competition": "AIME II",
+  "problem_number": 2,
+  "difficulty_tier": "pre_gpt",
+  "tags": [
+    "AIME II",
+    "2017",
+    "pre_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:33:15.980903+00:00"
+}

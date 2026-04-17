@@ -1,0 +1,18 @@
+-- 2023 AIME II Problems/Problem 1
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2023_AIME_II_Problems/Problem_1
+
+-- Problem (LaTeX):
+/-
+The numbers of apples growing on each of six apple trees form an arithmetic sequence where the greatest number of apples growing on any of the six trees is double the least number of apples growing on any of the six trees. The total number of apples growing on all six trees is $990.$ Find the greatest number of apples growing on any of the six trees.
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+In the arithmetic sequence, let $a$ be the first term and $d$ be the common difference, where $d>0.$ The sum of the first six terms is \[a+(a+d)+(a+2d)+(a+3d)+(a+4d)+(a+5d) = 6a+15d.\] We are given that \begin{align*} 6a+15d &= 990, \\ 2a &= a+5d. \end{align*} The second equation implies that $a=5d.$ Substituting this into the first equation, we get \begin{align*} 6(5d)+15d &=990, \\ 45d &= 990 \\ d &= 22. \end{align*} It follows that $a=110.$ Therefore, the greatest number of apples growing on any of the six trees is $a+5d=\boxed{220}.$ ~MRENTHUSIASM
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_091cdef0ed : Prop := by
+  sorry

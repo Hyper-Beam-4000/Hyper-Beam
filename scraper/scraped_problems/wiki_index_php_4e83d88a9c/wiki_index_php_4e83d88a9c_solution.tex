@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2024 AMC 12B Problems/Problem 11}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Add up $x_1$ with $x_{89}$ , $x_2$ with $x_{88}$ , and $x_i$ with $x_{90-i}$ . Notice \[x_i+x_{90-i}=\sin^2(i^{\circ})+\sin^2((90-i)^{\circ})=\sin^2(i^{\circ})+\cos^2(i^{\circ})=1\] by the Pythagorean identity. Since we can pair up $1$ with $89$ and keep going until $44$ with $46$ , we get \[x_1+x_2+\dots+x_{90}=44+x_{45}+x_{90}=44+\left(\frac{\sqrt{2}}{2}\right)^2+1^2=\frac{91}{2}\] Hence the mean is $\boxed{\textbf{(E) }\frac{91}{180}}$ ~kafuu_chino
+
+\end{document}

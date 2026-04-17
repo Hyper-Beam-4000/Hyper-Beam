@@ -1,0 +1,18 @@
+-- 2023 AIME II Problems/Problem 2
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2023_AIME_II_Problems/Problem_2
+
+-- Problem (LaTeX):
+/-
+Recall that a palindrome is a number that reads the same forward and backward. Find the greatest integer less than $1000$ that is a palindrome both when written in base ten and when written in base eight, such as $292 = 444_{\text{eight}}.$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Assuming that such palindrome is greater than $777_8 = 511,$ we conclude that the palindrome has four digits when written in base $8.$ Let such palindrome be \[(\underline{ABBA})_8 = 512A + 64B + 8B + A = 513A + 72B.\] It is clear that $A=1,$ so we repeatedly add $72$ to $513$ until we get palindromes less than $1000:$ \begin{align*} 513+72\cdot0 &= 513, \\ 513+72\cdot1 &= \boxed{585}, \\ 513+72\cdot2 &= 657, \\ 513+72\cdot3 &= 729, \\ 513+72\cdot4 &= 801, \\ 513+72\cdot5 &= 873, \\ 513+72\cdot6 &= 945, \\ 513+72\cdot7 &= 1017. \\ \end{align*} ~MRENTHUSIASM
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_0e082f2e62 : Prop := by
+  sorry

@@ -1,0 +1,18 @@
+-- 2021 AMC 12B Problems/Problem 15
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2021_AMC_12B_Problems/Problem_15
+
+-- Problem (LaTeX):
+/-
+The figure is constructed from $11$ line segments, each of which has length $2$ . The area of pentagon $ABCDE$ can be written as $\sqrt{m} + \sqrt{n}$ , where $m$ and $n$ are positive integers. What is $m + n ?$ [asy] /* Made by samrocksnature */ pair A=(-2.4638,4.10658); pair B=(-4,2.6567453480756127); pair C=(-3.47132,0.6335248637894945); pair D=(-1.464483379039766,0.6335248637894945); pair E=(-0.956630463955801,2.6567453480756127); pair F=(-2,2); pair G=(-3,2); draw(A--B--C--D--E--A); draw(A--F--A--G); draw(B--F--C); draw(E--G--D); label("A",A,N); label("B",B,W); label("C",C,S); label("D",D,S); label("E",E,dir(0)); dot(A^^B^^C^^D^^E^^F^^G); [/asy] $\textbf{(A)} ~20 \qquad\textbf{(B)} ~21 \qquad\textbf{(C)} ~22 \qquad\textbf{(D)} ~23 \qquad\textbf{(E)} ~24$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+[asy] /* Made by samrocksnature, adapted by Tucker, then adjusted by samrocksnature again, then adjusted by erics118 xD*/ pair A=(-2.4638,4.10658); pair B=(-4,2.6567453480756127); pair C=(-3.47132,0.6335248637894945); pair D=(-1.464483379039766,0.6335248637894945); pair E=(-0.956630463955801,2.6567453480756127); pair F=(-1.85,2); pair G=(-3.1,2); draw(A--G--A--F, lightgray); draw(B--F--C, lightgray); draw(E--G--D, lightgray); dot(F^^G, lightgray); draw(A--B--C--D--E--A); draw(A--C--A--D); label("A",A,N); label("B",B,W); label("C",C,S); label("D",D,S); label("E",E,dir(0)); dot(A^^B^^C^^D^^E); [/asy] Draw diagonals $AC$ and $AD$ to split the pentagon into three parts. We can compute the area for each triangle and sum them up at the end. For triangles $ABC$ and $ADE$ , they each have area $2\cdot\frac{1}{2}\cdot\frac{4\sqrt{3}}{4}=\sqrt{3}$ . For triangle $ACD$ , we can see that $AC=AD=2\sqrt{3}$ and $CD=2$ . Using Pythagorean Theorem, the altitude for this triangle is $\sqrt{11}$ , so the area is $\sqrt{11}$ . Adding each part up, we get $2\sqrt{3}+\sqrt{11}=\sqrt{12}+\sqrt{11} \implies \boxed{\textbf{(D)} ~23}$ . Note: Another easier way to find the areas would be to use the formula $A=\frac12ab\sin C$ - erringbubble
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_47f2791be4 : Prop := by
+  sorry

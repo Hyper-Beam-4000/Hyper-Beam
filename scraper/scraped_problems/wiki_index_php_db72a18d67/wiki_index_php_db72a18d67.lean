@@ -1,0 +1,18 @@
+-- 2025 AMC 12A Problems/Problem 8
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12A_Problems/Problem_8
+
+-- Problem (LaTeX):
+/-
+Pentagon $ABCDE$ is inscribed in a circle, and $\angle BEC = \angle CED = 30^\circ$ . Let line $AC$ and line $BD$ intersect at point $F$ , and suppose that $AB = 9$ and $AD = 24$ . What is $BF$ ? $\textbf{(A) } \frac{57}{11} \qquad\textbf{(B) } \frac{59}{11} \qquad\textbf{(C) } \frac{60}{11} \qquad\textbf{(D) } \frac{61}{11} \qquad\textbf{(E) } \frac{63}{11}$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+We will scale down the diagram by a factor of $3$ so that $AB = 3$ and $AD = 8.$ Since $\angle BEC = 30^{\circ},$ it follows that $\angle BAC = \angle BDC = 30^{\circ}$ as they all subtend the same arc. Similarly, since $\angle CED = 30^{\circ},$ it follows that $\angle CAD = \angle CBD = 30^{\circ}$ as well. We obtain the following diagram: [asy] /* Made by MRENTHUSIASM */ size(200); real r = 7*sqrt(3); pair O, A, B, C, D, E, F; O = origin; B = r*dir(30); C = r*dir(-30); D = r*dir(-90); E = r*dir(180); A = intersectionpoints(Circle(O,r),Circle(B,9))[0]; F = intersectionpoint(A--C,B--D); draw(Circle(O,r)^^B--C--D--E--A^^B--E--C--F); draw(A--D--B--cycle^^A--F,red); dot("$B$",B,1.5*B/r,linewidth(4)); dot("$C$",C,1.5*C/r,linewidth(4)); dot("$D$",D,1.5*D/r,linewidth(4)); dot("$E$",E,1.5*E/r,linewidth(4)); dot("$A$",A,1.5*A/r,linewidth(4)); dot("$F$",F,1.5*F/r,linewidth(4)); label("$30^{\circ}$",E,6*(1,0),fontsize(8)); label("$30^{\circ}$",E,7*dir(-32),fontsize(8)); label("$30^{\circ}$",A,9*dir(-56),red+fontsize(8)); label("$30^{\circ}$",A,9*dir(-84),red+fontsize(8)); label("$3$",1.1*midpoint(A--B),red); label("$8$",0.4*midpoint(A--D),red); [/asy] Note that $\triangle ABD$ has $\angle BAD = 60^{\circ}.$ Applying Law of Cosines, we get \begin{align*} BD^2 &= AB^2+AD^2-2AB\cdot AD \cdot\cos{60^{\circ}} \\ &= 9 + 64 - 2 \cdot 3 \cdot 8 \cdot \frac{1}{2} \\ &= 49, \end{align*} from which $BD = 7.$ From here, we wish to find $BF.$ As $AF$ is the angle bisector of $\angle BAD,$ we apply the Angle Bisector Theorem: \begin{align*} \frac{AB}{BF} &= \frac{AD}{DF} \\ \frac{3}{BF} &= \frac{8}{7-BF}. \end{align*} Solving for $BF,$ we get $BF = \frac{21}{11}.$ Remember to scale the figure back up by a factor of $3,$ so our answer is $\frac{21}{11}\cdot 3 = \boxed{\textbf{(E) } \frac{63}{11}}.$ ~lprado ~MRENTHUSIASM
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_db72a18d67 : Prop := by
+  sorry

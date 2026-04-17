@@ -129,6 +129,9 @@ def evaluate_submission(submission_id: str, contest_id: str) -> None:
             "embedding_similarity": _mean("embedding_similarity"),
             "proof_technique_match": _mean("proof_technique_match"),
             "concept_coverage": _mean("concept_coverage"),
+            "semantic_structure": _mean("semantic_structure"),
+            "lean_compiles": _mean("lean_compiles"),
+            "lean_comparison": _mean("lean_comparison"),
         }
 
         ddb.save_submission_summary(

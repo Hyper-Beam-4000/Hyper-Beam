@@ -1,0 +1,18 @@
+-- 2018 AIME II Problems/Problem 9
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_AIME_II_Problems/Problem_9
+
+-- Problem (LaTeX):
+/-
+Octagon $ABCDEFGH$ with side lengths $AB = CD = EF = GH = 10$ and $BC = DE = FG = HA = 11$ is formed by removing 6-8-10 triangles from the corners of a $23$ $\times$ $27$ rectangle with side $\overline{AH}$ on a short side of the rectangle, as shown. Let $J$ be the midpoint of $\overline{AH}$ , and partition the octagon into 7 triangles by drawing segments $\overline{JB}$ , $\overline{JC}$ , $\overline{JD}$ , $\overline{JE}$ , $\overline{JF}$ , and $\overline{JG}$ . Find the area of the convex polygon whose vertices are the centroids of these 7 triangles. [asy] unitsize(6); pair P = (0, 0), Q = (0, 23), R = (27, 23), SS = (27, 0); pair A = (0, 6), B = (8, 0), C = (19, 0), D = (27, 6), EE = (27, 17), F = (19, 23), G = (8, 23), J = (0, 23/2), H = (0, 17); draw(P--Q--R--SS--cycle); draw(J--B); draw(J--C); draw(J--D); draw(J--EE); draw(J--F); draw(J--G); draw(A--B); draw(H--G); real dark = 0.6; filldraw(A--B--P--cycle, gray(dark)); filldraw(H--G--Q--cycle, gray(dark)); filldraw(F--EE--R--cycle, gray(dark)); filldraw(D--C--SS--cycle, gray(dark)); dot(A); dot(B); dot(C); dot(D); dot(EE); dot(F); dot(G); dot(H); dot(J); dot(H); defaultpen(fontsize(10pt)); real r = 1.3; label("$A$", A, W*r); label("$B$", B, S*r); label("$C$", C, S*r); label("$D$", D, E*r); label("$E$", EE, E*r); label("$F$", F, N*r); label("$G$", G, N*r); label("$H$", H, W*r); label("$J$", J, W*r); [/asy]
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+We represent octagon $ABCDEFGH$ in the coordinate plane with the upper left corner of the rectangle being the origin. Then it follows that $A=(0,-6), B=(8, 0), C=(19,0), D=(27, -6), E=(27, -17), F=(19, -23), G=(8, -23), H=(0, -17), J=(0, -\frac{23}{2})$ . Recall that the centroid is $\frac{1}{3}$ way up each median in the triangle. Thus, we can find the centroids easily by finding the midpoint of the side opposite of point $J$ . Furthermore, we can take advantage of the reflective symmetry across the line parallel to $BC$ going through $J$ by dealing with less coordinates and ommiting the $\frac{1}{2}$ in the shoelace formula. By doing some basic algebra, we find that the coordinates of the centroids of $\bigtriangleup JAB, \bigtriangleup JBC, \bigtriangleup JCD, \bigtriangleup JDE$ are $\left(\frac{8}{3}, -\frac{35}{6}\right), \left(9, -\frac{23}{6}\right), \left(\frac{46}{3}, -\frac{35}{6}\right),$ and $\left(18, -\frac{23}{2}\right)$ , respectively. We'll have to throw in the projection of the centroid of $\bigtriangleup JAB$ to the line of reflection to apply shoelace, and that point is $\left( \frac{8}{3}, -\frac{23}{2}\right)$ Finally, applying Shoelace, we get: $\left|\left(\frac{8}{3}\cdot (-\frac{23}{6})+9\cdot (-\frac{35}{6})+\frac{46}{3}\cdot (-\frac{23}{2})+18\cdot (\frac{-23}{2})+\frac{8}{3}\cdot (-\frac{35}{6})\right) - \left((-\frac{35}{6}\cdot 9) +\\(-\frac{23}{6}\cdot \frac{46}{3})+ (-\frac{35}{6}\cdot 18)+(\frac{-23}{2}\cdot \frac{8}{3})+(-\frac{23}{2}\cdot \frac{8}{3})\right)\right|$ $=\left|\left(-\frac{92}{9}-\frac{105}{2}-\frac{529}{3}-207-\frac{140}{9}\right)-\left(-\frac{105}{2}-\frac{529}{9}-105-\frac{92}{3}-\frac{92}{3}\right)\right|$ $=\left|-\frac{232}{9}-\frac{1373}{6}-207+\frac{529}{9}+\frac{184}{3}+105+\frac{105}{2}\right|$ $=\left|\frac{297}{9}-\frac{690}{6}-102\right|=\left| 33-115-102\right|=\left|-184\right|=\boxed{184}$ Solution by ktong note: for a slightly simpler calculation, notice that the heptagon can be divided into two trapezoids of equal area and a small triangle.
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_6e4ba0f0d5 : Prop := by
+  sorry

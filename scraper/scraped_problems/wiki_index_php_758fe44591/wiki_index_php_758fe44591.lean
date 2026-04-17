@@ -1,0 +1,18 @@
+-- 2023 AIME I Problems/Problem 7
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2023_AIME_I_Problems/Problem_7
+
+-- Problem (LaTeX):
+/-
+Call a positive integer $n$ extra-distinct if the remainders when $n$ is divided by $2, 3, 4, 5,$ and $6$ are distinct. Find the number of extra-distinct positive integers less than $1000$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+$n$ can either be $0$ or $1$ (mod $2$ ). Case 1: $n \equiv 0 \pmod{2}$ Then, $n \equiv 2 \pmod{4}$ , which implies $n \equiv 1 \pmod{3}$ and $n \equiv 4 \pmod{6}$ , and therefore $n \equiv 3 \pmod{5}$ . Using CRT , we obtain $n \equiv 58 \pmod{60}$ , which gives $16$ values for $n$ . Case 2: $n \equiv 1 \pmod{2}$ $n$ is then $3 \pmod{4}$ . If $n \equiv 0 \pmod{3}$ , $n \equiv 3 \pmod{6}$ , a contradiction. Thus, $n \equiv 2 \pmod{3}$ , which implies $n \equiv 5 \pmod{6}$ . $n$ can either be $0 \pmod{5}$ , which implies that $n \equiv 35 \pmod{60}$ by CRT, giving $17$ cases; or $4 \pmod{5}$ , which implies that $n \equiv 59 \pmod{60}$ by CRT, giving $16$ cases. The total number of extra-distinct numbers is thus $16 + 16 + 17 = \boxed{049}$ . ~mathboy100
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_758fe44591 : Prop := by
+  sorry

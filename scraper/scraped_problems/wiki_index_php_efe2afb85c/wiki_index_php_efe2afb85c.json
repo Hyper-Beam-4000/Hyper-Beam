@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2020_AIME_I_Problems/Problem_15",
+  "title": "2020 AIME I Problems/Problem 15",
+  "problem": "Let $\\triangle ABC$ be an acute triangle with circumcircle $\\omega,$ and let $H$ be the intersection of the altitudes of $\\triangle ABC.$ Suppose the tangent to the circumcircle of $\\triangle HBC$ at $H$ intersects $\\omega$ at points $X$ and $Y$ with $HA=3,HX=2,$ and $HY=6.$ The area of $\\triangle ABC$ can be written in the form $m\\sqrt{n},$ where $m$ and $n$ are positive integers, and $n$ is not divisible by the square of any prime. Find $m+n.$",
+  "solution": "The following is a power of a point solution to this menace of a problem: [asy] defaultpen(fontsize(12)+0.6); size(250); pen p=fontsize(10)+gray+0.4; var phi=75.5, theta=130, r=4.8; pair A=r*dir(270-phi-57), C=r*dir(270+phi-57), B=r*dir(theta-57), H=extension(A,foot(A,B,C),B,foot(B,C,A)); path omega=circumcircle(A,B,C), c=circumcircle(H,B,C); pair O=circumcenter(H,B,C), Op=2*H-O, Z=bisectorpoint(O,Op), X=IP(omega,L(H,Z,0,50)), Y=IP(omega,L(H,Z,50,0)), D=2*H-A, K=extension(B,C,X,Y), E=extension(A,origin,X,Y), L=foot(H,B,C); draw(K--C^^omega^^c^^L(A,D,0,1)); draw(Y--K^^L(A,origin,0,1.5)^^L(X,D,0.7,3.5),fuchsia+0.4); draw(CR(H,length(H-L)),royalblue); draw(C--K,p); dot(\"$A$\",A,dir(120)); dot(\"$B$\",B,down); dot(\"$C$\",C,down); dot(\"$H$\",H,down); dot(\"$X$\",X,up); dot(\"$Y$\",Y,down); dot(\"$O$\",origin,down); dot(\"$O'$\",O,down); dot(\"$K$\",K,up); dot(\"$L$\",L,dir(H-X)); dot(\"$D$\",D,down); dot(\"$E$\",E,down); //draw(O--origin,p); //draw(origin--4*dir(57),fuchsia); //draw(Arc(H,3,160,200),royalblue); //draw(Arc(H,2,30,70),heavygreen); //draw(Arc(H,6,220,240),fuchsia); [/asy] Let points be what they appear as in the diagram below. Note that $3HX = HY$ is not insignificant; from here, we set $XH = HE = \\frac{1}{2} EY = HL = 2$ by PoP and trivial construction. Now, $D$ is the reflection of $A$ over $H$ . Note $AO \\perp XY$ , and therefore by Pythagorean theorem we have $AE = XD = \\sqrt{5}$ . Consider $HD = 3$ . We have that $\\triangle HXD \\cong HLK$ , and therefore we are ready to PoP with respect to $(BHC)$ . Setting $BL = x, LC = y$ , we obtain $xy = 10$ by PoP on $(ABC)$ , and furthermore, we have $KH^2 = 9 = (KL - x)(KL + y) = (\\sqrt{5} - x)(\\sqrt{5} + y)$ . Now, we get $4 = \\sqrt{5}(y - x) - xy$ , and from $xy = 10$ we take \\[\\frac{14}{\\sqrt{5}} = y - x.\\] However, squaring and manipulating with $xy = 10$ yields that $(x + y)^2 = \\frac{396}{5}$ and from here, since $AL = 5$ we get the area to be $3\\sqrt{55} \\implies \\boxed{058}$ . ~awang11's sol",
+  "answer": "",
+  "year": 2020,
+  "competition": "AIME I",
+  "problem_number": 15,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME I",
+    "2020",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:35:14.955241+00:00"
+}

@@ -6,6 +6,13 @@
   "solution": "Let $\\angle DBT = \\alpha$ and $\\angle BEM = \\beta$ .\nExtend AD intersects BC at point T, then TC = TA, TE is perpendicular to AC Thus, AB is the tangent of the circle BEM Then the question is equivalent as the $\\angle ABT$ is the auxillary angle of $\\angle BEM$ . ontinued",
   "answer": "",
   "year": 2024,
-  "scraped_at": "2026-03-24T05:45:06.962860+00:00",
-  "lean_code": "import Mathlib.Geometry.Euclidean.Circumcircle\nimport Mathlib.Geometry.Euclidean.Angle\nimport Mathlib.Tactic\n\nopen EuclideanGeometry\n\n-- Problem: Show that line AB is tangent to the circumcircle of triangle BEM\ntheorem usamo_2024_p5\n  {A B C D E M : Point}\n  (hABC : Triangle A B C)\n  (hD : ∠ A D C = ∠ A C B)\n  (hBDC : ∠ B D C = 90 + ∠ B A C)\n  (hE : E ∈ ray B D ∧ dist A E = dist E C)\n  (hM : M = midpoint B C) :\n  tangent (line A B) (circumcircle B E M) := by\n  -- Introduce the given conditions and assumptions\n  intro hABC hD hBDC hE hM\n\n  -- Step 1: Establish the properties of point D\n  -- D is chosen such that ∠DAC = ∠ACB and ∠BDC = 90° + ∠BAC\n  have hD1 : ∠ A D C = ∠ A C B := hD\n  have hD2 : ∠ B D C = 90 + ∠ B A C := hBDC\n\n  -- Step 2: Establish the properties of point E\n  -- E is on ray BD and AE = EC\n  have hE1 : E ∈ ray B D := hE.1\n  have hE2 : dist A E = dist E C := hE.2\n\n  -- Step 3: Establish the properties of point M\n  -- M is the midpoint of BC\n  have hM1 : M = midpoint B C := hM\n\n  -- Step 4: Show that line AB is tangent to the circumcircle of triangle BEM\n  -- We need to show that ∠ABT is the auxiliary angle of ∠BEM\n  -- This involves showing that the angle conditions lead to tangency\n  sorry\n\n  -- The proof outline involves using the angle conditions and\n  -- properties of the circumcircle to establish tangency.\n  -- Further geometric constructions and angle chasing are required.\n  sorry"
+  "competition": "USAMO",
+  "problem_number": 5,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "USAMO",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:20:06.146370+00:00"
 }

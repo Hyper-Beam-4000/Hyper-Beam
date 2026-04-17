@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2023_AMC_12A_Problems/Problem_7",
+  "title": "2023 AMC 12A Problems/Problem 7",
+  "problem": "A digital display shows the current date as an $8$ -digit integer consisting of a $4$ -digit year, followed by a $2$ -digit month, followed by a $2$ -digit date within the month. For example, Arbor Day this year is displayed as $20230428.$ For how many dates in $2023$ does each digit appear an even number of times in the $8$ -digital display for that date? $\\textbf{(A)}~5\\qquad\\textbf{(B)}~6\\qquad\\textbf{(C)}~7\\qquad\\textbf{(D)}~8\\qquad\\textbf{(E)}~9$",
+  "solution": "Do careful casework by each month. Make sure to start with 2023. In the month and the date, we need a $0$ , a $3$ , and two digits repeated (which has to be $1$ and $2$ after consideration). After the casework, we get $\\boxed{\\textbf{(E)}~9}$ .\nFor curious readers, the numbers (in chronological order) are:",
+  "answer": "",
+  "year": 2023,
+  "competition": "AMC 12A",
+  "problem_number": 7,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12A",
+    "2023",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:28:53.129436+00:00"
+}

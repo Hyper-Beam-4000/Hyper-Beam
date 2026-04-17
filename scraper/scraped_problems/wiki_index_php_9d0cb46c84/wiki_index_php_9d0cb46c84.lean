@@ -1,0 +1,24 @@
+-- 2025 AIME I Problems/Problem 8
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2025_AIME_I_Problems/Problem_8
+
+-- Problem (LaTeX):
+/-
+Let $k$ be a real number such that the system
+\begin{align*}
+&|25 + 20i - z| = 5 \\
+&|z - 4 - k| = |z - 3i - k|
+\end{align*}
+has exactly one complex solution $z$ . The sum of all possible values of $k$ can be written as $\frac{m}{n}$ , where $m$ and $n$ are relatively prime positive integers. Find $m + n$ . Here $i = \sqrt{-1}$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+[asy] size(300); draw((0, 0) -- (0, 20), EndArrow(10)); label("$y$", (0, 20), NW); dot((25,20)); draw((0, 0) -- (25, 0), EndArrow(10)); label("$x$", (25, 0), SE); draw(circle((25,20),5)); label(scale(0.7)*"$(25,20)$", (25,20), S); draw((7,0) -- (3,3), blue); draw((5,3/2) -- (21,23), dashed); label("$(4+k,0)$", (7,0), S); label("$(k,3)$", (3,3), N); draw(rightanglemark((3,3),(5,3/2),(21,23), 20)); draw(rightanglemark((25,20),(21,23),(5,3/2), 20)); draw((25,20) -- (21,23)); [/asy] The complex number $z$ must satisfy the following conditions on the complex plane: $1.$ The magnitude between $z$ and $(25,20)$ is $5.$ This can be represented by drawing a circle with center $(25,20)$ and radius $5.$ $2.$ It is equidistant from the points $(4+k,0)$ and $(k,3).$ Hence it must lie on the perpendicular bisector of the line connecting these points. For $z$ to have one solution, the perpendicular bisector of the segment connecting the two points must be tangent to the circle.
+This bisector must pass the midpoint, $(2+k,\frac{3}{2}),$ and have slope $\frac{4}{3}.$ The segment connecting the point of tangency to the center of the circle has slope $\frac{-3}{4},$ meaning the points of tangency can be $(29,17)$ or $(21,23).$ Solving the equation for the slope of the perpendicular bisector gives \[\frac{\frac{3}{2}-23}{k+2-21}=\frac{4}{3}\] or \[\frac{\frac{3}{2}-17}{k+2-29}=\frac{4}{3},\] giving $k=\frac{23}{8}$ or $\frac{123}{8}$ , having a sum of $\frac{73}{4} \Longrightarrow \boxed{077}.$ ~nevergonnagiveup
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_9d0cb46c84 : Prop := by
+  sorry

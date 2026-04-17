@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2025 AMC 12B Problems/Problem 9}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+We wish to find $6^{6^6}\pmod{100}$ and find the tens digit. By the Chinese Remainder Theorem, it suffices to find $6^{6^6}\pmod{4}$ and $6^{6^6}\pmod{25}$ and find the solution to the system. We know that $6^{6^6}\equiv 0\pmod{4}$ , so we just need to find the remainder modulo $25$ . By Euler’s Totient Theorem, $6^{6^6}\equiv 6^r\pmod{25}$ , where $r\equiv 6^6\pmod{\varphi(25)=20}$ . Hence we need to find $6^6\pmod{20}$ . Now we again use the Chinese Remainder Theorem. We know that $6^6\equiv 0\pmod{4}$ and $6^6\equiv 1^6\equiv 1\pmod{5}$ . Testing cases yields $6^6\equiv 16\pmod{20}$ . Therefore, we know that $6^{6^6}\equiv 6^{16}\pmod{25}$ . Now we can simplify: \[6^{6^6}\equiv 6^{16}\equiv (6^4)^4\equiv 1296^4\equiv (-4)^4\equiv 256\equiv 6\pmod{25}\] Solving the system $6^{6^6}\equiv 6\pmod{25}$ and $6^{6^6}\equiv 0\pmod{4}$ yields $6^{6^6}\equiv 56\pmod{100}$ . Hence the answer is $\boxed{\textbf{(C)}~5}$ . ~ eevee9406
+
+\end{document}

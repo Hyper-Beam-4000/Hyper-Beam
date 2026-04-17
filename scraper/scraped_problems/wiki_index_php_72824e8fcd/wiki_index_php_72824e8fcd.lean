@@ -1,29 +1,18 @@
-import Mathlib.Algebra.GroupPower.Basic
-import Mathlib.Algebra.Order.Field
+-- 2018 USAMO Problems/Problem 1
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_USAMO_Problems/Problem_1
+
+-- Problem (LaTeX):
+/-
+Let $a,b,c$ be positive real numbers such that $a+b+c=4\sqrt[3]{abc}$ . Prove that \[2(ab+bc+ca)+4\min(a^2,b^2,c^2)\ge a^2+b^2+c^2.\]
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+WLOG let $a \leq b \leq c$ . Add $2(ab+bc+ca)$ to both sides of the inequality and factor to get: \[4(a(a+b+c)+bc) \geq (a+b+c)^2\] \[\frac{4a\sqrt[3]{abc}+bc}{2} \geq 2\sqrt[3]{a^2b^2c^2}\] The last inequality is true by AM-GM. Since all these steps are reversible, the proof is complete. - It should actually be 4(a)(a+b+c) + 4bc which results in a wrong inequality by AM-GM Hence, the solution is wrong.
+-/
+
 import Mathlib.Tactic
 
-open Real
-
--- Problem: Let a, b, c be positive real numbers such that a + b + c = 4 * (abc)^(1/3).
--- Prove that 2(ab + bc + ca) + 4 * min(a^2, b^2, c^2) ≥ a^2 + b^2 + c^2.
-
-theorem usamo_2018_p1 (a b c : ℝ) (h_pos : 0 < a ∧ 0 < b ∧ 0 < c) 
-  (h_eq : a + b + c = 4 * (a * b * c) ^ (1 / 3)) : 
-  2 * (a * b + b * c + c * a) + 4 * min (a^2) (min (b^2) (c^2)) ≥ a^2 + b^2 + c^2 := by
-  -- Without loss of generality, assume a ≤ b ≤ c
-  wlog h : a ≤ b ∧ b ≤ c using [a b c, b c a, c a b] 
-  case main =>
-    -- We need to show the inequality holds under these assumptions
-    -- Step 1: Use the given condition a + b + c = 4 * (abc)^(1/3)
-    have h1 : a + b + c = 4 * (a * b * c) ^ (1 / 3) := h_eq
-    -- Step 2: Transform the inequality using the given condition
-    have : 4 * a * (a + b + c) + 4 * b * c ≥ (a + b + c)^2 := by
-      -- Apply AM-GM inequality
-      sorry
-    -- Step 3: Conclude the proof using the transformed inequality
-    sorry
-  -- Handle other cases if necessary
-  case swap =>
-    sorry
-  case swap =>
-    sorry
+theorem wiki_index_php_72824e8fcd : Prop := by
+  sorry

@@ -1,0 +1,18 @@
+-- 2023 AIME II Problems/Problem 3
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2023_AIME_II_Problems/Problem_3
+
+-- Problem (LaTeX):
+/-
+Let $\triangle ABC$ be an isosceles triangle with $\angle A = 90^\circ.$ There exists a point $P$ inside $\triangle ABC$ such that $\angle PAB = \angle PBC = \angle PCA$ and $AP = 10.$ Find the area of $\triangle ABC.$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+This solution refers to the Diagram section. Let $\angle PAB = \angle PBC = \angle PCA = \theta,$ from which $\angle PAC = 90^\circ-\theta,$ and $\angle APC = 90^\circ.$ Moreover, we have $\angle PBA = \angle PCB = 45^\circ-\theta,$ as shown below: [asy] /* Made by MRENTHUSIASM */ size(250); pair A, B, C, P; A = origin; B = (0,10*sqrt(5)); C = (10*sqrt(5),0); P = intersectionpoints(Circle(A,10),Circle(C,20))[0]; dot("$A$",A,1.5*SW,linewidth(4)); dot("$B$",B,1.5*NW,linewidth(4)); dot("$C$",C,1.5*SE,linewidth(4)); dot("$P$",P,1.5*NE,linewidth(4)); markscalefactor=0.125; draw(rightanglemark(B,A,C,10),red); draw(rightanglemark(A,P,C,10),red); draw(anglemark(P,A,B,25),red); draw(anglemark(P,B,C,25),red); draw(anglemark(P,C,A,25),red); draw(anglemark(A,B,P,25),green); draw(anglemark(B,C,P,25),green); draw(anglemark(C,A,P,25),green); add(pathticks(anglemark(P,A,B,25), n = 1, r = 0.1, s = 10, red)); add(pathticks(anglemark(P,B,C,25), n = 1, r = 0.1, s = 10, red)); add(pathticks(anglemark(P,C,A,25), n = 1, r = 0.1, s = 10, red)); draw(A--B--C--cycle^^P--A^^P--B^^P--C); label("$10$",midpoint(A--P),dir(-30),blue); label("$\theta$",A,9.5*dir(76),red); label("$\theta$",C,9.5*dir(168),red); label("$\theta$",B,9*dir(305),red); label("$45^\circ-\theta$",B,6*dir(235),green); label("$45^\circ-\theta$",C,6*dir(85),green); label("$90^\circ-\theta$",A,2*dir(-40),green); [/asy] Note that $\triangle PAB \sim \triangle PBC$ by AA Similarity. The ratio of similitude is $\frac{PA}{PB} = \frac{PB}{PC} = \frac{AB}{BC},$ so $\frac{10}{PB} = \frac{1}{\sqrt2}$ and thus $PB=10\sqrt2.$ Similarly, we can figure out that $PC=20$ . Finally, $AC=\sqrt{10^2+20^2}=10\sqrt{5}$ , so the area of $\triangle ABC$ is \[\frac12\cdot AB\cdot AC = \frac12\cdot (10\sqrt{5})^2 = \boxed{250}.\] ~s214425 ~MRENTHUSIASM
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_80f004d4e5 : Prop := by
+  sorry

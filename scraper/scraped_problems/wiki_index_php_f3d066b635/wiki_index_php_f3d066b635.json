@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2024_AMC_12A_Problems/Problem_16",
+  "title": "2024 AMC 12A Problems/Problem 16",
+  "problem": "A set of $12$ tokens — $3$ red, $2$ white, $1$ blue, and $6$ black — is to be distributed at random to $3$ game players, $4$ tokens per player. The probability that some player gets all the red tokens, another gets all the white tokens, and the remaining player gets the blue token can be written as $\\frac{m}{n}$ , where $m$ and $n$ are relatively prime positive integers. What is $m+n$ ? $\\textbf{(A) }387 \\qquad \\textbf{(B) }388 \\qquad \\textbf{(C) }389 \\qquad \\textbf{(D) }390 \\qquad \\textbf{(E) }391 \\qquad$",
+  "solution": "https://www.youtube.com/watch?v=ynMtiJuLCNI",
+  "answer": "",
+  "year": 2024,
+  "competition": "AMC 12A",
+  "problem_number": 16,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12A",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:30:28.614583+00:00"
+}

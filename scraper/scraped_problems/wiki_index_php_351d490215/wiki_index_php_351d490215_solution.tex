@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2021 AIME II Problems/Problem 14}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+In this solution, all angle measures are in degrees. Let $M$ be the midpoint of $\overline{BC}$ so that $\overline{OM}\perp\overline{BC}$ and $A,G,M$ are collinear. Let $\angle ABC=13k,\angle BCA=2k$ and $\angle XOY=17k.$ Note that: Since $\angle OGX = \angle OAX = 90,$ quadrilateral $OGAX$ is cyclic by the Converse of the Inscribed Angle Theorem. It follows that $\angle OAG = \angle OXG,$ as they share the same intercepted arc $\widehat{OG}.$ Since $\angle OGY = \angle OMY = 90,$ quadrilateral $OGYM$ is cyclic by the supplementary opposite angles. It follows that $\angle OMG = \angle OYG,$ as they share the same intercepted arc $\widehat{OG}.$ It follows that $\angle OAG = \angle OXG,$ as they share the same intercepted arc $\widehat{OG}.$ It follows that $\angle OMG = \angle OYG,$ as they share the same intercepted arc $\widehat{OG}.$ Together, we conclude that $\triangle OAM \sim \triangle OXY$ by AA, so $\angle AOM = \angle XOY = 17k.$ Next, we express $\angle BAC$ in terms of $k.$ By angle addition, we have \begin{align*} \angle AOM &= \angle AOB + \angle BOM \\ &= 2\angle BCA + \frac12\angle BOC \hspace{10mm} &&\text{by Inscribed Angle Theorem and Perpendicular Bisector Property} \\ &= 2\angle BCA + \angle BAC. &&\text{by Inscribed Angle Theorem} \end{align*} Substituting back gives $17k=2(2k)+\angle BAC,$ from which $\angle BAC=13k.$ For the sum of the interior angles of $\triangle ABC,$ we get \begin{align*} \angle ABC + \angle BCA + \angle BAC &= 180 \\ 13k+2k+13k&=180 \\ 28k&=180 \\ k&=\frac{45}{7}. \end{align*} Finally, we obtain $\angle BAC=13k=\frac{585}{7},$ from which the answer is $585+7=\boxed{592}.$ ~Constance-variance ~MRENTHUSIASM
+
+\end{document}

@@ -1,0 +1,18 @@
+-- 2018 AIME I Problems/Problem 1
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_AIME_I_Problems/Problem_1
+
+-- Problem (LaTeX):
+/-
+Let $S$ be the number of ordered pairs of integers $(a,b)$ with $1 \leq a \leq 100$ and $b \geq 0$ such that the polynomial $x^2+ax+b$ can be factored into the product of two (not necessarily distinct) linear factors with integer coefficients. Find the remainder when $S$ is divided by $1000$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let the linear factors be $(x+c)(x+d)$ . Then, $a=c+d$ and $b=cd$ . We know that $1\le a\le 100$ and $b\ge 0$ , so $c$ and $d$ both have to be non-negative However, $a$ cannot be $0$ , so at least one of $c$ and $d$ must be greater than $0$ , ie positive. Also, $a$ cannot be greater than $100$ , so $c+d$ must be less than or equal to $100$ . Essentially, if we plot the solutions, we get a triangle on the coordinate plane with vertices $(0,0), (0, 100),$ and $(100,0)$ . Remember that $(0,0)$ does not work, so there is a square with the top right corner $(1,1)$ . Note that $c$ and $d$ are interchangeable since they end up as $a$ and $b$ in the end anyways. Thus, we simply draw a line from $(1,1)$ to $(50,50)$ , designating one of the halves as our solution (since the other side is simply the coordinates flipped). We note that the pattern from $(1,1)$ to $(50,50)$ is $2+3+4+\dots+51$ solutions and from $(51, 49)$ to $(100,0)$ is $50+49+48+\dots+1$ solutions, since we can decrease the $y$ -value by $1$ until $0$ for each coordinate. Adding up gives \[\dfrac{2+51}{2}\cdot 50+\dfrac{50+1}{2}\cdot 50.\] This gives us $2600$ , and $2600\equiv 600 \bmod{1000}.$ Thus, the answer is: \[\boxed{600}.\] ~Minor edit by Yiyj1
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_43aa5d441f : Prop := by
+  sorry

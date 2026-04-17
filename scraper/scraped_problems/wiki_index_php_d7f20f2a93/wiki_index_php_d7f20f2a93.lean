@@ -1,30 +1,18 @@
-import Mathlib.Geometry.Euclidean.Circumcircle
-import Mathlib.Geometry.Euclidean.Triangle
+-- 2021 USAMO Problems/Problem 1
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2021_USAMO_Problems/Problem_1
+
+-- Problem (LaTeX):
+/-
+Rectangles $BCC_{1}B_{2}$ , $CAA_{1}C_{2}$ , and $ABB_{1}A_{2}$ are erected outside an acute triangle $ABC$ . Suppose that \[\angle BC_{1}C + \angle CA_{1}A + \angle AB_{1}B = 180^{\circ}.\] Prove that lines $B_{1}C_{2}$ , $C_{1}A_{2}$ , and $A_{1}B_{2}$ are concurrent.
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $D$ be the second point of intersection of the circles $(AB_1B)$ and $(AA_1C).$ Then: \begin{align*} \angle ADB &= 180^\circ – \angle AB_1B,&\angle ADC &= 180^\circ – \angle AA_1C\\ \angle BDC &= 360^\circ – \angle ADB – \angle ADC\\ &= 360^\circ – (180^\circ – \angle AB_1B) – (180^\circ – \angle AA_1C)\\ &= \angle AB_1B + \angle AA_1C\\ \angle BDC + \angle BC_1C &= 180^\circ \end{align*} Therefore, $BDCC_1B_2$ is cyclic with diameters $BC_1$ and $CB_2$ , and thus $\angle CDB_2 = 90^\circ.$ Similarly, $\angle CDA_1 = 90^\circ$ , meaning points $A_1$ , $D$ , and $B_2$ are collinear. Similarly, the points $A_2, D, C_1$ and $C_2, D, B_1$ are collinear. (After USAMO 2021 Solution Notes – Evan Chen) vladimir.shelomovskii@gmail.com, vvsss
+-/
+
 import Mathlib.Tactic
 
-open EuclideanGeometry
-
--- Problem: Prove that lines B₁C₂, C₁A₂, and A₁B₂ are concurrent
-theorem usamo_2021_p1 (A B C A₁ B₁ C₁ A₂ B₂ C₂ : Point) 
-  (h₁ : Rectangle B C C₁ B₂) (h₂ : Rectangle C A A₁ C₂) (h₃ : Rectangle A B B₁ A₂)
-  (h_angle : ∠ B C₁ C + ∠ C A₁ A + ∠ A B₁ B = 180) :
-  Concurrent (Line.mk B₁ C₂) (Line.mk C₁ A₂) (Line.mk A₁ B₂) := by
-  -- Introduce the point D as the intersection of circles AB₁B and AA₁C
-  obtain ⟨D, hD₁, hD₂⟩ : ∃ D, CircleThrough A B₁ B D ∧ CircleThrough A A₁ C D := sorry
-  -- Show that BDCC₁B₂ is cyclic
-  have h_cyclic_BDCC₁B₂ : Cyclic [B, D, C, C₁, B₂] := by
-    -- Use angle chasing to show cyclicity
-    sorry
-  -- Show that CDA₁ is a right angle
-  have h_right_CDA₁ : ∠ C D A₁ = 90 := by
-    -- Use the cyclic property and angle chasing
-    sorry
-  -- Show that A₁, D, and B₂ are collinear
-  have h_collinear_A₁DB₂ : Collinear [A₁, D, B₂] := by
-    -- Use the right angle property
-    sorry
-  -- Similarly, show collinearity for other points
-  have h_collinear_A₂DC₁ : Collinear [A₂, D, C₁] := sorry
-  have h_collinear_C₂DB₁ : Collinear [C₂, D, B₁] := sorry
-  -- Conclude concurrency from collinearity
-  exact Concurrent_of_Collinear h_collinear_A₁DB₂ h_collinear_A₂DC₁ h_collinear_C₂DB₁
+theorem wiki_index_php_d7f20f2a93 : Prop := by
+  sorry

@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2024 AIME II Problems/Problem 3}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Consider this table: $\begin{array}{|c|c|c|} \hline a & b & c \\ \hline d & e & f\\ \hline \end{array}$ We note that $c+f = 9$ , because $c+f \leq 18$ , meaning it never achieves a unit's digit sum of $9$ otherwise. Since no values are carried onto the next digit, this implies $b+e=9$ and $a+d=9$ . We can then simplify our table into this: $\begin{array}{|c|c|c|} \hline a & b & c \\ \hline 9-a & 9-b & 9-c \\ \hline \end{array}$ We want $10(a+b+c) + (9-a+9-b+9-c) = 99$ , or $9(a+b+c+3) = 99$ , or $a+b+c=8$ . Since zeroes are allowed, we just need to apply stars and bars on $a, b, c$ , to get $\tbinom{8+3-1}{3-1} = \boxed{045}$ . ~akliu
+
+\end{document}

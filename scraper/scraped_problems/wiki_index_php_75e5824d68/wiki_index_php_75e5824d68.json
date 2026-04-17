@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2023_AMC_12B_Problems/Problem_15",
+  "title": "2023 AMC 12B Problems/Problem 15",
+  "problem": "Suppose $a$ , $b$ , and $c$ are positive integers such that \\[\\frac{a}{14}+\\frac{b}{15}=\\frac{c}{210}.\\] Which of the following statements are necessarily true? I. If $\\gcd(a,14)=1$ or $\\gcd(b,15)=1$ or both, then $\\gcd(c,210)=1$ . II. If $\\gcd(c,210)=1$ , then $\\gcd(a,14)=1$ or $\\gcd(b,15)=1$ or both. III. $\\gcd(c,210)=1$ if and only if $\\gcd(a,14)=\\gcd(b,15)=1$ . $\\textbf{(A)}~\\text{I, II, and III}\\qquad\\textbf{(B)}~\\text{I only}\\qquad\\textbf{(C)}~\\text{I and II only}\\qquad\\textbf{(D)}~\\text{III only}\\qquad\\textbf{(E)}~\\text{II and III only}$",
+  "solution": "We examine each of the conditions. The first condition is false. A simple counterexample is $a=3$ and $b=5$ . The corresponding value of $c$ is $115$ . Since $\\gcd(3,14)=1$ , condition $I$ would imply that $\\gcd(c,210)=1.$ However, $\\gcd(115,210)$ is clearly not $1$ (they share a common factor of $5$ ). Condition $I$ is false so that we can rule out choices $A,B,$ and $C$ . We now decide between the two answer choices $D$ and $E$ . What differs between them is the validity of condition $II$ , so it suffices to check $II$ simply. We look at statement $II$ 's contrapositive to prove it. The contrapositive states that if $\\gcd(a,14)\\neq1$ and $\\gcd(b,15)\\neq1$ , then $\\gcd(c,210)\\neq1.$ In other words, if $a$ shares some common factor that is not $1$ with $14$ and $b$ shares some common factor that is not $1$ with $15$ , then $c$ also shares a common factor that is not $1$ with $210$ . Let's say that $a=a'\\cdot n$ , where $a'$ is a factor of $14$ not equal to $1$ . (So $a'$ is the common factor.) We can rewrite the given equation as $15a+14b=c\\implies15(a'n)+14b=c.$ We can express $14$ as $a'\\cdot n'$ , for some positive integer $n'$ (this $n'$ can be $1$ ). We can factor $a'$ out to get $a'(15n+bn')=c.$ Since all values in this equation are integers, $c$ must be divisible by $a'$ . Since $a'$ is a factor of $14$ , $a'$ must also be a factor of $210$ , a multiple of $14$ . Therefore, we know that $c$ shares a common factor with $210$ (which is $a'$ ), so $\\gcd(c,210)\\neq1$ . This is what $II$ states, so therefore $II$ is true. Thus, our answer is $\\boxed{\\textbf{(E) }\\text{II and III only}}.$ ~Technodoggo\n~AVM2023 (Minor Edits - Fixes in the first paragraph and grammar edits)",
+  "answer": "It can easily be shown that statement I is false (a counterexample would be $a=1, b=5, c=85$ ), meaning the only viable answer choices are D and E. Since both of these answer choices include statement III, this means III is true. Since III is true, this actually implies that statement II is true, as III is just a stronger version of statement II (or its contrapositive, to be precise). Therefore the answer is $\\boxed{\\textbf{(E) II and III only}}.$ ~SpencerD. ~edited by A_MatheMagician",
+  "year": 2023,
+  "competition": "AMC 12B",
+  "problem_number": 15,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12B",
+    "2023",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:29:44.726460+00:00"
+}

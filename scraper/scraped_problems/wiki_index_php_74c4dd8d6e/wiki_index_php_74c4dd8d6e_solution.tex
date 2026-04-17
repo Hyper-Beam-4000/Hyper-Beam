@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2024 AMC 12B Problems/Problem 17}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Since $-10 \le a,b \le 10$ , there are 21 integers to choose from, and $P(21,2) = 21 \times 20 = 420$ equally likely ordered pairs $(a,b)$ . Applying Vieta's formulas, $x_1 \cdot x_2 \cdot x_3 = -6$ $x_1 + x_2+ x_3 = -a$ $x_1 \cdot x_2 + x_1 \cdot x_3 + x_3 \cdot x_2 = b$ Cases: (1) $(x_1,x_2,x_3) = (-1,1,6) , b = -1, a=-6$ valid (2) $(x_1,x_2,x_3) = ( 1,2,-3) , b = -7, a=0$ valid (3) $(x_1,x_2,x_3) = (1,-2,3) , b = -5, a=-2$ valid (4) $(x_1,x_2,x_3) = (-1,2,3) , b = 1, a=-4$ valid (5) $(x_1,x_2,x_3) = (-1,-2,-3) , b = 11$ invalid the total event space is $21 \cdot (21- 1)$ (choice of select a times choice of selecting b given no-replacement) hence, our answer is $\frac{4}{21 \cdot 20} = \boxed{\textbf{(C) }\frac{1}{105}}$ ~ luckuso
+
+\end{document}

@@ -1,0 +1,26 @@
+-- 2017 AMC 12B Problems/Problem 24
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2017_AMC_12B_Problems/Problem_24
+
+-- Problem (LaTeX):
+/-
+Quadrilateral $ABCD$ has right angles at $B$ and $C$ , $\triangle ABC \sim \triangle BCD$ , and $AB > BC$ . There is a point $E$ in the interior of $ABCD$ such that $\triangle ABC \sim \triangle CEB$ and the area of $\triangle AED$ is $17$ times the area of $\triangle CEB$ . What is $\tfrac{AB}{BC}$ ? $\textbf{(A) } 1+\sqrt{2} \qquad \textbf{(B) } 2 + \sqrt{2} \qquad \textbf{(C) } \sqrt{17} \qquad \textbf{(D) } 2 + \sqrt{5} \qquad \textbf{(E) } 1 + 2\sqrt{3}$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $CD=1$ , $BC=x$ , and $AB=x^2$ . Note that $AB/BC=x$ . By the Pythagorean Theorem, $BD=\sqrt{x^2+1}$ . Since $\triangle BCD \sim \triangle ABC \sim \triangle CEB$ , the ratios of side lengths must be equal. Since $BC=x$ , $CE=\frac{x^2}{\sqrt{x^2+1}}$ and $BE=\frac{x}{\sqrt{x^2+1}}$ . Let F be a point on $\overline{BC}$ such that $\overline{EF}$ is an altitude of triangle $CEB$ . Note that $\triangle CEB \sim \triangle CFE \sim \triangle EFB$ . Therefore, $EF=\frac{x}{x^2+1}$ and $EG=\frac{x^3}{x^2+1}$ . Since $\overline{CF}$ and $\overline{BF}$ form altitudes of triangles $CED$ and $BEA$ , respectively, the areas of these triangles can be calculated. Additionally, the area of triangle $BEC$ can be calculated, as it is a right triangle. Solving for each of these yields: \begin{align*}
+[BEC] &=[CED]=[BEA]=\frac{x^3}{2(x^2+1)} \\
+[ABCD] &=[AED]+[DEC]+[CEB]+[BEA] \\
+\frac{(BC)(AB+CD)}{2} &= 17*[CEB]+ [CEB] + [CEB] + [CEB] \\
+\frac{x^3+x}{2} &= \frac{20x^3}{2(x^2+1)} \\
+\frac{x}{x^2+1} &= \frac{20x^3}{x^2+1} \\
+(x^2+1)^2 &=20x^2 \\
+x^4-18x^2+1 &=0 \implies x^2=9+4\sqrt{5}=4+2(2\sqrt{5})+5 \\
+\end{align*} Therefore, the answer is $\boxed{\textbf{(D) } 2+\sqrt{5}}$
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_3dda79944b : Prop := by
+  sorry

@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2018_AIME_I_Problems/Problem_8",
+  "title": "2018 AIME I Problems/Problem 8",
+  "problem": "Let $ABCDEF$ be an equiangular hexagon such that $AB=6, BC=8, CD=10$ , and $DE=12$ . Denote by $d$ the diameter of the largest circle that fits inside the hexagon. Find $d^2$ .",
+  "solution": "First of all, draw a good diagram! This is always the key to solving any geometry problem. Once you draw it, realize that $EF=2, FA=16$ . Why? Because since the hexagon is equiangular, we can put an equilateral triangle around it, with side length $6+8+10=24$ . Then, if you drew it to scale, notice that the \"widest\" this circle can be according to $AF, CD$ is $7\\sqrt{3}$ . And it will be obvious that the sides won't be inside the circle, so our answer is $\\boxed{147}$ . -expiLnCalc",
+  "answer": "",
+  "year": 2018,
+  "competition": "AIME I",
+  "problem_number": 8,
+  "difficulty_tier": "early_gpt",
+  "tags": [
+    "AIME I",
+    "2018",
+    "early_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:33:44.082089+00:00"
+}

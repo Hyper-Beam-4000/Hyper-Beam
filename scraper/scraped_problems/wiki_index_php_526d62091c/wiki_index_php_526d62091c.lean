@@ -1,0 +1,18 @@
+-- 2025 AMC 12B Problems/Problem 22
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12B_Problems/Problem_22
+
+-- Problem (LaTeX):
+/-
+What is the greatest possible area of the triangle in the complex plane with vertices $2z$ , $(1+i)z$ , and $(1-i)z$ , where $z$ is a complex number satisfying $|4z - 2| = 1$ ? $\textbf{(A)}~\frac 14 \qquad \textbf{(B)}~\frac 12 \qquad \textbf{(C)}~\frac{9}{16} \qquad \textbf{(D)}~\frac 34 \qquad \textbf{(E)}~1$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Because we can factor $z$ from each vertex, the area of the triangle is equal to $|z|^2$ multiplied by the area of the triangle with vertices $2, 1+i, 1-i$ . The vertical side of that triangle has length $2$ and the altitude to that side has length $1$ , so the area is $1$ . We now just need the maximum possible value of $|z|^2$ . The equation $|4z-2| = 1$ can be rewritten as $|z-1/2| = 1/4$ . Therefore, it exists as a circle with radius $1/4$ and center at $(1/2, 0)$ on the complex plane. The maximum possible magnitude of a complex number on this circle occurs with $\frac{3}{4}$ , with magnitude $\frac{3}{4}$ . We can justify this because the line connecting the origin and the complex number $\frac{3}{4}$ goes through the center of the circle. Our answer is then $\left(\frac{3}{4}\right)^2 = \boxed{\frac{9}{16}}.$ ~lprado
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_526d62091c : Prop := by
+  sorry

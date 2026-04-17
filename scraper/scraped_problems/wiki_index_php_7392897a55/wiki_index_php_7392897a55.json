@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2021_AMC_12A_Problems/Problem_2",
+  "title": "2021 AMC 12A Problems/Problem 2",
+  "problem": "Under what conditions is $\\sqrt{a^2+b^2}=a+b$ true, where $a$ and $b$ are real numbers? $\\textbf{(A) }$ It is never true. $\\textbf{(B) }$ It is true if and only if $ab=0$ . $\\textbf{(C) }$ It is true if and only if $a+b\\ge 0$ . $\\textbf{(D) }$ It is true if and only if $ab=0$ and $a+b\\ge 0$ . $\\textbf{(E) }$ It is always true.",
+  "solution": "One can square both sides to get $a^{2}+b^{2}=a^{2}+2ab+b^{2}$ . Then, $0=2ab\\implies ab=0$ . Also, it is clear that both sides of the equation must be nonnegative. The answer is $\\boxed{\\textbf{(D)}}$ . ~Jhawk0224",
+  "answer": "https://youtu.be/Yp2NfDk_D-g ~ pi_is_3.14",
+  "year": 2021,
+  "competition": "AMC 12A",
+  "problem_number": 2,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12A",
+    "2021",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:25:56.633080+00:00"
+}

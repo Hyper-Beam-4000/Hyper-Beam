@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2023_AMC_12B_Problems/Problem_21",
+  "title": "2023 AMC 12B Problems/Problem 21",
+  "problem": "A lampshade is made in the form of the lateral surface of the frustum of a right circular cone. The height of the frustum is $3\\sqrt3$ inches, its top diameter is $6$ inches, and its bottom diameter is $12$ inches. A bug is at the bottom of the lampshade and there is a glob of honey on the top edge of the lampshade at the spot farthest from the bug. The bug wants to crawl to the honey, but it must stay on the surface of the lampshade. What is the length in inches of its shortest path to the honey? $\\textbf{(A) } 6 + 3\\pi\\qquad \\textbf{(B) }6 + 6\\pi\\qquad \\textbf{(C) } 6\\sqrt3 \\qquad \\textbf{(D) } 6\\sqrt5 \\qquad \\textbf{(E) } 6\\sqrt3 + \\pi$",
+  "solution": "We augment the frustum to a circular cone.\nDenote by $O$ the apex of the cone.\nDenote by $A$ the bug and $B$ the honey. By using the numbers given in this problem, the height of the cone is $6 \\sqrt{3}$ .\nThus, $OA = 12$ and $OB = 6$ . We unfold the lateral face. So we get a circular sector.\nThe radius is 12 and the length of the arc is $12\\pi$ .\nThus, the central angle of this circular sector is $180^\\circ$ . Because $A$ and $B$ are opposite in the original frustum, in the unfolded circular cone, $\\angle AOB = \\frac{180^\\circ}{2} = 90^\\circ$ . Notice that a feasible path between $A$ and $B$ can only fall into the region with the range of radii between $OB = 6$ and $OA = 12$ .\nTherefore, we cannot directly connect $A$ and $B$ and must make a detour.\nDenote by $AC$ a tangent to the circular sector with radius 6 that meets it at point $C$ .\nTherefore, the shortest path between $A$ and $B$ consists of a segment $AC$ and an arc from $C$ to $B$ . Because $OA = 12$ , $OC = 6$ and $\\angle OCA = 90^\\circ$ , we have $AC = \\sqrt{OA^2 - OC^2} = 6 \\sqrt{3}$ and $\\angle AOC = 60^\\circ$ .\nThis implies $\\angle COB = \\angle AOB - \\angle AOC = 30^\\circ$ .\nTherefore, the length of the arc between $C$ and $B$ is $OB \\cdot \\pi \\cdot \\frac{\\angle COB}{180^\\circ} = \\pi$ .\nTherefore, the shortest distance between $A$ and $B$ is $\\boxed{\\textbf{(E) } 6 \\sqrt{3} + \\pi}$ . ~Steven Chen (Professor Chen Education Palace, www.professorchenedu.com)",
+  "answer": "",
+  "year": 2023,
+  "competition": "AMC 12B",
+  "problem_number": 21,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12B",
+    "2023",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:29:52.716080+00:00"
+}

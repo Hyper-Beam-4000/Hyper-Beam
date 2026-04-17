@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2017 AIME II Problems/Problem 12}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Impose a coordinate system and let the center of $C_0$ be $(0,0)$ and $A_0$ be $(1,0)$ . Therefore $A_1=(1-r,r)$ , $A_2=(1-r-r^2,r-r^2)$ , $A_3=(1-r-r^2+r^3,r-r^2-r^3)$ , $A_4=(1-r-r^2+r^3+r^4,r-r^2-r^3+r^4)$ , and so on, where the signs alternate in groups of $2$ . The limit of all these points is point $B$ . Using the sum of infinite geometric series formula on $B$ and reducing the expression: $(1-r)-(r^2-r^3)+(r^4-r^5)-...=\frac{1-r}{1+r^2}$ , $(r-r^2)-(r^3-r^4)+(r^5-r^6)-...=\frac{r-r^2}{1+r^2}$ . Thus, we get $B=\left(\frac{1-r}{r^2+1},\frac{r-r^2}{r^2+1}\right)$ . The distance from $B$ to the origin is $\sqrt{\left(\frac{1-r}{r^2+1}\right)^2+\left(\frac{r-r^2}{r^2+1}\right)^2}=\frac{1-r}{\sqrt{r^2+1}}.$ Let $r=\frac{11}{60}$ , and the distance from the origin is $\frac{49}{61}$ . $49+61=\boxed{110}$ .
+
+\end{document}

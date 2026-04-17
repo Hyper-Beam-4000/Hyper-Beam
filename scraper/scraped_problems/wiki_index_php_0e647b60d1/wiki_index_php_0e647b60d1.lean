@@ -1,0 +1,18 @@
+-- 2019 AMC 12B Problems/Problem 18
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2019_AMC_12B_Problems/Problem_18
+
+-- Problem (LaTeX):
+/-
+Square pyramid $ABCDE$ has base $ABCD$ , which measures $3$ cm on a side, and altitude $AE$ perpendicular to the base, which measures $6$ cm. Point $P$ lies on $BE$ , one third of the way from $B$ to $E$ ; point $Q$ lies on $DE$ , one third of the way from $D$ to $E$ ; and point $R$ lies on $CE$ , two thirds of the way from $C$ to $E$ . What is the area, in square centimeters, of $\triangle{PQR}$ ? $\textbf{(A) } \frac{3\sqrt2}{2} \qquad\textbf{(B) } \frac{3\sqrt3}{2} \qquad\textbf{(C) } 2\sqrt2 \qquad\textbf{(D) } 2\sqrt3 \qquad\textbf{(E) } 3\sqrt2$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Using the given data, we can label the points $A(0, 0, 0), B(3, 0, 0), C(3, 3, 0), D(0, 3, 0),$ and $E(0, 0, 6)$ . We can also find the points $P = B + \frac{1}{3} \overrightarrow{BE} = (3,0,0) + \frac{1}{3}(-3, 0, 6) = (3,0,0) + (-1,0,2) = (2, 0, 2)$ . Similarly, $Q = (0, 2, 2)$ and $R = (1, 1, 4)$ . Using the distance formula, $PQ = \sqrt{\left(-2\right)^2 + 2^2 + 0^2} = 2\sqrt{2}$ , $PR = \sqrt{\left(-1\right)^2 + 1^2 + 2^2} = \sqrt{6}$ , and $QR = \sqrt{1^2 + \left(-1\right)^2 + 2^2} = \sqrt{6}$ . Using Heron's formula, or by dropping an altitude from $P$ to find the height, we can then find that the area of $\triangle{PQR}$ is $\boxed{\textbf{(C) }2\sqrt{2}}$ . Note : After finding the coordinates of $P,Q,$ and $R$ , we can alternatively find the vectors $\overrightarrow{PQ}=[-2,2,0]$ and $\overrightarrow{PR}=[-1,1,2]$ , then apply the formula $\text{area} = \frac{1}{2}\left|\overrightarrow{PQ} \times \overrightarrow{PR}\right|$ . In this case, the cross product equals $[4,4,0]$ , which has magnitude $4\sqrt{2}$ , giving the area as $2\sqrt{2}$ like before.
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_0e647b60d1 : Prop := by
+  sorry

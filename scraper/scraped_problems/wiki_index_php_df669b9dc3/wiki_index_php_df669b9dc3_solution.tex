@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2017 AMC 12A Problems/Problem 24}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Using the given ratios, note that $\frac{XY}{BD} = 1 - \frac{1}{4} - \frac{11}{36} = \frac{4}{9}.$ By AA Similarity, $\triangle AXD \sim \triangle EXY$ with a ratio of $\frac{DX}{XY} = \frac{9}{16}$ and $\triangle ACX \sim \triangle EFX$ with a ratio of $\frac{AX}{XE} = \frac{DX}{XY} = \frac{9}{16}$ , so $\frac{XF}{CX} = \frac{16}{9}$ . Now we find the length of $BD$ . Because the quadrilateral is cyclic, we can simply use the Law of Cosines. \[BD^2=3^2+8^2-48\cos\angle BAD=2^2+6^2-24\cos (180-\angle BAD)=2^2+6^2+24\cos\angle BAD\] \[\rightarrow \cos\angle BAD = \frac{11}{24}\] \[\rightarrow BD=\sqrt{51}\] By Power of a Point, $CX\cdot XG = DX\cdot XB = \frac{\sqrt{51}}{4} \frac{3\sqrt{51}}{4}$ . Thus $XF\cdot XG = \frac{XF}{CX} CX\cdot XG = \frac{51}{3} = \boxed{\textbf{(A)}\ 17}.$ -solution by FRaelya
+
+\end{document}

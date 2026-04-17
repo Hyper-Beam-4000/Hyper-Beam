@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2020_AMC_12B_Problems/Problem_6",
+  "title": "2020 AMC 12B Problems/Problem 6",
+  "problem": "For all integers $n \\geq 9,$ the value of \\[\\frac{(n+2)!-(n+1)!}{n!}\\] is always which of the following? $\\textbf{(A) } \\text{a multiple of 4} \\qquad \\textbf{(B) } \\text{a multiple of 10} \\qquad \\textbf{(C) } \\text{a prime number} \\qquad \\textbf{(D) } \\text{a perfect square} \\qquad \\textbf{(E) } \\text{a perfect cube}$",
+  "solution": "We first expand the expression: \\[\\frac{(n+2)!-(n+1)!}{n!} = \\frac{(n+2)(n+1)n!-(n+1)n!}{n!}.\\] We can now divide out a common factor of $n!$ from each term of the numerator: \\[(n+2)(n+1)-(n+1).\\] Factoring out $(n+1),$ we get \\[[(n+2)-1](n+1) = (n+1)^2,\\] which proves that the answer is $\\boxed{\\textbf{(D) } \\text{a perfect square}}.$",
+  "answer": "",
+  "year": 2020,
+  "competition": "AMC 12B",
+  "problem_number": 6,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12B",
+    "2020",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:25:19.305460+00:00"
+}

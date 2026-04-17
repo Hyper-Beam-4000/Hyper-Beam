@@ -1,0 +1,18 @@
+-- 2020 AIME II Problems/Problem 14
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2020_AIME_II_Problems/Problem_14
+
+-- Problem (LaTeX):
+/-
+For a real number $x$ let $\lfloor x\rfloor$ be the greatest integer less than or equal to $x$ , and define $\{x\} = x - \lfloor x \rfloor$ to be the fractional part of $x$ . For example, $\{3\} = 0$ and $\{4.56\} = 0.56$ . Define $f(x)=x\{x\}$ , and let $N$ be the number of real-valued solutions to the equation $f(f(f(x)))=17$ for $0\leq x\leq 2020$ . Find the remainder when $N$ is divided by $1000$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Note that the upper bound for our sum is $2019,$ and not $2020,$ because if it were $2020$ then the function composition cannot equal to $17.$ From there, it's not too hard to see that, by observing the function composition from right to left, $N$ is (note that the summation starts from the right to the left): \[\sum_{x=17}^{2019} \sum_{y=x}^{2019} \sum_{z=y}^{2019} 1 .\] One can see an easy combinatorical argument exists which is the official solution, but I will present another solution here for the sake of variety. Applying algebraic manipulation and the hockey-stick identity $3$ times gives \[\sum_{x=17}^{2019} \sum_{y=x}^{2019} \sum_{z=y}^{2019} 1\] \[=\sum_{x=17}^{2019} \sum_{y=x}^{2019} \sum_{z=y}^{2019} \binom{z-y}{0}\] \[=\sum_{x=17}^{2019} \sum_{y=x}^{2019} \binom{2020-y}{1}\] \[=\sum_{x=17}^{2019} \binom{2021-x}{2}\] \[=\binom{2005}{3}\] Hence, \[N = \frac{2005 \cdot 2004 \cdot 2003}{3 \cdot 2\cdot 1} \equiv \boxed{010} (\mathrm{mod} \hskip .2cm 1000)\]
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_aeb5bc6481 : Prop := by
+  sorry

@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12A_Problems/Problem_2",
+  "title": "2025 AMC 12A Problems/Problem 2",
+  "problem": "A box contains $10$ pounds of a nut mix that is $50$ percent peanuts, $20$ percent cashews, and $30$ percent almonds. A second nut mix containing $20$ percent peanuts, $40$ percent cashews, and $40$ percent almonds is added to the box resulting in a new nut mix that is $40$ percent peanuts. How many pounds of cashews are now in the box? $\\textbf{(A) } 3.5 \\qquad\\textbf{(B) } 4 \\qquad\\textbf{(C) } 4.5 \\qquad\\textbf{(D) } 5 \\qquad\\textbf{(E) } 6$",
+  "solution": "We are given $0.2(10) = 2$ pounds of cashews in the first box. Denote the pounds of nuts in the second nut mix as $x.$ \\[5 + 0.2x = 0.4(10 + x)\\] \\[0.2x = 1\\] \\[x = 5\\] Thus, we have $5$ pounds of the second mix. \\[0.4(5) + 2 = 2 + 2 = \\boxed{\\text{(B) }4}\\] ~pigwash ~yuvaG (Formatting) ~LucasW (Minor $\\LaTeX$ ) ~Kirbyisdabestboiii (Very very very minor edits)",
+  "answer": "",
+  "year": 2025,
+  "competition": "AMC 12A",
+  "problem_number": 2,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12A",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:31:34.290033+00:00"
+}

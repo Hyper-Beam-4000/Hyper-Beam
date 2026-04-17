@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2022_AIME_II_Problems/Problem_4",
+  "title": "2022 AIME II Problems/Problem 4",
+  "problem": "There is a positive real number $x$ not equal to either $\\tfrac{1}{20}$ or $\\tfrac{1}{2}$ such that \\[\\log_{20x} (22x)=\\log_{2x} (202x).\\] The value $\\log_{20x} (22x)$ can be written as $\\log_{10} (\\tfrac{m}{n})$ , where $m$ and $n$ are relatively prime positive integers. Find $m+n$ .",
+  "solution": "Define $a$ to be $\\log_{20x} (22x) = \\log_{2x} (202x)$ , what we are looking for. Then, by the definition of the logarithm, \\[\\begin{cases} (20x)^{a} &= 22x \\\\ (2x)^{a} &= 202x. \\end{cases}\\] Dividing the first equation by the second equation gives us $10^a = \\frac{11}{101}$ , so by the definition of logs, $a = \\log_{10} \\frac{11}{101}$ . This is what the problem asked for, so the fraction $\\frac{11}{101}$ gives us $m+n = \\boxed{112}$ . ~ihatemath123",
+  "answer": "",
+  "year": 2022,
+  "competition": "AIME II",
+  "problem_number": 4,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME II",
+    "2022",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:36:40.951682+00:00"
+}

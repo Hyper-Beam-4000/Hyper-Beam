@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2024_AIME_II_Problems/Problem_13",
+  "title": "2024 AIME II Problems/Problem 13",
+  "problem": "Let $\\omega\\neq 1$ be a $13$ th root of unity. Find the remainder when \\[\\prod_{k=0}^{12}(2-2\\omega^k+\\omega^{2k})\\] is divided by $1000$ .",
+  "solution": "\\[\\prod_{k=0}^{12} \\left(2- 2\\omega^k + \\omega^{2k}\\right) = \\prod_{k=0}^{12} \\left((1 - \\omega^k)^2 + 1\\right) = \\prod_{k=0}^{12} \\left((1 + i) - \\omega^k)((1 - i) - \\omega^k\\right)\\] Now, we consider the polynomial $x^{13} - 1$ whose roots are the 13th roots of unity. Taking our rewritten product from $0$ to $12$ , we see that both instances of $\\omega^k$ cycle through each of the 13th roots. Then, our answer is: \\[((1 + i)^{13} - 1)((1 - i)^{13} - 1)\\] \\[= (-64(1 + i) - 1)(-64(1 - i) - 1)\\] \\[= (65 + 64i)(65 - 64i)\\] \\[= 65^2 + 64^2\\] \\[= \\boxed{\\textbf{321}}\\] ~Mqnic_",
+  "answer": "",
+  "year": 2024,
+  "competition": "AIME II",
+  "problem_number": 13,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AIME II",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:38:14.348856+00:00"
+}

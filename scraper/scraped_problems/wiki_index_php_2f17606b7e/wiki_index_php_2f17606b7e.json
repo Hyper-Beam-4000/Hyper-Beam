@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2021_AIME_II_Problems/Problem_7",
+  "title": "2021 AIME II Problems/Problem 7",
+  "problem": "Let $a, b, c,$ and $d$ be real numbers that satisfy the system of equations \\begin{align*} a + b &= -3, \\\\ ab + bc + ca &= -4, \\\\ abc + bcd + cda + dab &= 14, \\\\ abcd &= 30. \\end{align*} There exist relatively prime positive integers $m$ and $n$ such that \\[a^2 + b^2 + c^2 + d^2 = \\frac{m}{n}.\\] Find $m + n$ .",
+  "solution": "From the fourth equation we get $d=\\frac{30}{abc}.$ Substitute this into the third equation and you get $abc + \\frac{30(ab + bc + ca)}{abc} = abc - \\frac{120}{abc} = 14$ . Hence $(abc)^2 - 14(abc)-120 = 0$ . Solving, we get $abc = -6$ or $abc = 20$ . From the first and second equation, we get $ab + bc + ca = ab-3c = -4 \\Longrightarrow ab = 3c-4$ . If $abc=-6$ , substituting we get $c(3c-4)=-6$ . If you try solving this you see that this does not have real solutions in $c$ , so $abc$ must be $20$ . So $d=\\frac{3}{2}$ . Since $c(3c-4)=20$ , $c=-2$ or $c=\\frac{10}{3}$ . If $c=\\frac{10}{3}$ , then the system $a+b=-3$ and $ab = 6$ does not give you real solutions. So $c=-2$ . Since you already know $d=\\frac{3}{2}$ and $c=-2$ , so you can solve for $a$ and $b$ pretty easily and see that $a^{2}+b^{2}+c^{2}+d^{2}=\\frac{141}{4}$ . So the answer is $\\boxed{145}$ . ~math31415926535 ~minor edit by Mathkiddie",
+  "answer": "",
+  "year": 2021,
+  "competition": "AIME II",
+  "problem_number": 7,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME II",
+    "2021",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:36:04.645246+00:00"
+}

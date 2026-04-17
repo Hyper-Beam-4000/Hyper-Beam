@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_AMC_12B_Problems/Problem_2",
+  "title": "2019 AMC 10B Problems/Problem 2",
+  "problem": "Consider the statement, \"If $n$ is not prime, then $n-2$ is prime.\" Which of the following values of $n$ is a counterexample to this statement? $\\textbf{(A) } 11 \\qquad \\textbf{(B) } 15 \\qquad \\textbf{(C) } 19 \\qquad \\textbf{(D) } 21 \\qquad \\textbf{(E) } 27$",
+  "solution": "Since a counterexample must be a value of $n$ which is not prime, $n$ must be composite, so we eliminate $\\text{A}$ and $\\text{C}$ . Now we subtract $2$ from the remaining answer choices, and we see that the only time $n-2$ is not prime is when $n = \\boxed{\\textbf{(E) }27}$ . ~IronicNinja minor edit (the inclusion of not) by AlcBoy1729",
+  "answer": "",
+  "year": 2019,
+  "competition": "AMC 12B",
+  "problem_number": 2,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12B",
+    "2019",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:23:47.941297+00:00"
+}

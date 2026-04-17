@@ -86,6 +86,70 @@ def make_id_from_url(url: str) -> str:
         slug = "root"
     return f"{slug}_{h}"
 
+
+def parse_competition_meta(url: str) -> Dict[str, Any]:
+    """Extract competition name, problem number, and difficulty tier from an AoPS URL.
+
+    Examples
+    --------
+    2017_USAMO_Problems/Problem_1    → competition="USAMO",   problem_number=1
+    2017_AMC_12A_Problems/Problem_5  → competition="AMC 12A", problem_number=5
+    2025_AIME_II_Problems/Problem_15 → competition="AIME II", problem_number=15
+    """
+    from urllib.parse import parse_qs
+    qs = parse_qs(urlparse(url).query)
+    title_param = qs.get("title", [""])[0]           # e.g. "2017_USAMO_Problems/Problem_1"
+
+    # ── year ────────────────────────────────────────────────────────────────
+    # title_param looks like "2017_USAMO_Problems/Problem_1"; use lookahead/lookbehind
+    # to match exactly 4 digits (not part of a longer number).
+    year_m = re.search(r'(?<!\d)(\d{4})(?!\d)', title_param)
+    year = int(year_m.group(1)) if year_m else None
+
+    # ── competition ──────────────────────────────────────────────────────────
+    competition = "Unknown"
+    if re.search(r'USAMO', title_param, re.IGNORECASE):
+        competition = "USAMO"
+    elif re.search(r'AMC_12A|AMC 12A', title_param, re.IGNORECASE):
+        competition = "AMC 12A"
+    elif re.search(r'AMC_12B|AMC 12B', title_param, re.IGNORECASE):
+        competition = "AMC 12B"
+    elif re.search(r'AIME_II|AIME II', title_param, re.IGNORECASE):
+        competition = "AIME II"
+    elif re.search(r'AIME_I|AIME I', title_param, re.IGNORECASE):
+        competition = "AIME I"
+
+    # ── problem number ───────────────────────────────────────────────────────
+    prob_m = re.search(r'Problem_(\d+)', title_param, re.IGNORECASE)
+    problem_number = int(prob_m.group(1)) if prob_m else None
+
+    # ── difficulty tier (based on training-data era) ─────────────────────────
+    if year is None:
+        difficulty_tier = "unknown"
+    elif year <= 2017:
+        difficulty_tier = "pre_gpt"
+    elif year == 2018:
+        difficulty_tier = "early_gpt"
+    elif year <= 2023:
+        difficulty_tier = "training_data"
+    else:
+        difficulty_tier = "post_cutoff"
+
+    tags = []
+    if competition != "Unknown":
+        tags.append(competition)
+    if year:
+        tags.append(str(year))
+    if difficulty_tier != "unknown":
+        tags.append(difficulty_tier)
+
+    return {
+        "competition": competition,
+        "problem_number": problem_number,
+        "difficulty_tier": difficulty_tier,
+        "tags": tags,
+    }
+
 # ----------------------------
 # LaTeX extraction
 # ----------------------------
@@ -233,8 +297,28 @@ def parse_aops_wiki_problem(url: str, html: str) -> Dict[str, Any]:
                 return clean_junk(raw_text)
         return ""
 
+    def get_solution() -> str:
+        """Return Solution 1 for pages with numbered solutions (AMC/AIME),
+        or the lone solution/proof section for USAMO-style pages."""
+        # Pass 1: explicit "solution 1" or bare "solution" (exact)
+        for key in sections:
+            if re.search(r'\bsolution\s+1\b', key) or key.strip() in ("solution", "proof"):
+                html_block = "".join(sections[key])
+                raw_text = extract_latex_from_html(html_block)
+                return clean_junk(raw_text)
+        # Pass 2: any solution/proof section that isn't numbered > 1
+        for key in sections:
+            if "solution" in key or "proof" in key:
+                num = re.search(r'solution\s+(\d+)', key)
+                if num and int(num.group(1)) > 1:
+                    continue
+                html_block = "".join(sections[key])
+                raw_text = extract_latex_from_html(html_block)
+                return clean_junk(raw_text)
+        return ""
+
     problem = sec_text(["problem", "statement", "question"])
-    solution = sec_text(["solution", "proof"])
+    solution = get_solution()
     answer = sec_text(["answer"])
 
     if not problem and sections["intro"]:
@@ -244,6 +328,8 @@ def parse_aops_wiki_problem(url: str, html: str) -> Dict[str, Any]:
     year_match = re.search(r'\b(19|20)\d{2}\b', title)
     year = int(year_match.group(0)) if year_match else None
 
+    comp_meta = parse_competition_meta(url)
+
     return {
         "source": "AoPS Wiki",
         "url": url,
@@ -252,6 +338,10 @@ def parse_aops_wiki_problem(url: str, html: str) -> Dict[str, Any]:
         "solution": solution,
         "answer": answer,
         "year": year,
+        "competition": comp_meta["competition"],
+        "problem_number": comp_meta["problem_number"],
+        "difficulty_tier": comp_meta["difficulty_tier"],
+        "tags": comp_meta["tags"],
         "scraped_at": datetime.now(timezone.utc).isoformat(),
     }
 

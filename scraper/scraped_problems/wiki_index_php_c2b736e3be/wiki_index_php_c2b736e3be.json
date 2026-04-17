@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2023_AIME_I_Problems/Problem_2",
+  "title": "2023 AIME I Problems/Problem 2",
+  "problem": "Positive real numbers $b \\not= 1$ and $n$ satisfy the equations \\[\\sqrt{\\log_b n} = \\log_b \\sqrt{n} \\qquad \\text{and} \\qquad b \\cdot \\log_b n = \\log_b (bn).\\] The value of $n$ is $\\frac{j}{k},$ where $j$ and $k$ are relatively prime positive integers. Find $j+k.$",
+  "solution": "Denote $x = \\log_b n$ .\nHence, the system of equations given in the problem can be rewritten as \\begin{align*} \\sqrt{x} & = \\frac{1}{2} x , \\\\ bx & = 1 + x . \\end{align*} Solving the system gives $x = 4$ and $b = \\frac{5}{4}$ .\nTherefore, \\[n = b^x = \\frac{625}{256}.\\] Therefore, the answer is $625 + 256 = \\boxed{881}$ . ~Steven Chen (Professor Chen Education Palace, www.professorchenedu.com)",
+  "answer": "",
+  "year": 2023,
+  "competition": "AIME I",
+  "problem_number": 2,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME I",
+    "2023",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:36:58.301624+00:00"
+}

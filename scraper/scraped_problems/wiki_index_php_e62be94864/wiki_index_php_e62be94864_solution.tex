@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2025 AMC 12B Problems/Problem 25}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Let $\triangle ABC$ and center $O$ be such that $OA=1, OB=2, OC=3$ . Suppose the length of the side of $ABC$ is $s$ . Noticing that $OA + OB = OC$ , we suspect that $OACB$ is a cyclic quadrilateral. If it was, we could apply Ptolemy's Theorem, which would say that \[CB \cdot OA + OB \cdot AC = OC \cdot AB\] \[s + 2s = 3s.\] Because Ptolemy's is true, $OACB$ is cyclic. Because it's cyclic, $\angle AOB = 180 - \angle BCA = 120$ . Applying Law of Cosines on $AOB$ , we get \[s^2 = 1^2 + 2^2 - 2 \cdot 1 \cdot 2 \cdot \cos{120}\] \[s^2 = 1 + 4 +2 = \boxed{7}.\] ~lprado
+
+\end{document}

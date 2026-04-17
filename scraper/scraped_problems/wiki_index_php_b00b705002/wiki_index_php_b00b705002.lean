@@ -1,45 +1,19 @@
-import Mathlib.Data.Real.Basic
-import Mathlib.Data.Finset.Basic
+-- 2024 USAMO Problems/Problem 6
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2024_USAMO_Problems/Problem_6
+
+-- Problem (LaTeX):
+/-
+Continued Let $n>2$ be an integer and let $\ell \in\{1,2, \ldots, n\}$ . A collection $A_1, \ldots, A_k$ of (not necessarily distinct) subsets of $\{1,2, \ldots, n\}$ is called $\ell$ -large if $\left|A_i\right| \geq \ell$ for all $1 \leq i \leq k$ . Find, in terms of $n$ and $\ell$ , the largest real number $c$ such that the inequality \[\sum_{i=1}^k \sum_{j=1}^k x_i x_j \frac{\left|A_i \cap A_j\right|^2}{\left|A_i\right| \cdot\left|A_j\right|} \geq c\left(\sum_{i=1}^k x_i\right)^2\] holds for all positive integers $k$ , all nonnegative real numbers $x_1, \ldots, x_k$ , and all $\ell$ -large collections $A_1, \ldots, A_k$ of subsets of $\{1,2, \ldots, n\}$ .
+Note: For a finite set $S,|S|$ denotes the number of elements in $S$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+
+-/
+
 import Mathlib.Tactic
 
-open Finset
-
--- Problem: Find the largest real number c such that the inequality holds for all conditions given.
-theorem usamo_2024_p6 (n : ℕ) (hn : n > 2) (ℓ : ℕ) (hℓ : 1 ≤ ℓ ∧ ℓ ≤ n) :
-  ∃ c : ℝ, ∀ (k : ℕ) (x : Fin k → ℝ) (A : Fin k → Finset (Fin n)),
-  (∀ i, ℓ ≤ (A i).card) →
-  (∑ i j, x i * x j * ((A i ∩ A j).card ^ 2 : ℝ) / ((A i).card * (A j).card)) ≥
-  c * (∑ i, x i) ^ 2 := by
-  -- Introduce the variables and assumptions
-  intro k x A hA
-
-  -- We need to find a suitable c such that the inequality holds
-  -- Strategy: Analyze the structure of the inequality and use properties of sets and sums
-  -- Step 1: Simplify the double sum expression
-  have h1 : ∑ i j, x i * x j * ((A i ∩ A j).card ^ 2 : ℝ) / ((A i).card * (A j).card) =
-            ∑ i j, (x i * ((A i ∩ A j).card : ℝ) / (A i).card) * (x j * ((A i ∩ A j).card : ℝ) / (A j).card), by
-    -- Use algebraic manipulation and properties of sums
-    sorry
-
-  -- Step 2: Consider the case when all sets are equal and have maximum intersection
-  -- This will help us find an upper bound for c
-  have h2 : ∀ i j, (A i ∩ A j).card ≤ min (A i).card (A j).card, by
-    -- Use properties of set intersections
-    sorry
-
-  -- Step 3: Use the condition ℓ ≤ |A_i| to bound the expressions
-  have h3 : ∀ i, (A i).card ≥ ℓ, from hA
-
-  -- Step 4: Analyze the inequality and propose a candidate for c
-  -- We hypothesize that c = 1/ℓ might be a candidate
-  let c := 1 / (ℓ : ℝ)
-
-  -- Step 5: Prove that this c satisfies the inequality for all valid inputs
-  have h4 : (∑ i j, (x i * ((A i ∩ A j).card : ℝ) / (A i).card) * (x j * ((A i ∩ A j).card : ℝ) / (A j).card)) ≥
-            c * (∑ i, x i) ^ 2, by
-    -- Use the proposed value of c and simplify
-    sorry
-
-  -- Conclude the existence of such a c
-  use c
-  exact h4
+theorem wiki_index_php_b00b705002 : Prop := by
+  sorry

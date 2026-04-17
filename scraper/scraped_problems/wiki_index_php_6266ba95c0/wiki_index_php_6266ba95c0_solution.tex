@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2020 AMC 12B Problems/Problem 17}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Let $P(x) = x^5+ax^4+bx^3+cx^2+dx+2020$ . We first notice that $\frac{-1+i\sqrt{3}}{2} = e^{2\pi i / 3}$ . That is because of Euler's Formula : $e^{ix} = \cos(x) + i \cdot \sin(x)$ . $\frac{-1+i\sqrt{3}}{2}$ = $-\frac{1}{2} + i \cdot \frac {\sqrt{3}}{2}$ = $\cos(120^\circ) + i \cdot \sin(120^\circ) = e^{ 2\pi i / 3}$ . In order $r$ to be a root of $P$ , $re^{2\pi i / 3}$ must also be a root of P, meaning that 3 of the roots of $P$ must be $r$ , $re^{i\frac{2\pi}{3}}$ , $re^{i\frac{4\pi}{3}}$ . However, since $P$ is degree 5, there must be two additional roots. Let one of these roots be $w$ , if $w$ is a root, then $we^{2\pi i / 3}$ and $we^{4\pi i / 3}$ must also be roots. However, $P$ is a fifth degree polynomial, and can therefore only have $5$ roots. This implies that $w$ is either $r$ , $re^{2\pi i / 3}$ , or $re^{4\pi i / 3}$ . Thus we know that the polynomial $P$ can be written in the form $(x-r)^m(x-re^{2\pi i / 3})^n(x-re^{4\pi i / 3})^p$ . Moreover, by Vieta's, we know that there is only one possible value for the magnitude of $r$ as $||r||^5 = 2020$ , meaning that the amount of possible polynomials $P$ is equivalent to the possible sets $(m,n,p)$ . In order for the coefficients of the polynomial to all be real, $n = p$ due to $re^{2\pi i / 3}$ and $re^{4 \pi i / 3}$ being conjugates and since $m+n+p = 5$ , (as the polynomial is 5th degree) we have two possible solutions for $(m, n, p)$ which are $(1,2,2)$ and $(3,1,1)$ yielding two possible polynomials. The answer is thus $\boxed{\textbf{(C) } 2}$ . ~Murtagh
+
+\end{document}

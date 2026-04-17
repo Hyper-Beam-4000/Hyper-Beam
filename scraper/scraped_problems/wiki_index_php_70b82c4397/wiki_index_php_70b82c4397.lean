@@ -1,0 +1,21 @@
+-- 2021 AIME I Problems/Problem 2
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2021_AIME_I_Problems/Problem_2
+
+-- Problem (LaTeX):
+/-
+In the diagram below, $ABCD$ is a rectangle with side lengths $AB=3$ and $BC=11$ , and $AECF$ is a rectangle with side lengths $AF=7$ and $FC=9,$ as shown. The area of the shaded region common to the interiors of both rectangles is $\frac mn$ , where $m$ and $n$ are relatively prime positive integers. Find $m+n$ . [asy] pair A, B, C, D, E, F; A=(0,3); B=(0,0); C=(11,0); D=(11,3); E=foot(C, A, (9/4,0)); F=foot(A, C, (35/4,3)); draw(A--B--C--D--cycle); draw(A--E--C--F--cycle); filldraw(A--(9/4,0)--C--(35/4,3)--cycle,gray*0.5+0.5*lightgray); dot(A^^B^^C^^D^^E^^F); label("$A$", A, W); label("$B$", B, W); label("$C$", C, (1,0)); label("$D$", D, (1,0)); label("$F$", F, N); label("$E$", E, S); [/asy]
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $G$ be the intersection of $AD$ and $FC$ .
+From vertical angles, we know that $\angle FGA= \angle DGC$ . Also, because we are given that $ABCD$ and $AFCE$ are rectangles, we know that $\angle AFG= \angle CDG=90 ^{\circ}$ .
+Therefore, by AA similarity, we know that $\triangle AFG\sim\triangle CDG$ . Let $AG=x$ . Then, we have $DG=11-x$ . By similar triangles, we know that $FG=\frac{7}{3}(11-x)$ and $CG=\frac{3}{7}x$ . We have $\frac{7}{3}(11-x)+\frac{3}{7}x=FC=9$ . Solving for $x$ , we have $x=\frac{35}{4}$ .
+The area of the shaded region is just $3\cdot \frac{35}{4}=\frac{105}{4}$ . Thus, the answer is $105+4=\framebox{109}$ . ~yuanyuanC
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_70b82c4397 : Prop := by
+  sorry

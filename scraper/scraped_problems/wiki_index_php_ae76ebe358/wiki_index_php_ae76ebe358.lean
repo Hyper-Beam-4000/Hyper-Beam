@@ -1,0 +1,18 @@
+-- 2019 AMC 10A Problems/Problem 21
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2019_AMC_12A_Problems/Problem_18
+
+-- Problem (LaTeX):
+/-
+A sphere with center $O$ has radius $6$ . A triangle with sides of length $15, 15,$ and $24$ is situated in space so that each of its sides is tangent to the sphere. What is the distance between $O$ and the plane determined by the triangle? $\textbf{(A) }2\sqrt{3}\qquad \textbf{(B) }4\qquad \textbf{(C) }3\sqrt{2}\qquad \textbf{(D) }2\sqrt{5}\qquad \textbf{(E) }5\qquad$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+The triangle is placed on the sphere so that its three sides are tangent to the sphere. The cross-section of the sphere created by the plane of the triangle is also the incircle of the triangle. To find the inradius, use $\text{area} = \text{inradius} \cdot \text{semiperimeter}$ . The area of the triangle can be found by drawing an altitude from the vertex between sides with length $15$ to the midpoint of the side with length $24$ . The Pythagorean triple $9$ - $12$ - $15$ allows us easily to determine that the base is $24$ and the height is $9$ . The formula $\frac {\text{base} \cdot \text{height}} {2}$ can also be used to find the area of the triangle as $108$ , while the semiperimeter is simply $\frac {15 + 15 + 24} {2} = 27$ . After plugging into the equation, we thus get $108 = \text{inradius} \cdot 27$ , so the inradius is $4$ . Now, let the distance between $O$ and the triangle be $x$ . Choose a point on the incircle and denote it by $A$ . The distance $OA$ is $6$ , because it is just the radius of the sphere. The distance from point $A$ to the center of the incircle is $4$ , because it is the radius of the incircle. By using the Pythagorean Theorem, we thus find $x = \sqrt{6^2-4^2}=\sqrt{20} = \boxed{\textbf {(D) } 2 \sqrt {5}}$ .
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_ae76ebe358 : Prop := by
+  sorry

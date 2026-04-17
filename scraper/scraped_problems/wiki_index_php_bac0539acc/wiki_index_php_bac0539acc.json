@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2018_AMC_12A_Problems/Problem_9",
+  "title": "2018 AMC 12A Problems/Problem 9",
+  "problem": "Which of the following describes the largest subset of values of $y$ within the closed interval $[0,\\pi]$ for which \\[\\sin(x+y)\\leq \\sin(x)+\\sin(y)\\] for every $x$ between $0$ and $\\pi$ , inclusive? $\\textbf{(A) } y=0 \\qquad \\textbf{(B) } 0\\leq y\\leq \\frac{\\pi}{4} \\qquad \\textbf{(C) } 0\\leq y\\leq \\frac{\\pi}{2} \\qquad \\textbf{(D) } 0\\leq y\\leq \\frac{3\\pi}{4} \\qquad \\textbf{(E) } 0\\leq y\\leq \\pi$",
+  "solution": "On the interval $[0, \\pi]$ sine is nonnegative; thus $\\sin(x + y) = \\sin x \\cos y + \\sin y \\cos x \\le \\sin x + \\sin y$ for all $x, y \\in [0, \\pi]$ and equality only occurs when $\\cos x = \\cos y = 1$ , which is cosine's maximum value. The answer is $\\boxed{\\textbf{(E) } 0\\le y\\le \\pi}$ . (CantonMathGuy)",
+  "answer": "Notice that for $y=0$ there is equality and nowhere else because the angle is not being rotated enough. We can just try all the subset of values from the answer choices to try out preferably the largest value for each subset that works as they've special trig values and are the upper bound for the set with values of the $x$ interval. From this we notice $E$ has the largest bound from the answer choices that works. Hence our answer is $\\boxed{E}$ .\n~Batmanstark",
+  "year": 2018,
+  "competition": "AMC 12A",
+  "problem_number": 9,
+  "difficulty_tier": "early_gpt",
+  "tags": [
+    "AMC 12A",
+    "2018",
+    "early_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:21:48.071981+00:00"
+}

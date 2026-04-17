@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2024_AMC_12B_Problems/Problem_1",
+  "title": "2024 AMC 10B Problems/Problem 1",
+  "problem": "In a long line of people arranged left to right, the 1013th person from the left is also the 1010th person from the right. How many people are in the line? $\\textbf{(A) } 2021 \\qquad\\textbf{(B) } 2022 \\qquad\\textbf{(C) } 2023 \\qquad\\textbf{(D) } 2024 \\qquad\\textbf{(E) } 2025$",
+  "solution": "If the person is the 1013th from the left, that means there is 1012 people to their left.\nIf the person is the 1010th from the right, that means there is 1009 people to their right.\nTherefore, there are $1012 + 1 + 1009 = \\boxed{\\textbf{(B) } 2022}$ people in line.",
+  "answer": "",
+  "year": 2024,
+  "competition": "AMC 12B",
+  "problem_number": 1,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12B",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:30:49.966464+00:00"
+}

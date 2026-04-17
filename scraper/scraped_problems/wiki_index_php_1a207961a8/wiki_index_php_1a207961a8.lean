@@ -1,0 +1,18 @@
+-- 2021 AMC 12A Problems/Problem 17
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2021_AMC_12A_Problems/Problem_17
+
+-- Problem (LaTeX):
+/-
+Trapezoid $ABCD$ has $\overline{AB}\parallel\overline{CD},BC=CD=43$ , and $\overline{AD}\perp\overline{BD}$ . Let $O$ be the intersection of the diagonals $\overline{AC}$ and $\overline{BD}$ , and let $P$ be the midpoint of $\overline{BD}$ . Given that $OP=11$ , the length of $AD$ can be written in the form $m\sqrt{n}$ , where $m$ and $n$ are positive integers and $n$ is not divisible by the square of any prime. What is $m+n$ ? $\textbf{(A) }65 \qquad \textbf{(B) }132 \qquad \textbf{(C) }157 \qquad \textbf{(D) }194\qquad \textbf{(E) }215$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Angle chasing* reveals that $\triangle BPC\sim\triangle BDA$ , therefore \[2=\frac{BD}{BP}=\frac{AB}{BC}=\frac{AB}{43},\] or $AB=86$ . Additional angle chasing shows that $\triangle ABO\sim\triangle CDO$ , therefore \[2=\frac{AB}{CD}=\frac{BO}{OD}=\frac{BP+11}{BP-11},\] or $BP=33$ and $BD=66$ . Since $\triangle ADB$ is right, the Pythagorean theorem implies that \[AD=\sqrt{86^2-66^2}=4\sqrt{190}.\] The answer is $4+190=\boxed{\textbf{(D) }194}$ . Angle Chasing: If we set $\angle DBC = \alpha$ , then we know that $\angle DCB = 180^\circ-2\alpha$ because $\triangle DBC$ is isosceles. Then, $\angle BCP = 90^\circ-\alpha$ (since $P$ is the midpoint of $\overline{BD},$ and therefore line $\overline{CP}$ is a median, which then means $\angle BCP$ bisects $\angle DBC$ ), so $\angle BPC$ is a right angle. Because $\angle BDC = \alpha$ and $\overline{AB}\parallel\overline{DC}$ , we conclude that $\angle ABD = \alpha$ too. Lastly, because $\triangle BPC$ and $\triangle BDA$ are both right triangles, they are similar by AA. ~mn28407 (Solution) ~mm (Angle Chasing Remark) ~eagleye ~MRENTHUSIASM ~charyyu83 ~EBai (Minor Edits)
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_1a207961a8 : Prop := by
+  sorry

@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2017_AMC_12B_Problems/Problem_2",
+  "title": "2017 AMC 10B Problems/Problem 3",
+  "problem": "Real numbers $x$ , $y$ , and $z$ satisfy the inequalities $0<x<1$ , $-1<y<0$ , and $1<z<2$ .\nWhich of the following numbers is necessarily positive? $\\textbf{(A)}\\ y+x^2\\qquad\\textbf{(B)}\\ y+xz\\qquad\\textbf{(C)}\\ y+y^2\\qquad\\textbf{(D)}\\ y+2y^2\\qquad\\textbf{(E)}\\ y+z$",
+  "solution": "Notice that $y+z$ must be positive because $|z|>|y|$ . Therefore the answer is $\\boxed{\\textbf{(E) } y+z}$ . The other choices: $\\textbf{(A)}$ As $x$ grows closer to $0$ , $x^2$ decreases and thus becomes less than $y$ . $\\textbf{(B)}$ $x$ can be as small as possible ( $x>0$ ), so $xz$ grows close to $0$ as $x$ approaches $0$ . $\\textbf{(C)}$ For all $-1<y<0$ , $|y|>|y^2|$ , and thus it is always negative. $\\textbf{(D)}$ The same logic as above, but when $-\\frac{1}{2}<y<0$ this time.",
+  "answer": "",
+  "year": 2017,
+  "competition": "AMC 12B",
+  "problem_number": 2,
+  "difficulty_tier": "pre_gpt",
+  "tags": [
+    "AMC 12B",
+    "2017",
+    "pre_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:20:57.646773+00:00"
+}

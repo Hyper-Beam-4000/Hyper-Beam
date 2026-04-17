@@ -1,0 +1,18 @@
+-- 2023 AIME II Problems/Problem 14
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2023_AIME_II_Problems/Problem_14
+
+-- Problem (LaTeX):
+/-
+A cube-shaped container has vertices $A,$ $B,$ $C,$ and $D,$ where $\overline{AB}$ and $\overline{CD}$ are parallel edges of the cube, and $\overline{AC}$ and $\overline{BD}$ are diagonals of faces of the cube, as shown. Vertex $A$ of the cube is set on a horizontal plane $\mathcal{P}$ so that the plane of the rectangle $ABDC$ is perpendicular to $\mathcal{P},$ vertex $B$ is $2$ meters above $\mathcal{P},$ vertex $C$ is $8$ meters above $\mathcal{P},$ and vertex $D$ is $10$ meters above $\mathcal{P}.$ The cube contains water whose surface is parallel to $\mathcal{P}$ at a height of $7$ meters above $\mathcal{P}.$ The volume of water is $\frac{m}{n}$ cubic meters, where $m$ and $n$ are relatively prime positive integers. Find $m+n.$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+[asy] defaultpen(linewidth(0.6)); pair A = (0, 0), B = (5.656,2), C = (-2.828, 8), D = B+C, P = 0.875*C, Q = B+0.625*C, H = (-2.828, 0), G = (5.656, 0); pair P1 = (-5, 0), P2 = (10, 0); draw(A--B--D--C--A); filldraw(A--B--Q--P--cycle,rgb(0.35,0.7,0.9)); draw(C--H, dotted); draw(B--G, dotted); draw(P1--P2); dot("$A$",A,S); dot("$B$",B,E); dot("$C$",C,N); dot("$D$",D,N); dot("$H$",H,S); dot("$G$",G,S); dot("$P$",P,SE); dot("$Q$",Q,E); label("$\mathcal P$",(11, 0)); [/asy] Let's first view the cube from a direction perpendicular to $ABDC$ , as illustrated above. Let $x$ be the cube's side length. Since $\triangle CHA \sim \triangle AGB$ , we have \[\frac{CA}{CH} = \frac{AB}{AG}.\] We know $AB = x$ , $AG = \sqrt{x^2-2^2}$ , $AC = \sqrt{2}x$ , $CH = 8$ . Plug them into the above equation, we get \[\frac{\sqrt{2}x}{8} = \frac{x}{\sqrt{x^2-2^2}}.\] Solving this we get the cube's side length $x = 6$ , and $AC = 6\sqrt{2}.$ Let $PQ$ be the water's surface, both $P$ and $Q$ are $7$ meters from $\mathcal P$ . Notice that $C$ is $8$ meters from $\mathcal P$ , this means \[CP = \frac{1}{8}CA = \frac{3\sqrt{2}}{4}.\] Similarly, \[DQ = \frac{3}{8}CA = \frac{9\sqrt{2}}{4}.\] [asy] defaultpen(linewidth(0.6)); pair A = (0, 0), C = (0, 2*6), X = (6, 6), Y = (-6, 6), P = (0, 1.75*6), I = (-0.25*6, 1.75*6), J = (0.25*6, 1.75*6); pair P1 = (-8, 0), P2 = (8, 0); draw(A--X--C--Y--A); filldraw(A--X--J--I--Y--cycle,rgb(0.35,0.7,0.9)); draw(P1--P2, dotted); dot("$A$",A,S); dot("$C$",C,N); dot("$P$",P,S); label("$\mathcal P$",(10, 0)); [/asy] Now, we realize that the 3D space inside the cube without water is a frustum, with $P$ on its smaller base and $Q$ on its larger base. To find its volume, all we need is to find the areas of both bases and the height, which is $x = 6$ . To find the smaller base, let's move our viewpoint onto the plane $ABDC$ and view the cube from a direction parallel to $ABDC$ , as shown above. The area of the smaller base is simply \[S_1 = CP^2 = \Bigl(\frac{3\sqrt{2}}{4}\Bigr)^2 = \frac{9}{8}.\] Similarly, the area of the larger base is \[S_2 = DQ^2 = \Bigl(\frac{9\sqrt{2}}{4}\Bigr)^2 = \frac{81}{8}.\] Finally, applying the formula for a frustum's volume, \[V = \frac{1}{3} \cdot x \cdot (S_1 + \sqrt{S_1S_2} + S_2) = \frac{1}{3} \cdot 6 \cdot \Bigl(\frac{9}{8} + \sqrt{\frac{9}{8}\cdot\frac{81}{8}} + \frac{81}{8}\Bigl) = \frac{117}{4}.\] The water's volume is thus \[6^3 - \frac{117}{4} = \frac{747}{4},\] giving $\boxed{751}$ .
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_071a6c68d1 : Prop := by
+  sorry

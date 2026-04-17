@@ -6,6 +6,13 @@
   "solution": "(but 4044 seems to be the wrong answer?)\nTo answer this question, we need to consider how friendships on Mathbook are formed. If two users have at least two friends in common, then they will be able to become friends with each other. This means that the minimum number of friendships that must already exist in order for every user to eventually become friends with every other user is the smallest number of friendships that guarantees that each pair of users has at least two friends in common. One way to guarantee that each pair of users has at least two friends in common is to create a complete graph, where each user is friends with every other user. In this case, each pair of users has exactly $2022 - 2 = 2020$ friends in common. However, this is not the minimum number of friendships required, since some pairs of users may have more than two friends in common without forming a complete graph. To find the minimum number of friendships required, we can use the fact that a friendship between two users implies that they share all of their mutual friends. In other words, if two users are friends, then they must have at least two friends in common. This means that if we want to guarantee that each pair of users has at least two friends in common, we can do so by ensuring that each user has at least two friends. Therefore, the minimum number of friendships that must already exist in order for every user to eventually become friends with every other user is $2 \\cdot 2022 = \\boxed{4044}$ .",
   "answer": "",
   "year": 2022,
-  "scraped_at": "2026-03-24T05:43:46.170321+00:00",
-  "lean_code": "import Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic\n\nopen Nat\n\n-- Problem: Determine the minimum number of friendships required so that every user can eventually become friends with every other user.\ntheorem mathbook_friendship (n : ℕ) (h : n = 2022) : ∃ m, m = 4044 := by\n  -- Assume each user must have at least two friends initially\n  have h1 : ∀ u : ℕ, u < n → ∃ v w : ℕ, v < n ∧ w < n ∧ v ≠ w ∧ u ≠ v ∧ u ≠ w := by\n    sorry\n  \n  -- Calculate the minimum number of friendships needed\n  have h2 : ∃ m, m = 2 * n := by\n    -- Each user must have at least two friends\n    use 2 * n\n    rw [h]\n    norm_num\n    -- This ensures that every user can eventually become friends with every other user\n    sorry\n\n  -- Conclude that the minimum number of friendships is 4044\n  obtain ⟨m, hm⟩ := h2\n  use m\n  exact hm"
+  "competition": "USAMO",
+  "problem_number": 6,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "USAMO",
+    "2022",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:19:51.791998+00:00"
 }

@@ -1,0 +1,19 @@
+-- 2019 AMC 10A Problems/Problem 7
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2019_AMC_12A_Problems/Problem_5
+
+-- Problem (LaTeX):
+/-
+Two lines with slopes $\dfrac{1}{2}$ and $2$ intersect at $(2,2)$ . What is the area of the triangle enclosed by these two lines and the line $x+y=10 ?$ $\textbf{(A) } 4 \qquad\textbf{(B) } 4\sqrt{2} \qquad\textbf{(C) } 6 \qquad\textbf{(D) } 8 \qquad\textbf{(E) } 6\sqrt{2}$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let's first work out the slope-intercept form of all three lines: $(x,y)=(2,2)$ and $y=\frac{x}{2} + b$ implies $2=\frac{2}{2} +b=> 2=1+b$ so $b=1$ , while $y=2x + c$ implies $2= 2 \cdot 2+c=> 2=4+c$ so $c=-2$ . Also, $x+y=10$ implies $y=-x+10$ . Thus the lines are $y=\frac{x}{2} +1, y=2x-2,$ and $y=-x+10$ .
+Now we find the intersection points between each of the lines with $y=-x+10$ , which are $(6,4)$ and $(4,6)$ . Using the distance formula and then the Pythagorean Theorem, we see that we have an isosceles triangle with base $2\sqrt{2}$ and height $3\sqrt{2}$ , whose area is $\boxed{\textbf{(C) }6}$ .
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_1b1b3b2472 : Prop := by
+  sorry

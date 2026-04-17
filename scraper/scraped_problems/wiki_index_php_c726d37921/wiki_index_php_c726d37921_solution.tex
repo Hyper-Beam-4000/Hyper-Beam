@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2019 AIME II Problems/Problem 6}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Using change of base on the second equation to base b, \[\frac{\log x}{\log \log_{b}{x}}=54\] \[\log x = 54 \cdot \log\log_{b}{x}\] \[x = (\log_{b}{x})^{54}\] Note by dolphin7 - you could also just rewrite the second equation in exponent form. Substituting this into the $\sqrt x$ of the first equation, \[3\log_{b}{((\log_{b}{x})^{27}\log_{b}{x})} = 56\] \[3\log_{b}{(\log_{b}{x})^{28}} = 56\] \[\log_{b}{(\log_{b}{x})^{84}} = 56\] We can manipulate this equation to be able to substitute $x = (\log_{b}{x})^{54}$ a couple more times: \[\log_{b}{(\log_{b}{x})^{54}} = 56 \cdot \frac{54}{84}\] \[\log_{b}{x} = 36\] \[(\log_{b}{x})^{54} = 36^{54}\] \[x = 6^{108}\] However, since we found that $\log_{b}{x} = 36$ , $x$ is also equal to $b^{36}$ . Equating these, \[b^{36} = 6^{108}\] \[b = 6^3 = \boxed{216}\]
+
+\end{document}

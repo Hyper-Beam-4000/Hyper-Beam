@@ -1,0 +1,18 @@
+-- 2018 AMC 10B Problems/Problem 15
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_AMC_12B_Problems/Problem_11
+
+-- Problem (LaTeX):
+/-
+A closed box with a square base is to be wrapped with a square sheet of wrapping paper. The box is centered on the wrapping paper with the vertices of the base lying on the midlines of the square sheet of paper, as shown in the figure on the left. The four corners of the wrapping paper are to be folded up over the sides and brought together to meet at the center of the top of the box, point $A$ in the figure on the right. The box has base length $w$ and height $h$ . What is the area of the sheet of wrapping paper? [asy] size(270pt); defaultpen(fontsize(10pt)); filldraw(((3,3)--(-3,3)--(-3,-3)--(3,-3)--cycle),lightgrey); dot((-3,3)); label("$A$",(-3,3),NW); draw((1,3)--(-3,-1),dashed+linewidth(.5)); draw((-1,3)--(3,-1),dashed+linewidth(.5)); draw((-1,-3)--(3,1),dashed+linewidth(.5)); draw((1,-3)--(-3,1),dashed+linewidth(.5)); draw((0,2)--(2,0)--(0,-2)--(-2,0)--cycle,linewidth(.5)); draw((0,3)--(0,-3),linetype("2.5 2.5")+linewidth(.5)); draw((3,0)--(-3,0),linetype("2.5 2.5")+linewidth(.5)); label('$w$',(-1,-1),SW); label('$w$',(1,-1),SE); draw((4.5,0)--(6.5,2)--(8.5,0)--(6.5,-2)--cycle); draw((4.5,0)--(8.5,0)); draw((6.5,2)--(6.5,-2)); label("$A$",(6.5,0),NW); dot((6.5,0)); [/asy] $\textbf{(A) } 2(w+h)^2 \qquad \textbf{(B) } \frac{(w+h)^2}2 \qquad \textbf{(C) } 2w^2+4wh \qquad \textbf{(D) } 2w^2 \qquad \textbf{(E) } w^2h$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Consider one-quarter of the image (the wrapping paper is divided up into $4$ congruent squares). The length of each dotted line is $h$ . The area of the rectangle that is $w$ by $h$ is $wh$ . The combined figure of the two triangles with base $h$ is a square with $h$ as its diagonal. Using the Pythagorean Theorem, each side of this square is $\frac{h}{\sqrt2}$ . Thus, the area is the side length squared which is $\frac{h^2}{2}$ . Similarly, the combined figure of the two triangles with base $w$ is a square with area $\frac{w^2}{2}$ . Adding all of these together, we get $\frac{w^2}{2} + \frac{h^2}{2} + wh$ . Since we have four of these areas in the entire wrapping paper, we multiply this by $4$ , getting $4\left(\frac{w^2}{2} + \frac{h^2}{2} + wh\right) = 2\left(w^2 + h^2 + 2wh\right) = \boxed{\textbf{(A) } 2(w+h)^2}$ . The diagram for this solution is shown below: [asy] /* Edited by MRENTHUSIASM */ size(180pt); defaultpen(fontsize(10pt)); fill(((0,3)--(-3,3)--(-3,0)--(0,0)--cycle),lightgrey); dot((-3,3)); label("$A$",(-3,3),NW); draw((-3,0)--(-3,3)--(0,3),linewidth(.5)); draw((0,2)--(-1,3)--(-3,1)--(-2,0),dashed+linewidth(.5)); draw((0,2)--(-2,0),linewidth(.5)); draw((0,3)--(0,0),linetype("2.5 2.5")+linewidth(.5)); draw((0,0)--(-3,0),linetype("2.5 2.5")+linewidth(.5)); label("$w$",(-1,1),NW); label("$w$",(-2,2),SE); label("$h$",(-2.5,0.5),NE); label("$h$",(-0.5,2.5),SW); label("$\frac{w}{\sqrt{2}}$",(-2,3),N); label("$\frac{h}{\sqrt{2}}$",(-0.5,3),N); label("$\frac{h}{\sqrt{2}}$",(0,2.5),E); label("$\frac{w}{\sqrt{2}}$",(0,1),E); label("$\frac{w}{\sqrt{2}}$",(-1,0),S); label("$\frac{h}{\sqrt{2}}$",(-2.5,0),S); label("$\frac{h}{\sqrt{2}}$",(-3,0.5),W); label("$\frac{w}{\sqrt{2}}$",(-3,2),W); label("$wh$",(-1.5,1.5),red); label("$\frac{w^2}{4}$",centroid((-3,3),(-1,3),(-3,1)),red); label("$\frac{w^2}{4}$",centroid((0,0),(-2,0),(0,2)),red); label("$\frac{h^2}{4}$",centroid((-3,0),(-2,0),(-3,1)),red); label("$\frac{h^2}{4}$",centroid((0,3),(-1,3),(0,2)),red); [/asy] ~Hydroquantum (Solution) ~MRENTHUSIASM (Diagram)
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_561e7fc8dd : Prop := by
+  sorry

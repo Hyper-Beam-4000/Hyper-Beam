@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2018_AMC_12B_Problems/Problem_19",
+  "title": "2018 AMC 10B Problems/Problem 21",
+  "problem": "Mary chose an even $4$ -digit number $n$ . She wrote down all the divisors of $n$ in increasing order from left to right: $1,2,\\ldots,\\dfrac{n}{2},n$ . At some moment Mary wrote $323$ as a divisor of $n$ . What is the smallest possible value of the next divisor written to the right of $323$ ? $\\textbf{(A) } 324 \\qquad \\textbf{(B) } 330 \\qquad \\textbf{(C) } 340 \\qquad \\textbf{(D) } 361 \\qquad \\textbf{(E) } 646$",
+  "solution": "Let $d$ be the next divisor written to the right of $323.$ If $\\gcd(323,d)=1,$ then \\[n\\geq323d>323^2>100^2=10000,\\] which contradicts the precondition that $n$ is a $4$ -digit number. It follows that $\\gcd(323,d)>1.$ Since $323=17\\cdot19,$ the smallest possible value of $d$ is $17\\cdot20=\\boxed{\\textbf{(C) } 340},$ from which \\[n=\\operatorname{lcm}(323,d)=17\\cdot19\\cdot20=6460.\\] ~MRENTHUSIASM ~tdeng",
+  "answer": "Since prime factorizing $323$ gives you $17 \\cdot 19$ , the desired answer needs to be a multiple of $17$ or $19$ , this is because if it is not a multiple of $17$ or $19$ , $n$ will be more than a $4$ digit number. For example, if the answer were to instead be $324$ , $n$ would have to be a multiple of $2^2\\cdot3^4\\cdot17\\cdot19$ for both $323$ and $324$ to be a valid factor, meaning $n$ would have to be at least $104652$ , which is too big. Looking at the answer choices, $\\textbf{(A)}$ and $\\textbf{(B)}$ are both not a multiple of neither $17$ nor $19$ , $\\textbf{(C)}$ is divisible by $17$ . $\\textbf{(D)}$ is divisible by $19$ , and $\\textbf{(E)}$ is divisible by both $17$ and $19$ . Since $\\boxed{\\textbf{(C) } 340}$ is the smallest number divisible by either $17$ or $19$ it is the answer. Checking, we can see that $n$ would be $6460$ , a $4$ -digit number. Note that $n$ is also divisible by $2$ , one of the listed divisors of $n$ . (If $n$ was not divisible by $2$ , we would need to look for a different divisor.) -Edited by Mathandski",
+  "year": 2018,
+  "competition": "AMC 12B",
+  "problem_number": 19,
+  "difficulty_tier": "early_gpt",
+  "tags": [
+    "AMC 12B",
+    "2018",
+    "early_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:22:45.686187+00:00"
+}

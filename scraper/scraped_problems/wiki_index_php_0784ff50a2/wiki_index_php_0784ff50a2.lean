@@ -1,0 +1,18 @@
+-- 2024 AIME II Problems/Problem 3
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2024_AIME_II_Problems/Problem_3
+
+-- Problem (LaTeX):
+/-
+Find the number of ways to place a digit in each cell of a 2x3 grid so that the sum of the two numbers formed by reading left to right is $999$ , and the sum of the three numbers formed by reading top to bottom is $99$ . The grid below is an example of such an arrangement because $8+991=999$ and $9+9+81=99$ . \[\begin{array}{|c|c|c|} \hline 0 & 0 & 8 \\ \hline 9 & 9 & 1 \\ \hline \end{array}\]
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Consider this table: $\begin{array}{|c|c|c|} \hline a & b & c \\ \hline d & e & f\\ \hline \end{array}$ We note that $c+f = 9$ , because $c+f \leq 18$ , meaning it never achieves a unit's digit sum of $9$ otherwise. Since no values are carried onto the next digit, this implies $b+e=9$ and $a+d=9$ . We can then simplify our table into this: $\begin{array}{|c|c|c|} \hline a & b & c \\ \hline 9-a & 9-b & 9-c \\ \hline \end{array}$ We want $10(a+b+c) + (9-a+9-b+9-c) = 99$ , or $9(a+b+c+3) = 99$ , or $a+b+c=8$ . Since zeroes are allowed, we just need to apply stars and bars on $a, b, c$ , to get $\tbinom{8+3-1}{3-1} = \boxed{045}$ . ~akliu
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_0784ff50a2 : Prop := by
+  sorry

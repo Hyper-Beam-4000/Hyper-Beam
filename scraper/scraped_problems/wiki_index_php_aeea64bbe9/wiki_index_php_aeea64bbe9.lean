@@ -1,40 +1,20 @@
-import Mathlib.Data.Nat.Basic
+-- 2024 USAMO Problems/Problem 3
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2024_USAMO_Problems/Problem_3
+
+-- Problem (LaTeX):
+/-
+Let $m$ be a positive integer. A triangulation of a polygon is $m$ -balanced if its triangles can be colored with $m$ colors in such a way that the sum of the areas of all triangles of the same color is the same for each of the $m$ colors. Find all positive integers $n$ for which there exists an $m$ -balanced triangulation of a regular $n$ -gon.
+Note: A triangulation of a convex polygon $\mathcal{P}$ with $n \geq 3$ sides is any partitioning of $\mathcal{P}$ into $n-2$ triangles by $n-3$ diagonals of $\mathcal{P}$ that do not intersect in the polygon's interior. Solution 1 The answer is if and only if $m$ is a proper divisor of $n$ . We represent the vertices of the regular $n$ -gon using complex numbers. Let $\omega = \exp(2\pi i/n)$ be a primitive $n$ -th root of unity, and label the vertices as $1, \omega, \omega^2, \ldots, \omega^{n-1}$ . Key Lemma: The triangle with vertices $\omega^k, \omega^{k+a}, \omega^{k+b}$ has signed area: \[T(a, b) := \frac{(\omega^a - 1)(\omega^b - 1)(\omega^{-b} - \omega^{-a})}{4i}\] Proof of Lemma: We can rotate by $\omega^{-k}$ to assume without loss of generality that $k = 0$ . Then we apply the complex shoelace formula to the triangle with vertices $1, \omega^a, \omega^b$ : \[\frac{i}{4} \det \begin{bmatrix} 1 & 1 & 1 \\ \omega^a & \omega^{-a} & 1 \\ \omega^b & \omega^{-b} & 1 \end{bmatrix} = \frac{i}{4} \det \begin{bmatrix} 0 & 0 & 1 \\ \omega^a - 1 & \omega^{-a} - 1 & 1 \\ \omega^b - 1 & \omega^{-b} - 1 & 1 \end{bmatrix}\] which simplifies to the expression for $T(a, b)$ above. Construction (Sufficiency): To construct a valid triangulation and coloring when $m$ divides $n$ , we draw all the diagonals from vertex 1, and then color the resulting triangles with the $m$ colors in cyclic order. For example, when $n = 9$ and $m = 3$ , we get a coloring with red, green, blue as shown in the image, repeating cyclically. To prove this works, we fix a residue $r \mod m$ corresponding to one of the colors. Then the total area of triangles with this color is: \[\sum_{\substack{0 \leq j < n \\ j \equiv r \mod m}} \text{Area}(\omega^0, \omega^j, \omega^{j+1}) = \sum_{\substack{0 \leq j < n \\ j \equiv r \mod m}} T(j, j+1)\] After algebraic manipulation: \[= \frac{\omega - 1}{4i} \left(\frac{n}{m}(1 + \omega^{-1}) + \sum_{\substack{0 \leq j < n \\ j \equiv r \mod m}} (\omega^{-1-j} - \omega^j)\right)\] When $m$ divides $n$ , we can show that the inner sum vanishes, and the total area of each color equals: \[\sum_{\substack{0 \leq j < n \\ j \equiv r \mod m}} \text{Area}(\omega^0, \omega^j, \omega^{j+1}) = \frac{n}{m} \cdot \frac{\omega - \omega^{-1}}{4i}\] Since the right-hand side does not depend on the residue $r$ , this shows all colors have equal area. Necessity: To prove that $m$ must divide $n$ , we note that if there were a valid triangulation and coloring, the total area of each color would equal: \[S := \frac{n}{m} \cdot \frac{\omega - \omega^{-1}}{4i}\] We then prove the following claim: The number $4i \cdot S$ is not an algebraic integer when $m \nmid n$ . This can be shown using the fact that $K = \mathbb{Q}(\omega)$ is a number field with ring of integers $\mathcal{O}_K = \mathbb{Z}[\omega]$ . We demonstrate that: \[\omega \cdot 4i \cdot S = \frac{n}{m}\omega^2 - \frac{n}{m}\] is not an algebraic integer when $m$ doesn't divide $n$ because $\frac{n}{m} \not\in \mathbb{Z}$ . However, for any triangle in our construction, $4i \cdot T(a,b)$ is always an algebraic integer. Since a finite sum of algebraic integers is also an algebraic integer, the sum of expressions of the form $4i \cdot T(a,b)$ can never equal $4i \cdot S$ unless $m$ divides $n$ . We can also show this directly by noting that $T(a,b)$ is always divisible by $\frac{\omega - \omega^{-1}}{4i}$ , which means we need $\frac{n}{m}$ to be an algebraic integer. A rational number is an algebraic integer if and only if it's a rational integer, so $\frac{n}{m}$ is an algebraic integer exactly when $m$ divides $n$ . Therefore, a valid triangulation and coloring exists if and only if $m$ is a proper divisor of $n$ . ~ brandonyee Let $m$ be a positive integer. A triangulation of a polygon is $m$ -balanced if its triangles can be colored with $m$ colors in such a way that the sum of the areas of all triangles of the same color is the same for each of the $m$ colors. Find all positive integers $n$ for which there exists an $m$ -balanced triangulation of a regular $n$ -gon.
+Note: A triangulation of a convex polygon $\mathcal{P}$ with $n \geq 3$ sides is any partitioning of $\mathcal{P}$ into $n-2$ triangles by $n-3$ diagonals of $\mathcal{P}$ that do not intersect in the polygon's interior.
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+The answer is if and only if $m$ is a proper divisor of $n$ . We represent the vertices of the regular $n$ -gon using complex numbers. Let $\omega = \exp(2\pi i/n)$ be a primitive $n$ -th root of unity, and label the vertices as $1, \omega, \omega^2, \ldots, \omega^{n-1}$ . Key Lemma: The triangle with vertices $\omega^k, \omega^{k+a}, \omega^{k+b}$ has signed area: \[T(a, b) := \frac{(\omega^a - 1)(\omega^b - 1)(\omega^{-b} - \omega^{-a})}{4i}\] Proof of Lemma: We can rotate by $\omega^{-k}$ to assume without loss of generality that $k = 0$ . Then we apply the complex shoelace formula to the triangle with vertices $1, \omega^a, \omega^b$ : \[\frac{i}{4} \det \begin{bmatrix} 1 & 1 & 1 \\ \omega^a & \omega^{-a} & 1 \\ \omega^b & \omega^{-b} & 1 \end{bmatrix} = \frac{i}{4} \det \begin{bmatrix} 0 & 0 & 1 \\ \omega^a - 1 & \omega^{-a} - 1 & 1 \\ \omega^b - 1 & \omega^{-b} - 1 & 1 \end{bmatrix}\] which simplifies to the expression for $T(a, b)$ above. Construction (Sufficiency): To construct a valid triangulation and coloring when $m$ divides $n$ , we draw all the diagonals from vertex 1, and then color the resulting triangles with the $m$ colors in cyclic order. For example, when $n = 9$ and $m = 3$ , we get a coloring with red, green, blue as shown in the image, repeating cyclically. To prove this works, we fix a residue $r \mod m$ corresponding to one of the colors. Then the total area of triangles with this color is: \[\sum_{\substack{0 \leq j < n \\ j \equiv r \mod m}} \text{Area}(\omega^0, \omega^j, \omega^{j+1}) = \sum_{\substack{0 \leq j < n \\ j \equiv r \mod m}} T(j, j+1)\] After algebraic manipulation: \[= \frac{\omega - 1}{4i} \left(\frac{n}{m}(1 + \omega^{-1}) + \sum_{\substack{0 \leq j < n \\ j \equiv r \mod m}} (\omega^{-1-j} - \omega^j)\right)\] When $m$ divides $n$ , we can show that the inner sum vanishes, and the total area of each color equals: \[\sum_{\substack{0 \leq j < n \\ j \equiv r \mod m}} \text{Area}(\omega^0, \omega^j, \omega^{j+1}) = \frac{n}{m} \cdot \frac{\omega - \omega^{-1}}{4i}\] Since the right-hand side does not depend on the residue $r$ , this shows all colors have equal area. Necessity: To prove that $m$ must divide $n$ , we note that if there were a valid triangulation and coloring, the total area of each color would equal: \[S := \frac{n}{m} \cdot \frac{\omega - \omega^{-1}}{4i}\] We then prove the following claim: The number $4i \cdot S$ is not an algebraic integer when $m \nmid n$ . This can be shown using the fact that $K = \mathbb{Q}(\omega)$ is a number field with ring of integers $\mathcal{O}_K = \mathbb{Z}[\omega]$ . We demonstrate that: \[\omega \cdot 4i \cdot S = \frac{n}{m}\omega^2 - \frac{n}{m}\] is not an algebraic integer when $m$ doesn't divide $n$ because $\frac{n}{m} \not\in \mathbb{Z}$ . However, for any triangle in our construction, $4i \cdot T(a,b)$ is always an algebraic integer. Since a finite sum of algebraic integers is also an algebraic integer, the sum of expressions of the form $4i \cdot T(a,b)$ can never equal $4i \cdot S$ unless $m$ divides $n$ . We can also show this directly by noting that $T(a,b)$ is always divisible by $\frac{\omega - \omega^{-1}}{4i}$ , which means we need $\frac{n}{m}$ to be an algebraic integer. A rational number is an algebraic integer if and only if it's a rational integer, so $\frac{n}{m}$ is an algebraic integer exactly when $m$ divides $n$ . Therefore, a valid triangulation and coloring exists if and only if $m$ is a proper divisor of $n$ . ~ brandonyee
+-/
+
 import Mathlib.Tactic
 
-open Nat
-
--- Theorem: A regular n-gon can have an m-balanced triangulation if and only if m is a proper divisor of n.
-theorem m_balanced_triangulation_exists (n m : ℕ) (h : 0 < m) : 
-  (∃ (triangulation : List (ℕ × ℕ × ℕ)), 
-    ∃ (coloring : List ℕ), 
-      (∀ t ∈ triangulation, t.1 < n ∧ t.2 < n ∧ t.3 < n) ∧
-      (∀ t ∈ triangulation, coloring.length = m) ∧
-      (∀ c < m, 
-        let area_sum := ∑ t in triangulation, if coloring.get t = c then area_of_triangle t else 0
-        in area_sum = (1 / m) * total_area n)
-  ) ↔ m ∣ n := by
-  -- Proof strategy:
-  -- 1. Show sufficiency: If m divides n, construct a triangulation and coloring.
-  -- 2. Show necessity: If an m-balanced triangulation exists, then m must divide n.
-
-  -- Sufficiency: Assume m divides n.
-  constructor
-  · intro hmn
-    -- Construct the triangulation by drawing diagonals from one vertex.
-    -- Color the triangles cyclically with m colors.
-    have : m ∣ n := hmn
-    sorry -- Complete the construction and show the areas are equal.
-
-  -- Necessity: Assume an m-balanced triangulation exists.
-  · intro htri
-    -- If an m-balanced triangulation exists, show that m must divide n.
-    obtain ⟨triangulation, coloring, htriangles, hcolors, hequal_areas⟩ := htri
-    -- Use the fact that the total area is divided equally among m colors.
-    -- This implies m divides the total number of triangles, hence m divides n.
-    sorry -- Complete the argument using properties of divisors and areas.
-
--- Placeholder for area calculation function
-def area_of_triangle (t : ℕ × ℕ × ℕ) : ℝ := sorry
-
--- Placeholder for total area of the n-gon
-def total_area (n : ℕ) : ℝ := sorry
+theorem wiki_index_php_aeea64bbe9 : Prop := by
+  sorry

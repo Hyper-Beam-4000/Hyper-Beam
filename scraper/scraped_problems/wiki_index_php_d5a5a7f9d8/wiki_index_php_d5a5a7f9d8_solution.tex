@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2024 AMC 10A Problems/Problem 23}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Subtracting the first two equations yields $(a-c)(b-1)=13$ . Notice that both factors are integers, so $b-1$ could equal one of $13,1,-1,-13$ and $b=14,2,0,-12$ . We consider each case separately: For $b=0$ , from the second equation, we see that $a=87$ . Then $87c=60$ , which is not possible as $c$ is an integer, so this case is invalid. For $b=2$ , we have $2c+a=87$ and $ca=58$ , which by experimentation on the factors of $58$ has no solution, so this is also invalid. For $b=14$ , we have $14c+a=87$ and $ca=46$ , which by experimentation on the factors of $46$ has no solution, so this is also invalid. Thus, we must have $b=-12$ , so $a=12c+87$ and $ca=72$ . Thus $c(12c+87)=72$ , so $c(4c+29)=24$ . We can simply trial and error this to find that $c=-8$ so then $a=-9$ . The answer is then $(-9)(-12)+(-12)(-8)+(-8)(-9)=108+96+72=\boxed{\textbf{(D) }276}$ . By Antony Huang ~Very Minor Edit by lucassf12
+
+\end{document}

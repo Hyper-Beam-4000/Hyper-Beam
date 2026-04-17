@@ -1,0 +1,18 @@
+-- 2018 AIME II Problems/Problem 12
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_AIME_II_Problems/Problem_12
+
+-- Problem (LaTeX):
+/-
+Let $ABCD$ be a convex quadrilateral with $AB = CD = 10$ , $BC = 14$ , and $AD = 2\sqrt{65}$ . Assume that the diagonals of $ABCD$ intersect at point $P$ , and that the sum of the areas of triangles $APB$ and $CPD$ equals the sum of the areas of triangles $BPC$ and $APD$ . Find the area of quadrilateral $ABCD$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $AP=x$ and let $PC=\rho x$ . Let $[ABP]=\Delta$ and let $[ADP]=\Lambda$ . We easily get $[PBC]=\rho \Delta$ and $[PCD]=\rho\Lambda$ . We are given that $[ABP] +[PCD] = [PBC]+[ADP]$ , which we can now write as \[\Delta + \rho\Lambda = \rho\Delta + \Lambda \qquad \Longrightarrow \qquad \Delta -\Lambda = \rho (\Delta -\Lambda).\] Either $\Delta = \Lambda$ or $\rho=1$ . The former would imply that $ABCD$ is a parallelogram, which it isn't; therefore we conclude $\rho=1$ and $P$ is the midpoint of $AC$ . Let $\angle BAD = \theta$ and $\angle BCD = \phi$ . Then $[ABCD]=2\cdot [BCD]=140\sin\phi$ . On one hand, since $[ABD]=[BCD]$ , we have \begin{align}\sqrt{65}\sin\theta = 7\sin\phi \quad \implies \quad 16+49\cos^2\phi = 65\cos^2\theta\end{align} whereas, on the other hand, using cosine formula to get the length of $BD$ , we get \[10^2+4\cdot 65 - 40\sqrt{65}\cos\theta = 10^2+14^2-280\cos\phi\] \begin{align}\tag{2}\implies \qquad 65\cos^2\theta = \left(7\cos\phi+ \frac{8}{5}\right)^2\end{align} Eliminating $\cos\theta$ in the above two equations and solving for $\cos\phi$ we get \[\cos\phi = \frac{3}{5}\qquad \implies \qquad \sin\phi = \frac{4}{5}\] which finally yields $[ABCD]=2\cdot [BCD] = 140\sin\phi = 112$ .
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_077869dc8d : Prop := by
+  sorry

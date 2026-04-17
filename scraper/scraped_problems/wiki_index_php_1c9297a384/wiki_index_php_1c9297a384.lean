@@ -1,0 +1,18 @@
+-- 2018 AMC 12B Problems/Problem 25
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_AMC_12B_Problems/Problem_25
+
+-- Problem (LaTeX):
+/-
+Circles $\omega_1$ , $\omega_2$ , and $\omega_3$ each have radius $4$ and are placed in the plane so that each circle is externally tangent to the other two. Points $P_1$ , $P_2$ , and $P_3$ lie on $\omega_1$ , $\omega_2$ , and $\omega_3$ respectively such that $P_1P_2=P_2P_3=P_3P_1$ and line $P_iP_{i+1}$ is tangent to $\omega_i$ for each $i=1,2,3$ , where $P_4 = P_1$ . See the figure below. The area of $\triangle P_1P_2P_3$ can be written in the form $\sqrt{a}+\sqrt{b}$ for positive integers $a$ and $b$ . What is $a+b$ ? [asy] unitsize(12); pair A = (0, 8/sqrt(3)), B = rotate(-120)*A, C = rotate(120)*A; real theta = 41.5; pair P1 = rotate(theta)*(2+2*sqrt(7/3), 0), P2 = rotate(-120)*P1, P3 = rotate(120)*P1; filldraw(P1--P2--P3--cycle, gray(0.9)); draw(Circle(A, 4)); draw(Circle(B, 4)); draw(Circle(C, 4)); dot(P1); dot(P2); dot(P3); defaultpen(fontsize(10pt)); label("$P_1$", P1, E*1.5); label("$P_2$", P2, SW*1.5); label("$P_3$", P3, N); label("$\omega_1$", A, W*17); label("$\omega_2$", B, E*17); label("$\omega_3$", C, W*17); [/asy] $\textbf{(A) }546\qquad\textbf{(B) }548\qquad\textbf{(C) }550\qquad\textbf{(D) }552\qquad\textbf{(E) }554$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $O_1$ and $O_2$ be the centers of $\omega_1$ and $\omega_2$ respectively and draw $O_1O_2$ , $O_1P_1$ , and $O_2P_2$ . Note that $\angle{O_1P_1P_2}$ and $\angle{O_2P_2P_3}$ are both right. Furthermore, since $\triangle{P_1P_2P_3}$ is equilateral, $m\angle{P_1P_2P_3} = 60^\circ$ and $m\angle{O_2P_2P_1} = 30^\circ$ . Mark $M$ as the base of the altitude from $O_2$ to $P_1P_2.$ Since $\triangle P_2O_2M$ is a 30-60-90 triangle, $O_2M = 2$ and $P_2M = 2\sqrt{3}$ . Also, since $O_1O_2 = 8$ and $O_1P_1 = 4$ , we can find $P_1M = \sqrt{8^2 - (4 + 2)^2} = 2\sqrt{7}$ . Thus, $P_1P_2 = P_1M + P_2M = 2\sqrt{3} + 2\sqrt{7}$ . This makes \[\left[P_1P_2P_3\right] = \frac{\sqrt 3}4\cdot\left(2\sqrt 3 + 2\sqrt 7\right)^2 = 10\sqrt 3 + 6\sqrt 7 = \sqrt{300} + \sqrt{252}.\] So, our answer is $252 + 300 = \boxed{\textbf{D) }552}$ . Note by diyarv: A way to see that $P_1M = 2{\sqrt 7}$ is through similar triangles. Call the intersection between $P_1M$ and $O_1O_2$ $S$ . Since angles $\angle{O_1P_1S}$ and $\angle{O_2MS}$ are both right angles, and $\angle{P_1SO_1}$ and $\angle{MSO_2}$ are congruent, triangles $\triangle{P_1SO_1}$ and $\triangle{MSO_2}$ are similar by AA similarity. And, since $O_1P_1$ is $4$ and $O_2M$ is 2, the common ratio is $2$ . Using the fact that $O_1S + SO_2 = 8$ , we see that these lengths are $\frac{16}{3}$ and $\frac{8}{3}$ respectively. Using the Pythagorean theorem, we see that $P_1S$ and $SP_2$ are $\frac{2\sqrt{7}}{3}$ and $\frac{4\sqrt{7}}{3}$ respectively, giving us a sum of $2\sqrt{7}$ . A better note on why $P_1M = \sqrt{8^2 - (4 + 2)^2}$ : This is more easily seen by translating $O_1O_2$ so that $O_2$ is mapped to $M$ and the resulting $O_1’$ remains collinear with the original $O_1$ and $P_1$ . This forms a right triangle, with leg $O_1’ P = 4+2 = 6$ and hypotenuse $O_1’O_2 = 8$ . Therefore $P_1M = \sqrt{8^2 - (4 + 2)^2}$
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_1c9297a384 : Prop := by
+  sorry

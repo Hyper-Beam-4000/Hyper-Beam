@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_AMC_12A_Problems/Problem_2",
+  "title": "2019 AMC 12A Problems/Problem 2",
+  "problem": "Suppose $a$ is $150\\%$ of $b$ . What percent of $a$ is $3b$ ? $\\textbf{(A) } 50 \\qquad \\textbf{(B) } 66+\\frac{2}{3} \\qquad \\textbf{(C) } 150 \\qquad \\textbf{(D) } 200 \\qquad \\textbf{(E) } 450$",
+  "solution": "Since $a=1.5b$ , that means $b=\\frac{a}{1.5}$ . We multiply by $3$ to get a $3b$ term, yielding $3b=2a$ , and $2a$ is $\\boxed{\\textbf{(D) }200\\%}$ of $a$ .",
+  "answer": "",
+  "year": 2019,
+  "competition": "AMC 12A",
+  "problem_number": 2,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12A",
+    "2019",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:23:03.941040+00:00"
+}

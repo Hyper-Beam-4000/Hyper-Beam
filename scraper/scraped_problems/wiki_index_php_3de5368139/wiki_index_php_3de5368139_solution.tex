@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2025 AMC 12B Problems/Problem 20}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+We will solve this using states. Let $P_n$ be the probability of reaching $4$ , given that you start from $n$ . We want to find $P_0$ . Of course, $P_4 = 1$ . We also know that \[P_3 = \frac{1}{4}P_4 + \frac{1}{4}P_2\] \[P_2 = \frac{1}{4}P_3 + \frac{1}{4}P_1\] \[P_1 = \frac{1}{4}P_2 + \frac{1}{4}P_0\] \[P_0 = \frac{1}{2}P_1.\] Solving the system, we find that $P_1 = \frac{2}{97}$ and $P_0 = \boxed{\frac{1}{97}}.$ ~lprado
+
+\end{document}

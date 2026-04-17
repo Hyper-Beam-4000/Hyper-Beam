@@ -1,0 +1,18 @@
+-- 2024 AIME I Problems/Problem 6
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2024_AIME_I_Problems/Problem_6
+
+-- Problem (LaTeX):
+/-
+Consider the paths of length $16$ that follow the lines from the lower left corner to the upper right corner on an $8\times 8$ grid. Find the number of such paths that change direction exactly four times, as in the examples shown below. [asy] size(10cm); usepackage("tikz");label("\begin{tikzpicture}[scale=.5]\draw(0,0)grid(8,8);\draw[line width=2,red](0,0)--(2,0)--(2,3)--(5,3)--(5,8)--(8,8);\end{tikzpicture}",origin); label("\begin{tikzpicture}[scale=.5]\draw(0,0)grid(8,8);\draw[line width=2,red](0,0)--(0,3)--(3,3)--(3,5)--(8,5)--(8,8);\end{tikzpicture}",E); [/asy]
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+We divide the path into eight “ $R$ ” movements and eight “ $U$ ” movements. Five sections of alternating $RURUR$ or $URURU$ are necessary in order to make four “turns" because each transition from $R$ to $U$ or from $U$ to $R$ is one turn. Without loss of generality, we use the first case and multiply by $2$ (because we can convert each path in the first case to one in the second case by turning $R$ 's to $U$ 's and $U$ 's to $R$ 's). For $U$ , let $a$ be the length of the first block of $U$ 's and $b$ be the second block of $U$ 's. There are eight $U$ 's in total, so we have to have $a+b=8$ . We have seven ordered pairs of such positive integers $(a,b)$ , specifically $(1,7),(2,6),\ldots,(6,2),(7,1)$ . For $R$ , we subtract $1$ from each block of $R$ 's (because each block of $R$ 's must have length at least $1$ , and to use stars and bars we have to have minimum length $0$ ). From here, we use stars and bars to get ${7 \choose 5}=21$ . Thus our answer is $7\cdot21\cdot2=\boxed{294}$ . ~eevee9406
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_5d16254911 : Prop := by
+  sorry

@@ -1,0 +1,19 @@
+-- 2018 AIME I Problems/Problem 10
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_AIME_I_Problems/Problem_10
+
+-- Problem (LaTeX):
+/-
+The wheel shown below consists of two circles and five spokes, with a label at each point where a spoke meets a circle. A bug walks along the wheel, starting at point $A$ . At every step of the process, the bug walks from one labeled point to an adjacent labeled point. Along the inner circle the bug only walks in a counterclockwise direction, and along the outer circle the bug only walks in a clockwise direction. For example, the bug could travel along the path $AJABCHCHIJA$ , which has $10$ steps. Let $n$ be the number of paths with $15$ steps that begin and end at point $A$ . Find the remainder when $n$ is divided by $1000.$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+We divide this up into casework. The "directions" the bug can go are $\text{Clockwise}$ , $\text{Counter-Clockwise}$ , and $\text{Switching}$ . Let an $I$ signal going clockwise (because it has to be in the inner circle), an $O$ signal going counter-clockwise, and an $S$ switching between inner and outer circles. An example string of length fifteen that gets the bug back to $A$ would be $ISSIIISOOSISSII$ .
+For the bug to end up back at $A$ , the difference between the number of $I$ 's and $O$ 's must be a multiple of $5$ . Case 1 -- There are 15 more $I$ 's than $O$ 's. There is clearly $1$ way for this to happen. Case 2 -- There are $5$ more $I$ 's than $O$ 's. We split this case up into several sub-cases based on the number of $S$ 's. Sub-case 1 -- There are $10$ $S$ 's and $5$ $I$ 's. Notice that the number of ways to order the $I$ 's and $O$ 's are independent assortments because the $I$ 's must be in the "even" spaces between $S$ 's (i.e. before the 1st $S$ , between the 2nd and 3rd $S$ 's, etc.), while the $O$ 's must be in the "odd" spaces. Sub-case 1 -- There are $10$ $S$ 's and $5$ $I$ 's. Notice that the number of ways to order the $I$ 's and $O$ 's are independent assortments because the $I$ 's must be in the "even" spaces between $S$ 's (i.e. before the 1st $S$ , between the 2nd and 3rd $S$ 's, etc.), while the $O$ 's must be in the "odd" spaces. There are $6$ places to put the $I$ 's (after the 0th, 2nd, 4th, 6th, 8th, and 10th $S$ 's), and $4$ places to put the (0) $O$ 's. We use stars and bars to get an answer of $\binom{10}{5}\binom{4}{0}$ Sub-case 2 -- There are $8$ $S$ 's, $6$ $I$ 's, and $1$ $O$ . Similarly and by using stars and bars, we get an amount of $\binom{10}{4}\binom{4}{1}$ All the other sub-cases are similar, with a total of $\binom{10}{5}\binom{4}{0}+\binom{10}{4}\binom{4}{1}+\cdots+\binom{10}{1}\binom{4}{4}=\binom{14}{5}=2002$ by Vandermonde's Identity . There are $6$ places to put the $I$ 's (after the 0th, 2nd, 4th, 6th, 8th, and 10th $S$ 's), and $4$ places to put the (0) $O$ 's. We use stars and bars to get an answer of $\binom{10}{5}\binom{4}{0}$ Sub-case 2 -- There are $8$ $S$ 's, $6$ $I$ 's, and $1$ $O$ . Similarly and by using stars and bars, we get an amount of $\binom{10}{4}\binom{4}{1}$ Case 3 -- There are $5$ more $O$ 's than $I$ 's. This case is similar to the other case. Here is an example of a sub-case for this case. Sub-case There are $10$ $S$ 's and $5$ $O$ 's. There are $\binom{9}{4}\binom{5}{0}$ ways to do this. We can see now that the pattern is going to be $\binom{9}{4}\binom{5}{0}+\binom{9}{3}\binom{5}{1}+\cdots+\binom{9}{0}\binom{5}{4}=\binom{14}{4}=1001$ . Sub-case There are $10$ $S$ 's and $5$ $O$ 's. There are $\binom{9}{4}\binom{5}{0}$ ways to do this. So, the total number of ways is $1+2002+1001=3004$ which gives $\boxed{004}$ as the answer.
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_310647f083 : Prop := by
+  sorry

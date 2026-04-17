@@ -1,0 +1,18 @@
+-- 2023 AIME II Problems/Problem 8
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2023_AIME_II_Problems/Problem_8
+
+-- Problem (LaTeX):
+/-
+Let $\omega = \cos\frac{2\pi}{7} + i \cdot \sin\frac{2\pi}{7},$ where $i = \sqrt{-1}.$ Find the value of the product \[\prod_{k=0}^6 \left(\omega^{3k} + \omega^k + 1\right).\]
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+For any $k\in Z$ , we have, \begin{align*} & \left( \omega^{3k} + \omega^k + 1 \right) \left( \omega^{3\left( 7 - k \right)} + \omega^{\left( 7 - k \right)} + 1 \right) \\ & = \omega^{3 \cdot 7} + \omega^{2k + 7} + \omega^{3k} + \omega^{-2k + 3 \cdot 7} + \omega^7 + \omega^k + \omega^{3\left( 7 - k \right)} + \omega^{\left( 7 - k \right)} + 1 \\ & = 1 + \omega^{2k} + \omega^{3k} + \omega^{-2k} + 1 + \omega^k + \omega^{-3k} + \omega^{-k} + 1 \\ & = 2 + \omega^{-3k} \sum_{j=0}^6 \omega^{j k} \\ & = 2 + \omega^{-3k} \frac{1 - \omega^{7 k}}{1 - \omega^k} \\ & = 2 . \end{align*} The second and the fifth equalities follow from the property that $\omega^7 = 1$ . Therefore, \begin{align*} \Pi_{k=0}^6 \left( \omega^{3k} + \omega^k + 1 \right) & = \left( \omega^{3 \cdot 0} + \omega^0 + 1 \right) \Pi_{k=1}^3 \left( \omega^{3k} + \omega^k + 1 \right) \left( \omega^{3\left( 7 - k \right)} + \omega^{\left( 7 - k \right)} + 1 \right) \\ & = 3 \cdot 2^3 \\ & = \boxed{\textbf{024}}. \end{align*} Man, What can I say? Mamba never out! ~Steven Chen (Professor Chen Education Palace, www.professorchenedu.com) $k$ cannot be a multiple of $7$ , otherwise the first equation would equal $9$ instead of $2$ ~inaccessibles
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_303a21e589 : Prop := by
+  sorry

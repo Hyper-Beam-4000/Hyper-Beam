@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2024_AIME_I_Problems/Problem_14",
+  "title": "2024 AIME I Problems/Problem 14",
+  "problem": "Let $ABCD$ be a tetrahedron such that $AB=CD= \\sqrt{41}$ , $AC=BD= \\sqrt{80}$ , and $BC=AD= \\sqrt{89}$ . There exists a point $I$ inside the tetrahedron such that the distances from $I$ to each of the faces of the tetrahedron are all equal. This distance can be written in the form $\\frac{m \\sqrt n}{p}$ , where $m$ , $n$ , and $p$ are positive integers, $m$ and $p$ are relatively prime, and $n$ is not divisible by the square of any prime. Find $m+n+p$ .",
+  "solution": "Notice that \\(41=4^2+5^2\\), \\(89=5^2+8^2\\), and \\(80=8^2+4^2\\), let \\(A~(0,0,0)\\), \\(B~(4,5,0)\\), \\(C~(0,5,8)\\), and \\(D~(4,0,8)\\). Then the plane \\(BCD\\) has a normal\n\\begin{equation*}\n\\mathbf n:=\\frac14\\overrightarrow{BC}\\times\\overrightarrow{CD}=\\frac14\\begin{pmatrix}-4\\\\0\\\\8\\end{pmatrix}\\times\\begin{pmatrix}4\\\\-5\\\\0\\end{pmatrix}=\\begin{pmatrix}10\\\\8\\\\5\\end{pmatrix}.\n\\end{equation*}\nHence, the distance from \\(A\\) to plane \\(BCD\\), or the height of the tetrahedron, is\n\\begin{equation*}\nh:=\\frac{\\mathbf n\\cdot\\overrightarrow{AB}}{|\\mathbf n|}=\\frac{10\\times4+8\\times5+5\\times0}{\\sqrt{10^2+8^2+5^2}}=\\frac{80\\sqrt{21}}{63}.\n\\end{equation*}\nEach side of the tetrahedron has the same area due to congruency by \"S-S-S\", and we call it \\(S\\). Then by the volume formula for pyramids,\n\\begin{align*}\n\\frac13Sh&=V_{D\\text-ABC}=V_{I\\text-ABC}+V_{I\\text-BCD}+V_{I\\text-CDA}+V_{I\\text-DAB}\\\\\n&=\\frac13Sr\\cdot4.\n\\end{align*}\nHence, \\(r=\\tfrac h4=\\tfrac{20\\sqrt{21}}{63}\\), and so the answer is \\(20+21+63=\\boxed{104}\\). Solution by Quantum-Phantom",
+  "answer": "",
+  "year": 2024,
+  "competition": "AIME I",
+  "problem_number": 14,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AIME I",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:37:55.469236+00:00"
+}

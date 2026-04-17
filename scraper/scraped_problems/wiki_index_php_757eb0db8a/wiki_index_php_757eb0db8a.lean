@@ -1,0 +1,23 @@
+-- 2024 AMC 12A Problems/Problem 13
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2024_AMC_12A_Problems/Problem_13
+
+-- Problem (LaTeX):
+/-
+The graph of $y=e^{x+1}+e^{-x}-2$ has an axis of symmetry. What is the reflection of the point $(-1,\tfrac{1}{2})$ over this axis? $\textbf{(A) }\left(-1,-\frac{3}{2}\right)\qquad\textbf{(B) }(-1,0)\qquad\textbf{(C) }\left(-1,\frac{1}{2}\right)\qquad\textbf{(D) }\left(0,\frac{1}{2}\right)\qquad\textbf{(E) }\left(3,\frac{1}{2}\right)$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+The line of symmetry is probably of the form $x=a$ for some constant $a$ . A vertical line of symmetry at $x=a$ for a function $f$ exists if and only if $f(a-b)=f(a+b)$ ; we substitute $a-b$ and $a+b$ into our given function and see that we must have \[e^{a-b+1}+e^{-(a-b)}-2=e^{a+b+1}+e^{-(a+b)}-2\] for all real $b$ . Simplifying: \begin{align*}
+e^{a-b+1}+e^{-(a-b)}-2&=e^{a+b+1}+e^{-(a+b)}-2 \\
+e^{a-b+1}+e^{b-a}&=e^{a+b+1}+e^{-a-b} \\
+e^{a-b+1}-e^{-a-b}&=e^{a+b+1}-e^{b-a} \\
+e^{-b}\left(e^{a+1}-e^{-a}\right)&=e^b\left(e^{a+1}-e^{-a}\right). \\
+\end{align*} If $e^{a+1}-e^{-a}\neq0$ , then $e^{-b}=e^b$ for all real $b$ ; this is clearly impossible, so let $e^{a+1}-e^{-a}=0\implies a+1=-a\implies a=-\dfrac12$ . Thus, our line of symmetry is $x=-\dfrac12$ , and reflecting $\left(-1,\dfrac12\right)$ over this line gives $\boxed{\textbf{(D) }\left(0,\dfrac12\right)}.$ ~Technodoggo
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_757eb0db8a : Prop := by
+  sorry

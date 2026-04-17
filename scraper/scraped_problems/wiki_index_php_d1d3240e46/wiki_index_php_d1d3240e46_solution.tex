@@ -1,0 +1,12 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2019 AIME I Problems/Problem 5}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+One could recursively compute the probabilities of reaching $(0,0)$ as the first axes point from any point $(x,y)$ as \[P(x,y) = \frac{1}{3} P(x-1,y) + \frac{1}{3} P(x,y-1) + \frac{1}{3} P(x-1,y-1)\] for $x,y \geq 1,$ and the base cases are $P(0,0) = 1, P(x,0) = P(y,0) = 0$ for any $x,y$ not equal to zero.
+We then recursively find $P(4,4) = \frac{245}{2187}$ so the answer is $245 + 7 = \boxed{252}$ . If this algebra seems intimidating, you can watch a nice pictorial explanation of this by On The Spot Stem. https://www.youtube.com/watch?v=XBRuy3_TM9w
+
+\end{document}

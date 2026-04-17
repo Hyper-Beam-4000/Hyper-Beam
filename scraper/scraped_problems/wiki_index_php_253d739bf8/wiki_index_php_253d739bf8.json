@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12B_Problems/Problem_12",
+  "title": "2025 AMC 12B Problems/Problem 12",
+  "problem": "The windshield wiper on the driver's side of a large bus is depicted below. [asy] /* Made by MRENTHUSIASM */ size(200); pair A, B, C, D; A = origin; B = (3/2,3*sqrt(3)/2); C = B+(0,1.75); D = B-(0,1.75); draw(A--B,linewidth(1.1)); draw(C--D,red+linewidth(2.1)); dot(A^^B,linewidth(5)); label(\"$A$\",A,1.5*W); label(\"$B$\",B,1.5*E); label(\"$C$\",C,1.5*E); label(\"$D$\",D,1.5*E); [/asy] Arm $\\overline{AB}$ pivots back and forth around point $A$ , sweeping out an arc of $60^{\\circ}$ , symmetric about the vertical line through $A$ . The wiper blade $\\overline{CD}$ is attached to $B$ at its midpoint and stays vertical as the arm moves. The arm is $3$ feet long, and the wiper blade is $3.5$ feet tall. What is the area of the windshield cleaned by the wiper, in square feet, to the nearest hundredth? (Assume that the windshield is a flat vertical surface.) $\\textbf{(A) } 9.68 \\qquad \\textbf{(B) } 10.14 \\qquad \\textbf{(C) } 10.50 \\qquad \\textbf{(D) } 11.32 \\qquad \\textbf{(E) } 12.00$",
+  "solution": "The area cleaned by the wiper follows a thickened curve with vertical ends, where the curve is a $60^\\circ$ arc with radius $3$ . Since the sides are vertical, by Cavalieri's Principle, the area is equivalent to a rectangle with side lengths $3.5$ and the distance between the two vertical ends. Let $B'$ be the result of point $B$ at its leftmost point after it has swept $60^\\circ$ . Then $ABB'$ is equilateral so $BB' = AB = 3$ . So the area is $3.5 \\cdot 3 = \\boxed{\\textbf{(C) } 10.50}$ . Note: if you aren't aware of Cavalieri's Principle, you can still recognize this by slicing the top curved part of the shape and moving it to the bottom, creating a rectangle with the same area as the original shape.",
+  "answer": "",
+  "year": 2025,
+  "competition": "AMC 12B",
+  "problem_number": 12,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12B",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:32:28.351000+00:00"
+}

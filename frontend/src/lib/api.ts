@@ -43,6 +43,9 @@ export interface Problem {
   source?: string | null;
   url?: string | null;
   year?: number | null;
+  competition?: string | null;
+  problem_number?: number | null;
+  difficulty_tier?: string | null;
   problem_text?: string | null;
   solution_text?: string | null;
   problem_latex?: string | null;

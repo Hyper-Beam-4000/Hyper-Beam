@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2022_AIME_I_Problems/Problem_15",
+  "title": "2022 AIME I Problems/Problem 15",
+  "problem": "Let $x,$ $y,$ and $z$ be positive real numbers satisfying the system of equations: \\begin{align*} \\sqrt{2x-xy} + \\sqrt{2y-xy} &= 1 \\\\ \\sqrt{2y-yz} + \\sqrt{2z-yz} &= \\sqrt2 \\\\ \\sqrt{2z-zx} + \\sqrt{2x-zx} &= \\sqrt3. \\end{align*} Then $\\left[ (1-x)(1-y)(1-z) \\right]^2$ can be written as $\\frac{m}{n},$ where $m$ and $n$ are relatively prime positive integers. Find $m+n.$",
+  "solution": "First, let define a triangle with side lengths $\\sqrt{2x}$ , $\\sqrt{2z}$ , and $l$ , with altitude from $l$ 's equal to $\\sqrt{xz}$ . $l = \\sqrt{2x - xz} + \\sqrt{2z - xz}$ , the left side of one equation in the problem. Let $\\theta$ be angle opposite the side with length $\\sqrt{2x}$ . Then the altitude has length $\\sqrt{2z} \\cdot \\sin(\\theta) = \\sqrt{xz}$ and thus $\\sin(\\theta) = \\sqrt{\\frac{x}{2}}$ , so $x=2\\sin^2(\\theta)$ and the side length $\\sqrt{2x}$ is equal to $2\\sin(\\theta)$ . We can symmetrically apply this to the two other equations/triangles. By law of sines, we have $\\frac{2\\sin(\\theta)}{\\sin(\\theta)} = 2R$ , with $R=1$ as the circumradius, same for all 3 triangles.\nThe circumcircle's central angle to a side is $2 \\arcsin(l/2)$ , so the 3 triangles' $l=1, \\sqrt{2}, \\sqrt{3}$ , have angles $120^{\\circ}, 90^{\\circ}, 60^{\\circ}$ , respectively. This means that by half angle arcs, we see that we have in some order, $x=2\\sin^2(\\alpha)$ , $y=2\\sin^2(\\beta)$ , and $z=2\\sin^2(\\gamma)$ (not necessarily this order, but here it does not matter due to symmetry), satisfying that $\\alpha+\\beta=180^{\\circ}-\\frac{120^{\\circ}}{2}$ , $\\beta+\\gamma=180^{\\circ}-\\frac{90^{\\circ}}{2}$ , and $\\gamma+\\alpha=180^{\\circ}-\\frac{60^{\\circ}}{2}$ . Solving, we get $\\alpha=\\frac{135^{\\circ}}{2}$ , $\\beta=\\frac{105^{\\circ}}{2}$ , and $\\gamma=\\frac{165^{\\circ}}{2}$ . We notice that \\[[(1-x)(1-y)(1-z)]^2=[\\sin(2\\alpha)\\sin(2\\beta)\\sin(2\\gamma)]^2=[\\sin(135^{\\circ})\\sin(105^{\\circ})\\sin(165^{\\circ})]^2\\] \\[=\\left(\\frac{\\sqrt{2}}{2} \\cdot \\frac{\\sqrt{6}-\\sqrt{2}}{4} \\cdot \\frac{\\sqrt{6}+\\sqrt{2}}{4}\\right)^2 = \\left(\\frac{\\sqrt{2}}{8}\\right)^2=\\frac{1}{32} \\to \\boxed{033}. \\blacksquare\\] - kevinmathz",
+  "answer": "",
+  "year": 2022,
+  "competition": "AIME I",
+  "problem_number": 15,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME I",
+    "2022",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:36:35.698010+00:00"
+}

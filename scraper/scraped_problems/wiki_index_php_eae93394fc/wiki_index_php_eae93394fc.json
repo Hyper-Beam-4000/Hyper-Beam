@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12A_Problems/Problem_5",
+  "title": "2025 AMC 12A Problems/Problem 5",
+  "problem": "In the figure below, the outside square contains infinitely many squares, each of them with the same center and sides parallel to the outside square. The ratio of the side length of a square to the side length of the next inner square is $k,$ where $0 < k < 1.$ The spaces between squares are alternately shaded, as shown in the figure (which is not necessarily drawn to scale). [asy] unitsize(1cm); int n = 25; real s = 6; real ratio = 0.767; real a = s; for (int i = 0; i < n; ++i) { real b = a * ratio; // Draw current square draw(box((-a/2,-a/2),(a/2,a/2))); if (i % 2 == 1) { fill(box((-a/2,-a/2),(a/2,a/2)), gray(1)); } else { fill(box((-a/2,-a/2),(a/2,a/2)), lightred); } a = b; } draw(box((-a/2,-a/2),(a/2,a/2))); [/asy] The area of the shaded portion of the figure is $64\\%$ of the area of the original square. What is $k?$ $\\textbf{(A) } \\frac 35 \\qquad \\textbf{(B) } \\frac {16}{25} \\qquad \\textbf{(C) } \\frac 23 \\qquad \\textbf{(D) } \\frac 34 \\qquad \\textbf{(E) } \\frac 45$",
+  "solution": "Let the side length of the largest square be $a,$ so it has area $a^2.$ Hence, the second-largest square has area $a^2k^2,$ the third-largest has $a^2k^4,$ and so on. It follows that the total shaded area is \\[a^2-a^2k^2+a^2k^4-a^2k^6+...=a^2(1-k^2+k^4-k^6+...)=a^2\\dfrac{1}{1+k^2}.\\] The ratio of the area of the shaded region to that of the original square is then \\[\\dfrac{a^2\\frac{1}{1+k^2}}{a^2}=\\dfrac{1}{1+k^2}=\\dfrac{64}{100}\\] \\[\\implies 64+64k^2=100\\implies k^2=\\dfrac{36}{64}\\implies k=\\boxed{\\text{(D) }\\dfrac{3}{4}}.\\] ~Tacos_are_yummy_1",
+  "answer": "",
+  "year": 2025,
+  "competition": "AMC 12A",
+  "problem_number": 5,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12A",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:31:38.378917+00:00"
+}

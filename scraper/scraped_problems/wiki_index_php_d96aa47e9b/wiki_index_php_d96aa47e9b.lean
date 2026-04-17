@@ -1,0 +1,18 @@
+-- 2018 AMC 12B Problems/Problem 15
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_AMC_12B_Problems/Problem_15
+
+-- Problem (LaTeX):
+/-
+How many odd positive $3$ -digit integers are divisible by $3$ but do not contain the digit $3$ ? $\textbf{(A) } 96 \qquad \textbf{(B) } 97 \qquad \textbf{(C) } 98 \qquad \textbf{(D) } 102 \qquad \textbf{(E) } 120$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $\underline{ABC}$ be one such odd positive $3$ -digit integer with hundreds digit $A,$ tens digit $B,$ and ones digit $C.$ Since $\underline{ABC}\equiv0\pmod3,$ we need $A+B+C\equiv0\pmod3$ by the divisibility rule for $3.$ As $A\in\{1,2,4,5,6,7,8,9\}$ and $C\in\{1,5,7,9\},$ there are $8$ possibilities for $A$ and $4$ possibilities for $C.$ Note that each ordered pair $(A,C)$ determines the value of $B$ modulo $3,$ so $B$ can be any element in one of the sets $\{0,6,9\},\{1,4,7\},$ or $\{2,5,8\}.$ We conclude that there are always $3$ possibilities for $B.$ By the Multiplication Principle, the answer is $8\cdot4\cdot3=\boxed{\textbf{(A) } 96}.$ ~Plasma_Vortex ~MRENTHUSIASM
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_d96aa47e9b : Prop := by
+  sorry

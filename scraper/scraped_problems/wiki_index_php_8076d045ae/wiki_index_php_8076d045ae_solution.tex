@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2017 AIME II Problems/Problem 3}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+[asy] pair A,B,C,D,X,Z,P; A=(0,0); B=(12,0); C=(8,10); X=(10,5); Z=(6,0); P=(6,3.4); fill(B--X--P--Z--cycle,lightgray); draw(A--B--C--cycle); dot(A); label("$A$",A,SW); dot(B); label("$B$",B,SE); dot(C); label("$C$",C,N); draw(X--P,dashed); draw(Z--P,dashed); dot(X); label("$X$",X,NE); dot(Z); label("$Z$",Z,S); dot(P); label("$P$",P,NW); [/asy] The set of all points closer to point $B$ than to point $A$ lie to the right of the perpendicular bisector of $AB$ (line $PZ$ in the diagram), and the set of all points closer to point $B$ than to point $C$ lie below the perpendicular bisector of $BC$ (line $PX$ in the diagram). Therefore, the set of points inside the triangle that are closer to $B$ than to either vertex $A$ or vertex $C$ is bounded by quadrilateral $BXPZ$ . Because $X$ is the midpoint of $BC$ and $Z$ is the midpoint of $AB$ , $X=(10,5)$ and $Z=(6,0)$ . The coordinates of point $P$ is the solution to the system of equations defined by lines $PX$ and $PZ$ . Using the point-slope form of a linear equation and the fact that the slope of the line perpendicular to a line with slope $m$ is $-\frac{1}{m}$ , the equation for line $PX$ is $y=\frac{2}{5}x+1$ and the equation for line $PZ$ is $x=6$ . The solution of this system is $P=\left(6,\frac{17}{5}\right)$ . Using the shoelace formula on quadrilateral $BXPZ$ and triangle $ABC$ , the area of quadrilateral $BXPZ$ is $\frac{109}{5}$ and the area of triangle $ABC$ is $60$ . Finally, the probability that a randomly chosen point inside the triangle is closer to vertex $B$ than to vertex $A$ or vertex $C$ is the ratio of the area of quadrilateral $BXPZ$ to the area of $ABC$ , which is $\frac{\frac{109}{5}}{60}=\frac{109}{300}$ . The answer is $109+300=\boxed{409}$ .
+
+\end{document}

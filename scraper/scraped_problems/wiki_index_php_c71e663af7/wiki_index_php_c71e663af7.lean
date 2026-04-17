@@ -1,0 +1,18 @@
+-- 2025 AMC 12A Problems/Problem 25
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12A_Problems/Problem_25
+
+-- Problem (LaTeX):
+/-
+Polynomials $P(x)$ and $Q(x)$ each have degree $3$ and leading coefficient $1$ , and their roots are all elements of $\{1,2,3,4,5\}$ . The function $f(x) = \dfrac{P(x)}{Q(x)}$ has the property that there exist real numbers $a < b < c < d$ such that the set of all real numbers $x$ such that $f(x) \leq 0$ consists of the closed interval $[a,b]$ together with the open interval $(c,d)$ . How many ordered pairs of polynomials $(P, Q)$ are possible? $\textbf{(A)}~7 \qquad \textbf{(B)}~9 \qquad \textbf{(C)}~11 \qquad \textbf{(D)}~12 \qquad \textbf{(E)}~13 \qquad \textbf{(F)}~8$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+None of the answer choices on the official test (which asked for the number of possible functions $f(x)$ ) were correct, but choice E would be correct if this problem asked for the number of pairs of functions $(P(x), Q(x))$ . Let $R(x) = \frac{P(x)}{Q(x)}$ . Since $R(x) \leq 0$ on $[a, b]$ but not for values slightly less than $a$ or slightly more than $b$ , $P(x) = 0$ at $x = a$ and $x = b$ . Therefore, $P(x) = (x-a)(x-b)(x-r)$ for some $r \in \{1, 2, 3, 4, 5\}$ . Since $R(x) \leq 0$ on $(c, d)$ but not at $x = c$ or $x = d$ , $R(x)$ is not continuous at $x = c$ or $x = d$ . Therefore, $R(x)$ must be undefined at $x = c$ and $x = d$ , that is, $Q(x) = 0$ at $x = c$ and $x = d$ . So $Q(x) = (x-c)(x-d)(x-s)$ for some $s \in \{1, 2, 3, 4, 5\}$ . Therefore, $R(x) = \frac{(x-a)(x-b)(x-r)}{(x-c)(x-d)(x-s)}$ . Notice that $\frac{(x-a)(x-b)}{(x-c)(x-d)} \leq 0$ only on $[a, b]$ and $(c, d)$ . Therefore, $\frac{x-r}{x-s}$ must be nonnegative for all $x \notin \{a, b, c, d, r, s\}$ . This only happens if $r = s$ . Thus $R(x) = \frac{(x-a)(x-b)(x-r)}{(x-c)(x-d)(x-r)}$ , which is the same as $\frac{(x-a)(x-b)}{(x-c)(x-d)}$ except that it is undefined at $x = r$ . Thus $R(x)$ satisfies the desired property as long as $r \notin [a, b] \cup (c, d)$ . Note that each quintuple $(a, b, c, d, r)$ defines a unique pair of functions $(P(x), Q(x))$ . If $(a, b, c, d) = (1, 2, 3, 4)$ , $r$ can be $3$ , $4$ , or $5$ . If $(a, b, c, d) = (1, 2, 3, 5)$ , $r$ can be $3$ or $5$ . If $(a, b, c, d) = (1, 2, 4, 5)$ , $r$ can be $3$ , $4$ , or $5$ . If $(a, b, c, d) = (1, 3, 4, 5)$ , $r$ can be $4$ or $5$ . If $(a, b, c, d) = (2, 3, 4, 5)$ , $r$ can be $1$ , $4$ , or $5$ . Therefore, there are $\boxed{(\textbf{E})\ 13}$ possible pairs of functions $(P(x), Q(x))$ . -j314andrews
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_c71e663af7 : Prop := by
+  sorry

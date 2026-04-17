@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2023_AMC_12A_Problems/Problem_17",
+  "title": "2023 AMC 12A Problems/Problem 17",
+  "problem": "Flora the frog starts at 0 on the number line and makes a sequence of jumps to the right. In any one jump, independent of previous jumps, Flora leaps a positive integer distance $m$ with probability $\\frac{1}{2^m}$ . What is the probability that Flora will eventually land at 10? $\\textbf{(A)}~\\frac{5}{512}\\qquad\\textbf{(B)}~\\frac{45}{1024}\\qquad\\textbf{(C)}~\\frac{127}{1024}\\qquad\\textbf{(D)}~\\frac{511}{1024}\\qquad\\textbf{(E)}~\\frac{1}{2}$",
+  "solution": "Initially, the probability of landing at $10$ and landing past $10$ (summing the infinte series) are exactly the same. Landing before 10 repeats this initial condition, with a different irrelevant scaling factor. Therefore, the probability must be $\\boxed{\\textbf{(E)}~\\frac12}$ .",
+  "answer": "",
+  "year": 2023,
+  "competition": "AMC 12A",
+  "problem_number": 17,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12A",
+    "2023",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:29:06.666773+00:00"
+}

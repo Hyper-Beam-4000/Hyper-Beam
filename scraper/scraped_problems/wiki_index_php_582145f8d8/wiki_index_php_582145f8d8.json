@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2022_AIME_II_Problems/Problem_9",
+  "title": "2022 AIME II Problems/Problem 9",
+  "problem": "Let $\\ell_A$ and $\\ell_B$ be two distinct parallel lines. For positive integers $m$ and $n$ , distinct points $A_1, A_2, \\allowbreak A_3, \\allowbreak \\ldots, \\allowbreak A_m$ lie on $\\ell_A$ , and distinct points $B_1, B_2, B_3, \\ldots, B_n$ lie on $\\ell_B$ . Additionally, when segments $\\overline{A_iB_j}$ are drawn for all $i=1,2,3,\\ldots, m$ and $j=1,\\allowbreak 2,\\allowbreak 3, \\ldots, \\allowbreak n$ , no point strictly between $\\ell_A$ and $\\ell_B$ lies on more than 2 of the segments. Find the number of bounded regions into which this figure divides the plane when $m=7$ and $n=5$ . The figure shows that there are 8 regions when $m=3$ and $n=2$ . [asy] import geometry; size(10cm); draw((-2,0)--(13,0)); draw((0,4)--(10,4)); label(\"$\\ell_A$\",(-2,0),W); label(\"$\\ell_B$\",(0,4),W); point A1=(0,0),A2=(5,0),A3=(11,0),B1=(2,4),B2=(8,4),I1=extension(B1,A2,A1,B2),I2=extension(B1,A3,A1,B2),I3=extension(B1,A3,A2,B2); draw(B1--A1--B2); draw(B1--A2--B2); draw(B1--A3--B2); label(\"$A_1$\",A1,S); label(\"$A_2$\",A2,S); label(\"$A_3$\",A3,S); label(\"$B_1$\",B1,N); label(\"$B_2$\",B2,N); label(\"1\",centroid(A1,B1,I1)); label(\"2\",centroid(B1,I1,I3)); label(\"3\",centroid(B1,B2,I3)); label(\"4\",centroid(A1,A2,I1)); label(\"5\",(A2+I1+I2+I3)/4); label(\"6\",centroid(B2,I2,I3)); label(\"7\",centroid(A2,A3,I2)); label(\"8\",centroid(A3,B2,I2)); dot(A1); dot(A2); dot(A3); dot(B1); dot(B2); [/asy]",
+  "solution": "We can use recursion to solve this problem: 1. Fix 7 points on $\\ell_A$ , then put one point $B_1$ on $\\ell_B$ . Now, introduce a function $f(x)$ that indicates the number of regions created, where x is the number of points on $\\ell_B$ . For example, $f(1) = 6$ because there are 6 regions. 2. Now, put the second point $B_2$ on $\\ell_B$ . Join $A_1~A_7$ and $B_2$ will create $7$ new regions (and we are not going to count them again), and split the existing regions. Let's focus on the spliting process: line segment formed between $B_2$ and $A_1$ intersect lines $\\overline{B_1A_2}$ , $\\overline{B_1A_3}$ , ..., $\\overline{B_1A_7}$ at $6$ points $\\Longrightarrow$ creating $6$ regions (we already count one region at first), then $5$ points $\\Longrightarrow$ creating $5$ regions (we already count one region at first), 4 points, etc. So, we have: \\[f(2) = f(1) + 7 + (6+5+...+1) = 34.\\] 3. If you still need one step to understand this: $A_1~A_7$ and $B_3$ will still create $7$ new regions. Intersecting \\[\\overline{A_2B_1}, \\overline{A_2B_2};\\] \\[\\overline{A_3B_1}, \\overline{A_3B_2};\\] \\[...\\] \\[\\overline{A_7B_1}, \\overline{A_7B_2}\\] at $12$ points, creating $12$ regions, etc. Thus, we have: \\[f(3) = f(2)+7+(12+10+8+...+2)=34+7+6\\cdot 7=83.\\] Yes, you might already notice that: \\[f(n+1) = f(n)+7+(6+5+...+1)\\cdot n = f(n) + 7 + 21n.\\] 5. Finally, we have $f(4) = 153$ , and $f(5)=244$ . Therefore, the answer is $\\boxed{244}$ . Note: we could deduce a general formula of this recursion: $f(n+1)=f(n)+N_a+\\frac{n\\cdot (N_a) \\cdot (N_a-1)}{2}$ , where $N_a$ is the number of points on $\\ell_A$",
+  "answer": "",
+  "year": 2022,
+  "competition": "AIME II",
+  "problem_number": 9,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME II",
+    "2022",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:36:47.631119+00:00"
+}

@@ -6,6 +6,13 @@
   "solution": "We define a remainder operation $\\,a \\bmod b\\,$ to be the remainder when $a$ is divided by $b$ .\nAlso, let $\\lfloor x\\rfloor$ be the usual floor function. Base- $(2n)$ Representation: \\[n^k \\;=\\; a_{k-1}\\,(2n)^{k-1} \\;+\\; a_{k-2}\\,(2n)^{k-2} \\;+\\;\\dots\\;+\\;a_1\\,(2n)\\;+\\;a_0,\\] where each $a_i$ satisfies $0 \\le a_i < 2n.$ Hence, the base- $(2n)$ representation of $n^k$ is $a_{k-1}\\,a_{k-2}\\,\\dots\\,a_1\\,a_0.$ Leading Digit: \\[a_{k-1} \\;=\\; \\left\\lfloor \\dfrac{n^k}{(2n)^{k-1}} \\right\\rfloor \\;=\\; \\left\\lfloor \\dfrac{n}{2^{k-1}} \\right\\rfloor.\\] General Digit Formula:\nFor $0 \\le i < k,$ \\[a_i \\;=\\; \\left\\lfloor \\dfrac{\\,n^k \\bmod (2n)^{\\,i+1}}{(2n)^i} \\right\\rfloor.\\] Because $n$ is odd, one can show \\[n^k \\bmod (2n)^{\\,i+1} \\;\\ge\\; n^{\\,i+1},\\] which implies \\[a_i \\;\\ge\\; \\left\\lfloor \\dfrac{n^{\\,i+1}}{(2n)^i} \\right\\rfloor \\;=\\; \\left\\lfloor \\dfrac{n}{2^i} \\right\\rfloor \\;\\ge\\; 2^{\\,k-1-i} \\left\\lfloor \\dfrac{n}{2^{\\,k-1}} \\right\\rfloor.\\] As $n$ grows large, $\\bigl\\lfloor n / 2^{\\,k-1}\\bigr\\rfloor$ becomes arbitrarily big, so each digit $a_i$ eventually exceeds any fixed $d.$ Hence there exists an integer $N$ such that for all odd $n > N,$ the digits $a_i$ in the base- $(2n)$ representation of $n^k$ are all $> d.$",
   "answer": "",
   "year": 2025,
-  "scraped_at": "2026-03-24T05:45:23.787620+00:00",
-  "lean_code": "import Mathlib.Data.Nat.Basic\nimport Mathlib.Data.Int.Basic\nimport Mathlib.Tactic\n\nopen Nat\n\n-- Problem: Prove that there exists a positive integer N such that for every odd integer n > N, \n-- the digits in the base-(2n) representation of n^k are all greater than d.\ntheorem usamo_2025_p1 (k d : ℕ) (hk : 0 < k) (hd : 0 < d) : \n  ∃ N : ℕ, ∀ n : ℕ, Odd n → n > N → ∀ i : ℕ, i < k → \n  let a_i := (n^k % (2*n)^(i+1)) / (2*n)^i in a_i > d := by\n  -- We will show that for sufficiently large n, each digit a_i is greater than d.\n  -- Start by considering the leading digit a_{k-1}.\n  have leading_digit : ∀ n : ℕ, Odd n → n > 0 → \n    let a_k_minus_1 := n / 2^(k-1) in a_k_minus_1 > d := by\n    intros n hn hpos\n    -- For large n, n / 2^(k-1) becomes arbitrarily large.\n    sorry\n\n  -- We need to show that for each digit a_i, it eventually exceeds d.\n  have general_digit : ∀ n : ℕ, Odd n → n > 0 → ∀ i : ℕ, i < k → \n    let a_i := (n^k % (2*n)^(i+1)) / (2*n)^i in a_i > d := by\n    intros n hn hpos i hi\n    -- Use the inequality n^k % (2*n)^(i+1) ≥ n^(i+1) to bound a_i.\n    sorry\n\n  -- Choose N such that for all odd n > N, the condition holds.\n  obtain ⟨N, hN⟩ := exists_nat_gt (d * 2^(k-1))\n  use N\n  intros n hn hNn i hi\n  -- Apply the results for leading and general digits.\n  cases i with\n  | zero => apply leading_digit; assumption\n  | succ i' => apply general_digit; assumption\n  -- Conclude that for all i < k, a_i > d.\n  sorry"
+  "competition": "USAMO",
+  "problem_number": 1,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "USAMO",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:20:08.717438+00:00"
 }

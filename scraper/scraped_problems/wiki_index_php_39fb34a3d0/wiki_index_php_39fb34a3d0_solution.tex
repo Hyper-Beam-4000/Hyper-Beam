@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2019 AIME I Problems/Problem 8}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+We can substitute $y = \sin^2{x}$ . Since we know that $\cos^2{x}=1-\sin^2{x}$ , we can do some simplification. This yields $y^5+(1-y)^5=\frac{11}{36}$ . From this, we can substitute again to get some cancellation through binomials. If we let $z=\frac{1}{2}-y$ , we can simplify the equation to: \[\left(\frac{1}{2}+z\right)^5+\left(\frac{1}{2}-z\right)^5=\frac{11}{36}.\] After using binomial theorem, this simplifies to: \[\frac{1}{16}(80z^4+40z^2+1)=\frac{11}{36}.\] If we use the quadratic formula, we obtain $z^2=\frac{1}{12}$ , so $z=\pm\frac{1}{2\sqrt{3}}$ (observe that either choice of $z$ doesn't matter). Substituting $z,$ we get: \[\sin^{12}{x}+\cos^{12}{x}=\left(\frac{1}{2}-z\right)^6+\left(\frac{1}{2}+z\right)^6=2z^6 + \frac{15z^4}{2} + \frac{15z^2}{8} + \frac{1}{32}=\frac{13}{54}.\] Therefore, the answer is $13+54=\boxed{067}$ . -eric2020, inspired by Tommy2002
+
+\end{document}

@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_AIME_II_Problems/Problem_11",
+  "title": "2019 AIME II Problems/Problem 11",
+  "problem": "Triangle $ABC$ has side lengths $AB=7, BC=8,$ and $CA=9.$ Circle $\\omega_1$ passes through $B$ and is tangent to line $AC$ at $A.$ Circle $\\omega_2$ passes through $C$ and is tangent to line $AB$ at $A.$ Let $K$ be the intersection of circles $\\omega_1$ and $\\omega_2$ not equal to $A.$ Then $AK=\\tfrac mn,$ where $m$ and $n$ are relatively prime positive integers. Find $m+n.$",
+  "solution": "[asy] unitsize(20); pair B = (0,0); pair A = (2,sqrt(45)); pair C = (8,0); draw(circumcircle(A,B,(-17/8,0)),rgb(.7,.7,.7)); draw(circumcircle(A,C,(49/8,0)),rgb(.7,.7,.7)); draw(B--A--C--cycle); label(\"$A$\",A,dir(105)); label(\"$B$\",B,dir(-135)); label(\"$C$\",C,dir(-75)); dot((2.68,2.25)); label(\"$K$\",(2.68,2.25),2*down); label(\"$\\omega_1$\",(-4.5,1)); label(\"$\\omega_2$\",(12.75,6)); label(\"$7$\",(A+B)/2,dir(140)); label(\"$8$\",(B+C)/2,dir(-90)); label(\"$9$\",(A+C)/2,dir(60)); [/asy] -Diagram by Brendanb4321 Note that from the tangency condition that the supplement of $\\angle CAB$ with respects to lines $AB$ and $AC$ are equal to $\\angle AKB$ and $\\angle AKC$ , respectively, so from tangent-chord, \\[\\angle AKC=\\angle AKB=180^{\\circ}-\\angle BAC\\] Also note that $\\angle ABK=\\angle KAC$ $^{(*)}$ , so $\\triangle AKB\\sim \\triangle CKA$ . Using similarity ratios, we can easily find \\[AK^2=BK*KC\\] However, since $AB=7$ and $CA=9$ , we can use similarity ratios to get \\[BK=\\frac{7}{9}AK, CK=\\frac{9}{7}AK\\] Now we use Law of Cosines on $\\triangle AKB$ : From reverse Law of Cosines, $\\cos{\\angle BAC}=\\frac{11}{21}\\implies \\cos{(180^{\\circ}-\\angle BAC)}=\\angle AKB=-\\frac{11}{21}$ Giving us \\[AK^2+\\frac{49}{81}AK^2+\\frac{22}{27}AK^2=49\\] \\[\\implies \\frac{196}{81}AK^2=49\\] \\[AK=\\frac{9}{2}\\] so our answer is $9+2=\\boxed{011}$ . $^{(*)}$ Let $O$ be the center of $\\omega_1$ . Then $\\angle KAC = 90 - \\angle OAK = 90 - \\frac{1}{2}(180 - \\angle AOK) = \\frac{\\angle AOK}{2} = \\angle ABK$ . Thus, $\\angle ABK = \\angle KAC$ -franchester; $^{(*)}$ by firebolt360",
+  "answer": "",
+  "year": 2019,
+  "competition": "AIME II",
+  "problem_number": 11,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME II",
+    "2019",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:34:49.333166+00:00"
+}

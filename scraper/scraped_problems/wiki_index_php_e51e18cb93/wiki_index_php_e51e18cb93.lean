@@ -1,0 +1,18 @@
+-- 2020 AMC 12A Problems/Problem 12
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2020_AMC_12A_Problems/Problem_12
+
+-- Problem (LaTeX):
+/-
+Line $l$ in the coordinate plane has equation $3x-5y+40=0$ . This line is rotated $45^{\circ}$ counterclockwise about the point $(20,20)$ to obtain line $k$ . What is the $x$ -coordinate of the $x$ -intercept of line $k?$ $\textbf{(A) } 10 \qquad \textbf{(B) } 15 \qquad \textbf{(C) } 20 \qquad \textbf{(D) } 25 \qquad \textbf{(E) } 30$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+The slope of the line is $\frac{3}{5}$ . We must transform it by $45^{\circ}$ . $45^{\circ}$ creates an isosceles right triangle, since the sum of the angles of the triangle must be $180^{\circ}$ and one angle is $90^{\circ}$ . This means the last leg angle must also be $45^{\circ}$ . In the isosceles right triangle, the two legs are congruent. We can therefore construct an isosceles right triangle with a line of $\frac{3}{5}$ slope on graph paper. That line with $\frac{3}{5}$ slope starts at $(0,0)$ and will go to $(5,3)$ , the vector $<5, 3 >$ . Construct another line from $(0,0)$ to $(3,-5)$ , the vector $<3,-5>$ . This is $\perp$ and equal to the original line segment. The difference between the two vectors is $<2,8>$ , which is the slope $4$ , and that is the slope of line $k$ . Furthermore, the equation $3x-5y+40=0$ passes straight through $(20,20)$ since $3(20)-5(20)+40=60-100+40=0$ , which means that any rotations about $(20,20)$ would contain $(20,20)$ . We can create a line of slope $4$ through $(20,20)$ . The $x$ -intercept is therefore $20-\frac{20}{4} = \boxed{\textbf{(B) } 15.}$ ~lopkiloinm ~ShawnX (diagram)
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_e51e18cb93 : Prop := by
+  sorry

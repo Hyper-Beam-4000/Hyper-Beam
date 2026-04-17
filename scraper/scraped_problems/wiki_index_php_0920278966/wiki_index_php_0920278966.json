@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2017_AIME_II_Problems/Problem_9",
+  "title": "2017 AIME II Problems/Problem 9",
+  "problem": "A special deck of cards contains $49$ cards, each labeled with a number from $1$ to $7$ and colored with one of seven colors. Each number-color combination appears on exactly one card. Sharon will select a set of eight cards from the deck at random. Given that she gets at least one card of each color and at least one card with each number, the probability that Sharon can discard one of her cards and $\\textit{still}$ have at least one card of each color and at least one card with each number is $\\frac{p}{q}$ , where $p$ and $q$ are relatively prime positive integers. Find $p+q$ .",
+  "solution": "Without loss of generality, assume that the $8$ numbers on Sharon's cards are $1$ , $1$ , $2$ , $3$ , $4$ , $5$ , $6$ , and $7$ , in that order, and assume the $8$ colors are red, red, and six different arbitrary colors. There are ${8\\choose2}-1$ ways of assigning the two red cards to the $8$ numbers; we subtract $1$ because we cannot assign the two reds to the two $1$ 's.\nIn order for Sharon to be able to remove at least one card and still have at least one card of each color, one of the reds have to be assigned with one of the $1$ s. The number of ways for this to happen is $2 \\cdot 6 = 12$ (the first card she draws has to be a $1$ (2 choices), while the second card can be any card but the remaining card with a $1$ (6 choices)). Each of these assignments is equally likely, so desired probability is $\\frac{12}{{8\\choose2}-1}=\\frac{4}{9} \\implies 4 + 9 = 13 = \\boxed{013}$ .",
+  "answer": "",
+  "year": 2017,
+  "competition": "AIME II",
+  "problem_number": 9,
+  "difficulty_tier": "pre_gpt",
+  "tags": [
+    "AIME II",
+    "2017",
+    "pre_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:33:25.267034+00:00"
+}

@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2023_AMC_12B_Problems/Problem_12",
+  "title": "2023 AMC 12B Problems/Problem 12",
+  "problem": "For complex number $u = a+bi$ and $v = c+di$ (where $i=\\sqrt{-1}$ ), define the binary operation $u \\otimes v = ac + bdi$ Suppose $z$ is a complex number such that $z\\otimes z = z^{2}+40$ . What is $|z|$ ? $\\textbf{(A) }2\\qquad\\textbf{(B) }5\\qquad\\textbf{(C) }\\sqrt{5}\\qquad\\textbf{(D) }\\sqrt{10}\\qquad\\textbf{(E) }5\\sqrt{2}$",
+  "solution": "let $z$ = $a+bi$ . $z \\otimes z = a^{2}+b^{2}i$ . This is equal to $z^{2} + 40 = a^{2}-b^{2}+40+2abi$ Since the real values have to be equal to each other, $a^{2}-b^{2}+40 = a^{2}$ .\nSimple algebra shows $b^{2} = 40$ , so $b = \\pm 2\\sqrt{10}$ . The imaginary components must also equal each other, meaning $b^{2} = 2ab$ , or $b = 2a$ . This means $a = \\frac{b}{2} = \\pm \\sqrt{10}$ . Thus, the magnitude of $z$ is $\\sqrt{a^{2}+b^{2}} = \\sqrt{10+40} = \\sqrt{50} = 5\\sqrt{2}$ $=\\text{\\boxed{\\textbf{(E) }5\\sqrt{2}}}$ ~Failure.net",
+  "answer": "",
+  "year": 2023,
+  "competition": "AMC 12B",
+  "problem_number": 12,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12B",
+    "2023",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:29:40.694861+00:00"
+}

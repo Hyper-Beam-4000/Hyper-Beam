@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2025 AMC 12A Problems/Problem 13}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+We first find what $N$ is by figuring out how many numbers we need to take out of the set so that the set does not contain $5$ consecutive integers. Since $N$ must be maximized, we must minimize what numbers are removed, and we quickly find that taking two numbers out works. Consider taking out $5$ and $10$ . You are left with $\{1,2,3,4,6,7,8,9,11,12,13\}$ , which does not have a string of $5$ consecutive integers. There are only $3$ ways to take out two integers such that the resulting set meets our condition ( $5$ and $10$ , $5$ and $9$ , or $4$ and $9$ ), and ${\binom{13}{2}}=78$ total ways to choose such integers. Therefore, the probability is $\boxed{\dfrac{1}{26}}$ . ~Kevin Wang Minor edits ~aashrithm29 Very minor LaTeX edit ~ PerseverePlayer Note: An alternative way to come to the conclusion that there are only three possible subsets of length twelve is as follows: Let the two numbers removed from $C$ be $a$ and $b$ such that $a<b$ . Then, because we cannot have any sequence of five consecutive numbers, $a \leq 5$ , $b-a \leq 5$ , and $13 - b +1\leq 5$ . Then, graphing this system in the $ab$ plane, we easily see that there are only three solutions for $(a,b)$ : $(5,10), (4,9)$ , and $(5,9)$ . Then, simply proceed as described above. ~ 526
+
+\end{document}

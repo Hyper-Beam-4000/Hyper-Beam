@@ -6,6 +6,13 @@
   "solution": "",
   "answer": "",
   "year": 2024,
-  "scraped_at": "2026-03-24T05:45:14.026806+00:00",
-  "lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Data.Finset.Basic\nimport Mathlib.Tactic\n\nopen Finset\n\n-- Problem: Find the largest real number c such that the inequality holds for all conditions given.\ntheorem usamo_2024_p6 (n : ℕ) (hn : n > 2) (ℓ : ℕ) (hℓ : 1 ≤ ℓ ∧ ℓ ≤ n) :\n  ∃ c : ℝ, ∀ (k : ℕ) (x : Fin k → ℝ) (A : Fin k → Finset (Fin n)),\n  (∀ i, ℓ ≤ (A i).card) →\n  (∑ i j, x i * x j * ((A i ∩ A j).card ^ 2 : ℝ) / ((A i).card * (A j).card)) ≥\n  c * (∑ i, x i) ^ 2 := by\n  -- Introduce the variables and assumptions\n  intro k x A hA\n\n  -- We need to find a suitable c such that the inequality holds\n  -- Strategy: Analyze the structure of the inequality and use properties of sets and sums\n  -- Step 1: Simplify the double sum expression\n  have h1 : ∑ i j, x i * x j * ((A i ∩ A j).card ^ 2 : ℝ) / ((A i).card * (A j).card) =\n            ∑ i j, (x i * ((A i ∩ A j).card : ℝ) / (A i).card) * (x j * ((A i ∩ A j).card : ℝ) / (A j).card), by\n    -- Use algebraic manipulation and properties of sums\n    sorry\n\n  -- Step 2: Consider the case when all sets are equal and have maximum intersection\n  -- This will help us find an upper bound for c\n  have h2 : ∀ i j, (A i ∩ A j).card ≤ min (A i).card (A j).card, by\n    -- Use properties of set intersections\n    sorry\n\n  -- Step 3: Use the condition ℓ ≤ |A_i| to bound the expressions\n  have h3 : ∀ i, (A i).card ≥ ℓ, from hA\n\n  -- Step 4: Analyze the inequality and propose a candidate for c\n  -- We hypothesize that c = 1/ℓ might be a candidate\n  let c := 1 / (ℓ : ℝ)\n\n  -- Step 5: Prove that this c satisfies the inequality for all valid inputs\n  have h4 : (∑ i j, (x i * ((A i ∩ A j).card : ℝ) / (A i).card) * (x j * ((A i ∩ A j).card : ℝ) / (A j).card)) ≥\n            c * (∑ i, x i) ^ 2, by\n    -- Use the proposed value of c and simplify\n    sorry\n\n  -- Conclude the existence of such a c\n  use c\n  exact h4"
+  "competition": "USAMO",
+  "problem_number": 6,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "USAMO",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:20:07.435202+00:00"
 }

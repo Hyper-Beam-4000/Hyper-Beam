@@ -1,0 +1,20 @@
+-- 2022 AMC 10B Problems/Problem 21
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2022_AMC_12B_Problems/Problem_20
+
+-- Problem (LaTeX):
+/-
+Let $P(x)$ be a polynomial with rational coefficients such that when $P(x)$ is divided by the polynomial $x^2 + x + 1$ , the remainder is $x+2$ , and when $P(x)$ is divided by the polynomial $x^2+1$ , the remainder
+is $2x+1$ . There is a unique polynomial of least degree with these two properties. What is the sum of
+the squares of the coefficients of that polynomial? $\textbf{(A)}\ 10 \qquad\textbf{(B)}\ 13 \qquad\textbf{(C)}\ 19 \qquad\textbf{(D)}\ 20 \qquad\textbf{(E)}\ 23$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Given that all the answer choices and coefficients are integers, we hope that $P(x)$ has positive integer coefficients. Throughout this solution, we will express all polynomials in base $x$ . E.g. $x^2 + x + 1 = 111_{x}$ . We are given: \[111a + 12 = 101b + 21 = P(x).\] We add $111$ and $101$ to each side and balance respectively: \[111(a - 1) + 123 = 101(b - 1) + 122 = P(x).\] We make the unit's digits equal: \[111(a - 1) + 123 = 101(b - 2) + 223 = P(x).\] We now notice that: \[111(a - 11) + 1233 = 101(b - 12) + 1233 = P(x).\] Therefore $a = 11_{x} = x + 1$ , $b = 12_{x} = x + 2$ , and $P(x) = 1233_{x} = x^3 + 2x^2 + 3x + 3$ . $3$ is the minimal degree of $P(x)$ since there is no way to influence the $x$ ‘s digit in $101b + 21$ when $b$ is an integer. The desired sum is $1^2 + 2^2 +3^2+ 3^2 = \boxed{\textbf{(E)} \ 23}$ P.S. The four computational steps can be deduced through quick experimentation. ~ numerophile
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_a23f9e8cf9 : Prop := by
+  sorry

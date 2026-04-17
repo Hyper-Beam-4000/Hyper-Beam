@@ -1,0 +1,13 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2017 AIME I Problems/Problem 11}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Assume that $5 \in \{a_1, a_2, a_3\}$ , $m \neq 5$ , and WLOG, $\max{(a_1, a_2, a_3)} = 5$ . Then we know that the other two medians in $\{a_1, a_2, a_3\}$ and the smallest number of rows 1, 2, and 3 are all less than 5. But there are only 4 numbers less than 5 in $1, 2, 3, \dots, 9$ , a Contradiction. Thus, if $5 \in \{a_1, a_2, a_3\}$ , then $m = 5$ . WLOG, assume $5$ is in the upper left corner. One of the two other values in the top row needs to be below $5$ , and the other needs to be above $5$ . This can be done in $4\cdot4\cdot2=32$ ways.
+The other $6$ can be arranged in $6!=720$ ways.
+Finally, accounting for when $5$ is in every other space, our answer is $32\cdot720\cdot9$ , which is $207360$ . But we only need the last $3$ digits, so $\boxed{360}$ is our answer. ~Solution by SuperSaiyanOver9000, mathics42, edited by zhaohm
+
+\end{document}

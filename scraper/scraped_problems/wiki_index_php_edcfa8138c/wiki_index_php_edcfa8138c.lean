@@ -1,0 +1,18 @@
+-- 2022 AMC 12A Problems/Problem 23
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2022_AMC_12A_Problems/Problem_23
+
+-- Problem (LaTeX):
+/-
+Let $h_n$ and $k_n$ be the unique relatively prime positive integers such that \[\frac{1}{1}+\frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{n}=\frac{h_n}{k_n}.\] Let $L_n$ denote the least common multiple of the numbers $1, 2, 3, \ldots, n$ . For how many integers with $1\le{n}\le{22}$ is $k_n<L_n$ ? $\textbf{(A) }0 \qquad\textbf{(B) }3 \qquad\textbf{(C) }7 \qquad\textbf{(D) }8\qquad\textbf{(E) }10$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+We are given that \[\sum_{i=1}^{n}\frac1i = \frac{1}{L_n}\sum_{i=1}^{n}\frac{L_n}{i} = \frac{h_n}{k_n}.\] Since $k_n < L_n,$ we need $\gcd\left(\sum_{i=1}^{n}\frac{L_n}{i}, L_n\right)>1.$ For all primes $p$ such that $p\leq n,$ let $\nu_p(L_n)=e\geq1$ be the exponent of the largest power of $p$ that divides $L_n.$ It is clear that $L_n\equiv0\pmod{p},$ so we test whether $\sum_{i=1}^{n}\frac{L_n}{i}\equiv0\pmod{p}.$ Note that \[\sum_{i=1}^{n}\frac{L_n}{i} \equiv \sum_{i=1}^{\left\lfloor\tfrac{n}{p^e}\right\rfloor}\frac{L_n}{ip^e} \ (\operatorname{mod} \ p^e) \equiv \sum_{i=1}^{\left\lfloor\tfrac{n}{p^e}\right\rfloor}\frac{L_n}{ip^e} \ (\operatorname{mod} \ p).\] We construct the following table for $\nu_p(L_n)=e:$ \[\begin{array}{c|c|l|c} \textbf{Case of }\boldsymbol{(p,e)} & \textbf{Interval of }\boldsymbol{n} & \hspace{22.75mm}\textbf{Sum} & \boldsymbol{\stackrel{?}{\equiv}0\ (\operatorname{mod} \ p)} \\ [0.5ex] \hline\hline & & & \\ [-2ex] (2,1) & [2,3] & L_n/2 & \\ (2,2) & [4,7] & L_n/4 & \\ (2,3) & [8,15] & L_n/8 & \\ (2,4) & [16,22] & L_n/16 & \\ [0.5ex] \hline & & & \\ [-2ex] (3,1) & [3,5] & L_n/3 & \\ & [6,8] & L_n/3 + L_n/6 & \checkmark \\ (3,2) & [9,17] & L_n/9 & \\ & [18,22] & L_n/9 + L_n/18 & \checkmark \\ [0.5ex] \hline & & & \\ [-2ex] (5,1) & [5,9] & L_n/5 & \\ & [10,14] & L_n/5 + L_n/10 & \\ & [15,19] & L_n/5 + L_n/10 + L_n/15 & \\ & [20,22] & L_n/5 + L_n/10 + L_n/15 + L_n/20 & \checkmark \\ [0.5ex] \hline & & & \\ [-2ex] (7,1) & [7,13] & L_n/7 & \\ & [14,20] & L_n/7 + L_n/14 & \\ & [21,22] & L_n/7 + L_n/14 + L_n/21 & \\ [0.5ex] \hline & & & \\ [-2ex] (11,1) & [11,21] & L_n/11 & \\ & \{22\} & L_n/11 + L_n/22 & \\ [0.5ex] \hline & & & \\ [-2ex] (13,1) & [13,22] & L_n/13 & \\ [0.5ex] \hline & & & \\ [-2ex] (17,1) & [17,22] & L_n/17 & \\ [0.5ex] \hline & & & \\ [-2ex] (19,1) & [19,22] & L_n/19 & \\ [0.5ex] \end{array}\] Note that: If the Sum column has only one term, then it is never congruent to $0$ modulo $p.$ If $p$ and $q$ are positive integers such that $p\geq q,$ then $L_p$ is a multiple of $L_q.$ Therefore, for a specific case, if the sum is congruent to $0$ modulo $p$ for the smallest element in the interval of $n,$ then it is also congruent to $0$ modulo $p$ for all other elements in the interval of $n.$ Together, there are $\boxed{\textbf{(D) }8}$ such integers $n,$ namely \[6,7,8,18,19,20,21,22.\] ~MRENTHUSIASM
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_edcfa8138c : Prop := by
+  sorry

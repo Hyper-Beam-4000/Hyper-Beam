@@ -9,7 +9,15 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import { fetchProblems, type Problem } from "@/lib/api";
 
-const USAMO_YEARS = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
+const YEARS = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
+
+const COMPETITIONS = [
+  { value: "USAMO",   label: "USAMO" },
+  { value: "AMC 12A", label: "AMC 12A" },
+  { value: "AMC 12B", label: "AMC 12B" },
+  { value: "AIME I",  label: "AIME I" },
+  { value: "AIME II", label: "AIME II" },
+];
 
 const Problems = () => {
   const [problems, setProblems] = useState<Problem[]>([]);
@@ -62,7 +70,9 @@ const Problems = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Competitions</SelectItem>
-              <SelectItem value="USAMO">USAMO</SelectItem>
+              {COMPETITIONS.map((c) => (
+                <SelectItem key={c.value} value={c.value}>{c.label}</SelectItem>
+              ))}
             </SelectContent>
           </Select>
           <Select value={year || "all"} onValueChange={(v) => setYear(v === "all" ? "" : v)}>
@@ -71,7 +81,7 @@ const Problems = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Years</SelectItem>
-              {USAMO_YEARS.map((y) => (
+              {YEARS.map((y) => (
                 <SelectItem key={y} value={String(y)}>{y}</SelectItem>
               ))}
             </SelectContent>
@@ -99,9 +109,14 @@ const Problems = () => {
                       {problem.title || "Untitled Problem"}
                     </CardTitle>
                     <div className="flex gap-2 flex-wrap">
-                      <Badge variant="outline">USAMO</Badge>
+                      {problem.competition && (
+                        <Badge variant="outline">{problem.competition}</Badge>
+                      )}
                       {problem.year && (
                         <Badge variant="secondary">{problem.year}</Badge>
+                      )}
+                      {problem.problem_number && (
+                        <Badge variant="secondary">#{problem.problem_number}</Badge>
                       )}
                     </div>
                   </CardHeader>

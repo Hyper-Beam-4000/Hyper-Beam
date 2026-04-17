@@ -1,0 +1,18 @@
+-- 2019 AMC 12A Problems/Problem 15
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2019_AMC_12A_Problems/Problem_15
+
+-- Problem (LaTeX):
+/-
+Positive real numbers $a$ and $b$ have the property that \[\sqrt{\log{a}} + \sqrt{\log{b}} + \log \sqrt{a} + \log \sqrt{b} = 100\] and all four terms on the left are positive integers, where log denotes the base 10 logarithm. What is $ab$ ? $\textbf{(A) } 10^{52} \qquad \textbf{(B) } 10^{100} \qquad \textbf{(C) } 10^{144} \qquad \textbf{(D) } 10^{164} \qquad \textbf{(E) } 10^{200}$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Since $\sqrt{\log{a}}$ is a positive integer, we get $\log a = x^2$ for some integer $x$ ; since $\log \sqrt{a} = \tfrac 12 \log a$ is a positive integer, we get $x=2m$ . Thus $a=10^{4m^2}$ ; similarly $b=10^{4n^2}$ . Substituting, we get $2(m+n+m^2+n^2)=100$ , i.e. $m(m+1) + n(n+1) = 50$ . It follows that $m,n \le 6$ . The values of $m(m+1)$ for $m=1,\ldots , 6$ are $\qquad m$ $1\qquad$ $2\qquad$ $3\qquad$ $4\qquad$ $5\qquad$ $6\qquad$ $m(m+1)\qquad$ $2$ $6$ $12$ $20\qquad$ $30$ $42$ Two of those values must add up to $50$ and we see that $20+30=50$ , so $m=4, n=5$ and $ab=10^{4(m^2+n^2)}=10^{4(4^2+5^2)}$ , and our answer is $\boxed{\textbf{(D) } 10^{164}}$ .
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_7090225103 : Prop := by
+  sorry

@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2023_AMC_12A_Problems/Problem_8",
+  "title": "2023 AMC 12A Problems/Problem 8",
+  "problem": "Maureen is keeping track of the mean of her quiz scores this semester. If Maureen scores an $11$ on the next quiz, her mean will increase by $1$ . If she scores an $11$ on each of the next three quizzes, her mean will increase by $2$ . What is the mean of her quiz scores currently? $\\textbf{(A) }4\\qquad\\textbf{(B) }5\\qquad\\textbf{(C) }6\\qquad\\textbf{(D) }7\\qquad\\textbf{(E) }8$",
+  "solution": "Let $a$ represent the amount of tests taken previously and $x$ the mean of the scores taken previously. We can write the following equations: \\[\\frac{ax+11}{a+1}=x+1\\qquad (1)\\] \\[\\frac{ax+33}{a+3}=x+2\\qquad (2)\\] Multiplying equation $(1)$ by $(a+1)$ and solving, we get: \\[ax+11=ax+a+x+1\\] \\[11=a+x+1\\] \\[a+x=10\\qquad (3)\\] Multiplying equation $(2)$ by $(a+3)$ and solving, we get: \\[ax+33=ax+2a+3x+6\\] \\[33=2a+3x+6\\] \\[2a+3x=27\\qquad (4)\\] Solving the system of equations for $(3)$ and $(4)$ , we find that $a=3$ and $x=\\boxed{\\textbf{(D) }7}$ . ~ Larry Page (Yes, it's really me)",
+  "answer": "Let's consider all the answer choices. If the average is $8$ , then, we can assume that all her test choices were $8$ . We can see that she must have gotten $8$ twice, in order for another score of $11$ to bring her average up by one. However, adding three $11$ 's will not bring her score up to 10. Continuing this process for the answer choices, we see that the answer is $\\boxed{\\textbf{(D) }7}$ ~andliu766 (minor wording edit by mihikamishra)",
+  "year": 2023,
+  "competition": "AMC 12A",
+  "problem_number": 8,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12A",
+    "2023",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:28:54.489637+00:00"
+}

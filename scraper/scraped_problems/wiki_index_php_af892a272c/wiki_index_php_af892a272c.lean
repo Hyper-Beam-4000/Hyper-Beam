@@ -1,0 +1,18 @@
+-- 2022 AMC 10A Problems/Problem 9
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2022_AMC_12A_Problems/Problem_7
+
+-- Problem (LaTeX):
+/-
+A rectangle is partitioned into $5$ regions as shown. Each region is to be painted a solid color - red, orange, yellow, blue, or green - so that regions that touch are painted different colors, and colors can be used more than once. How many different colorings are possible? [asy] size(5.5cm); draw((0,0)--(0,2)--(2,2)--(2,0)--cycle); draw((2,0)--(8,0)--(8,2)--(2,2)--cycle); draw((8,0)--(12,0)--(12,2)--(8,2)--cycle); draw((0,2)--(6,2)--(6,4)--(0,4)--cycle); draw((6,2)--(12,2)--(12,4)--(6,4)--cycle); [/asy] $\textbf{(A) }120\qquad\textbf{(B) }270\qquad\textbf{(C) }360\qquad\textbf{(D) }540\qquad\textbf{(E) }720$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+The top left rectangle can be $5$ possible colors. Then the bottom left region can only be $4$ possible colors, and the bottom middle can only be $3$ colors since it is next to the top left and bottom left. Similarly, we have $3$ choices for the top right and $3$ choices for the bottom right, which gives us a total of $5\cdot4\cdot3\cdot3\cdot3=\boxed{\textbf{(D) }540}$ . ~Txu
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_af892a272c : Prop := by
+  sorry

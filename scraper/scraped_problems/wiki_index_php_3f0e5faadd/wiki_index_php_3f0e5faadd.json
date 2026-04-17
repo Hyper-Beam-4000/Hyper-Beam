@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2020_AMC_12A_Problems/Problem_19",
+  "title": "2020 AMC 10A Problems/Problem 21",
+  "problem": "There exists a unique strictly increasing sequence of nonnegative integers $a_1 < a_2 < … < a_k$ such that \\[\\frac{2^{289}+1}{2^{17}+1} = 2^{a_1} + 2^{a_2} + … + 2^{a_k}.\\] What is $k?$ $\\textbf{(A) } 117 \\qquad \\textbf{(B) } 136 \\qquad \\textbf{(C) } 137 \\qquad \\textbf{(D) } 273 \\qquad \\textbf{(E) } 306$",
+  "solution": "First, substitute $2^{17}$ with $x$ .\nThen, the given equation becomes $\\frac{x^{17}+1}{x+1}=x^{16}-x^{15}+x^{14}...-x^1+x^0$ by sum of powers factorization.\nNow consider only $x^{16}-x^{15}$ . This equals $x^{15}(x-1)=x^{15} \\cdot (2^{17}-1)$ .\nNote that $2^{17}-1$ equals $2^{16}+2^{15}+...+1$ , by difference of powers factorization (or by considering the expansion of $2^{17}=2^{16}+2^{15}+...+2^{2}+2 + 2$ ).\nThus, we can see that $x^{16}-x^{15}$ forms the sum of 17 different powers of 2.\nApplying the same method to each of $x^{14}-x^{13}$ , $x^{12}-x^{11}$ , ... , $x^{2}-x^{1}$ , we can see that each of the pairs forms the sum of 17 different powers of 2. This gives us $17 \\cdot 8=136$ .\nBut we must count also the $x^0$ term.\nThus, Our answer is $136+1=\\boxed{\\textbf{(C) } 137}$ . ~seanyoon777",
+  "answer": "",
+  "year": 2020,
+  "competition": "AMC 12A",
+  "problem_number": 19,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12A",
+    "2020",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:24:55.127418+00:00"
+}

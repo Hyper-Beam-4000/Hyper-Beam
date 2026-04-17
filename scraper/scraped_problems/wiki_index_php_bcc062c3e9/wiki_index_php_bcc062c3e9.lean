@@ -1,0 +1,18 @@
+-- 2020 AIME II Problems/Problem 12
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2020_AIME_II_Problems/Problem_12
+
+-- Problem (LaTeX):
+/-
+Let $m$ and $n$ be odd integers greater than $1.$ An $m\times n$ rectangle is made up of unit squares where the squares in the top row are numbered left to right with the integers $1$ through $n$ , those in the second row are numbered left to right with the integers $n + 1$ through $2n$ , and so on. Square $200$ is in the top row, and square $2000$ is in the bottom row. Find the number of ordered pairs $(m,n)$ of odd integers greater than $1$ with the property that, in the $m\times n$ rectangle, the line through the centers of squares $200$ and $2000$ intersects the interior of square $1099$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let us take some cases. Since $m$ and $n$ are odds, and $200$ is in the top row and $2000$ in the bottom, $m$ has to be $3$ , $5$ , $7$ , or $9$ . Also, taking a look at the diagram, the slope of the line connecting those centers has to have an absolute value of $< 1$ . Therefore, $m < 1800 \mod n < 1800-m$ . If $m=3$ , $n$ can range from $667$ to $999$ . However, $900$ divides $1800$ , so looking at mods, we can easily eliminate $899$ and $901$ . Now, counting these odd integers, we get $167 - 2 = 165$ . Similarly, let $m=5$ . Then $n$ can range from $401$ to $499$ . However, $450|1800$ , so one can remove $449$ and $451$ . Counting odd integers, we get $50 - 2 = 48$ . Take $m=7$ . Then, $n$ can range from $287$ to $333$ . However, $300|1800$ , so one can verify and eliminate $299$ and $301$ . Counting odd integers, we get $24 - 2 = 22$ . Let $m = 9$ . Then $n$ can vary from $223$ to $249$ . However, $225|1800$ . Checking that value and the values around it, we can eliminate $225$ . Counting odd integers, we get $14 - 1 = 13$ . Add all of our cases to get \[165+48+22+13 = \boxed{248}\] -Solution by thanosaops
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_bcc062c3e9 : Prop := by
+  sorry

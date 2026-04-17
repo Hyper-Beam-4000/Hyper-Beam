@@ -1,0 +1,18 @@
+-- 2018 AMC 10B Problems/Problem 14
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_AMC_12B_Problems/Problem_10
+
+-- Problem (LaTeX):
+/-
+A list of $2018$ positive integers has a unique mode, which occurs exactly $10$ times. What is the least number of distinct values that can occur in the list? $\textbf{(A)}\ 202\qquad\textbf{(B)}\ 223\qquad\textbf{(C)}\ 224\qquad\textbf{(D)}\ 225\qquad\textbf{(E)}\ 234$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+To minimize the number of distinct values, we want to maximize the number of times a number appears. So, we could have $223$ numbers appear $9$ times, $1$ number appear once, and the mode appear $10$ times, giving us a total of $223 + 1 + 1 = \boxed{\textbf{(D)}\ 225}.$
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_0809e1c7fc : Prop := by
+  sorry

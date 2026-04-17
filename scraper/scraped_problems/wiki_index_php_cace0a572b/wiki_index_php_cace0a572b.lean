@@ -1,0 +1,18 @@
+-- 2023 AIME II Problems/Problem 7
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2023_AIME_II_Problems/Problem_7
+
+-- Problem (LaTeX):
+/-
+Each vertex of a regular dodecagon ( $12$ -gon) is to be colored either red or blue, and thus there are $2^{12}$ possible colorings. Find the number of these colorings with the property that no four vertices colored the same color are the four vertices of a rectangle.
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Note that the condition is equivalent to stating that there are no 2 pairs of oppositely spaced vertices with the same color. Case 1: There are no pairs. This yields $2$ options for each vertices 1-6, and the remaining vertices 7-12 are set, yielding $2^6=64$ cases. Case 2: There is one pair. Again start with 2 options for each vertex in 1-6, but now multiply by 6 since there are 6 possibilities for which pair can have the same color assigned instead of the opposite. Thus, the cases are: $2^6*6=384$ case 3: There are two pairs, but oppositely colored. Start with $2^6$ for assigning 1-6, then multiply by 6C2=15 for assigning which have repeated colors. Divide by 2 due to half the cases having the same colored opposites. $2^6*15/2=480$ It is apparent that no other cases exist, as more pairs would force there to be 2 pairs of same colored oppositely spaced vertices with the same color. Thus, the answer is: $64+384+480=\boxed{928}$ ~SAHANWIJETUNGA
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_cace0a572b : Prop := by
+  sorry

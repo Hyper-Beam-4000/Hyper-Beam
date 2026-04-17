@@ -1,0 +1,13 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2022 AIME I Problems/Problem 13}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+$0.\overline{abcd}=\frac{abcd}{9999} = \frac{x}{y}$ , $9999=9\times 11\times 101$ . Then we need to find the number of positive integers $x$ that (with one of more $y$ such that $y|9999$ ) can meet the requirement $1 \leq {x}\cdot\frac{9999}{y} \leq 9999$ . Make cases by factors of $x$ . (A venn diagram of cases would be nice here.) Case $A$ : $3 \nmid x$ and $11 \nmid x$ and $101 \nmid x$ , aka $\gcd (9999, x)=1$ . Euler's totient function counts these: \[\varphi \left(3^2 \cdot 11 \cdot 101 \right) = ((3-1)\cdot 3)(11-1)(101-1)= \bf{6000}\] values (but it's enough to note that it's a multiple of 1000 and thus does not contribute to the final answer) Note: You don't need to know this formula. The remaining cases essentially re-derive the same computation for other factors of $9999$ . This case isn't actually different. The remaining cases have $3$ (or $9$ ), $11$ , and/or $101$ as factors of $abcd$ , which cancel out part of $9999$ .
+Note: Take care about when to use $3$ vs $9$ . Case $B$ : $3|x$ , but $11 \nmid x$ and $101 \nmid x$ . Then $abcd=9x$ to leave 3 uncancelled, and $x=3p$ ,
+so $x \leq \frac{9999}{9} = 1111$ , giving: $x \in 3 \cdot \{1, \dots \left\lfloor \frac{1111}{3}\right\rfloor\}$ , $x \notin (3\cdot 11) \cdot \{1 \dots \left\lfloor \frac{1111}{3\cdot 11}\right\rfloor\}$ , $x \notin (3 \cdot 101) \cdot \{1 \dots \left\lfloor \frac{1111}{3 \cdot 101}\right\rfloor\}$ , for a subtotal of $\left\lfloor \frac{1111}{3}\right\rfloor - (\left\lfloor\frac{1111}{3 \cdot 11}\right\rfloor + \left\lfloor\frac{1111}{3 \cdot 101}\right\rfloor ) = 370 - (33+3) = \bf{334}$ values. Case $C$ : $11|x$ , but $3 \nmid x$ and $101 \nmid x$ . Much like previous case, $abcd$ is $11x$ , so $x \leq \frac{9999}{11} = 909$ , giving $\left\lfloor \frac{909}{11}\right\rfloor - \left(\left\lfloor\frac{909}{11 \cdot 3}\right\rfloor + \left\lfloor\frac{909}{11 \cdot 101}\right\rfloor \right) = 82 - (27 + 0) = \bf{55}$ values. Case $D$ : $3|x$ and $11|x$ (so $33|x$ ), but $101 \nmid x$ . Here, $abcd$ is $99x$ , so $x \leq \frac{9999}{99} = 101$ , giving $\left\lfloor \frac{101}{33}\right\rfloor - \left\lfloor \frac{101}{33 \cdot 101}\right\rfloor = 3-0 = \bf{3}$ values. Case $E$ : $101|x$ . Here, $abcd$ is $101x$ , so $x \leq \frac{9999}{101} = 99$ , giving $\left\lfloor \frac{99}{101}\right\rfloor = \bf{0}$ values, so we don't need to account for multiples of $3$ and $11$ . To sum up, the answer is \[6000+334+55+3+0\equiv\boxed{392} \pmod{1000}.\]
+
+\end{document}

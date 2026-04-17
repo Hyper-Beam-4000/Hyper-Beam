@@ -1,0 +1,18 @@
+-- 2018 AIME II Problems/Problem 6
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_AIME_II_Problems/Problem_6
+
+-- Problem (LaTeX):
+/-
+A real number $a$ is chosen randomly and uniformly from the interval $[-20, 18]$ . The probability that the roots of the polynomial $x^4 + 2ax^3 + (2a - 2)x^2 + (-4a + 3)x - 2$ are all real can be written in the form $\dfrac{m}{n}$ , where $m$ and $n$ are relatively prime positive integers. Find $m + n$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+The polynomial we are given is rather complicated, so let's use Rational Root Theorem to see if it has any retinal roots. By Rational Root Theorem, $x = 1, -1, 2, -2$ are all possible rational roots. Upon plugging these roots into the polynomial, $x = -2$ and $x = 1$ make the polynomial equal 0 and thus, they are roots that we can factor out. The polynomial becomes: $(x - 1)(x + 2)(x^2 + (2a - 1)x + 1)$ Since we know $1$ and $-2$ are real numbers, we only need to focus on the quadratic. Set the discriminant of the quadratic greater than or equal to 0, to ensure the remaining roots are real. $(2a - 1)^2 - 4 \geq 0$ . This simplifies to: $a \geq \dfrac{3}{2}$ or $a \leq -\dfrac{1}{2}$ This means that the interval $\left(-\dfrac{1}{2}, \dfrac{3}{2}\right)$ is the "bad" interval. The length of the interval where $a$ can be chosen from is 38 units long, while the bad interval is 2 units long. Therefore, the "good" interval is 36 units long. $\dfrac{36}{38} = \dfrac{18}{19}$ $18 + 19 = \boxed{037}$ ~First
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_0eaca448ac : Prop := by
+  sorry

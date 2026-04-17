@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2020_AIME_II_Problems/Problem_4",
+  "title": "2020 AIME II Problems/Problem 4",
+  "problem": "Triangles $\\triangle ABC$ and $\\triangle A'B'C'$ lie in the coordinate plane with vertices $A(0,0)$ , $B(0,12)$ , $C(16,0)$ , $A'(24,18)$ , $B'(36,18)$ , $C'(24,2)$ . A rotation of $m$ degrees clockwise around the point $(x,y)$ where $0<m<180$ , will transform $\\triangle ABC$ to $\\triangle A'B'C'$ . Find $m+x+y$ .",
+  "solution": "After sketching, it is clear a $90^{\\circ}$ rotation is done about $(x,y)$ . Looking between $A$ and $A'$ , $x+y=18$ . Thus $90+18=\\boxed{108}$ .\n~mn28407",
+  "answer": "",
+  "year": 2020,
+  "competition": "AIME II",
+  "problem_number": 4,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME II",
+    "2020",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:35:20.219677+00:00"
+}

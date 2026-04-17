@@ -40,7 +40,11 @@ async def list_problems(
 
         # Filter in-memory (small dataset)
         if competition and competition.upper() != "ALL":
-            items = [i for i in items if competition.upper() in (i.get("title") or "").upper()]
+            items = [
+                i for i in items
+                if competition.upper() == (i.get("competition") or "").upper()
+                or competition.upper() in (i.get("title") or "").upper()  # legacy fallback
+            ]
         if year:
             items = [i for i in items if i.get("year") == year]
 
@@ -51,6 +55,9 @@ async def list_problems(
                 "source": item.get("source"),
                 "url": item.get("url"),
                 "year": item.get("year"),
+                "competition": item.get("competition"),
+                "problem_number": item.get("problem_number"),
+                "difficulty_tier": item.get("difficulty_tier"),
                 "problem_text": _strip_trailing_solution(item.get("problem_text")),
                 "solution_text": item.get("solution_text"),
                 "problem_latex": _strip_trailing_solution(item.get("problem_text")),
@@ -84,6 +91,10 @@ async def get_problem(problem_id: str):
             "title": item.get("title"),
             "source": item.get("source"),
             "url": item.get("url"),
+            "year": item.get("year"),
+            "competition": item.get("competition"),
+            "problem_number": item.get("problem_number"),
+            "difficulty_tier": item.get("difficulty_tier"),
             "problem_text": _strip_trailing_solution(item.get("problem_text")),
             "solution_text": item.get("solution_text"),
             "problem_latex": _strip_trailing_solution(item.get("problem_text")),

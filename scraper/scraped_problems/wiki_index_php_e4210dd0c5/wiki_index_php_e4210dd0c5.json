@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2021_AMC_12B_Problems/Problem_3",
+  "title": "2021 AMC 12B Problems/Problem 3",
+  "problem": "Suppose \\[2+\\frac{1}{1+\\frac{1}{2+\\frac{2}{3+x}}}=\\frac{144}{53}.\\] What is the value of $x?$ $\\textbf{(A) }\\frac34 \\qquad \\textbf{(B) }\\frac78 \\qquad \\textbf{(C) }\\frac{14}{15} \\qquad \\textbf{(D) }\\frac{37}{38} \\qquad \\textbf{(E) }\\frac{52}{53}$",
+  "solution": "Subtracting $2$ from both sides and taking reciprocals gives $1+\\frac{1}{2+\\frac{2}{3+x}}=\\frac{53}{38}$ . Subtracting $1$ from both sides and taking reciprocals again gives $2+\\frac{2}{3+x}=\\frac{38}{15}$ . Subtracting $2$ from both sides and taking reciprocals for the final time gives $\\frac{x+3}{2}=\\frac{15}{8}$ or $x=\\frac{3}{4} \\implies \\boxed{\\text{(A) } 3/4}$ . ~ OlympusHero",
+  "answer": "",
+  "year": 2021,
+  "competition": "AMC 12B",
+  "problem_number": 3,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12B",
+    "2021",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:26:38.948840+00:00"
+}

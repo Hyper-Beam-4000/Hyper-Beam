@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2017_AIME_II_Problems/Problem_6",
+  "title": "2017 AIME II Problems/Problem 6",
+  "problem": "Find the sum of all positive integers $n$ such that $\\sqrt{n^2+85n+2017}$ is an integer.",
+  "solution": "Manipulating the given expression, $\\sqrt{n^2+85n+2017}=\\frac{1}{2}\\sqrt{4n^2+340n+8068}=\\frac{1}{2}\\sqrt{(2n+85)^2+843}$ . The expression under the radical must be an square number for the entire expression to be an integer, so $(2n+85)^2+843=s^2$ . Rearranging, $s^2-(2n+85)^2=843$ . By difference of squares, $(s-(2n+85))(s+(2n+85))=1\\times843=3\\times281$ . It is easy to check that those are all the factor pairs of 843. Considering each factor pair separately, $2n+85$ is found to be $421$ and $139$ . The two values of $n$ that satisfy one of the equations are $168$ and $27$ . Summing these together gives us the answer ; $168+27=\\boxed{195}$ .",
+  "answer": "",
+  "year": 2017,
+  "competition": "AIME II",
+  "problem_number": 6,
+  "difficulty_tier": "pre_gpt",
+  "tags": [
+    "AIME II",
+    "2017",
+    "pre_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:33:21.242097+00:00"
+}

@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2017 AIME II Problems/Problem 7}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+[asy] Label f; f.p=fontsize(5); xaxis(-3,3,Ticks(f,1.0)); yaxis(-3,26,Ticks(f,1.0)); real f(real x){return (x+2)^2;} real g(real x){return x*-1;} real h(real x){return x*-2;} real i(real x){return x*-3;} real j(real x){return x*8;} draw(graph(f,-2,3),green); draw(graph(g,-2,2),red); draw(graph(h,-2,1),red); draw(graph(i,-2,1/3),red); draw(graph(j,-0.25,3),red); [/asy] Note the equation $\log(kx)=2\log(x+2)$ is valid for $kx>0$ and $x>-2$ . Now, we simplify the given expression: $\log(kx)=2\log(x+2)=\log((x+2)^2) \implies kx=(x+2)^2$ . The last equation is derived by taking away the outside logs from the previous equation. Because $(x+2)^2$ is always non-negative, $kx$ must also be non-negative; therefore this takes care of the $kx>0$ condition as long as $k\neq0$ , i.e. $k$ cannot be $0$ . Now, we graph both $(x+2)^2$ (the green graph) and $kx$ (the red graph for $k=-1,k=-2,k=-3,k=8$ ) for $x>-2$ . It is easy to see that all negative values of $k$ make the equation $\log(kx)=2\log(x+2)$ have only one solution. However, there is also one positive value of $k$ that makes the equation only have one solution, as shown by the steepest line in the diagram. We can show that the slope of this line is a positive integer by setting the discriminant of the equation $(x+2)^2=kx$ to be $0$ and solving for $k$ , which yields $k=8$ . When $1\leq k \leq 7$ , $y=kx$ will intersect $y(x+2)^2$ twice, and when $k \geq 9$ , $y=kx$ will never intersect $y(x+2)^2$ . Therefore, there are $500$ negative solutions and $1$ positive solution, for a total of $\boxed{501}$ .
+
+\end{document}

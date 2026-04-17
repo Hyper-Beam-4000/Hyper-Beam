@@ -1,0 +1,18 @@
+-- 2025 AMC 12A Problems/Problem 23
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12A_Problems/Problem_23
+
+-- Problem (LaTeX):
+/-
+Call a positive integer fair if no digit is used more than once, it has no $0$ s, and no digit is adjacent to two greater digits. For example, $196, 23$ and $12463$ are fair, but $1546, 320,$ and $34321$ are not. How many fair positive integers are there? $\textbf{(A) } 511 \qquad \textbf{(B) } 2584 \qquad \textbf{(C) } 9841 \qquad \textbf{(D) } 17711 \qquad \textbf{(E) } 19682$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+To satisfy the conditions, a $\textit{fair}$ integer must have no digit be a local minimum. Let's say we have $n$ distinct digits, with each digit being a number from $1$ to $9$ . To create a $\textit{fair}$ integer, we begin by placing the largest digit. For the second-largest digit, we can either place this digit to the right or to the left of the string already created. We have these $2$ options for the third-largest digit, and so on. Therefore, there are $2^{n-1}$ valid permutations to create a $\textit{fair}$ integer. We must also choose which digits will be in the permutation. If you are creating an $n$ -digit long $\textit{fair}$ integer, there are $9\choose{n}$ ways to pick which digits will be in the number. Therefore, for each $n \in \{1,2,\dots, 9\}$ , the number of fair integers of length $n$ is: \[\binom{9}{n} \cdot 2^{n-1}.\] Summing over all $n$ : \[\sum_{n=1}^9{\binom{9}{n} \cdot 2^{n-1}}=\frac{1}{2}\left(\sum_{n=0}^9{\binom{9}{n}}2^n -1\right)=\frac{1}{2}\left((1+2)^9 -1 \right) = \frac{1}{2}(19682) = \boxed{9841}.\] Note that the Binomial Theorem was used to equate \[\sum_{n=0}^9{\binom{9}{n}}2^n = (1+2)^9.\] ~lprado
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_a0a385206b : Prop := by
+  sorry

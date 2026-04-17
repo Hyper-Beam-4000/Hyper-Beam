@@ -82,7 +82,7 @@ def save_problem_record(
     solution_text = metadata.get("solution") or metadata.get("answer") or ""
     content_hash = _sha1(problem_text + "\n" + solution_text)
 
-    table.put_item(Item={
+    item: Dict[str, Any] = {
         "id": problem_id,               # pk
         "title": metadata.get("title"),
         "source": metadata.get("source"),
@@ -94,7 +94,13 @@ def save_problem_record(
         "lean_code": lean_code or "",
         "content_hash": content_hash,
         "tags": metadata.get("tags", []),
-    })
+    }
+    # Structured labels — present when scraped from a known competition URL
+    for field in ("competition", "problem_number", "difficulty_tier"):
+        value = metadata.get(field)
+        if value is not None:
+            item[field] = value
+    table.put_item(Item=item)
 
 
 def get_problem(problem_id: str) -> Optional[Dict[str, Any]]:

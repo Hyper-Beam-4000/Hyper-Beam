@@ -1,0 +1,18 @@
+-- 2025 AIME I Problems/Problem 14
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2025_AIME_I_Problems/Problem_14
+
+-- Problem (LaTeX):
+/-
+Let $ABCDE$ be a convex pentagon with $AB=14,$ $BC=7,$ $CD=24,$ $DE=13,$ $EA=26,$ and $\angle B=\angle E=60^{\circ}.$ For each point $X$ in the plane, define $f(X)=AX+BX+CX+DX+EX.$ The least possible value of $f(X)$ can be expressed as $m+n\sqrt{p},$ where $m$ and $n$ are positive integers and $p$ is not divisible by the square of any prime. Find $m+n+p.$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Assume $AX=a$ , $BX=b$ , $CX=c$ , $DX=d$ , $EX=e$ , by Ptolemy inequality we have $a+2d\geq \sqrt{3}XE; a+2c\geq \sqrt{3}BX$ , and as we are minimizing the value of the LHS, we want the inequality reached; this happens when both quadrilaterals $CXAB$ and $AXDE$ are concyclic. We notice that we have right angles $\angle{BXA}=\angle{BCA}$ and $\angle{EDA}=\angle{EXA}$ as they both subtend a diameter of circles by noticing that we have formed Pythagorean triples (along with being told that $\angle{B}=\angle{E}=60^{\circ}$ . And so, since we have supplementary angles, $B$ , $X$ , and $E$ are collinear. Thus, we add up the two equalities to get $2a+2c+2d=\sqrt{3}(XE+BX)$ , or $a+c+d=\frac{\sqrt{3}}{2}(BE)$ . Thus we want to find $a+b+c+d+e=(1+\frac{\sqrt{3}}{2})BE$ . By Law of Cosines, we know that $\cos(\angle{DAC})=\frac{1}{7}$ , and since $\angle{CAB}=\angle{DAE}=30^{\circ}$ , we know $\cos(\angle{EAB})=cos(\angle{CAB}+\angle{DAE}+\arccos(\frac{1}{7}))=cos(60^{\circ}+\arccos(\frac{1}{7}))$ , which we find with the cosine angle addition formula and the fact that $\sin(\arccos(\frac{1}{7}))=\sqrt{1-(\frac{1}{7})^2}$ . Then, once again with Law of Cosines, we find that $BE=38$ , and thus the minimum of $a+b+c+d+e$ , or $(1+\frac{\sqrt{3}}{2})BE$ , is $38+19\sqrt{3}\implies\boxed{060}$ . ~Bluesoul ~hashbrown2009 Rewritten and edited by Juwushu .
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_6a80462565 : Prop := by
+  sorry

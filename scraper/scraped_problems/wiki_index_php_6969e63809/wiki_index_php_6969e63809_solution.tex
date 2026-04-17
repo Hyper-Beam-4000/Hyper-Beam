@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2020 AMC 12A Problems/Problem 22}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Square the given equality to yield \[(3 + 4i)^n = (a_n + b_ni)^2 = (a_n^2 - b_n^2) + 2a_nb_ni,\] so $a_nb_n = \tfrac12\operatorname{Im}((3+4i)^n)$ and \[\sum_{n\geq 0}\frac{a_nb_n}{7^n} = \frac12\operatorname{Im}\left(\sum_{n\geq 0}\frac{(3+4i)^n}{7^n}\right) = \frac12\operatorname{Im}\left(\frac{1}{1 - \frac{3 + 4i}7}\right) = \boxed{\frac 7{16}}.\]
+
+\end{document}

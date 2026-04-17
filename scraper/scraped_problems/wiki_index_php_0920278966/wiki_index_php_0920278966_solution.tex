@@ -1,0 +1,12 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2017 AIME II Problems/Problem 9}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Without loss of generality, assume that the $8$ numbers on Sharon's cards are $1$ , $1$ , $2$ , $3$ , $4$ , $5$ , $6$ , and $7$ , in that order, and assume the $8$ colors are red, red, and six different arbitrary colors. There are ${8\choose2}-1$ ways of assigning the two red cards to the $8$ numbers; we subtract $1$ because we cannot assign the two reds to the two $1$ 's.
+In order for Sharon to be able to remove at least one card and still have at least one card of each color, one of the reds have to be assigned with one of the $1$ s. The number of ways for this to happen is $2 \cdot 6 = 12$ (the first card she draws has to be a $1$ (2 choices), while the second card can be any card but the remaining card with a $1$ (6 choices)). Each of these assignments is equally likely, so desired probability is $\frac{12}{{8\choose2}-1}=\frac{4}{9} \implies 4 + 9 = 13 = \boxed{013}$ .
+
+\end{document}

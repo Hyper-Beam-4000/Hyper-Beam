@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2024_AMC_12A_Problems/Problem_1",
+  "title": "2024 AMC 10A Problems/Problem 1",
+  "problem": "What is the value of $9901\\cdot101-99\\cdot10101?$ $\\textbf{(A)}~2\\qquad\\textbf{(B)}~20\\qquad\\textbf{(C)}~200\\qquad\\textbf{(D)}~202\\qquad\\textbf{(E)}~2020$",
+  "solution": "The likely fastest method will be direct computation. $9901\\cdot101$ evaluates to $1000001$ and $99\\cdot10101$ evaluates to $999999$ . The difference is $\\boxed{\\textbf{(A) }2}.$ Solution by juwushu .",
+  "answer": "",
+  "year": 2024,
+  "competition": "AMC 12A",
+  "problem_number": 1,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12A",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:30:06.733137+00:00"
+}

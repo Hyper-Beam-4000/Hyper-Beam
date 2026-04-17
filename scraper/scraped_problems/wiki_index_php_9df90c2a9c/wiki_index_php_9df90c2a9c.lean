@@ -1,0 +1,19 @@
+-- 2025 AMC 12B Problems/Problem 14
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12B_Problems/Problem_14
+
+-- Problem (LaTeX):
+/-
+Consider a decreasing sequence of \(n\) positive integers \[x_1 > x_2 > \cdots > x_n\] that satisfies the following conditions: The average of the first \(3\) terms in the sequence is \(2025\). For all \(4 \le k \le n\), the average of the first \(k\) terms is \(1\) less than the average of the first \(k-1\) terms. What is the greatest possible value of \(n\)? $\textbf{(A)}~1013 \qquad \textbf{(B)}~1014 \qquad \textbf{(C)}~1016 \qquad \textbf{(D)}~2016 \qquad \textbf{(E)}~2025$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Since the mean of the first three terms is $2025$ , their sum is $2025 * 3 = 6075$ .
+Then, incorporating the fourth term makes the mean $2025-1=2024$ , so their sum must be $2024 * 4 = 8096$ , implying that the 4th term is $8096-6075=2021$ Doing the same for the 5th term, $2023 * 5= 10115$ , 5th term is $10115-8096=2019$ Algebraically, we can model this pattern for the $k$ th term = x as $(k-1)(2029-k) + x = (k)(2028-k)$ $2029k-2029-k^2+k+x=2028k-k^2$ $x=2029-2k$ So the maximum $k\le n$ for which $x$ is positive is 1014, giving our answer $n=\boxed{\textbf{(B) }1014}$ ~Failure.net
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_9df90c2a9c : Prop := by
+  sorry

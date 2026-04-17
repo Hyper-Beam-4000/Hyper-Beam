@@ -1,0 +1,18 @@
+-- 2023 AIME II Problems/Problem 6
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2023_AIME_II_Problems/Problem_6
+
+-- Problem (LaTeX):
+/-
+Consider the L-shaped region formed by three unit squares joined at their sides, as shown below. Two points $A$ and $B$ are chosen independently and uniformly at random from inside the region. The probability that the midpoint of $\overline{AB}$ also lies inside this L-shaped region can be expressed as $\frac{m}{n},$ where $m$ and $n$ are relatively prime positive integers. Find $m+n.$ [asy] unitsize(2cm); draw((0,0)--(2,0)--(2,1)--(1,1)--(1,2)--(0,2)--cycle); draw((0,1)--(1,1)--(1,0),dashed); [/asy]
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+We proceed by calculating the complement. Note that the only configuration of the 2 points that makes the midpoint outside of the L shape is one point in the top square, and one in the right square. This occurs with $\frac{2}{3} \cdot \frac{1}{3}$ probability. Let the topmost coordinate have value of: $(x_1,y_1+1)$ , and rightmost value of: $(x_2+1,y_2)$ . The midpoint of them is thus: \[\left(\frac{x_1+x_2+1}{2}, \frac{y_1+y_2+1}{2} \right)\] It is clear that $x_1, x_2, y_1, y_2$ are all between 0 and 1. For the midpoint to be outside the L-shape, both coordinates must be greater than 1, thus: \[\frac{x_1+x_2+1}{2}>1 \implies x_1+x_2>1\] By symmetry this has probability $\frac{1}{2}$ . Also by symmetry, the probability the y-coordinate works as well is $\frac{1}{2}$ . Thus the probability that the midpoint is outside the L-shape is: \[\frac{2}{3} \cdot \frac{1}{3} \cdot \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{18}\] We want the probability that the point is inside the L-shape however, which is $1-\frac{1}{18}=\frac{17}{18}$ , yielding the answer of $17+18=\boxed{35}$ ~SAHANWIJETUNGA
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_f2cb3e200a : Prop := by
+  sorry

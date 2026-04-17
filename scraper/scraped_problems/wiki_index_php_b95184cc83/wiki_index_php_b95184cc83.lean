@@ -1,9 +1,18 @@
-import Mathlib.Data.Nat.Basic
+-- 2020 USAMO Problems/Problem 6
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2020_USAMO_Problems/Problem_6
+
+-- Problem (LaTeX):
+/-
+lol lol
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+
+-/
+
 import Mathlib.Tactic
 
-open Nat
-
--- Problem: Prove that for all natural numbers n, n + 0 = n
-theorem problem_2020_usamo_p6 (n : ℕ) : n + 0 = n := by
-  -- Use reflexivity since this is definitional
-  rfl
+theorem wiki_index_php_b95184cc83 : Prop := by
+  sorry

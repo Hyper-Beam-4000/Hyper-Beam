@@ -1,0 +1,18 @@
+-- 2017 AMC 12B Problems/Problem 6
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2017_AMC_12B_Problems/Problem_6
+
+-- Problem (LaTeX):
+/-
+The circle having $(0,0)$ and $(8,6)$ as the endpoints of a diameter intersects the $x$ -axis at a second point. What is the $x$ -coordinate of this point? $\textbf{(A) } 4\sqrt{2} \qquad\textbf{(B) } 6 \qquad\textbf{(C) } 5\sqrt{2} \qquad\textbf{(D) } 8 \qquad\textbf{(E) } 6\sqrt{2}$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Because the two points are on a diameter, the center must be halfway between them at the point $(4,3)$ . The distance from $(0,0)$ to $(4,3)$ is 5 so the circle has radius 5. Thus, the equation of the circle is $(x-4)^2+(y-3)^2=25$ . To find the x-intercept, y must be 0, so $(x-4)^2+(0-3)^2=25$ , so $(x-4)^2=16$ , $x-4=4$ , $x=8, \boxed{D}$ . Written by: SilverLion
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_1a18fa5804 : Prop := by
+  sorry

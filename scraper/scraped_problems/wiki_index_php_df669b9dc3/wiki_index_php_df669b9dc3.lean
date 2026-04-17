@@ -1,0 +1,19 @@
+-- 2017 AMC 12A Problems/Problem 24
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2017_AMC_12A_Problems/Problem_24
+
+-- Problem (LaTeX):
+/-
+Quadrilateral $ABCD$ is inscribed in circle $O$ and has side lengths $AB=3, BC=2, CD=6$ , and $DA=8$ . Let $X$ and $Y$ be points on $\overline{BD}$ such that $\frac{DX}{BD} = \frac{1}{4}$ and $\frac{BY}{BD} = \frac{11}{36}$ .
+Let $E$ be the intersection of line $AX$ and the line through $Y$ parallel to $\overline{AD}$ . Let $F$ be the intersection of line $CX$ and the line through $E$ parallel to $\overline{AC}$ . Let $G$ be the point on circle $O$ other than $C$ that lies on line $CX$ . What is $XF\cdot XG$ ? $\textbf{(A) }17\qquad\textbf{(B) }\frac{59 - 5\sqrt{2}}{3}\qquad\textbf{(C) }\frac{91 - 12\sqrt{3}}{4}\qquad\textbf{(D) }\frac{67 - 10\sqrt{2}}{3}\qquad\textbf{(E) }18$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Using the given ratios, note that $\frac{XY}{BD} = 1 - \frac{1}{4} - \frac{11}{36} = \frac{4}{9}.$ By AA Similarity, $\triangle AXD \sim \triangle EXY$ with a ratio of $\frac{DX}{XY} = \frac{9}{16}$ and $\triangle ACX \sim \triangle EFX$ with a ratio of $\frac{AX}{XE} = \frac{DX}{XY} = \frac{9}{16}$ , so $\frac{XF}{CX} = \frac{16}{9}$ . Now we find the length of $BD$ . Because the quadrilateral is cyclic, we can simply use the Law of Cosines. \[BD^2=3^2+8^2-48\cos\angle BAD=2^2+6^2-24\cos (180-\angle BAD)=2^2+6^2+24\cos\angle BAD\] \[\rightarrow \cos\angle BAD = \frac{11}{24}\] \[\rightarrow BD=\sqrt{51}\] By Power of a Point, $CX\cdot XG = DX\cdot XB = \frac{\sqrt{51}}{4} \frac{3\sqrt{51}}{4}$ . Thus $XF\cdot XG = \frac{XF}{CX} CX\cdot XG = \frac{51}{3} = \boxed{\textbf{(A)}\ 17}.$ -solution by FRaelya
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_df669b9dc3 : Prop := by
+  sorry

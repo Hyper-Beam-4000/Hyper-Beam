@@ -6,6 +6,13 @@
   "solution": "",
   "answer": "",
   "year": 2020,
-  "scraped_at": "2026-03-24T05:42:19.550612+00:00",
-  "lean_code": "import Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic\n\nopen Nat\n\n-- Problem: Prove that for all natural numbers n, n + 0 = n\ntheorem problem_2020_usamo_p6 (n : ℕ) : n + 0 = n := by\n  -- Use reflexivity since this is definitional\n  rfl"
+  "competition": "USAMO",
+  "problem_number": 6,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "USAMO",
+    "2020",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:19:35.930715+00:00"
 }

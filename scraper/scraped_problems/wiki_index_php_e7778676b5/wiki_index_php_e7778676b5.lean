@@ -1,28 +1,18 @@
-import Mathlib.Data.List.Perm
-import Mathlib.Data.Nat.Basic
+-- 2017 USAMO Problems/Problem 2
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2017_USAMO_Problems/Problem_2
+
+-- Problem (LaTeX):
+/-
+Let $m_1, m_2, \ldots, m_n$ be a collection of $n$ positive integers, not necessarily distinct. For any sequence of integers $A = (a_1, \ldots, a_n)$ and any permutation $w = w_1, \ldots, w_n$ of $m_1, \ldots, m_n$ , define an $A$ -inversion of $w$ to be a pair of entries $w_i, w_j$ with $i < j$ for which one of the following conditions holds: \[a_i \ge w_i > w_j,\] \[w_j > a_i \ge w_i,\] or \[w_i > w_j > a_i.\] Show that, for any two sequences of integers $A = (a_1, \ldots, a_n)$ and $B = (b_1, \ldots, b_n)$ , and for any positive integer $k$ , the number of permutations of $m_1, \ldots, m_n$ having exactly $k$ $A$ -inversions is equal to the number of permutations of $m_1, \ldots, m_n$ having exactly $k$ $B$ -inversions.
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+
+-/
+
 import Mathlib.Tactic
 
-open List
-
--- Define what it means for a pair to be an A-inversion
-def is_A_inversion (A : List ℤ) (w : List ℤ) (i j : ℕ) : Prop :=
-  i < j ∧ ((A.get! i ≥ w.get! i ∧ w.get! i > w.get! j) ∨ 
-           (w.get! j > A.get! i ∧ A.get! i ≥ w.get! i) ∨ 
-           (w.get! i > w.get! j ∧ w.get! j > A.get! i))
-
--- Count the number of A-inversions in a permutation
-def count_A_inversions (A w : List ℤ) : ℕ :=
-  (List.range w.length).bind (λ i, 
-    (List.range w.length).filter (λ j, is_A_inversion A w i j)).length
-
--- The main theorem statement
-theorem usamo_2017_p2 (m : List ℕ) (A B : List ℤ) (k : ℕ) :
-    (∃ w : List ℤ, w ~ m ∧ count_A_inversions A w = k) ↔ 
-    (∃ w : List ℤ, w ~ m ∧ count_A_inversions B w = k) := by
-  -- Introduce the variables and assumptions
-  intro
-  -- The proof will rely on showing a bijection between permutations with k A-inversions and k B-inversions
-  -- Step 1: Show that the number of A-inversions is invariant under certain transformations
-  -- Step 2: Construct a bijection between permutations with k A-inversions and k B-inversions
-  -- Step 3: Use the invariance and bijection to conclude the proof
+theorem wiki_index_php_e7778676b5 : Prop := by
   sorry

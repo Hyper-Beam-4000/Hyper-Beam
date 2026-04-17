@@ -3,9 +3,16 @@
   "url": "https://artofproblemsolving.com/wiki/index.php?title=2021_USAMO_Problems/Problem_1",
   "title": "2021 USAMO Problems/Problem 1",
   "problem": "Rectangles $BCC_{1}B_{2}$ , $CAA_{1}C_{2}$ , and $ABB_{1}A_{2}$ are erected outside an acute triangle $ABC$ . Suppose that \\[\\angle BC_{1}C + \\angle CA_{1}A + \\angle AB_{1}B = 180^{\\circ}.\\] Prove that lines $B_{1}C_{2}$ , $C_{1}A_{2}$ , and $A_{1}B_{2}$ are concurrent.",
-  "solution": "Let $D$ be the second point of intersection of the circles $AB_1B$ and $AA_1C.$ Then: \\begin{align*} \\angle ADB &= 180^\\circ – \\angle AB_1B,&\\angle ADC &= 180^\\circ – \\angle AA_1C\\\\ \\angle BDC &= 360^\\circ – \\angle ADB – \\angle ADC\\\\ &= 360^\\circ – (180^\\circ – \\angle AB_1B) – (180^\\circ – \\angle AA_1C)\\\\ &= \\angle AB_1B + \\angle AA_1C\\\\ \\angle BDC + \\angle BC_1C &= 180^\\circ \\end{align*} Therefore, $BDCC_1B_2$ is cyclic with diameters $BC_1$ and $CB_2$ , and thus $\\angle CDB_2 = 90^\\circ.$ Similarly, $\\angle CDA_1 = 90^\\circ$ , meaning points $A_1$ , $D$ , and $B_2$ are collinear. Similarly, the points $A_2, D, C_1$ and $C_2, D, B_1$ are collinear. (After USAMO 2021 Solution Notes – Evan Chen) vladimir.shelomovskii@gmail.com, vvsss",
+  "solution": "Let $D$ be the second point of intersection of the circles $(AB_1B)$ and $(AA_1C).$ Then: \\begin{align*} \\angle ADB &= 180^\\circ – \\angle AB_1B,&\\angle ADC &= 180^\\circ – \\angle AA_1C\\\\ \\angle BDC &= 360^\\circ – \\angle ADB – \\angle ADC\\\\ &= 360^\\circ – (180^\\circ – \\angle AB_1B) – (180^\\circ – \\angle AA_1C)\\\\ &= \\angle AB_1B + \\angle AA_1C\\\\ \\angle BDC + \\angle BC_1C &= 180^\\circ \\end{align*} Therefore, $BDCC_1B_2$ is cyclic with diameters $BC_1$ and $CB_2$ , and thus $\\angle CDB_2 = 90^\\circ.$ Similarly, $\\angle CDA_1 = 90^\\circ$ , meaning points $A_1$ , $D$ , and $B_2$ are collinear. Similarly, the points $A_2, D, C_1$ and $C_2, D, B_1$ are collinear. (After USAMO 2021 Solution Notes – Evan Chen) vladimir.shelomovskii@gmail.com, vvsss",
   "answer": "",
   "year": 2021,
-  "scraped_at": "2026-03-24T05:42:22.201421+00:00",
-  "lean_code": "import Mathlib.Geometry.Euclidean.Circumcircle\nimport Mathlib.Geometry.Euclidean.Triangle\nimport Mathlib.Tactic\n\nopen EuclideanGeometry\n\n-- Problem: Prove that lines B₁C₂, C₁A₂, and A₁B₂ are concurrent\ntheorem usamo_2021_p1 (A B C A₁ B₁ C₁ A₂ B₂ C₂ : Point) \n  (h₁ : Rectangle B C C₁ B₂) (h₂ : Rectangle C A A₁ C₂) (h₃ : Rectangle A B B₁ A₂)\n  (h_angle : ∠ B C₁ C + ∠ C A₁ A + ∠ A B₁ B = 180) :\n  Concurrent (Line.mk B₁ C₂) (Line.mk C₁ A₂) (Line.mk A₁ B₂) := by\n  -- Introduce the point D as the intersection of circles AB₁B and AA₁C\n  obtain ⟨D, hD₁, hD₂⟩ : ∃ D, CircleThrough A B₁ B D ∧ CircleThrough A A₁ C D := sorry\n  -- Show that BDCC₁B₂ is cyclic\n  have h_cyclic_BDCC₁B₂ : Cyclic [B, D, C, C₁, B₂] := by\n    -- Use angle chasing to show cyclicity\n    sorry\n  -- Show that CDA₁ is a right angle\n  have h_right_CDA₁ : ∠ C D A₁ = 90 := by\n    -- Use the cyclic property and angle chasing\n    sorry\n  -- Show that A₁, D, and B₂ are collinear\n  have h_collinear_A₁DB₂ : Collinear [A₁, D, B₂] := by\n    -- Use the right angle property\n    sorry\n  -- Similarly, show collinearity for other points\n  have h_collinear_A₂DC₁ : Collinear [A₂, D, C₁] := sorry\n  have h_collinear_C₂DB₁ : Collinear [C₂, D, B₁] := sorry\n  -- Conclude concurrency from collinearity\n  exact Concurrent_of_Collinear h_collinear_A₁DB₂ h_collinear_A₂DC₁ h_collinear_C₂DB₁"
+  "competition": "USAMO",
+  "problem_number": 1,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "USAMO",
+    "2021",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:19:37.241995+00:00"
 }

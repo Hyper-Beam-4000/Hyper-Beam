@@ -1,0 +1,20 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2025 AMC 12A Problems/Problem 19}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+We begin by factoring:
+\begin{equation}
+\begin{split}
+&a^3b^2+a^2b^3+b^3c^2+b^2c^3+c^3a^2+c^2a^3 \\
+&=a^2b^2(a+b)+b^2c^2(b+c)+c^2a^2(c+a)\\
+&=(a^2b^2+b^2c^2+c^2a^2)(a+b+c) - a^2b^2c-b^2c^2a-c^2a^2b\\
+&=(a^2b^2+b^2c^2+c^2a^2)(a+b+c) - (abc)(ab+bc+ca).\\
+\end{split}
+\end{equation}
+From Vieta's Formulas, we know that $a+b+c = 0$ , $ab+bc+ca = k$ , and $abc = -1$ . Therefore, the answer equals $(a^2b^2+b^2c^2+c^2a^2)(0) - (-1)(k) = \boxed{k}.$ ~lprado
+
+\end{document}

@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2022_AIME_I_Problems/Problem_6",
+  "title": "2022 AIME I Problems/Problem 6",
+  "problem": "Find the number of ordered pairs of integers $(a, b)$ such that the sequence \\[3, 4, 5, a, b, 30, 40, 50\\] is strictly increasing and no set of four (not necessarily consecutive) terms forms an arithmetic progression.",
+  "solution": "Since $3,4,5,a$ and $3,4,5,b$ cannot be an arithmetic progression, $a$ or $b$ can never be $6$ . Since $b, 30, 40, 50$ and $a, 30, 40, 50$ cannot be an arithmetic progression, $a$ and $b$ can never be $20$ . Since $a < b$ , there are ${24 - 2 \\choose 2} = 231$ ways to choose $a$ and $b$ with these two restrictions in mind. However, there are still specific invalid cases counted in these $231$ pairs $(a,b)$ . Since \\[3,5,a,b\\] cannot form an arithmetic progression, $\\underline{(a,b) \\neq (7,9)}$ . \\[a,b,30,50\\] cannot be an arithmetic progression, so $(a,b) \\neq (-10,10)$ ; however, since this pair was not counted in our $231$ , we do not need to subtract it off. \\[3,a,b,30\\] cannot form an arithmetic progression, so $\\underline{(a,b) \\neq (12,21)}$ . \\[4, a, b, 40\\] cannot form an arithmetic progression, so $\\underline{(a,b) \\neq (16,28)}$ . \\[5, a,b, 50\\] cannot form an arithmetic progression, $(a,b) \\neq 20, 35$ ; however, since this pair was not counted in our $231$ (since we disallowed $a$ or $b$ to be $20$ ), we do not to subtract it off. Also, the sequences $(3,a,b,40)$ , $(3,a,b,50)$ , $(4,a,b,30)$ , $(4,a,b,50)$ , $(5,a,b,30)$ and $(5,a,b,40)$ will never be arithmetic, since that would require $a$ and $b$ to be non-integers. So, we need to subtract off $3$ progressions from the $231$ we counted, to get our final answer of $\\boxed{228}$ . ~ ihatemath123",
+  "answer": "",
+  "year": 2022,
+  "competition": "AIME I",
+  "problem_number": 6,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME I",
+    "2022",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:36:23.512286+00:00"
+}

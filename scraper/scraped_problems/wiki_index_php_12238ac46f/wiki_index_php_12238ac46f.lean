@@ -1,28 +1,18 @@
-import Mathlib.Data.Finset.Basic
-import Mathlib.Data.Nat.Choose
+-- 2024 USAMO Problems/Problem 2
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2024_USAMO_Problems/Problem_2
+
+-- Problem (LaTeX):
+/-
+Let $S_1, S_2, \ldots, S_{100}$ be finite sets of integers whose intersection is not empty. For each non-empty $T \subseteq\left\{S_1, S_2, \ldots, S_{100}\right\}$ , the size of the intersection of the sets in $T$ is a multiple of the number of sets in $T$ . What is the least possible number of elements that are in at least 50 sets? Solution 1 Let's determine the smallest possible number of elements that appear in at least 50 of the sets. First, we establish some notation. For any subset $T \subseteq \{S_1, S_2, \ldots, S_{100}\}$ , let $\cap T$ denote the intersection of all sets in $T$ . By the problem statement, $|\cap T|$ is divisible by $|T|$ . We'll use a binary encoding approach. For each element $x$ in our universe, define its "signature" as a binary string of length 100, where the $i$ -th bit is 1 if $x \in S_i$ and 0 otherwise. For any signature $v$ with exactly $k$ ones, corresponding elements must appear in exactly $k$ sets. The problem condition requires that for any subset of sets corresponding to positions where 1's appear in some signature $u$ , the number of elements having signature $v$ that contains all 1's from $u$ must be divisible by $|u|$ . Let's denote by $f(v)$ the number of elements with signature $v$ . The problem condition translates to: for any signature $u$ , $|u|$ divides $\sum_{v \supseteq u} f(v)$ . Key claim: For any signature $u$ with $|u| = 50$ , we need $f(u) \geq 50$ . Proof: By the divisibility condition, $\sum_{v \supseteq u} f(v)$ must be divisible by 50. For any $v$ strictly containing $u$ , if we sum over all such $u$ of size 50, each $f(v)$ with $|v| > 50$ gets counted multiple times. To satisfy the divisibility condition for each individual $u$ , we need $f(u) \geq 50$ for each signature $u$ with exactly 50 ones. Since there are $\binom{100}{50}$ different ways to choose 50 positions for ones in the signature, and each such signature must correspond to at least 50 elements, the minimum number of elements appearing in at least 50 sets is $50 \binom{100}{50}$ . Therefore, the answer is $\boxed{50 \binom{100}{50}}$ . ~ brandonyee Video Solution https://youtu.be/eguz1OuckH0 Let $S_1, S_2, \ldots, S_{100}$ be finite sets of integers whose intersection is not empty. For each non-empty $T \subseteq\left\{S_1, S_2, \ldots, S_{100}\right\}$ , the size of the intersection of the sets in $T$ is a multiple of the number of sets in $T$ . What is the least possible number of elements that are in at least 50 sets?
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let's determine the smallest possible number of elements that appear in at least 50 of the sets. First, we establish some notation. For any subset $T \subseteq \{S_1, S_2, \ldots, S_{100}\}$ , let $\cap T$ denote the intersection of all sets in $T$ . By the problem statement, $|\cap T|$ is divisible by $|T|$ . We'll use a binary encoding approach. For each element $x$ in our universe, define its "signature" as a binary string of length 100, where the $i$ -th bit is 1 if $x \in S_i$ and 0 otherwise. For any signature $v$ with exactly $k$ ones, corresponding elements must appear in exactly $k$ sets. The problem condition requires that for any subset of sets corresponding to positions where 1's appear in some signature $u$ , the number of elements having signature $v$ that contains all 1's from $u$ must be divisible by $|u|$ . Let's denote by $f(v)$ the number of elements with signature $v$ . The problem condition translates to: for any signature $u$ , $|u|$ divides $\sum_{v \supseteq u} f(v)$ . Key claim: For any signature $u$ with $|u| = 50$ , we need $f(u) \geq 50$ . Proof: By the divisibility condition, $\sum_{v \supseteq u} f(v)$ must be divisible by 50. For any $v$ strictly containing $u$ , if we sum over all such $u$ of size 50, each $f(v)$ with $|v| > 50$ gets counted multiple times. To satisfy the divisibility condition for each individual $u$ , we need $f(u) \geq 50$ for each signature $u$ with exactly 50 ones. Since there are $\binom{100}{50}$ different ways to choose 50 positions for ones in the signature, and each such signature must correspond to at least 50 elements, the minimum number of elements appearing in at least 50 sets is $50 \binom{100}{50}$ . Therefore, the answer is $\boxed{50 \binom{100}{50}}$ . ~ brandonyee
+-/
+
 import Mathlib.Tactic
 
-open Finset
-
--- Problem: Determine the least possible number of elements that are in at least 50 sets
-theorem usamo_2024_p2 :
-  let S : Finset (Finset ℕ) := univ.image (λ i : Fin 100, (some (nonempty_of_mem_univ i)))
-  let f : (Fin 100 → Bool) → ℕ := λ v, (univ.filter (λ x, (λ i, x i = tt) = v)).card
-  50 * (Nat.choose 100 50) = 50 * (Nat.choose 100 50) := by
-  -- Introduce the sets and the function f
-  intro S f
-  -- We need to show that for any signature u with |u| = 50, f(u) ≥ 50
-  have h₁ : ∀ u : Fin 100 → Bool, u.card = 50 → f u ≥ 50 := by
-    intro u hu
-    -- Use the divisibility condition: |u| divides ∑_{v ⊇ u} f(v)
-    have h₂ : u.card ∣ ∑ v in univ.filter (λ v, ∀ i, u i → v i), f v := sorry
-    -- To satisfy the divisibility condition, we need f(u) ≥ 50
-    sorry
-  -- Calculate the total number of elements with at least 50 ones
-  have h₃ : ∑ u in univ.filter (λ u, u.card = 50), f u ≥ 50 * (Nat.choose 100 50) := by
-    apply sum_le_sum
-    intro u hu
-    apply h₁
-    exact hu
-  -- Conclude that the minimum number of elements is 50 * (Nat.choose 100 50)
-  exact rfl
+theorem wiki_index_php_12238ac46f : Prop := by
+  sorry

@@ -1,42 +1,20 @@
-import Mathlib.Data.Nat.Basic
+-- 2020 USAMO Problems/Problem 4
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2020_USAMO_Problems/Problem_4
+
+-- Problem (LaTeX):
+/-
+Suppose that $(a_1, b_1), (a_2, b_2), \ldots , (a_{100}, b_{100})$ are distinct ordered pairs of nonnegative integers. Let $N$ denote the number of pairs of integers $(i, j)$ satisfying $1 \le i < j \le 100$ and $|a_ib_j - a_j b_i|=1$ . Determine the largest possible value of $N$ over all possible choices of the $100$ ordered pairs.
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let's start off with just $(a_1, b_1), (a_2, b_2)$ and suppose that it satisfies the given condition. We could use $(1, 1), (1, 2)$ for example. We should maximize the number of conditions that the third pair satisfies. We find out that the third pair should equal $(a_1+a_2, b_1+b_2)$ : We know this must be true: \[|a_1b_2-a_2b_1| = 1\] So \[a_1b_2-a_2b_1 = 1\] We require the maximum conditions for $(a_3, b_3)$ \[|a_3b_2-a_2b_3| = 1\] \[|a_3b_1-a_1b_3| = 1\] Then one case can be: \[a_3b_2-a_2b_3 = 1\] \[a_3b_1-a_1b_3 = -1\] We try to do some stuff such as solving for $a_3$ with manipulations: \[a_3b_2a_1-a_2b_3a_1 = a_1\] \[a_3b_1a_2-a_1b_3a_2 = -a_2\] \[a_3(a_1b_2-a_2b_1) = a_1+a_2\] \[a_3 = a_1+a_2\] \[a_3b_2b_1-a_2b_3b_1 = b_1\] \[a_3b_1b_2-a_1b_3b_2 = -b_2\] \[b_3(a_1b_2-a_2b_1) = b_1+b_2\] \[b_3 = b_1+b_2\] We showed that 3 pairs are a complete graph; however, 4 pairs are not a complete graph. We will now show that: \[a_4 = a_1+2a_2\] \[b_4 = b_1+2b_2\] \[|a_1b_1+2a_2b_1-a_1b_1-2a_1b_2| = 1\] \[2|a_2b_1-a_1b_2| = 1\] This is clearly impossible because $1$ is not even and also $|a_2b_1-a_1b_2| = 1$ .
+The answer is as follows: \[0+1+2+\ldots+2\] $a_1$ has $0$ subtractions that follow condition while $a_2$ has $1$ and then the rest has $2$ .
+There are $n$ terms, so our answer be $2n-3$ and in case of $n=100$ that means \[\boxed{N=197}.\] ~Lopkiloinm
+-/
+
 import Mathlib.Tactic
 
-open Nat
-
--- Problem: Determine the largest possible value of N over all possible choices of 100 ordered pairs
-theorem usamo_2020_p4 : ∃ N : ℕ, N = 197 := by
-  -- We need to show that the maximum number of pairs (i, j) such that |a_i b_j - a_j b_i| = 1 is 197
-  -- Consider the sequence of pairs (a_k, b_k) = (F_k, F_{k+1}) where F_k is the k-th Fibonacci number
-  -- This sequence satisfies the condition |a_i b_j - a_j b_i| = 1 for consecutive pairs
-  -- We will show that this sequence gives the maximum number of such pairs
-
-  -- Define the Fibonacci sequence
-  let fib : ℕ → ℕ
-  | 0 => 0
-  | 1 => 1
-  | n + 2 => fib n + fib (n + 1)
-
-  -- Consider the pairs (fib k, fib (k + 1)) for k = 1 to 100
-  -- These pairs are distinct and satisfy the condition for consecutive indices
-  have h_fib : ∀ k, 1 ≤ k → |fib k * fib (k + 2) - fib (k + 1) * fib (k + 1)| = 1 := by
-    intro k hk
-    -- Use the property of Fibonacci numbers: fib (k+2) = fib (k+1) + fib k
-    rw [fib, fib]
-    -- Simplify the expression using the Fibonacci identity
-    ring
-    -- The expression simplifies to 1
-    norm_num
-
-  -- The number of such pairs (i, j) is the sum of the first 99 natural numbers
-  -- This is because each pair (fib k, fib (k + 1)) contributes to the count for k = 1 to 99
-  have h_sum : ∑ i in Finset.range 99, i = 197 := by
-    -- Use the formula for the sum of the first n natural numbers: n * (n + 1) / 2
-    rw [Finset.sum_range_id]
-    norm_num
-
-  -- Conclude that the maximum N is 197
-  use 197
-  exact h_sum
-
-  -- The sequence of Fibonacci pairs achieves the maximum number of pairs satisfying the condition
+theorem wiki_index_php_9915c92b08 : Prop := by
   sorry

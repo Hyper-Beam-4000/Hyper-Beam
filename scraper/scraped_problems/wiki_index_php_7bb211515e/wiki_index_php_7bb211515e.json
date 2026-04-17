@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2020_AMC_12A_Problems/Problem_10",
+  "title": "2020 AMC 12A Problems/Problem 10",
+  "problem": "There is a unique positive integer $n$ such that \\[\\log_2{(\\log_{16}{n})} = \\log_4{(\\log_4{n})}.\\] What is the sum of the digits of $n?$ $\\textbf{(A) } 4 \\qquad \\textbf{(B) } 7 \\qquad \\textbf{(C) } 8 \\qquad \\textbf{(D) } 11 \\qquad \\textbf{(E) } 13$",
+  "solution": "We can use the fact that $\\log_{a^b} c = \\frac{1}{b} \\log_a c.$ This can be proved by using Change of Base Formula to base $a.$ So, the original equation $\\log_2{(\\log_{2^4}{n})} = \\log_{2^2}{(\\log_{2^2}{n})}$ becomes \\[\\log_2\\left({\\frac{1}{4}\\log_{2}{n}}\\right) = \\frac{1}{2}\\log_2\\left({\\frac{1}{2}\\log_2{n}}\\right).\\] Using log property of addition, we expand both sides and then simplify: \\begin{align*} \\log_2{\\frac{1}{4}}+\\log_2{(\\log_{2}{n}}) &= \\frac{1}{2}\\left[\\log_2{\\frac{1}{2}} +\\log_{2}{(\\log_2{n})}\\right] \\\\ \\log_2{\\frac{1}{4}}+\\log_2{(\\log_{2}{n}}) &= \\frac{1}{2}\\left[-1 +\\log_{2}{(\\log_2{n})}\\right] \\\\ -2+\\log_2{(\\log_{2}{n}}) &= -\\frac{1}{2}+ \\frac{1}{2}(\\log_{2}{(\\log_2{n})}). \\end{align*} Subtracting $\\frac{1}{2}(\\log_{2}{(\\log_2{n})})$ from both sides and adding $2$ to both sides gives us \\[\\frac{1}{2}(\\log_{2}{(\\log_2{n})}) = \\frac{3}{2}.\\] Multiplying by $2,$ exponentiating, and simplifying gives us \\begin{align*} \\log_{2}{(\\log_2{n})} &= 3 \\\\ \\log_2{n}&=8 \\\\ n&=256. \\end{align*} Adding the digits together, we have $2+5+6=\\boxed{\\textbf{(E) } 13}.$ ~quacker88 (Solution) ~MRENTHUSIASM (Reformatting)",
+  "answer": "",
+  "year": 2020,
+  "competition": "AMC 12A",
+  "problem_number": 10,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12A",
+    "2020",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:24:42.221879+00:00"
+}

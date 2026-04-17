@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2020_AIME_II_Problems/Problem_8",
+  "title": "2020 AIME II Problems/Problem 8",
+  "problem": "Define a sequence recursively by $f_1(x)=|x-1|$ and $f_n(x)=f_{n-1}(|x-n|)$ for integers $n>1$ . Find the least value of $n$ such that the sum of the zeros of $f_n$ exceeds $500,000$ .",
+  "solution": "First it will be shown by induction that the zeros of $f_n$ are the integers $a, {a+2,} {a+4,} \\dots, {a + n(n-1)}$ , where $a = n - \\frac{n(n-1)}2.$ This is certainly true for $n=1$ . Suppose that it is true for $n = m-1 \\ge 1$ , and note that the zeros of $f_m$ are the solutions of $|x - m| = k$ , where $k$ is a nonnegative zero of $f_{m-1}$ . Because the zeros of $f_{m-1}$ form an arithmetic sequence with common difference $2,$ so do the zeros of $f_m$ . The greatest zero of $f_{m-1}$ is \\[m-1+\\frac{(m-1)(m-2)}2 =\\frac{m(m-1)}2,\\] so the greatest zero of $f_m$ is $m+\\frac{m(m-1)}2$ and the least is $m-\\frac{m(m-1)}2$ . It follows that the number of zeros of $f_n$ is $\\frac{n(n-1)}2+1=\\frac{n^2-n+2}2$ , and their average value is $n$ . The sum of the zeros of $f_n$ is \\[\\frac{n^3-n^2+2n}2.\\] Let $S(n)=n^3-n^2+2n$ , so the sum of the zeros exceeds $500{,}000$ if and only if $S(n) > 1{,}000{,}000 = 100^3\\!.$ Because $S(n)$ is increasing for $n > 2$ , the values $S(100) = 1{,}000{,}000 - 10{,}000 + 200 = 990{,}200$ and $S(101)=1{,}030{,}301 - 10{,}201 + 202 = 1{,}020{,}302$ show that the requested value of $n$ is $\\boxed{101}$ .",
+  "answer": "",
+  "year": 2020,
+  "competition": "AIME II",
+  "problem_number": 8,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME II",
+    "2020",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:35:25.465650+00:00"
+}

@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2017_AIME_II_Problems/Problem_12",
+  "title": "2017 AIME II Problems/Problem 12",
+  "problem": "Circle $C_0$ has radius $1$ , and the point $A_0$ is a point on the circle. Circle $C_1$ has radius $r<1$ and is internally tangent to $C_0$ at point $A_0$ . Point $A_1$ lies on circle $C_1$ so that $A_1$ is located $90^{\\circ}$ counterclockwise from $A_0$ on $C_1$ . Circle $C_2$ has radius $r^2$ and is internally tangent to $C_1$ at point $A_1$ . In this way a sequence of circles $C_1,C_2,C_3,\\ldots$ and a sequence of points on the circles $A_1,A_2,A_3,\\ldots$ are constructed, where circle $C_n$ has radius $r^n$ and is internally tangent to circle $C_{n-1}$ at point $A_{n-1}$ , and point $A_n$ lies on $C_n$ $90^{\\circ}$ counterclockwise from point $A_{n-1}$ , as shown in the figure below. There is one point $B$ inside all of these circles. When $r = \\frac{11}{60}$ , the distance from the center $C_0$ to $B$ is $\\frac{m}{n}$ , where $m$ and $n$ are relatively prime positive integers. Find $m+n$ . [asy] draw(Circle((0,0),125)); draw(Circle((25,0),100)); draw(Circle((25,20),80)); draw(Circle((9,20),64)); dot((125,0)); label(\"$A_0$\",(125,0),E); dot((25,100)); label(\"$A_1$\",(25,100),SE); dot((-55,20)); label(\"$A_2$\",(-55,20),E); [/asy]",
+  "solution": "Impose a coordinate system and let the center of $C_0$ be $(0,0)$ and $A_0$ be $(1,0)$ . Therefore $A_1=(1-r,r)$ , $A_2=(1-r-r^2,r-r^2)$ , $A_3=(1-r-r^2+r^3,r-r^2-r^3)$ , $A_4=(1-r-r^2+r^3+r^4,r-r^2-r^3+r^4)$ , and so on, where the signs alternate in groups of $2$ . The limit of all these points is point $B$ . Using the sum of infinite geometric series formula on $B$ and reducing the expression: $(1-r)-(r^2-r^3)+(r^4-r^5)-...=\\frac{1-r}{1+r^2}$ , $(r-r^2)-(r^3-r^4)+(r^5-r^6)-...=\\frac{r-r^2}{1+r^2}$ . Thus, we get $B=\\left(\\frac{1-r}{r^2+1},\\frac{r-r^2}{r^2+1}\\right)$ . The distance from $B$ to the origin is $\\sqrt{\\left(\\frac{1-r}{r^2+1}\\right)^2+\\left(\\frac{r-r^2}{r^2+1}\\right)^2}=\\frac{1-r}{\\sqrt{r^2+1}}.$ Let $r=\\frac{11}{60}$ , and the distance from the origin is $\\frac{49}{61}$ . $49+61=\\boxed{110}$ .",
+  "answer": "",
+  "year": 2017,
+  "competition": "AIME II",
+  "problem_number": 12,
+  "difficulty_tier": "pre_gpt",
+  "tags": [
+    "AIME II",
+    "2017",
+    "pre_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:33:29.329367+00:00"
+}

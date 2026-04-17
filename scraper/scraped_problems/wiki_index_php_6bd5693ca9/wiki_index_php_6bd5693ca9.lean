@@ -1,0 +1,18 @@
+-- 2022 AIME II Problems/Problem 15
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2022_AIME_II_Problems/Problem_15
+
+-- Problem (LaTeX):
+/-
+Two externally tangent circles $\omega_1$ and $\omega_2$ have centers $O_1$ and $O_2$ , respectively. A third circle $\Omega$ passing through $O_1$ and $O_2$ intersects $\omega_1$ at $B$ and $C$ and $\omega_2$ at $A$ and $D$ , as shown. Suppose that $AB = 2$ , $O_1O_2 = 15$ , $CD = 16$ , and $ABO_1CDO_2$ is a convex hexagon. Find the area of this hexagon. [asy] import geometry; size(10cm); point O1=(0,0),O2=(15,0),B=9*dir(30); circle w1=circle(O1,9),w2=circle(O2,6),o=circle(O1,O2,B); point A=intersectionpoints(o,w2)[1],D=intersectionpoints(o,w2)[0],C=intersectionpoints(o,w1)[0]; filldraw(A--B--O1--C--D--O2--cycle,0.2*fuchsia+white,black); draw(w1); draw(w2); draw(O1--O2,dashed); draw(o); dot(O1); dot(O2); dot(A); dot(D); dot(C); dot(B); label("$\omega_1$",8*dir(110),SW); label("$\omega_2$",5*dir(70)+(15,0),SE); label("$O_1$",O1,W); label("$O_2$",O2,E); label("$B$",B,N+1/2*E); label("$A$",A,N+1/2*W); label("$C$",C,S+1/4*W); label("$D$",D,S+1/4*E); label("$15$",midpoint(O1--O2),N); label("$16$",midpoint(C--D),N); label("$2$",midpoint(A--B),S); label("$\Omega$",o.C+(o.r-1)*dir(270)); [/asy]
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+First observe that $AO_2 = O_2D$ and $BO_1 = O_1C$ . Let points $A'$ and $B'$ be the reflections of $A$ and $B$ , respectively, about the perpendicular bisector of $\overline{O_1O_2}$ . Then quadrilaterals $ABO_1O_2$ and $B'A'O_2O_1$ are congruent, so hexagons $ABO_1CDO_2$ and $A'B'O_1CDO_2$ have the same area. Furthermore, triangles $DO_2A'$ and $B'O_1C$ are congruent, so $A'D = B'C$ and quadrilateral $A'B'CD$ is an isosceles trapezoid. [asy] import olympiad; size(180); defaultpen(linewidth(0.7)); pair Ap = dir(105), Bp = dir(75), O1 = dir(25), C = dir(320), D = dir(220), O2 = dir(175); draw(unitcircle^^Ap--Bp--O1--C--D--O2--cycle); label("$A'$",Ap,dir(origin--Ap)); label("$B'$",Bp,dir(origin--Bp)); label("$O_1$",O1,dir(origin--O1)); label("$C$",C,dir(origin--C)); label("$D$",D,dir(origin--D)); label("$O_2$",O2,dir(origin--O2)); draw(O2--O1,linetype("4 4")); draw(Ap--D^^Bp--C,linetype("2 2")); [/asy] Next, remark that $B'O_1 = DO_2$ , so quadrilateral $B'O_1DO_2$ is also an isosceles trapezoid; in turn, $B'D = O_1O_2 = 15$ , and similarly $A'C = 15$ . Thus, Ptolemy's theorem on $A'B'CD$ yields $A'D\cdot B'C + 2\cdot 16 = 15^2$ , whence $A'D = B'C = \sqrt{193}$ . Let $\alpha = \angle A'B'D$ . The Law of Cosines on triangle $A'B'D$ yields \[\cos\alpha = \frac{15^2 + 2^2 - (\sqrt{193})^2}{2\cdot 2\cdot 15} = \frac{36}{60} = \frac 35,\] and hence $\sin\alpha = \tfrac 45$ . Thus the distance between bases $A’B’$ and $CD$ is $12$ (in fact, $\triangle A'B'D$ is a $9-12-15$ triangle with a $7-12-\sqrt{193}$ triangle removed), which implies the area of $A'B'CD$ is $\tfrac12\cdot 12\cdot(2+16) = 108$ . Now let $O_1C = O_2A' = r_1$ and $O_2D = O_1B' = r_2$ ; the tangency of circles $\omega_1$ and $\omega_2$ implies $r_1 + r_2 = 15$ . Furthermore, angles $A'O_2D$ and $A'B'D$ are opposite angles in cyclic quadrilateral $B'A'O_2D$ , which implies the measure of angle $A'O_2D$ is $180^\circ - \alpha$ . Therefore, the Law of Cosines applied to triangle $\triangle A'O_2D$ yields \begin{align*} 193 &= r_1^2 + r_2^2 - 2r_1r_2(-\tfrac 35) = (r_1^2 + 2r_1r_2 + r_2^2) - \tfrac45r_1r_2\\ &= (r_1+r_2)^2 - \tfrac45 r_1r_2 = 225 - \tfrac45r_1r_2. \end{align*} Thus $r_1r_2 = 40$ , and so the area of triangle $A'O_2D$ is $\tfrac12r_1r_2\sin\alpha = 16$ . Thus, the area of hexagon $ABO_{1}CDO_{2}$ is $108 + 2\cdot 16 = \boxed{140}$ . ~djmathman
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_6bd5693ca9 : Prop := by
+  sorry

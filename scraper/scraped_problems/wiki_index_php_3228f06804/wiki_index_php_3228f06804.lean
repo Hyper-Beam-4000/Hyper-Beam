@@ -1,0 +1,18 @@
+-- 2018 AMC 10A Problems/Problem 20
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_AMC_12A_Problems/Problem_15
+
+-- Problem (LaTeX):
+/-
+A scanning code consists of a $7 \times 7$ grid of squares, with some of its squares colored black and the rest colored white. There must be at least one square of each color in this grid of $49$ squares. A scanning code is called $\textit{symmetric}$ if its look does not change when the entire square is rotated by a multiple of $90 ^{\circ}$ counterclockwise around its center, nor when it is reflected across a line joining opposite corners or a line joining midpoints of opposite sides. What is the total number of possible symmetric scanning codes? $\textbf{(A)} \text{ 510} \qquad \textbf{(B)} \text{ 1022} \qquad \textbf{(C)} \text{ 8190} \qquad \textbf{(D)} \text{ 8192} \qquad \textbf{(E)} \text{ 65,534}$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Draw a $7 \times 7$ square. \[\begin{tabular}{|c|c|c|c|c|c|c|} \hline K & J & H & G & H & J & K \\ \hline J & F & E & D & E & F & J \\ \hline H & E & C & B & C & E & H \\ \hline G & D & B & A & B & D & G \\ \hline H & E & C & B & C & E & H \\ \hline J & F & E & D & E & F & J \\ \hline K & J & H & G & H & J & K \\ \hline \end{tabular}\] Start from the center and label all protruding cells symmetrically. (Note that "I" is left out of this labelling, so there are only 10 labels, not 11, as ending in K would suggest!) More specifically, since there are $4$ given lines of symmetry ( $2$ diagonals, $1$ vertical, $1$ horizontal) and they split the plot into $8$ equivalent sections, we can take just one-eighth and study it in particular. Each of these sections has $10$ distinct sub-squares, whether partially or in full. So since each can be colored either white or black, we choose $2^{10}=1024$ but then subtract the $2$ cases where all are white or all are black. That leaves us with $\fbox{\textbf{(B)} \text{ 1022}}$ . There are only ten squares we get to actually choose, and two independent choices for each, for a total of $2^{10} = 1024$ codes. Two codes must be subtracted (due to the rule that there must be at least one square of each color) for an answer of $\fbox{\textbf{(B) }1022}$ . Note that this problem is very similar to the 1996 AIME Problem 7 https://artofproblemsolving.com/wiki/index.php/1996_AIME_Problems/Problem_7 .
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_3228f06804 : Prop := by
+  sorry

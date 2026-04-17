@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_AIME_I_Problems/Problem_9",
+  "title": "2019 AIME I Problems/Problem 9",
+  "problem": "Let $\\tau(n)$ denote the number of positive integer divisors of $n$ . Find the sum of the six least positive integers $n$ that are solutions to $\\tau (n) + \\tau (n+1) = 7$ .",
+  "solution": "In order to obtain a sum of $7$ , we must have: either a number with $5$ divisors ( a fourth power of a prime ) and a number with $2$ divisors ( a prime ), or a number with $4$ divisors ( a semiprime or a cube of a prime ) and a number with $3$ divisors ( a square of a prime ). (No integer greater than $1$ can have fewer than $2$ divisors.) Since both of these cases contain a number with an odd number of divisors, that number must be an even power of a prime. These can come in the form of a square-like $3^2$ with $3$ divisors, or a fourth power like $2^4$ with $5$ divisors. We then find the smallest such values by hand. $2^2$ has two possibilities: $3$ and $4$ or $4$ and $5$ . Neither works. $3^2$ has two possibilities: $8$ and $9$ or $9$ and $10$ . $\\boxed{(8,9)}$ and $\\boxed{(9,10)}$ both work. $2^4$ has two possibilities: $15$ and $16$ or $16$ and $17$ . Only $\\boxed{(16,17)}$ works. $5^2$ has two possibilities: $24$ and $25$ or $25$ and $26$ . Only $\\boxed{(25,26)}$ works. $7^2$ has two possibilities: $48$ and $49$ or $49$ and $50$ . Neither works. $3^4$ has two possibilities: $80$ and $81$ or $81$ and $82$ . Neither works. $11^2$ has two possibilities: $120$ and $121$ or $121$ and $122$ . Only $\\boxed{(121,122)}$ works. $13^2$ has two possibilities: $168$ and $169$ or $169$ and $170$ . Neither works. $17^2$ has two possibilities: $288$ and $289$ or $289$ and $290$ . Neither works. $19^2$ has two possibilities: $360$ and $361$ or $361$ and $362$ . Only $\\boxed{(361,362)}$ works. Having computed the working possibilities, we take the sum of the corresponding values of $n$ : $8+9+16+25+121+361 = \\boxed{\\textbf{540}}$ . ~Kepy. Possible improvement: since all primes $>2$ are odd, their fourth powers are odd as well, which cannot be adjacent to any primes because both of the adjacent numbers will be even. Thus, we only need to check $16$ for the fourth power case. - mathleticguyyy",
+  "answer": "",
+  "year": 2019,
+  "competition": "AIME I",
+  "problem_number": 9,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME I",
+    "2019",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:34:26.186836+00:00"
+}

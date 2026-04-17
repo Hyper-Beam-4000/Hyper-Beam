@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12B_Problems/Problem_16",
+  "title": "2025 AMC 12B Problems/Problem 16",
+  "problem": "An analog clock starts at midnight and runs for $2025$ minutes before stopping. What is the tangent of the acute angle between the hour hand and the minute hand when the clock stops? $\\textbf{(A) } 0 \\qquad \\textbf{(B) } \\sqrt{2}-1 \\qquad \\textbf{(C) } 2-\\sqrt{2} \\qquad \\textbf{(D) } \\frac{\\sqrt{2}}{2} \\qquad \\textbf{(E) } 3-\\sqrt{2}$",
+  "solution": "When divided by $60$ , $2025$ yields $33$ , with a remainder of $45$ . Since $33 \\equiv 9 \\pmod{24}$ , the clock is now at $9:45$ . At this time, the hour is $75\\%$ over, so the hour hand is also $75\\%$ of the way between $9$ and $10$ . There are $360/12 = 30 ^\\circ$ degrees between $9$ and $10$ , and since the hour hand is $75\\%$ of the way, it is $30^\\circ \\cdot \\frac{3}{4} = \\frac{45}{2}^\\circ$ from the minute hand, which is pointing directly at $9$ . We now just need to find $\\tan{(45/2)}$ . Let this be $x$ . Using the tangent addition formula, we get that \\[\\tan{45} = \\frac{x + x}{1 - x\\cdot x}\\] \\[1 = \\frac{2x}{1-x^2}\\] \\[x^2+2x-1 = 0.\\] Using the Quadratic Formula, and knowing $x$ must be positive since $0 < x < 90$ , we get $x = \\tan{(45/2)}= \\boxed{\\sqrt{2}-1}$ ~lprado Note: One could solve this quickly using the *tangent half angle identity*, which is $\\tan(\\frac{\\theta}{2}) = \\frac{\\sin(\\theta)}{1+\\cos(\\theta)} = \\frac{1-\\cos(\\theta)}{\\sin(\\theta)}$ ~math660 Note: Another interesting way to find the angle between the hands at 9:45 is to use the formula $30h - \\frac{11}{2}m$ , where $h$ is the hour and $m$ is the minute. In this case, we get the angle is $30 \\cdot 9 - \\frac{11}{2}(45) = \\frac{540-495}{2} = \\frac{45}{2}$ as desired. ~lprado",
+  "answer": "",
+  "year": 2025,
+  "competition": "AMC 12B",
+  "problem_number": 16,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12B",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:32:33.793570+00:00"
+}

@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2017_AMC_12A_Problems/Problem_5",
+  "title": "2017 AMC 12A Problems/Problem 5",
+  "problem": "At a gathering of $30$ people, there are $20$ people who all know each other and $10$ people who know no one. People who know each other hug, and people who do not know each other shake hands. How many handshakes occur? $\\textbf{(A)}\\ 240\\qquad\\textbf{(B)}\\ 245\\qquad\\textbf{(C)}\\ 290\\qquad\\textbf{(D)}\\ 480\\qquad\\textbf{(E)}\\ 490$",
+  "solution": "All of the handshakes will involve at least one person from the $10$ who knows no one. Label these ten people $A$ , $B$ , $C$ , $D$ , $E$ , $F$ , $G$ , $H$ , $I$ , $J$ . Person $A$ from the group of $10$ will initiate a handshake with everyone else ( $29$ people). Person $B$ initiates $28$ handshakes plus the one already counted from person $A$ . Person $C$ initiates $27$ new handshakes plus the two we already counted. This continues until person $J$ initiates $20$ handshakes plus the nine we already counted from $A$ ... $I$ . $29+28+27+26+25+24+23+22+21+20 = \\boxed{(B)=\\ 245}$",
+  "answer": "",
+  "year": 2017,
+  "competition": "AMC 12A",
+  "problem_number": 5,
+  "difficulty_tier": "pre_gpt",
+  "tags": [
+    "AMC 12A",
+    "2017",
+    "pre_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:20:21.737608+00:00"
+}

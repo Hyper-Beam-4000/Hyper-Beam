@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2023_AMC_12B_Problems/Problem_16",
+  "title": "2023 AMC 12B Problems/Problem 16",
+  "problem": "In the state of Coinland, coins have values $6,10,$ and $15$ cents. Suppose $x$ is the value in cents of the most expensive item in Coinland that cannot be purchased using these coins with exact change. What is the sum of the digits of $x?$ $\\textbf{(A) }8\\qquad\\textbf{(B) }10\\qquad\\textbf{(C) }7\\qquad\\textbf{(D) }11\\qquad\\textbf{(E) }9$",
+  "solution": "This problem asks to find largest $x$ that cannot be written as \\[6 a + 10 b + 15 c = x, \\hspace{1cm} (1)\\] where $a, b, c \\in \\Bbb Z_+$ . Denote by $r \\in \\left\\{ 0, 1 \\right\\}$ the remainder of $x$ divided by 2.\nModulo 2 on Equation (1), we get\nBy using modulus $m \\in \\left\\{ 2, 3, 5 \\right\\}$ on the equation above, we get $c \\equiv r \\pmod{2}$ . Following from the Chicken McNugget Theorem , we have that any number that is no less than $(3-1)(5-1) = 8$ can be expressed in the form of $3a + 5b$ with $a, b \\in \\Bbb Z_+$ . Therefore, all even numbers that are at least equal to $2 \\cdot 8 + 15 \\cdot 0 = 16$ can be written in the form of Equation (1) with $a, b, c \\in \\Bbb Z_+$ .\nAll odd numbers that are at least equal to $2 \\cdot 8 + 15 \\cdot 1 = 31$ can be written in the form of Equation (1) with $a, b, c \\in \\Bbb Z_+$ . The above two cases jointly imply that all numbers that are at least 30 can be written in the form of Equation (1) with $a, b, c \\in \\Bbb Z_+$ . Next, we need to prove that 29 cannot be written in the form of Equation (1) with $a, b, c \\in \\Bbb Z_+$ . Because 29 is odd, we must have $c \\equiv 1 \\pmod{2}$ .\nBecause $a, b, c \\in \\Bbb Z_+$ , we must have $c = 1$ .\nPlugging this into Equation (1), we get $3 a + 5 b = 7$ .\nHowever, this equation does not have non-negative integer solutions. All analysis above jointly imply that the largest $x$ that has no non-negative integer solution to Equation (1) is 29.\nTherefore, the answer is $2 + 9 = \\boxed{\\textbf{(D) 11}}$ . ~Steven Chen, www.professorchenedu.com",
+  "answer": "",
+  "year": 2023,
+  "competition": "AMC 12B",
+  "problem_number": 16,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12B",
+    "2023",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:29:46.066196+00:00"
+}

@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2024 AIME I Problems/Problem 7}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Let $z=4e^{i\theta}$ . Then the expression becomes \[(300+468i)e^{i\theta}+(24+36i)e^{-i\theta}\] The real part of this comes out to be $(300\cos \theta - 468 \sin \theta)+(24\cos \theta + 36 \sin \theta) = (324\cos \theta - 432 \sin \theta)$ . Using Cauchy-Schwarz to maximize this, \[(324\cos \theta - 432 \sin \theta)^2 \leq (\cos ^2 \theta+\sin ^2 \theta)(324^2+432^2) = (1)(324^2+432^2) = 540^2\] This value is attainable. Thus, the maximum is $\boxed{540}$ .
+
+\end{document}

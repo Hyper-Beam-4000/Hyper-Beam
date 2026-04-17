@@ -6,6 +6,13 @@
   "solution": "Since $q(p-1)$ is a perfect square and $q$ is prime, we should have $p - 1 = qb^2$ for some positive integer $b$ . Let $a^2 = p - q$ . Therefore, $q = p - a^2$ , and substituting that into the $p - 1 = qb^2$ and solving for $p$ gives \\[p = \\frac{a^2b^2 - 1}{b^2 - 1} = \\frac{(ab - 1)(ab + 1)}{b^2 - 1}.\\] Notice that we also have \\[p = \\frac{a^2b^2 - 1}{b^2 - 1} = a^2 + \\frac{a^2 - 1}{b^2 - 1}\\] and so $b^2 - 1 | a^2 - 1$ . We run through the cases $a = 1$ : Then $p - q = 1$ so $(p, q) = (3, 2)$ , which works. $a = b$ : This means $p = a^2 + 1$ , so $q = 1$ , a contradiction. $a > b$ : This means that $b^2 - 1 < ab - 1$ . Since $b^2 - 1$ can be split up into two factors $F_1, F_2$ such that $F_1 | ab - 1$ and $F_2 | ab + 1$ , we get \\[p = \\frac{ab - 1}{F_1} \\cdot \\frac{ab + 1}{F_2}\\] and each factor is greater than $1$ , contradicting the primality of $p$ . Thus, the only solution is $(p, q) = (3, 2)$ .",
   "answer": "",
   "year": 2022,
-  "scraped_at": "2026-03-24T05:43:32.319142+00:00",
-  "lean_code": "import Mathlib.Data.Nat.Prime\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic\n\nopen Nat\n\n-- Problem: Find all pairs of primes (p, q) such that p - q and pq - q are both perfect squares\ntheorem usamo_2022_p4 (p q : ℕ) (hp : p.Prime) (hq : q.Prime) :\n  (∃ a b : ℕ, a^2 = p - q ∧ b^2 = pq - q) ↔ (p = 3 ∧ q = 2) := by\n  constructor\n  · -- Forward direction: Assume there exist a, b such that a^2 = p - q and b^2 = pq - q\n    intro h\n    obtain ⟨a, b, ha, hb⟩ := h\n    -- Analyze the condition q(p - 1) = b^2\n    have h1 : q * (p - 1) = b^2 := by\n      rw [← hb, mul_sub, mul_one]\n    -- Since q is prime, p - 1 = qb^2 for some b\n    have h2 : ∃ k : ℕ, p - 1 = q * k := by\n      sorry\n    obtain ⟨k, hk⟩ := h2\n    -- Substitute q = p - a^2 into p - 1 = q * k\n    have h3 : q = p - a^2 := by\n      rw [← ha]\n    -- Solve for p using the derived equations\n    have h4 : p = (a^2 * k + 1) := by\n      rw [hk, h3]\n      sorry\n    -- Check possible values for a and b\n    cases a with\n    | zero =>\n      -- a = 0 leads to a contradiction since p ≠ q\n      exfalso\n      sorry\n    | succ a' =>\n      -- Consider the case a = 1\n      cases a' with\n      | zero =>\n        -- a = 1 implies p - q = 1, hence (p, q) = (3, 2)\n        have : p = 3 ∧ q = 2 := by\n          sorry\n        exact this\n      | succ a'' =>\n        -- a > 1 leads to contradictions due to primality constraints\n        exfalso\n        sorry\n  · -- Backward direction: Show that (p, q) = (3, 2) satisfies the conditions\n    intro h\n    rw [h]\n    -- Check that (3, 2) satisfies both conditions\n    use 1, 2\n    constructor\n    · -- p - q = 1^2\n      norm_num\n    · -- pq - q = 2^2\n      norm_num"
+  "competition": "USAMO",
+  "problem_number": 4,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "USAMO",
+    "2022",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:19:49.226380+00:00"
 }

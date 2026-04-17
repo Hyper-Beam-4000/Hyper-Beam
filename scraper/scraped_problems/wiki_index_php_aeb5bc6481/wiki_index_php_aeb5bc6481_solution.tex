@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2020 AIME II Problems/Problem 14}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Note that the upper bound for our sum is $2019,$ and not $2020,$ because if it were $2020$ then the function composition cannot equal to $17.$ From there, it's not too hard to see that, by observing the function composition from right to left, $N$ is (note that the summation starts from the right to the left): \[\sum_{x=17}^{2019} \sum_{y=x}^{2019} \sum_{z=y}^{2019} 1 .\] One can see an easy combinatorical argument exists which is the official solution, but I will present another solution here for the sake of variety. Applying algebraic manipulation and the hockey-stick identity $3$ times gives \[\sum_{x=17}^{2019} \sum_{y=x}^{2019} \sum_{z=y}^{2019} 1\] \[=\sum_{x=17}^{2019} \sum_{y=x}^{2019} \sum_{z=y}^{2019} \binom{z-y}{0}\] \[=\sum_{x=17}^{2019} \sum_{y=x}^{2019} \binom{2020-y}{1}\] \[=\sum_{x=17}^{2019} \binom{2021-x}{2}\] \[=\binom{2005}{3}\] Hence, \[N = \frac{2005 \cdot 2004 \cdot 2003}{3 \cdot 2\cdot 1} \equiv \boxed{010} (\mathrm{mod} \hskip .2cm 1000)\]
+
+\end{document}

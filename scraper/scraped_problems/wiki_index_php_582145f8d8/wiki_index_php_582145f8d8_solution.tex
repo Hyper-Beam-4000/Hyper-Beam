@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2022 AIME II Problems/Problem 9}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+We can use recursion to solve this problem: 1. Fix 7 points on $\ell_A$ , then put one point $B_1$ on $\ell_B$ . Now, introduce a function $f(x)$ that indicates the number of regions created, where x is the number of points on $\ell_B$ . For example, $f(1) = 6$ because there are 6 regions. 2. Now, put the second point $B_2$ on $\ell_B$ . Join $A_1~A_7$ and $B_2$ will create $7$ new regions (and we are not going to count them again), and split the existing regions. Let's focus on the spliting process: line segment formed between $B_2$ and $A_1$ intersect lines $\overline{B_1A_2}$ , $\overline{B_1A_3}$ , ..., $\overline{B_1A_7}$ at $6$ points $\Longrightarrow$ creating $6$ regions (we already count one region at first), then $5$ points $\Longrightarrow$ creating $5$ regions (we already count one region at first), 4 points, etc. So, we have: \[f(2) = f(1) + 7 + (6+5+...+1) = 34.\] 3. If you still need one step to understand this: $A_1~A_7$ and $B_3$ will still create $7$ new regions. Intersecting \[\overline{A_2B_1}, \overline{A_2B_2};\] \[\overline{A_3B_1}, \overline{A_3B_2};\] \[...\] \[\overline{A_7B_1}, \overline{A_7B_2}\] at $12$ points, creating $12$ regions, etc. Thus, we have: \[f(3) = f(2)+7+(12+10+8+...+2)=34+7+6\cdot 7=83.\] Yes, you might already notice that: \[f(n+1) = f(n)+7+(6+5+...+1)\cdot n = f(n) + 7 + 21n.\] 5. Finally, we have $f(4) = 153$ , and $f(5)=244$ . Therefore, the answer is $\boxed{244}$ . Note: we could deduce a general formula of this recursion: $f(n+1)=f(n)+N_a+\frac{n\cdot (N_a) \cdot (N_a-1)}{2}$ , where $N_a$ is the number of points on $\ell_A$
+
+\end{document}

@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2022 AIME II Problems/Problem 6}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+To find the greatest value of $x_{76} - x_{16}$ , $x_{76}$ must be as large as possible, and $x_{16}$ must be as small as possible. If $x_{76}$ is as large as possible, $x_{76} = x_{77} = x_{78} = \dots = x_{100} > 0$ . If $x_{16}$ is as small as possible, $x_{16} = x_{15} = x_{14} = \dots = x_{1} < 0$ . The other numbers between $x_{16}$ and $x_{76}$ equal to $0$ . Let $a = x_{76}$ , $b = x_{16}$ . Substituting $a$ and $b$ into $|x_1| + |x_2| + \cdots + |x_{100}| = 1$ and $x_1 + x_2 + \cdots + x_{100} = 0$ we get: \[25a - 16b = 1\] \[25a + 16b = 0\] $a = \frac{1}{50}$ , $b = -\frac{1}{32}$ $x_{76} - x_{16} = a - b = \frac{1}{50} + \frac{1}{32} = \frac{41}{800}$ . $m+n = \boxed{\textbf{841}}$ ~ isabelchen
+
+\end{document}

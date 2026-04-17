@@ -1,0 +1,19 @@
+-- 2019 AMC 12B Problems/Problem 24
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2019_AMC_12B_Problems/Problem_24
+
+-- Problem (LaTeX):
+/-
+Let $\omega=-\tfrac{1}{2}+\tfrac{1}{2}i\sqrt3.$ Let $S$ denote all points in the complex plane of the form $a+b\omega+c\omega^2,$ where $0\leq a \leq 1,0\leq b\leq 1,$ and $0\leq c\leq 1.$ What is the area of $S$ ? $\textbf{(A) } \frac{1}{2}\sqrt3 \qquad\textbf{(B) } \frac{3}{4}\sqrt3 \qquad\textbf{(C) } \frac{3}{2}\sqrt3\qquad\textbf{(D) } \frac{1}{2}\pi\sqrt3 \qquad\textbf{(E) } \pi$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Notice that $\omega=e^{\frac{2i\pi}{3}}$ , which is one of the cube roots of unity. We wish to find the span of $(a+b\omega+c\omega^2)$ for reals $0\le a,b,c\le 1$ .
+Observe also that if $a,b,c>0$ , then replacing $a$ , $b$ , and $c$ by $a-\min(a,b,c), b-\min(a,b,c),$ and $c-\min(a,b,c)$ leaves the value of $a+b\omega+c\omega^2$ unchanged. Therefore, assume that at least one of $a,b,c$ is equal to $0$ . If exactly one of them is $0$ , we can form an equilateral triangle of side length $1$ using the remaining terms. A similar argument works if exactly two of them are $0$ . In total, we get $3+{3 \choose 2} = 6$ equilateral triangles, whose total area is $6 \cdot \frac{\sqrt{3}}{4} = \boxed{\textbf{(C) } \frac{3}{2}\sqrt3}$ . Note : A diagram of the six equilateral triangles is shown below. [asy] size(200,200); draw((0,0)--(1,0)--(1/2,sqrt(3)/2)--cycle); draw((0,0)--(1/2,sqrt(3)/2)--(-1/2,sqrt(3)/2)--cycle); draw((0,0)--(-1/2,sqrt(3)/2)--(-1,0)--cycle); draw((0,0)--(-1,0)--(-1/2,-sqrt(3)/2)--cycle); draw((0,0)--(-1/2,-sqrt(3)/2)--(1/2,-sqrt(3)/2)--cycle); draw((0,0)--(1/2,-sqrt(3)/2)--(1,0)--cycle); draw((-2,0)--(2,0)); draw((0,-2)--(0,2)); [/asy]
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_5bc2ba0928 : Prop := by
+  sorry

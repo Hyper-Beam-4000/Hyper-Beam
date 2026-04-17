@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2024_AMC_12A_Problems/Problem_10",
+  "title": "2024 AMC 12A Problems/Problem 10",
+  "problem": "Let $\\alpha$ be the radian measure of the smallest angle in a $3{-}4{-}5$ right triangle. Let $\\beta$ be the radian measure of the smallest angle in a $7{-}24{-}25$ right triangle. In terms of $\\alpha$ , what is $\\beta$ ? $\\textbf{(A) }\\frac{\\alpha}{3}\\qquad \\textbf{(B) }\\alpha - \\frac{\\pi}{8}\\qquad \\textbf{(C) }\\frac{\\pi}{2} - 2\\alpha \\qquad \\textbf{(D) }\\frac{\\alpha}{2}\\qquad \\textbf{(E) }\\pi - 4\\alpha\\qquad$",
+  "solution": "We are given that \\[\\tan\\alpha=\\frac{3}{4} \\text{ and } \\tan\\beta=\\frac{7}{24}.\\] We have \\begin{align*} \\tan(\\alpha+\\beta) &= \\frac{\\tan\\alpha+\\tan\\beta}{1-\\tan\\alpha\\tan\\beta} \\\\ &= \\frac{\\frac{3}{4}+\\frac{7}{24}}{1-\\frac{3}{4} \\cdot \\frac{7}{24}} \\\\ &= \\frac{4}{3}. \\end{align*} It follows that \\begin{align*} \\alpha+\\beta&=\\tan^{-1}\\left(\\frac{4}{3}\\right) \\\\ &=\\frac{\\pi}{2}-\\tan^{-1}\\left(\\frac{3}{4}\\right) \\\\ &=\\frac{\\pi}{2}-\\alpha. \\end{align*} Therefore, the answer is \\[\\beta=\\boxed{\\textbf{(C) }\\frac{\\pi}{2}-2\\alpha}.\\] ~lptoggled",
+  "answer": "",
+  "year": 2024,
+  "competition": "AMC 12A",
+  "problem_number": 10,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12A",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:30:19.942664+00:00"
+}

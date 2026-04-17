@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2022_AMC_12A_Problems/Problem_14",
+  "title": "2022 AMC 12A Problems/Problem 14",
+  "problem": "What is the value of \\[(\\log 5)^{3}+(\\log 20)^{3}+(\\log 8)(\\log 0.25)\\] where $\\log$ denotes the base-ten logarithm? $\\textbf{(A)}~\\frac{3}{2}\\qquad\\textbf{(B)}~\\frac{7}{4}\\qquad\\textbf{(C)}~2\\qquad\\textbf{(D)}~\\frac{9}{4}\\qquad\\textbf{(E)}~3$",
+  "solution": "Let $\\text{log } 2 = x$ . The expression then becomes \\[(1+x)^3+(1-x)^3+(3x)(-2x)=\\boxed{2}.\\] -bluelinfish",
+  "answer": "",
+  "year": 2022,
+  "competition": "AMC 12A",
+  "problem_number": 14,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12A",
+    "2022",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:27:37.099875+00:00"
+}

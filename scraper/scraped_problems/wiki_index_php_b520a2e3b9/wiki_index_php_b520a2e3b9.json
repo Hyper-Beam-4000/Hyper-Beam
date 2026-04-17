@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12B_Problems/Problem_23",
+  "title": "2025 AMC 12B Problems/Problem 23",
+  "problem": "Let $S$ be the set of all integers $z > 1$ such that for all pairs of nonnegative integers $(x, y)$ with $x < y < z$ , the remainder when $2025x$ is divided by $z$ is less than the remainder when $2025y$ is divided by $z$ . What is the sum of the elements of $S$ ? $\\textbf{(A)}~3041 \\qquad \\textbf{(B)}~3542 \\qquad \\textbf{(C)}~3750 \\qquad \\textbf{(D)}~4044 \\qquad \\textbf{(E)}~4319$",
+  "solution": "Notice that there are $z$ distinct remainders modulo $z$ . However, if we let $R(x)$ denote the remainder when $2025x$ is divided by $z$ , we know that by the problem condition, \\[R(0)<R(1)<R(2)<\\cdots<R(z-1)\\] But there are only $z$ distinct remainders, and each of the $z$ terms above must correspond to a distinct remainder, so we must have $R(k)=k$ for all $k=0,1,\\dots,z-1$ . Then $2025k\\equiv k\\pmod{z}$ , so $2024k\\equiv 0\\pmod{z}$ . Since $k$ can vary, this is equivalent to $2024\\equiv 0\\pmod{z}$ , or $z\\mid 2024$ . Therefore, the values $z$ that satisfy the property are the factors of $2024$ , so we simply need to find the sum of the factors of $2024$ and subtract $1$ at the end since $z\\ne 1$ . But $2024=2^3\\cdot 11\\cdot 23$ , so the sum of the factors minus $1$ is \\[(1+2+4+8)(1+11)(1+23)-1=15\\cdot12\\cdot24-1=4320-1=\\boxed{\\textbf{(E)}~4319 }.\\] ~ eevee9406",
+  "answer": "",
+  "year": 2025,
+  "competition": "AMC 12B",
+  "problem_number": 23,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12B",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:32:43.112114+00:00"
+}

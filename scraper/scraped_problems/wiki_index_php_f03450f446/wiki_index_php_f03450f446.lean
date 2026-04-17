@@ -1,43 +1,18 @@
-import Mathlib.Geometry.Euclidean.Circumcircle
-import Mathlib.Geometry.Euclidean.Angle
+-- 2018 USAMO Problems/Problem 5
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_USAMO_Problems/Problem_5
+
+-- Problem (LaTeX):
+/-
+In convex cyclic quadrilateral $ABCD,$ we know that lines $AC$ and $BD$ intersect at $E,$ lines $AB$ and $CD$ intersect at $F,$ and lines $BC$ and $DA$ intersect at $G.$ Suppose that the circumcircle of $\triangle ABE$ intersects line $CB$ at $B$ and $P$ , and the circumcircle of $\triangle ADE$ intersects line $CD$ at $D$ and $Q$ , where $C,B,P,G$ and $C,Q,D,F$ are collinear in that order. Prove that if lines $FP$ and $GQ$ intersect at $M$ , then $\angle MAC = 90^{\circ}.$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+[asy] /* Geogebra to Asymptote conversion, documentation at artofproblemsolving.com/Wiki go to User:Azjps/geogebra */ import graph; size(13cm); real labelscalefactor = 0.5; /* changes label-to-point distance */ pen dps = linewidth(0.7) + fontsize(10); defaultpen(dps); /* default pen style */ pen dotstyle = black; /* point style */ real xmin = -14.573333333333343, xmax = 3.56, ymin = -4.74, ymax = 8.473333333333338; /* image dimensions */ pen sexdts = rgb(0.1803921568627451,0.49019607843137253,0.19607843137254902); pen cczzff = rgb(0.8,0.6,1); pen ccwwff = rgb(0.8,0.4,1); pen wvvxds = rgb(0.396078431372549,0.3411764705882353,0.8235294117647058); pen rvwvcq = rgb(0.08235294117647059,0.396078431372549,0.7529411764705882); pen wrwrwr = rgb(0.3803921568627451,0.3803921568627451,0.3803921568627451); /* draw figures */ draw(circle((-4.80390015600624,-0.5952574102964114), 2.6896620042551294), linewidth(1) + sexdts); draw((-5.58,1.98)--(-4.06,-3.18), linewidth(1) + cczzff); draw((-3.8846455730896308,1.9324397054436309)--(-7.42,-1.22), linewidth(1) + ccwwff); draw(circle((-7.256640463424001,0.8150682664688008), 2.0416143581437347), linewidth(1) + sexdts); draw(circle((-4.74356842508035,1.555353052957629), 0.9380526686465809), linewidth(1) + sexdts); draw((-13.275816730447621,2.195893092761112)--(-3.912501589632712,1.120300499610314), linewidth(1) + wvvxds); draw((-3.775365275873233,5.118495172394378)--(-8.947688716232484,-0.3288482488643849), linewidth(1) + wvvxds); draw((-5.58,1.98)--(-3.775365275873233,5.118495172394378), linewidth(1) + wvvxds); draw((-5.58,1.98)--(-7.42,-1.22), linewidth(1) + wvvxds); draw((-3.8846455730896308,1.9324397054436309)--(-4.06,-3.18), linewidth(1) + rvwvcq); draw((-3.8846455730896308,1.9324397054436309)--(-3.775365275873233,5.118495172394378), linewidth(1) + rvwvcq); draw((-13.275816730447621,2.195893092761112)--(-4.06,-3.18), linewidth(1) + rvwvcq); draw((-13.275816730447621,2.195893092761112)--(-3.775365275873233,5.118495172394378), linewidth(1) + rvwvcq); draw((-8.947688716232484,-0.3288482488643849)--(-0.2874232022466262,3.539053630345969), linewidth(1) + rvwvcq); draw((-7.42,-1.22)--(-0.2874232022466262,3.539053630345969), linewidth(1) + rvwvcq); draw((-0.2874232022466262,3.539053630345969)--(-4.06,-3.18), linewidth(1) + rvwvcq); draw(circle((-6.783982903277441,1.6253383695771872), 2.915556239332651), linewidth(1) + rvwvcq); draw((-5.58,1.98)--(-3.8846455730896308,1.9324397054436309), linewidth(1) + ccwwff); draw((-5.216225985226909,0.7450829498492438)--(-3.912501589632712,1.120300499610314), linewidth(1) + ccwwff); draw((-8.947688716232484,-0.3288482488643849)--(-5.58,1.98), linewidth(1) + ccwwff); draw((-8.947688716232484,-0.3288482488643849)--(-5.216225985226909,0.7450829498492438), linewidth(1) + ccwwff); draw((-5.58,1.98)--(-3.912501589632712,1.120300499610314), linewidth(1) + ccwwff); /* dots and labels */ dot((-5.58,1.98),dotstyle); label("$A$", (-5.52,2.113333333333337), N * labelscalefactor); dot((-7.42,-1.22),dotstyle); label("$B$", (-7.36,-1.0866666666666638), SW * labelscalefactor); dot((-4.06,-3.18),dotstyle); label("$C$", (-4,-3.046666666666664), NE * labelscalefactor); dot((-3.8846455730896308,1.9324397054436309),dotstyle); label("$D$", (-3.8266666666666733,2.06), NE * labelscalefactor); dot((-5.216225985226909,0.7450829498492438),linewidth(4pt) + dotstyle); label("$E$", (-5.16,0.8466666666666699), NE * labelscalefactor); dot((-3.775365275873233,5.118495172394378),linewidth(4pt) + dotstyle); label("$F$", (-3.72,5.22), NE * labelscalefactor); dot((-13.275816730447621,2.195893092761112),linewidth(4pt) + dotstyle); label("$G$", (-13.226666666666675,2.3), NE * labelscalefactor); dot((-8.947688716232484,-0.3288482488643849),linewidth(4pt) + dotstyle); label("$P$", (-8.893333333333342,-0.22), NE * labelscalefactor); dot((-3.912501589632712,1.120300499610314),linewidth(4pt) + dotstyle); label("$Q$", (-3.88,1.18), NE * labelscalefactor); dot((-0.2874232022466262,3.539053630345969),linewidth(4pt) + dotstyle); label("$X$", (-0.24,3.6466666666666705), NE * labelscalefactor); dot((-7.211833579631486,1.4993048370077748),linewidth(4pt) + dotstyle); label("$M$", (-7.16,1.60666666666667), NE * labelscalefactor); clip((xmin,ymin)--(xmin,ymax)--(xmax,ymax)--(xmax,ymin)--cycle); /* end of picture */ [/asy]
+-/
+
 import Mathlib.Tactic
 
-open EuclideanGeometry
-
--- Problem: Prove that if lines FP and GQ intersect at M, then ∠MAC = 90° in the given configuration.
-theorem usamo_2018_p5
-  (A B C D E F G P Q M : Point)
-  (h_cyclic : Cyclic [A, B, C, D])
-  (h_intersect_AC_BD : LineThrough A C ∩ LineThrough B D = {E})
-  (h_intersect_AB_CD : LineThrough A B ∩ LineThrough C D = {F})
-  (h_intersect_BC_DA : LineThrough B C ∩ LineThrough D A = {G})
-  (h_circumcircle_ABE : Circumcircle A B E ∩ LineThrough C B = {B, P})
-  (h_circumcircle_ADE : Circumcircle A D E ∩ LineThrough C D = {D, Q})
-  (h_collinear_CBPG : Collinear [C, B, P, G])
-  (h_collinear_CQDF : Collinear [C, Q, D, F])
-  (h_intersect_FP_GQ : LineThrough F P ∩ LineThrough G Q = {M}) :
-  ∠ M A C = 90° := by
-  -- Step 1: Establish the cyclic nature of quadrilateral ABCD
-  have h_cyclic_ABCD : Cyclic [A, B, C, D] := h_cyclic
-
-  -- Step 2: Use the properties of cyclic quadrilaterals
-  -- Angles subtended by the same arc are equal
-  have h_angle_AEB : ∠A E B = ∠A D C := by sorry
-  have h_angle_AED : ∠A E D = ∠A B C := by sorry
-
-  -- Step 3: Use the fact that P and Q lie on the circumcircles
-  -- This implies certain angle equalities
-  have h_angle_APB : ∠A P B = ∠A E B := by sorry
-  have h_angle_AQD : ∠A Q D = ∠A E D := by sorry
-
-  -- Step 4: Use the collinearity conditions
-  -- This helps in establishing the necessary angle conditions
-  have h_collinear_CBPG : Collinear [C, B, P, G] := h_collinear_CBPG
-  have h_collinear_CQDF : Collinear [C, Q, D, F] := h_collinear_CQDF
-
-  -- Step 5: Use the intersection condition of FP and GQ at M
-  have h_intersect_FP_GQ : LineThrough F P ∩ LineThrough G Q = {M} := h_intersect_FP_GQ
-
-  -- Step 6: Conclude that ∠MAC = 90° using the established conditions
-  -- This follows from the properties of cyclic quadrilaterals and the given configuration
+theorem wiki_index_php_f03450f446 : Prop := by
   sorry

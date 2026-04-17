@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2023_AMC_12A_Problems/Problem_1",
+  "title": "2023 AMC 12A Problems/Problem 1",
+  "problem": "Cities $A$ and $B$ are $45$ miles apart. Alicia lives in $A$ and Beth lives in $B$ . Alicia bikes towards $B$ at 18 miles per hour. Leaving at the same time, Beth bikes toward $A$ at 12 miles per hour. How many miles from City $A$ will they be when they meet? $\\textbf{(A) }20\\qquad\\textbf{(B) }24\\qquad\\textbf{(C) }25\\qquad\\textbf{(D) }26\\qquad\\textbf{(E) }27$",
+  "solution": "This is a $d=st$ problem, so let $x$ be the time it takes to meet. We can write the following equation: \\[12x+18x=45\\] Solving gives us $x=1.5$ . The $18x$ is Alicia so $18\\times1.5=\\boxed{\\textbf{(E) 27}}$ ~somebody named",
+  "answer": "",
+  "year": 2023,
+  "competition": "AMC 12A",
+  "problem_number": 1,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12A",
+    "2023",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:28:45.259296+00:00"
+}

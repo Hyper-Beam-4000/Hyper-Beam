@@ -1,0 +1,21 @@
+-- 2020 AMC 10A Problems/Problem 23
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2020_AMC_12A_Problems/Problem_20
+
+-- Problem (LaTeX):
+/-
+Let $T$ be the triangle in the coordinate plane with vertices $(0,0), (4,0),$ and $(0,3).$ Consider the following five isometries (rigid transformations) of the plane: rotations of $90^{\circ}, 180^{\circ},$ and $270^{\circ}$ counterclockwise around the origin, reflection across the $x$ -axis, and reflection across the $y$ -axis. How many of the $125$ sequences of three of these transformations (not necessarily distinct) will return $T$ to its original position? (For example, a $180^{\circ}$ rotation, followed by a reflection across the $x$ -axis, followed by a reflection across the $y$ -axis will return $T$ to its original position, but a $90^{\circ}$ rotation, followed by a reflection across the $x$ -axis, followed by another reflection across the $x$ -axis will not return $T$ to its original position.) $\textbf{(A) } 12 \qquad \textbf{(B) } 15 \qquad \textbf{(C) } 17 \qquad \textbf{(D) } 20 \qquad \textbf{(E) } 25$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Label each rotation \( A, B, C, D \), and \( E \) respectively. One can notice that any rotation on any figure is formed by the transformation on its vertices. Therefore, instead of thinking about the entire triangle, just think of the point \( (x, y) \). We proceed with casework on the \( 180^\circ \) rotation (B) Case A: We don't consider \( B \) (\( 180^\circ \) degrees) We have \( A, C, D \), and \( E \).
+Notice that we cannot have two reflections with one another as that will finish the sequence in two moves, not three. We also may not have two rotations, as it will cause the sequence to end in two moves as well. So we have one rotation and one reflection, but now we have a dilemma. We must choose either another rotation or another reflection. However, we deduced this is impossible, as it will not take the coordinate back to its original position. Therefore, there are 0 cases that work here. Case B: We consider the \( 180^\circ \) degree We first look at reflections. If we have two reflections of one kind D or E, we see that the sequence will finish in 2 rounds. Therefore. we must have one reflection D, one reflection E, and one \( 180^\circ \) rotation. This means we have a transformation set \( \{B, D, E\} \). The elements of this set can be swapped in \( 3! = 6 \) ways. We now look at rotations. If we have two rotations of A, that is essentially \( 90^\circ + 90^\circ = 180^\circ \) of rotation, and therefore mixed in with a \( 180^\circ \) rotation guarantees the same coordinate \( (x, y) \). So, we have a transformation set \( \{A, A, B\} \), which can be arranged in \( \frac{3!}{2!} = 3 \) ways. What about \( C \)? We can just see that \( C \) is just a rotation \( 90^\circ \) clockwise, so if we apply 2 of these, we again get \( 90^\circ + 90^\circ = 180^\circ \) of rotation, giving us enough room for transformation B. Then, our set is \( \{C, C, B\} \), which can be again arranged in \( \frac{3!}{2!} = 3 \) ways. Do any other cases exist? Well, if we have two rotations, then it is impossible, as the rotations negate one another into a \( 360^\circ \) rotation in two moves.
+More importantly, we also see that if we have a mix between a rotation and a reflection, we can see that one will swap the places of \( x \) and \( y \) \( (x, y) \rightarrow (-y, x) \) for instance, and the only other way to change that is another rotation that is not \( B \), which we already deemed was impossible
+We already concluded in case A that we cannot have \( A, C, \) and then either \( D \) or \( E \), therefore, we can only have \( B \), but either through inspection or seeing that \( B \) negates the values of \( x \) and \( y \) while a rotation of A and C brings them back to normal, therefore, this can also not work. Thus the total number of cases is \( 3+3 = 6 \) We have examined all the cases, and therefore our answer is \( 6+6 = \) $\boxed{\textbf{(A)} 12}$ ~Pinotation
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_854fa8250d : Prop := by
+  sorry

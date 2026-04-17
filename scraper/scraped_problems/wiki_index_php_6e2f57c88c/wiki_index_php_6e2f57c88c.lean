@@ -1,46 +1,18 @@
-import Mathlib.Geometry.Euclidean.Circumcircle
-import Mathlib.Geometry.Euclidean.Incenter
-import Mathlib.Geometry.Euclidean.Midpoint
+-- 2017 USAMO Problems/Problem 3
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2017_USAMO_Problems/Problem_3
+
+-- Problem (LaTeX):
+/-
+Let $ABC$ be a scalene triangle with circumcircle $\Omega$ and incenter $I.$ Ray $AI$ meets $BC$ at $D$ and $\Omega$ again at $M;$ the circle with diameter $DM$ cuts $\Omega$ again at $K.$ Lines $MK$ and $BC$ meet at $S,$ and $N$ is the midpoint of $IS.$ The circumcircles of $\triangle KID$ and $\triangle MAN$ intersect at points $L_1$ and $L.$ Prove that $\Omega$ passes through the midpoint of either $IL_1$ or $IL.$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $X$ be the point on circle $\Omega$ opposite $M$ . This means $\angle MAX = 90^\circ, BC \perp XM.$ $\angle XKM = \angle DKM = 90^\circ \implies$ the points $X, D,$ and $K$ are collinear. Let $D' = BC \cap XM \implies DD' \perp XM \implies$ $S$ is the orthocenter of $\triangle DMX \implies$ the points $X, A,$ and $S$ are collinear. Let $\omega$ be the circle centered at $S$ with radius $R = \sqrt {SK \cdot SM}.$ We denote $I_\omega$ inversion with respect to $\omega.$ Note that the circle $\Omega$ has diameter $MX$ and contain points $A, B, C,$ and $K.$ $I_\omega (K) = M \implies$ circle $\Omega \perp \omega \implies C = I_\omega (B), X = I_\omega (A).$ $I_\omega (K) = M \implies$ circle $KMD \perp \omega \implies D' = I_\omega (D) \in KMD \implies$ $\angle DD'M = 90^\circ \implies$ the points $X, D',$ and $M$ are collinear. Let $F \in AM, MF = MI.$ It is well known that $MB = MI = MC \implies$ $\Theta = BICF$ is circle centered at $M.$ $C = I_\omega (B) \implies \Theta \perp \omega.$ Let $I' = I_\omega (I ) \implies I' \in \Theta \implies \angle II'M = 90^\circ.$ $I' = I_\omega (I ), X = I_\omega (A ) \implies AII'X$ is cyclic. $\angle XI'I = \angle XAI = 90^\circ \implies$ the points $X, I' ,$ and $F$ are collinear. $I'IDD'$ is cyclic $\implies \angle I'D'M = \angle I'D'C + 90^\circ = \angle I'ID + 90^\circ,$ $\angle XFM = \angle I'FI = 90^\circ – \angle I'IF = 90^\circ – \angle I'ID \implies$ $\angle XFM + \angle I'D'M = 180^\circ \implies I'D'MF$ is cyclic. Therefore point $F$ lies on $I_\omega (IDK).$ $FA \perp SX, SI' \perp FX \implies I$ is orthocenter of $\triangle FSX.$ $N$ is midpoint $SI, M$ is midpoint $FI, I$ is orthocenter of $\triangle FSX, A$ is root of height $FA \implies AMN$ is the nine-point circle of $\triangle FSX \implies I' \in AMN.$ Let $N' = I_\omega (N) \implies R^2 = SN \cdot SN' = SI \cdot SI' \implies$ \[\frac {SN'}{SI'} = \frac {SI}{SN} =2 \implies\] $\angle XN'I' = \angle XSI' = 90^\circ – \angle AXI' = \angle IFX \implies N'XIF$ is cyclic. Therefore point $F$ lies on $I_\omega (AMN) \implies I_\omega(F) = L \implies$ The points $F, L,$ and $S$ are collinear, $AXFL$ is cyclic. Point $I$ is orthocenter $\triangle FSX \implies XI \perp SF, \angle ILS = \angle SI'F = 90^\circ$ $\implies$ The points $X, I, E,$ and $L$ are collinear. $AXFL$ is circle $\implies AI \cdot IF = IL \cdot XI\implies$ $AI \cdot \frac {IF}{2} = \frac {IL}{2} \cdot IX \implies AI \cdot IM = EI \cdot IX \implies AEMX$ is cyclic. \[E \in \Omega.\] vladimir.shelomovskii@gmail.com, vvsss
+-/
+
 import Mathlib.Tactic
 
-open EuclideanGeometry
-
--- Problem: Prove that the circumcircle of triangle ABC passes through the midpoint of either IL₁ or IL
-theorem usamo_2017_p3 (ABC : Triangle) (I : Point) (D M K S N L₁ L : Point) :
-  let Ω := circumcircle ABC
-  let ω := circle (S, sqrt (dist S K * dist S M))
-  let X := point_opposite_on_circle M Ω
-  let F := point_on_line AM such that dist M F = dist M I
-  let I' := inversion_point I ω
-  let N' := inversion_point N ω
-  let E := midpoint IL
-  (is_incenter I ABC) →
-  (is_on_ray AI D) →
-  (is_on_ray AI M) →
-  (is_on_circle D M (circle (D, M))) →
-  (is_on_circle K Ω) →
-  (is_on_line MK S) →
-  (is_midpoint N I S) →
-  (is_on_circle L₁ (circumcircle KID)) →
-  (is_on_circle L (circumcircle MAN)) →
-  (is_on_circle E Ω) := by
-  -- Assume necessary conditions and definitions
-  intros hI hD hM hDM hK hMK hN hL₁ hL
-  -- Establish that X is opposite M on Ω
-  have hX : is_opposite X M Ω := sorry
-  -- Show that circle with diameter DM is orthogonal to ω
-  have hOrthogonal : is_orthogonal (circle (D, M)) ω := sorry
-  -- Prove that S is the orthocenter of triangle DMX
-  have hOrthocenter : is_orthocenter S DMX := sorry
-  -- Show that A, X, and S are collinear
-  have hCollinear : collinear A X S := sorry
-  -- Establish that inversion with respect to ω maps K to M
-  have hInversionK : inversion_point K ω = M := sorry
-  -- Show that inversion maps circumcircle KID to a line through D'
-  have hInversionKID : is_on_line (inversion_point D ω) (line KID) := sorry
-  -- Prove that F lies on the inversion of circle AMN
-  have hInversionAMN : is_on_circle F (inversion_circle AMN ω) := sorry
-  -- Conclude that AXFL is cyclic
-  have hCyclicAXFL : is_cyclic AXFL := sorry
-  -- Show that E lies on Ω
-  exact sorry
+theorem wiki_index_php_6e2f57c88c : Prop := by
+  sorry

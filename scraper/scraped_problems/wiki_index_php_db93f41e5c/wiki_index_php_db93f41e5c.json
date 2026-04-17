@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AIME_II_Problems/Problem_11",
+  "title": "2025 AIME II Problems/Problem 11",
+  "problem": "Let $S$ be the set of vertices of a regular $24$ -gon. Find the number of ways to draw $12$ segments of equal lengths so that each vertex in $S$ is an endpoint of exactly one of the $12$ segments.",
+  "solution": "The segments we draw must be of equal length, corresponding to a specific step size $k$ (number of steps between vertices). For each step size $k$ , we need to determine if it is possible to form a perfect matching (non-overlapping segments covering all vertices). The number of such perfect matchings depends on the greatest common divisor (gcd) of $k$ and 24. When choosing a step size $k$ , the 24-gon is decomposed into $\\gcd(k, 24)$ cycles, each of length $\\frac{24}{\\gcd(k, 24)}$ . For a perfect matching to exist, each cycle must be of even length (since each line segment consists of 2 points, the length of the cycle must be divisible by 2). For each valid step size ( $k$ ): If the cycle length is 2 (diameters), there is exactly 1 way to match the vertices. For other even cycle lengths, each cycle contributes a factor of 2 to the number of perfect matchings. ( $k = 1$ ): $\\gcd(1, 24) = 1$ , cycle length 24, 2 matchings. ( $k = 2$ ): $\\gcd(2, 24) = 2$ , cycle length 12, $(2^2 = 4)$ matchings. ( $k = 3$ ): $\\gcd(3, 24) = 3$ , cycle length 8, $(2^3 = 8)$ matchings. ( $k = 4$ ): $\\gcd(4, 24) = 4$ , cycle length 6, $(2^4 = 16)$ matchings. ( $k = 5$ ): $\\gcd(5, 24) = 1$ , cycle length 24, 2 matchings. ( $k = 6$ ): $\\gcd(6, 24) = 6$ , cycle length 4, $(2^6 = 64)$ matchings. ( $k = 7$ ): $\\gcd(7, 24) = 1$ , cycle length 24, 2 matchings. ( $k = 8$ ): $\\gcd(8, 24) = 8$ , cycle length 3 (invalid, no matchings). ( $k = 9$ ): $\\gcd(9, 24) = 3$ , cycle length 8, $(2^3 = 8)$ matchings. ( $k = 10$ ): $\\gcd(10, 24) = 2$ , cycle length 12, $(2^2 = 4)$ matchings. ( $k = 11$ ): $\\gcd(11, 24) = 1$ , cycle length 24, 2 matchings. ( $k = 12$ ): $\\gcd(12, 24) = 12$ , cycle length 2, 1 matching. Summing these values: $2 + 4 + 8 + 16 + 2 + 64 + 2 + 0 + 8 + 4 + 2 + 1 = \\boxed{113}$ . ~ Athmyx ~ Minor edits by Christian",
+  "answer": "",
+  "year": 2025,
+  "competition": "AIME II",
+  "problem_number": 11,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AIME II",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:38:51.958141+00:00"
+}

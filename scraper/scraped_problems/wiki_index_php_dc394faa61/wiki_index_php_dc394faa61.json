@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2017_AIME_I_Problems/Problem_2",
+  "title": "2017 AIME I Problems/Problem 2",
+  "problem": "When each of $702$ , $787$ , and $855$ is divided by the positive integer $m$ , the remainder is always the positive integer $r$ . When each of $412$ , $722$ , and $815$ is divided by the positive integer $n$ , the remainder is always the positive integer $s \\neq r$ . Find $m+n+r+s$ .",
+  "solution": "Let's work on both parts of the problem separately. First, \\[855 \\equiv 787 \\equiv 702 \\equiv r \\pmod{m}.\\] We take the difference of $855$ and $787$ , and also of $787$ and $702$ . We find that they are $85$ and $68$ , respectively. Since the greatest common divisor of the two differences is $17$ , $m=1,17$ but if $m=1$ , then $r=0$ which violates $r$ being positive,so it's safe to assume that $m = 17$ . Then, we divide $855$ by $17$ , and it's easy to see that $r = 5$ . Dividing $787$ and $702$ by $17$ also yields remainders of $5$ , which means our work up to here is correct. Doing the same thing with $815$ , $722$ , and $412$ , the differences between $815$ and $722$ and $412$ are $310$ and $93$ , respectively. Since the only common divisor (besides $1$ , of course) is $31$ , $n = 31$ . Dividing all $3$ numbers by $31$ yields a remainder of $9$ for each, so $s = 9$ . Thus, $m + n + r + s = 17 + 5 + 31 + 9 = \\boxed{062}$ .",
+  "answer": "",
+  "year": 2017,
+  "competition": "AIME I",
+  "problem_number": 2,
+  "difficulty_tier": "pre_gpt",
+  "tags": [
+    "AIME I",
+    "2017",
+    "pre_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:32:55.722618+00:00"
+}

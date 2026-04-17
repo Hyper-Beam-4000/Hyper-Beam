@@ -1,0 +1,18 @@
+-- 2021 AIME I Problems/Problem 7
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2021_AIME_I_Problems/Problem_7
+
+-- Problem (LaTeX):
+/-
+Find the number of pairs $(m,n)$ of positive integers with $1\le m<n\le 30$ such that there exists a real number $x$ satisfying \[\sin(mx)+\sin(nx)=2.\]
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+It is trivial that the maximum value of $\sin \theta$ is $1$ , is achieved at $\theta = \frac{\pi}{2}+2k\pi$ for some integer $k$ . This implies that $\sin(mx) = \sin(nx) = 1$ , and that $mx = \frac{\pi}{2}+2a\pi$ and $nx = \frac{\pi}{2}+2b\pi$ , for integers $a, b$ . Taking their ratio, we have \[\frac{mx}{nx} = \frac{\frac{\pi}{2}+2a\pi}{\frac{\pi}{2}+2b\pi} \implies \frac{m}{n} = \frac{4a + 1}{4b + 1} \implies \frac{m}{4a + 1} = \frac{n}{4b + 1} = k.\] It remains to find all $m, n$ that satisfy this equation. If $k = 1$ , then $m \equiv n \equiv 1 \pmod 4$ . This corresponds to choosing two elements from the set $\{1, 5, 9, 13, 17, 21, 25, 29\}$ . There are $\binom 82$ ways to do so. If $k < 1$ , by multiplying $m$ and $n$ by the same constant $c = \frac{1}{k}$ , we have that $mc \equiv nc \equiv 1 \pmod 4$ . Then either $m \equiv n \equiv 1 \pmod 4$ , or $m \equiv n \equiv 3 \pmod 4$ . But the first case was already counted, so we don't need to consider that case. The other case corresponds to choosing two numbers from the set $\{3, 7, 11, 15, 19, 23, 27\}$ . There are $\binom 72$ ways here. (This argument seems to have a logical flaw *check note at bottom*) Finally, if $k > 1$ , note that $k$ must be an integer. This means that $m, n$ belong to the set $\{k, 5k, 9k, \dots\}$ , or $\{3k, 7k, 11k, \dots\}$ . Taking casework on $k$ , we get the sets $\{2, 10, 18, 26\}, \{6, 14, 22, 30\}, \{4, 20\}, \{12, 28\}$ . Some sets have been omitted; this is because they were counted in the other cases already. This sums to $\binom 42 + \binom 42 + \binom 22 + \binom 22$ . In total, there are $\binom 82 + \binom 72 + \binom 42 + \binom 42 + \binom 22 + \binom 22 = \boxed{063}$ pairs of $(m, n)$ . This solution was brought to you by ~Leonard_my_dude~
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_648928c337 : Prop := by
+  sorry

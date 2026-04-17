@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2019 AMC 12B Problems/Problem 13}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+We see that the total probability will eventually sum to 1 from the infinite geometric series sum formula. Now, if the green ball goes into the \( k=1 \) bin with a \( 1/2 \) chance, then the red ball has a \( \frac{1}{4} + \frac{1}{8} + \frac{1}{16} + \dots = 1/2 \) chance to go to a higher bin. The combined probability is \( 1/2 \cdot 1/2 = 1/4 \). If the green ball goes into the \( k=2 \) bin with \( 1/4 \) chance, then the red ball has a \( 1/8 + 1/16 + \dots = 1/4 \) chance to go to a higher level bin. This probability is \( 1/4 \cdot 1/4 = 1/16 \). So our common ratio is \( 1/4 \), and we use the geometric series sum formula to get \( \frac{1/4}{1 - 1/4} = \) $\boxed{\textbf{(C) } \frac{1}{3}}$ . ~Pinotation
+
+\end{document}

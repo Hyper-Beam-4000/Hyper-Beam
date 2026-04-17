@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2025 AMC 12A Problems/Problem 12}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+We will need to determine the sum of the reciprocals of the roots. To find the sum of the reciprocals of the roots $p,q$ of the quadratic $ax^2+bx+c$ , we use Vieta's formulas. Recall that $p+q = -b/a$ and $pq = c/a$ . Therefore, \[\frac{1}{p} + \frac{1}{q} = \frac{p+q}{pq} = \frac{\frac{-b}{a}}{\frac{c}{a}} = \frac{-b}{a} \cdot \frac{a}{c} = \frac{-b}{c},\] which doesn't depend on $a$ . The sum of the reciprocals of the roots of the quadratic $x^2-4x-3$ is $\frac{-(-4)}{-3} = -4/3.$ The same is true for every quadratic in the form $ax^2-4x-3$ . The sum of all the reciprocals of the roots of $ax^2+bx+c$ is $2025 \cdot \left(-\frac{4}{3}\right).$ Because we have $2025$ quadratics, there are $2 \cdot 2025 = 4050$ total roots. Our answer is $\frac{1}{\frac{1}{4050}\cdot \frac{-4\cdot 2025}{3}} =\boxed{(B)\ -\dfrac{3}{2}}$ . ~lprado ~some edits by i_am_not_suk_at_math, zoyashaikh, keanu31415 (minor latex edits)
+
+\end{document}

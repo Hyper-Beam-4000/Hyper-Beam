@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2020 AMC 12A Problems/Problem 6}}
+Source: AoPS Wiki
+
+\subsection*{Problem}
+In the plane figure shown below, $3$ of the unit squares have been shaded. What is the least number of additional unit squares that must be shaded so that the resulting figure has two lines of symmetry? [asy] import olympiad; unitsize(25); filldraw((1,3)--(1,4)--(2,4)--(2,3)--cycle, gray(0.7)); filldraw((2,1)--(2,2)--(3,2)--(3,1)--cycle, gray(0.7)); filldraw((4,0)--(5,0)--(5,1)--(4,1)--cycle, gray(0.7)); for (int i = 0; i < 5; ++i) { for (int j = 0; j < 6; ++j) { pair A = (j,i); } } for (int i = 0; i < 5; ++i) { for (int j = 0; j < 6; ++j) { if (j != 5) { draw((j,i)--(j+1,i)); } if (i != 4) { draw((j,i)--(j,i+1)); } } } [/asy] $\textbf{(A) } 4 \qquad \textbf{(B) } 5 \qquad \textbf{(C) } 6 \qquad \textbf{(D) } 7 \qquad \textbf{(E) } 8$
+
+\end{document}

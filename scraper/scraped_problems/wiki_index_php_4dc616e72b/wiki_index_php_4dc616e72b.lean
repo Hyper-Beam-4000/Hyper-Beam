@@ -1,0 +1,18 @@
+-- 2024 AIME I Problems/Problem 10
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2024_AIME_I_Problems/Problem_10
+
+-- Problem (LaTeX):
+/-
+Let $\triangle ABC$ have side lengths $AB=5$ , $BC=9$ , $CA=10$ . The tangents to circumcircle of $\triangle ABC$ at $B$ and $C$ intersect at point $D$ , and $\overline{AD}$ intersects the circumcircle at $P \neq A$ . The length of $AP$ is equal to $\frac{m}{n}$ , where $m$ and $n$ are relatively prime integers. Find $m + n$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+We have $\let\angle BCD = \let\angle CBD = \let\angle A$ from the tangency condition. With LoC we have $\cos(A) = \frac{25+100-81}{2*5*10} = \frac{11}{25}$ and $\cos(B) = \frac{81+25-100}{2*9*5} = \frac{1}{15}$ . Then, $CD = \frac{\frac{9}{2}}{\cos(A)} = \frac{225}{22}$ . Using LoC we can find $AD$ : $AD^2 = AC^2 + CD^2 - 2(AC)(CD)\cos(A+C) = 10^2+(\frac{225}{22})^2 + 2(10)\frac{225}{22}\cos(B) = 100 + \frac{225^2}{22^2} + 2(10)\frac{225}{22}*\frac{1}{15} = \frac{5^4*13^2}{484}$ . Thus, $AD = \frac{5^2*13}{22}$ . By Power of a Point, $DP*AD = CD^2$ so $DP*\frac{5^2*13}{22} = (\frac{225}{22})^2$ which gives $DP = \frac{5^2*9^2}{13*22}$ . Finally, we have $AP = AD - DP = \frac{5^2*13}{22} - \frac{5^2*9^2}{13*22} = \frac{100}{13}$ . So the answer is $\boxed{113}$ . ~angie.
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_4dc616e72b : Prop := by
+  sorry

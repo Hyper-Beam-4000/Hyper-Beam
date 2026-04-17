@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2017_AIME_II_Problems/Problem_8",
+  "title": "2017 AIME II Problems/Problem 8",
+  "problem": "Find the number of positive integers $n$ less than $2017$ such that \\[1+n+\\frac{n^2}{2!}+\\frac{n^3}{3!}+\\frac{n^4}{4!}+\\frac{n^5}{5!}+\\frac{n^6}{6!}\\] is an integer.",
+  "solution": "We start with the last two terms of the polynomial $1+n+\\frac{n^2}{2!}+\\frac{n^3}{3!}+\\frac{n^4}{4!}+\\frac{n^5}{5!}+\\frac{n^6}{6!}$ , which are $\\frac{n^5}{5!}+\\frac{n^6}{6!}$ . This can simplify to $\\frac{6n^5+n^6}{720}$ , which can further simplify to $\\frac{n^5(6+n)}{720}$ . Notice that the prime factorization of $720$ is $5\\cdot3\\cdot3\\cdot2\\cdot2\\cdot2\\cdot2$ . In order for $\\frac{n^5(6+n)}{720}$ to be an integer, one of the parts must divide $5, 3$ , and $2$ . Thus, one of the parts must be a multiple of $5, 3$ , and $2$ , and the LCM of these three numbers is $30$ . This means \\[n^5 \\equiv 0\\pmod{30}\\] or \\[6+n \\equiv 0\\pmod{30}\\] Thus, we can see that $n$ must equal $0\\pmod{30}$ or $-6\\pmod{30}$ . Note that as long as we satisfy $\\frac{6n^5+n^6}{720}$ , $2!, 3!$ , and $4!$ will all divide into integers, as their prime factorizations will be fulfilled with the LCM being 30. E.g. $4! = 2\\cdot2\\cdot2\\cdot2\\cdot3$ , and this will be divisible by $2^4\\cdot3^4\\cdot5^4$ . Now, since we know that $n$ must equal $0\\pmod{30}$ or $-6\\pmod{30}$ in order for the polynomial to be an integer, $n\\equiv0, 24\\pmod{30}$ . To find how many integers fulfill the equation and are $<2017$ , we take $\\left \\lfloor\\frac{2017}{30} \\right \\rfloor$ and multiply it by $2$ . Thus, we get $67\\cdot2=\\boxed{134}$ . ~Solution by IronicNinja~",
+  "answer": "",
+  "year": 2017,
+  "competition": "AIME II",
+  "problem_number": 8,
+  "difficulty_tier": "pre_gpt",
+  "tags": [
+    "AIME II",
+    "2017",
+    "pre_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:33:23.922944+00:00"
+}

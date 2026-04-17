@@ -1,0 +1,19 @@
+-- 2025 AMC 12A Problems/Problem 18
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12A_Problems/Problem_18
+
+-- Problem (LaTeX):
+/-
+How many ordered triples $(x, y, z)$ of different positive integers less than or equal to $8$ satisfy $xy > z$ , $xz > y$ , and $yz > x$ ? $\textbf{(A)}~36 \qquad \textbf{(B)}~84 \qquad \textbf{(C)}~186 \qquad \textbf{(D)}~336 \qquad \textbf{(E)}~486$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $0<x<y<z \le 8$ ; $x$ cannot be $1$ because it makes $xy>z$ $\rightarrow$ $y>z$ ; $x=2$ , $y=3$ , $z$ can be $4$ , $5$ but not others; $x=2$ , $y=4$ , $z$ can be $5$ , $6$ , $7$ ; $x=2$ , $y=5$ , $z$ can be $6$ , $7$ , $8$ ; $x=2$ , $y=6$ , $z$ can be $7$ , $8$ ; $x=2$ , $y=7$ , $z$ can be $8$ ;
+for $x=2$ , total $11$ cases; Similarly, for $x=3$ , $y=4$ , $5$ , $6$ , $7$ , total $10$ cases; for $x=4$ , $y=5$ , $6$ , $7$ , total $6$ cases; $x=5$ , $y=6$ , $7$ , $3$ cases; $x=6$ , $y=7$ , $z=8$ , $1$ cases; Total $= 11 + 10 + 6 + 3 + 1 = 31$ . Permutate $x$ , $y$ , $z$ for ordered triple, it is $31 \cdot 6=186$ , $\fbox{C}$ . ~imagination ~mathcantcount1plus1is3 (latex stuff) ~bouttaswitchy (minor)
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_4c2a8ff82b : Prop := by
+  sorry

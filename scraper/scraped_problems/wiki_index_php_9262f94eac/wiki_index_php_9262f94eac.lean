@@ -1,46 +1,18 @@
-import Mathlib.Geometry.Euclidean.Circumcenter
-import Mathlib.Geometry.Euclidean.Triangle
+-- 2020 USAMO Problems/Problem 1
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2020_USAMO_Problems/Problem_1
+
+-- Problem (LaTeX):
+/-
+Let $ABC$ be a fixed acute triangle inscribed in a circle $\omega$ with center $O$ . A variable point $X$ is chosen on minor arc $AB$ of $\omega$ , and segments $CX$ and $AB$ meet at $D$ . Denote by $O_1$ and $O_2$ the circumcenters of triangles $ADX$ and $BDX$ , respectively. Determine all points $X$ for which the area of triangle $OO_1O_2$ is minimized.
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $E$ be midpoint $AD.$ Let $F$ be midpoint $BD \implies$ \[EF = ED + FD = \frac {AD}{2} + \frac {BD}{2} = \frac {AB}{2}.\] $E$ and $F$ are the bases of perpendiculars dropped from $O_1$ and $O_2,$ respectively. Therefore $O_1O_2 \ge EF = \frac {AB}{2}.$ \[CX \perp O_1O_2, AX \perp O_1O \implies \angle O O_1O_2 = \angle AXC\] $\angle AXC = \angle ABC (AXBC$ is cyclic) $\implies \angle O O_1O_2 = \angle ABC.$ Similarly $\angle BAC = \angle O O_2 O_1 \implies \triangle ABC \sim \triangle O_2 O_1O.$ The area of $\triangle OO_1O_2$ is minimized if $CX \perp AB$ because \[\frac {[OO_1O_2]} {[ABC]} = \left(\frac {O_1 O_2} {AB}\right)^2 \ge \left(\frac {EF} {AB}\right)^2 = \frac {1}{4}.\] vladimir.shelomovskii@gmail.com, vvsss
+-/
+
 import Mathlib.Tactic
 
-open EuclideanGeometry
-
--- Problem: Determine all points X for which the area of triangle OO1O2 is minimized
-theorem usamo2020_p1 (A B C O X : Point) (h : IsAcuteTriangle A B C) (hX : X ∈ MinorArc A B) :
-  let D := LineSegment C X ∩ LineSegment A B
-  let O1 := Circumcenter (Triangle.mk A D X)
-  let O2 := Circumcenter (Triangle.mk B D X)
-  -- The area of triangle OO1O2 is minimized when CX ⊥ AB
-  (Area (Triangle.mk O O1 O2) = minArea) ↔ (LineSegment C X ⊥ LineSegment A B) := by
-  -- Introduce variables and assumptions
-  intro D O1 O2
-  -- Define midpoint E of AD and midpoint F of BD
-  let E := Midpoint A D
-  let F := Midpoint B D
-  -- Establish that EF = AB / 2
-  have hEF : Distance E F = Distance A B / 2 := by
-    -- Use midpoint properties
-    sorry
-  -- Show that O1O2 ≥ EF
-  have hO1O2 : Distance O1 O2 ≥ Distance E F := by
-    -- Use properties of circumcenters
-    sorry
-  -- Establish angle relations
-  have hAngle : Angle O O1 O2 = Angle A X C := by
-    -- Use cyclic properties and perpendicularity
-    sorry
-  -- Show similarity of triangles
-  have hSim : Triangle.mk A B C ∼ Triangle.mk O2 O1 O := by
-    -- Use angle-angle similarity
-    sorry
-  -- Minimize area condition
-  have hMinArea : Area (Triangle.mk O O1 O2) = minArea ↔ Distance O1 O2 = Distance E F := by
-    -- Relate area to side lengths and similarity
-    sorry
-  -- Conclude that CX ⊥ AB minimizes the area
-  constructor
-  · intro hMin
-    -- Use established conditions to show perpendicularity
-    sorry
-  · intro hPerp
-    -- Use perpendicularity to show area minimization
-    sorry
+theorem wiki_index_php_9262f94eac : Prop := by
+  sorry

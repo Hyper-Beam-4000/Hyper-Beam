@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2021_AIME_II_Problems/Problem_3",
+  "title": "2021 AIME II Problems/Problem 3",
+  "problem": "Find the number of permutations $x_1, x_2, x_3, x_4, x_5$ of numbers $1, 2, 3, 4, 5$ such that the sum of five products \\[x_1x_2x_3 + x_2x_3x_4 + x_3x_4x_5 + x_4x_5x_1 + x_5x_1x_2\\] is divisible by $3$ .",
+  "solution": "Since $3$ is one of the numbers, a product with a $3$ in it is automatically divisible by $3,$ so WLOG $x_3=3,$ and we will multiply by $5$ afterward since any of $x_1, x_2, \\ldots, x_5$ would be $3,$ after some cancelation we see that now all we need to find is the number of ways that $x_5x_1(x_4+x_2)$ is divisible by $3,$ since $x_5x_1$ is never divisible by $3,$ now we just need to find the number of ways $x_4+x_2$ is divisible by $3.$ Note that $x_2$ and $x_4$ can be $(1, 2), (2, 1), (1, 5), (5, 1), (2, 4), (4, 2), (4, 5),$ or $(5, 4).$ We have $2$ ways to designate $x_1$ and $x_5$ for a total of $8 \\cdot 2 = 16.$ So the desired answer is $16 \\cdot 5=\\boxed{080}.$ ~math31415926535 ~MathFun1000 (Rephrasing for clarity)",
+  "answer": "",
+  "year": 2021,
+  "competition": "AIME II",
+  "problem_number": 3,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME II",
+    "2021",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:35:59.260039+00:00"
+}

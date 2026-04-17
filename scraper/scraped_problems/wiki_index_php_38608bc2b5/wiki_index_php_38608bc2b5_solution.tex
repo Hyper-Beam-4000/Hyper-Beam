@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2020 AMC 10B Problems/Problem 23}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+For each transformation: Each labeled vertex will move to an adjacent position. The labeled vertices will maintain the consecutive order $ABCD$ in either direction (clockwise or counterclockwise). $L$ and $R$ will retain the direction of the labeled vertices, but $H$ and $V$ will alter the direction of the labeled vertices. After the $19$ th transformation, vertex $A$ will be at either $(1,-1)$ or $(-1,1).$ All possible configurations of the labeled vertices are shown below: [asy] /* Made by MRENTHUSIASM */ unitsize(7mm); label("$A$",(1,0)); label("$B$",(1,1)); label("$C$",(0,1)); label("$D$",(0,0)); label("$C$",(5,0)); label("$D$",(5,1)); label("$A$",(4,1)); label("$B$",(4,0)); label("$A$",(9,0)); label("$D$",(9,1)); label("$C$",(8,1)); label("$B$",(8,0)); label("$C$",(13,0)); label("$B$",(13,1)); label("$A$",(12,1)); label("$D$",(12,0)); label("\textbf{Configuration}",(-5,0.5)); label("\textbf{The 20th}",(-5,-1.5)); label("\textbf{Transformation}",(-5,-2.25)); label("$L$",(0.5,-1.875)); label("$R$",(4.5,-1.875)); label("$H$",(8.5,-1.875)); label("$V$",(12.5,-1.875)); [/asy] Each sequence of $19$ transformations generates one valid sequence of $20$ transformations. Therefore, the answer is $4^{19}=\boxed{\textbf{(C)}\ 2^{38}}.$ ~MRENTHUSIASM
+
+\end{document}

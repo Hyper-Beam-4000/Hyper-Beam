@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_AMC_12B_Problems/Problem_17",
+  "title": "2019 AMC 12B Problems/Problem 17",
+  "problem": "How many nonzero complex numbers $z$ have the property that $0, z,$ and $z^3,$ when represented by points in the complex plane, are the three distinct vertices of an equilateral triangle? $\\textbf{(A) }0\\qquad\\textbf{(B) }1\\qquad\\textbf{(C) }2\\qquad\\textbf{(D) }4\\qquad\\textbf{(E) }\\text{infinitely many}$",
+  "solution": "Convert $z$ and $z^3$ into modulus-argument (polar) form, giving $z=r\\text{cis}(\\theta)$ for some $r$ and $\\theta$ . Thus, by De Moivre's Theorem, $z^3=r^3\\text{cis}(3\\theta)$ . Since the distance from $0$ to $z$ is $r$ , and the triangle is equilateral, the distance from $0$ to $z^3$ must also be $r$ , so $r^3=r$ , giving $r=1$ . (We know $r \\neq 0$ since the problem statement specifies that $z$ must be nonzero.) Now, to get from $z$ to $z^3$ , which should be a rotation of $60^{\\circ}$ if the triangle is equilateral, we multiply by $z^2 = \\text{cis}(2\\theta)$ , again using De Moivre's Theorem and $r=1$ . Thus we require $2\\theta=\\pm\\frac{\\pi}{3} + 2\\pi k$ (where $k$ can be any integer). If $0 < \\theta < \\frac{\\pi}{2}$ , we must have $\\theta=\\frac{\\pi}{6}$ , while if $\\frac{\\pi}{2} \\leq \\theta < \\pi$ , we must have $\\theta = \\frac{5\\pi}{6}$ . Hence there are $2$ values that work for $0 < \\theta < \\pi$ . By symmetry, the interval $\\pi \\leq \\theta < 2\\pi$ will also give $2$ solutions. The answer is thus $2 + 2 = \\boxed{\\textbf{(D) }4}$ . Note : Here's a graph showing how $z$ and $z^3$ move as $\\theta$ increases: https://www.desmos.com/calculator/xtnpzoqkgs .",
+  "answer": "",
+  "year": 2019,
+  "competition": "AMC 12B",
+  "problem_number": 17,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12B",
+    "2019",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:24:08.966004+00:00"
+}

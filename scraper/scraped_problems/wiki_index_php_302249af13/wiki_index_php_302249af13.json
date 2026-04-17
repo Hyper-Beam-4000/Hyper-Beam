@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_AMC_12B_Problems/Problem_4",
+  "title": "2019 AMC 10B Problems/Problem 6",
+  "problem": "There is a positive integer $n$ such that $(n+1)! + (n+2)! = n! \\cdot 440$ . What is the sum of the digits of $n$ ? $\\textbf{(A) }3\\qquad\\textbf{(B) }8\\qquad\\textbf{(C) }10\\qquad\\textbf{(D) }11\\qquad\\textbf{(E) }12$",
+  "solution": "",
+  "answer": "",
+  "year": 2019,
+  "competition": "AMC 12B",
+  "problem_number": 4,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12B",
+    "2019",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:23:50.817458+00:00"
+}

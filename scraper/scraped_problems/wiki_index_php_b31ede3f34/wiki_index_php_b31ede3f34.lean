@@ -1,0 +1,19 @@
+-- 2025 AMC 12A Problems/Problem 16
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12A_Problems/Problem_16
+
+-- Problem (LaTeX):
+/-
+Triangle $\triangle ABC$ has side lengths $AB = 80$ , $BC = 45$ , and $AC = 75$ . The bisector of $\angle B$ and the altitude to side $\overline{AB}$ intersect at point $P$ . What is $BP$ ? $\textbf{(A)}~18\qquad\textbf{(B)}~19\qquad\textbf{(C)}~20\qquad\textbf{(D)}~21\qquad\textbf{(E)}~22$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $CD \perp AB$ with foot $D$ . Right triangles $ACD$ and $BCD$ give $AC^2 = AD^2+CD^2$ , $BC^2 = BD^2+CD^2$ , $AC^2-BC^2 = AD^2-BD^2 =(AD-BD)(AD+BD)$ . Since $AD+BD = AB = 80$ and $AC^2-BC^2 = 75^2-45^2 = 3600$ , we get the equation $3600 = 80(AD-BD)$ . This equation simplifies to $45 = AD - BD$ . We can solve the system of equations $AD + BD = 80$ and $AD - BD = 45$ easily via elimination, and we get $AD = \frac{125}{2}$ , $BD = \frac{35}{2}$ . $CD^2 = AC^2-AD^2 = 75^2-\left(\frac{125}{2}\right)^2 = \frac{6875}{4}$ , $CD = \frac{25\sqrt{11}}{2}$ . By Angle Bisector Theorem, $\frac{DP}{PC} = \frac{DB}{BC} = \frac{\frac{35}{2}}{45} = \frac{7}{18}$ , $PC = CD-DP$ thus, $18DP = 7(CD-DP)$ , $25DP = 7CD$ , $DP = \left(\frac{7}{25}\right)CD = \left(\frac{7}{25}\right)\left(\frac{25\sqrt{11}}{2}\right) = \frac{7\sqrt{11}}{2}$ . $BP^2 = BD^2+DP^2 = \left(\frac{35}{2}\right)^2+\left(\frac{7\sqrt{11}}{2}\right)^2 = \frac{1225}{4}+\frac{49(11)}{4} = \frac{1764}{4} = 441$ , thus $BP = \boxed{\text{(D) }21}.$ ~pigwash
+~aldzandrtc(fixed logical jump)
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_b31ede3f34 : Prop := by
+  sorry

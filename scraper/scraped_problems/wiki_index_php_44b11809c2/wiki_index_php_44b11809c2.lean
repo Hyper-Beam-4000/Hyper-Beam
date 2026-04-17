@@ -1,0 +1,18 @@
+-- 2018 AIME II Problems/Problem 5
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_AIME_II_Problems/Problem_5
+
+-- Problem (LaTeX):
+/-
+Suppose that $x$ , $y$ , and $z$ are complex numbers such that $xy = -80 - 320i$ , $yz = 60$ , and $zx = -96 + 24i$ , where $i$ $=$ $\sqrt{-1}$ . Then there are real numbers $a$ and $b$ such that $x + y + z = a + bi$ . Find $a^2 + b^2$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+The First (pun intended) thing to notice is that $xy$ and $zx$ have a similar structure (i.e. the real and imaginary parts differ by a factor of 4), but are not exactly conjugates. So let's take out the magnitudes of both, and see if we can multiply a root of unity to get the other. It turns out that root of unity is $e^{\frac{3\pi i}{2}}$ . Anyway this results in getting that $\left(\frac{-3i}{10}\right)y=z$ . Then substitute this into $yz$ to get, after some calculation, that $y=10e^{\frac{5\pi i}{4}}\sqrt{2}$ and $z=-3e^{\frac{7\pi i}{4}}\sqrt{2}$ . Then plug $z$ into $zx$ , you could do the same thing with $xy$ but $zx$ looks like it's easier due to it being smaller. Anyway you get $x=20+12i$ . Then add all three up, which it turns out easier than it seems because for $z$ and $y$ the $\sqrt{2}$ disappears after you expand the root of unity (e raised to a specific power). Long story short, you get $x=20+12i, y=-3+3i, z=-10-10i \implies x+y+z=7+5i \implies a^2+b^2=\boxed{074}$ . ~First
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_44b11809c2 : Prop := by
+  sorry

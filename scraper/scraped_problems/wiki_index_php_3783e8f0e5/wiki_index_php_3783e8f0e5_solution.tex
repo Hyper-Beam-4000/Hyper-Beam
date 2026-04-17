@@ -1,0 +1,12 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2017 AIME II Problems/Problem 13}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Considering $n \pmod{6}$ , we have the following formulas: $n\equiv 0$ : $\frac{n(n-4)}{2} + \frac{n}{3}$ $n\equiv 2, 4$ : $\frac{n(n-2)}{2}$ $n\equiv 3$ : $\frac{n(n-3)}{2} + \frac{n}{3}$ $n\equiv 1, 5$ : $\frac{n(n-1)}{2}$ To derive these formulas, we note the following:
+Any isosceles triangle formed by the vertices of our regular $n$ -sided polygon $P$ has its sides from the set of edges and diagonals of $P$ . Notably, as two sides of an isosceles triangle must be equal, it is important to use the property that same-lengthed edges and diagonals come in groups of $n$ , unless $n$ is even when one set of diagonals (those which bisect the polygon) comes in a group of $\frac{n}{2}$ . Three properties hold true of $f(n)$ : When $n$ is odd there are $\frac{n(n-1)}{2}$ satisfactory subsets (This can be chosen with $n$ choices for the not-base vertex, and $\frac{n-1}{2}$ for the pair of equal sides as we have $n-1$ edges to choose from, and we must divide by 2 for over-count).* Another explanation: For any diagonal or side of the polygon chosen as the base of the isosceles triangle, there is exactly 1 isosceles triangle that can be formed. So, the total number of satisfactory subsets is $\dbinom{n}{2}=\dfrac{n(n-1)}{2}.$ When $n$ is even there are $\frac{n(n-2)}{2}$ satisfactory subsets (This can be chosen with $n$ choices for the not-base vertex, and $\frac{n-2}{2}$ for the pair of equal sides as we have $n-1$ edges to choose from, one of them which is not satisfactory (the bisecting edge), and we must divide by 2 for over-count). When $n$ is a multiple of three we additionally over-count equilateral triangles, of which there are $\frac{n}{3}$ . As we count them three times, we are two times over, so we subtract $\frac{2n}{3}$ . Considering the six possibilities $n \equiv 0,1,2,3,4,5 \pmod{6}$ and solving, we find that the only valid solutions are $n = 36, 52, 157$ , from which the answer is $36 + 52 + 157 = \boxed{245}$ .
+
+\end{document}

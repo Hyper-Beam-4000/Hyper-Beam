@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2025 AMC 12A Problems/Problem 5}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Let the side length of the largest square be $a,$ so it has area $a^2.$ Hence, the second-largest square has area $a^2k^2,$ the third-largest has $a^2k^4,$ and so on. It follows that the total shaded area is \[a^2-a^2k^2+a^2k^4-a^2k^6+...=a^2(1-k^2+k^4-k^6+...)=a^2\dfrac{1}{1+k^2}.\] The ratio of the area of the shaded region to that of the original square is then \[\dfrac{a^2\frac{1}{1+k^2}}{a^2}=\dfrac{1}{1+k^2}=\dfrac{64}{100}\] \[\implies 64+64k^2=100\implies k^2=\dfrac{36}{64}\implies k=\boxed{\text{(D) }\dfrac{3}{4}}.\] ~Tacos_are_yummy_1
+
+\end{document}

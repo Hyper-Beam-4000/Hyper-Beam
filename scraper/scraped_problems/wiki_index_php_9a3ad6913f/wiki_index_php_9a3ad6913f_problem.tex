@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2017 AIME I Problems/Problem 15}}
+Source: AoPS Wiki
+
+\subsection*{Problem}
+The area of the smallest equilateral triangle with one vertex on each of the sides of the right triangle with side lengths $2\sqrt{3},~5,$ and $\sqrt{37},$ as shown, is $\frac{m\sqrt{p}}{n},$ where $m,~n,$ and $p$ are positive integers, $m$ and $n$ are relatively prime, and $p$ is not divisible by the square of any prime. Find $m+n+p.$ [asy] size(5cm); pair C=(0,0),B=(0,2*sqrt(3)),A=(5,0); real t = .385, s = 3.5*t-1; pair R = A*t+B*(1-t), P=B*s; pair Q = dir(-60) * (R-P) + P; fill(P--Q--R--cycle,gray); draw(A--B--C--A^^P--Q--R--P); dot(A--B--C--P--Q--R); [/asy]
+
+\end{document}

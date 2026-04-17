@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2022_AIME_I_Problems/Problem_2",
+  "title": "2022 AIME I Problems/Problem 2",
+  "problem": "Find the three-digit positive integer $\\underline{a}\\,\\underline{b}\\,\\underline{c}$ whose representation in base nine is $\\underline{b}\\,\\underline{c}\\,\\underline{a}_{\\,\\text{nine}},$ where $a,$ $b,$ and $c$ are (not necessarily distinct) digits.",
+  "solution": "We are given that \\[100a + 10b + c = 81b + 9c + a,\\] which rearranges to \\[99a = 71b + 8c.\\] Taking both sides modulo $71,$ we have \\begin{align*} 28a &\\equiv 8c \\pmod{71} \\\\ 7a &\\equiv 2c \\pmod{71}. \\end{align*} The only solution occurs at $(a,c)=(2,7),$ from which $b=2.$ Therefore, the requested three-digit positive integer is $\\underline{a}\\,\\underline{b}\\,\\underline{c}=\\boxed{227}.$ ~MRENTHUSIASM",
+  "answer": "",
+  "year": 2022,
+  "competition": "AIME I",
+  "problem_number": 2,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME I",
+    "2022",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:36:18.138625+00:00"
+}

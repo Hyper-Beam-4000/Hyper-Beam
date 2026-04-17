@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2018_AIME_II_Problems/Problem_3",
+  "title": "2018 AIME II Problems/Problem 3",
+  "problem": "Find the sum of all positive integers $b < 1000$ such that the base- $b$ integer $36_{b}$ is a perfect square and the base- $b$ integer $27_{b}$ is a perfect cube.",
+  "solution": "The first step is to convert $36_{b}$ and $27_{b}$ into base-10 numbers. Then, we can write \\[36_{b} = 3b + 6\\] and \\[27_{b} = 2b + 7\\] . It should also be noted that $8 \\leq b < 1000$ . Because there are less perfect cubes than perfect squares for the restriction we are given on $b$ , it is best to list out all the perfect cubes. Since the maximum $b$ can be is 1000 and $2$ • $1000 + 7 = 2007$ , we can list all the perfect cubes less than 2007. Now, $2b + 7$ must be one of \\[3^3, 4^3, ... , 12^3\\] . However, $2b + 7$ will always be odd, so we can eliminate the cubes of the even numbers and change our list of potential cubes to \\[3^3, 5^3, 7^3, 9^3\\text{, and }11^3\\] . Because $3b + 6$ is a perfect square and is clearly divisible by 3, it must be divisible by 9, so $b + 2$ is divisible by 3. Thus the cube, which is \\[2b + 7 = 2(b + 2) + 3\\] , must also be divisible by 3. Therefore, the only cubes that $2b + 7$ could potentially be now are $3^3$ and $9^3$ . We need to test both of these cubes to make sure $3b + 6$ is a perfect square. $\\textbf{Case 1:}$ If we set \\[3^3 = 2b + 7\\] so \\[b = 10\\] . If we plug this value of b into $3b + 6$ , the expression equals $36$ , which is indeed a perfect square. $\\textbf{Case 2:}$ If we set \\[9^3 = 2b + 7\\] so \\[b = 361\\] . If we plug this value of b into $3b + 6$ , the expression equals $1089$ , which is $33^2$ . We have proven that both $b = 10$ and $b = 361$ are the only solutions, so \\[10 + 361 = \\boxed{371}\\]",
+  "answer": "",
+  "year": 2018,
+  "competition": "AIME II",
+  "problem_number": 3,
+  "difficulty_tier": "early_gpt",
+  "tags": [
+    "AIME II",
+    "2018",
+    "early_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:33:57.656900+00:00"
+}

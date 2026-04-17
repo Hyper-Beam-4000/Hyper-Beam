@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12A_Problems/Problem_4",
+  "title": "2025 AMC 12A Problems/Problem 4",
+  "problem": "Agnes writes the following four statements on a blank piece of paper. $\\bullet$ At least one of these statements is true. $\\bullet$ At least two of these statements are true. $\\bullet$ At least two of these statements are false. $\\bullet$ At least one of these statements is false. Each statement is either true or false. How many false statements did Agnes write on the paper? $\\textbf{(A) } 0 \\qquad\\textbf{(B) } 1 \\qquad\\textbf{(C) } 2 \\qquad\\textbf{(D) } 3 \\qquad\\textbf{(E) } 4$",
+  "solution": "We first number all the statements: 1) At least one of these statements is true.\n2) At least two of these statements are true.\n3) At least two of these statements are false.\n4) At least one of these statements is false. We can immediately see that statement 4 must be true, as it would contradict itself if it were false. Similarly, statement 1 must be true, as all the other statements must be false if it were false, which is contradictory because statement 4 is true. Since both 1 and 4 are true, statement 2 has to be true. Therefore, statement 3 is the only false statement, making the answer $\\boxed{\\text{(B) }1}$ .\n-Rainjs",
+  "answer": "For this question, what I did was to simply test each of the answer choices. Let's start with (A) 0 false statements: We can check the answer of 0 false statements against each of the statements. Statement I: \"At least one of these statements is true.\" This statement is false, which already invalidates the answer of (A) 0 false statements, as we already have a false statement. Let's move onto (B) 1 false statement: We can check once again this answer against each of the statements. Statement I: \"At least one of these statements is true.\" This statement is true, as when we have 1 false statement, we have 3 true statements, and therefore this is true. Statement II: \"At least two of these statements are true.\" Once again, this statement is true, as when we have 1 false statement, we have 3 true statements, and thus this is also true. Statement III: \"At least two of these statements are false.\" This statement is false, as we have one false statement, not 2 and above. Statement IV: \"At least one of these statements is false.\" This statement is true, as we have one false statement. So, after checking the answer choice of (B) 1 false statement across the 4 statements, we get three true statements and one false statement, making this statement the correct answer. I will not dive into the other 3 answer choices, as we have already gotten the answer for this question, and if you were doing this way of solving on the test, you would most likely not test the other 3 answers either for the sake of saving time. ~EZ123 (Would appreciate it if someone formatted my solution using latex, thanks!)",
+  "year": 2025,
+  "competition": "AMC 12A",
+  "problem_number": 4,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12A",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:31:37.026546+00:00"
+}

@@ -1,0 +1,18 @@
+-- 2020 AMC 10B Problems/Problem 23
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2020_AMC_12B_Problems/Problem_19
+
+-- Problem (LaTeX):
+/-
+Square $ABCD$ in the coordinate plane has vertices at the points $A(1,1), B(-1,1), C(-1,-1),$ and $D(1,-1).$ Consider the following four transformations: $\quad\bullet\qquad$ $L,$ a rotation of $90^{\circ}$ counterclockwise around the origin; $\quad\bullet\qquad$ $R,$ a rotation of $90^{\circ}$ clockwise around the origin; $\quad\bullet\qquad$ $H,$ a reflection across the $x$ -axis; and $\quad\bullet\qquad$ $V,$ a reflection across the $y$ -axis. Each of these transformations maps the squares onto itself, but the positions of the labeled vertices will change. For example, applying $R$ and then $V$ would send the vertex $A$ at $(1,1)$ to $(-1,-1)$ and would send the vertex $B$ at $(-1,1)$ to itself. How many sequences of $20$ transformations chosen from $\{L, R, H, V\}$ will send all of the labeled vertices back to their original positions? (For example, $R, R, V, H$ is one sequence of $4$ transformations that will send the vertices back to their original positions.) $\textbf{(A)}\ 2^{37} \qquad\textbf{(B)}\ 3\cdot 2^{36} \qquad\textbf{(C)}\ 2^{38} \qquad\textbf{(D)}\ 3\cdot 2^{37} \qquad\textbf{(E)}\ 2^{39}$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+For each transformation: Each labeled vertex will move to an adjacent position. The labeled vertices will maintain the consecutive order $ABCD$ in either direction (clockwise or counterclockwise). $L$ and $R$ will retain the direction of the labeled vertices, but $H$ and $V$ will alter the direction of the labeled vertices. After the $19$ th transformation, vertex $A$ will be at either $(1,-1)$ or $(-1,1).$ All possible configurations of the labeled vertices are shown below: [asy] /* Made by MRENTHUSIASM */ unitsize(7mm); label("$A$",(1,0)); label("$B$",(1,1)); label("$C$",(0,1)); label("$D$",(0,0)); label("$C$",(5,0)); label("$D$",(5,1)); label("$A$",(4,1)); label("$B$",(4,0)); label("$A$",(9,0)); label("$D$",(9,1)); label("$C$",(8,1)); label("$B$",(8,0)); label("$C$",(13,0)); label("$B$",(13,1)); label("$A$",(12,1)); label("$D$",(12,0)); label("\textbf{Configuration}",(-5,0.5)); label("\textbf{The 20th}",(-5,-1.5)); label("\textbf{Transformation}",(-5,-2.25)); label("$L$",(0.5,-1.875)); label("$R$",(4.5,-1.875)); label("$H$",(8.5,-1.875)); label("$V$",(12.5,-1.875)); [/asy] Each sequence of $19$ transformations generates one valid sequence of $20$ transformations. Therefore, the answer is $4^{19}=\boxed{\textbf{(C)}\ 2^{38}}.$ ~MRENTHUSIASM
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_38608bc2b5 : Prop := by
+  sorry

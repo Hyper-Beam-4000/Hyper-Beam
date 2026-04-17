@@ -1,0 +1,19 @@
+-- 2020 AMC 10A Problems/Problem 20
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2020_AMC_12A_Problems/Problem_18
+
+-- Problem (LaTeX):
+/-
+Quadrilateral $ABCD$ satisfies $\angle ABC = \angle ACD = 90^{\circ}, AC=20,$ and $CD=30.$ Diagonals $\overline{AC}$ and $\overline{BD}$ intersect at point $E,$ and $AE=5.$ What is the area of quadrilateral $ABCD?$ $\textbf{(A) } 330 \qquad \textbf{(B) } 340 \qquad \textbf{(C) } 350 \qquad \textbf{(D) } 360 \qquad \textbf{(E) } 370$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+[asy] size(15cm,0); import olympiad; draw((0,0)--(0,2)--(6,4)--(4,0)--cycle); label("A", (0,2), NW); label("B", (0,0), SW); label("C", (4,0), SE); label("D", (6,4), NE); label("E", (1.714,1.143), N); label("F", (1,1.5), N); draw((0,2)--(4,0), dashed); draw((0,0)--(6,4), dashed); draw((0,0)--(1,1.5), dashed); label("20", (0,2)--(4,0), SW); label("30", (4,0)--(6,4), SE); label("$x$", (1,1.5)--(1.714,1.143), NE); label("5$-$$x$", (1,1.5)--(0,2), NE); draw(rightanglemark((0,2),(0,0),(4,0))); draw(rightanglemark((0,2),(4,0),(6,4))); draw(rightanglemark((0,0),(1,1.5),(0,2))); [/asy] It's crucial to draw a good diagram for this one. Since $AC=20$ and $CD=30$ , we get $[ACD]=300$ . Now we need to find $[ABC]$ to get the area of the whole quadrilateral. Drop an altitude from $B$ to $AC$ and call the point of intersection $F$ . Let $FE=x$ . Since $AE=5$ , then $AF=5-x$ . By dropping this altitude, we can also see two similar triangles, $\triangle BFE \sim \triangle DCE$ . Since $EC$ is $20-5=15$ , and $DC=30$ , we get that $BF=2x$ . Now, if we redraw another diagram just of $ABC$ , we get that $(2x)^2=(5-x)(15+x)$ because of the altitude geometric mean theorem which states that in any right triangle, the altitude squared is equal to the product of the two lengths that it divides the base into. Expanding, simplifying, and dividing by the GCF, we get $x^2+2x-15=0$ . This factors to $(x+5)(x-3)$ , which has roots of $x=-5, 3$ . Since lengths cannot be negative, $x=3$ . Since $x=3$ , that means the altitude $BF=2\cdot3=6$ , or $[ABC]=60$ . Thus $[ABCD]=[ACD]+[ABC]=300+60=\boxed {\textbf{(D) }360}$ ~ Solution by Ultraman
+~ Diagram by ciceronii
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_a9edc23282 : Prop := by
+  sorry

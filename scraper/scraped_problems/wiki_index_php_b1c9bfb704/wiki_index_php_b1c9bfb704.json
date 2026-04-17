@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12A_Problems/Problem_10",
+  "title": "2025 AMC 12A Problems/Problem 10",
+  "problem": "In the figure shown below, major arc $\\widehat{AD}$ and minor arc $\\widehat{BC}$ have the same center, $O$ . Also, $A$ lies between $O$ and $B$ , and $D$ lies between $O$ and $C$ . Major arc $\\widehat{AD}$ , minor arc $\\widehat{BC}$ , and each of the two segments $\\overline{AB}$ and $\\overline{CD}$ have length $2\\pi$ . What is the distance from $O$ to $A$ ? [asy] usepackage(\"mathptmx\"); size(6cm); defaultpen(linewidth(0.7)); real r = 1 - pi + sqrt(pi^2 + 1); pair O = (0, 0), A = r * dir(-30), B = (r + 2pi) * dir(-30), C = (r + 2pi) * dir(30), D = r * dir(30); draw(arc(O, r, 30, 330)); draw(arc(O, r + 2pi, -30, 30)); draw(O--A, dashed); draw(O--D, dashed); draw(A--B); draw(C--D); dot(\"$O$\", O, dir(135)); dot(\"$A$\", A, dir(270)); dot(\"$B$\", B, dir(0)); dot(\"$C$\", C, dir(0)); dot(\"$D$\", D, 1.5 * dir(70)); [/asy] $\\textbf{(A)}~1 \\qquad \\textbf{(B)}~1 - \\pi + \\sqrt{\\pi^{2} + 1} \\qquad \\textbf{(C)}~\\frac{\\pi}{2} \\qquad \\textbf{(D)}~\\frac{\\sqrt{\\pi^{2} + 1}}{2} \\qquad \\textbf{(E)}~2$",
+  "solution": "The ratio between the radius and the arc length is constant. For the inner circle, the radius, which we will denote as $r$ , has a corresponding arc length of $2\\pi r - 2\\pi$ (the circumference minus the major arc length). For the outer circle, the radius, which is $r + 2\\pi$ , has a corresponding arc length of $2\\pi$ . We therefore write the equation \\[\\frac{r}{2\\pi r - 2\\pi} = \\frac{r+2\\pi}{2\\pi},\\] which simplifies to \\[r = (r+2\\pi)(r-1)\\] \\[0 = r^2 + (2\\pi-2)r - 2\\pi.\\] Applying the Quadratic Formula, we get that $r =\\boxed{\\textbf{(B)} 1 - \\pi + \\sqrt{1 +\\pi^2}}$ ~lprado",
+  "answer": "",
+  "year": 2025,
+  "competition": "AMC 12A",
+  "problem_number": 10,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12A",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:31:45.010063+00:00"
+}

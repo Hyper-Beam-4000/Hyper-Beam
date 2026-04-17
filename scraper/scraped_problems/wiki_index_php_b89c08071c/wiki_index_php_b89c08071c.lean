@@ -1,0 +1,18 @@
+-- 2021 AMC 12B Problems/Problem 17
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2021_AMC_12B_Problems/Problem_17
+
+-- Problem (LaTeX):
+/-
+Let $ABCD$ be an isosceles trapezoid having parallel bases $\overline{AB}$ and $\overline{CD}$ with $AB>CD.$ Line segments from a point inside $ABCD$ to the vertices divide the trapezoid into four triangles whose areas are $2, 3, 4,$ and $5$ starting with the triangle with base $\overline{CD}$ and moving clockwise as shown in the diagram below. What is the ratio $\frac{AB}{CD}?$ [asy] unitsize(100); pair A=(-1, 0), B=(1, 0), C=(0.3, 0.9), D=(-0.3, 0.9), P=(0.2, 0.5), E=(0.1, 0.75), F=(0.4, 0.5), G=(0.15, 0.2), H=(-0.3, 0.5); draw(A--B--C--D--cycle, black); draw(A--P, black); draw(B--P, black); draw(C--P, black); draw(D--P, black); label("$A$",A,(-1,0)); label("$B$",B,(1,0)); label("$C$",C,(1,-0)); label("$D$",D,(-1,0)); label("$2$",E,(0,0)); label("$3$",F,(0,0)); label("$4$",G,(0,0)); label("$5$",H,(0,0)); dot(A^^B^^C^^D^^P); [/asy] $\textbf{(A)}\: 3\qquad\textbf{(B)}\: 2+\sqrt{2}\qquad\textbf{(C)}\: 1+\sqrt{6}\qquad\textbf{(D)}\: 2\sqrt{3}\qquad\textbf{(E)}\: 3\sqrt{2}$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Without the loss of generality, let $\mathcal T$ have vertices $A$ , $B$ , $C$ , and $D$ , with $AB = r$ and $CD = s$ . Also denote by $P$ the point in the interior of $\mathcal T$ . Let $X$ and $Y$ be the feet of the perpendiculars from $P$ to $AB$ and $CD$ , respectively. Observe that $PX = \tfrac 8r$ and $PY = \tfrac 4s$ . Now using the formula for the area of a trapezoid yields \[14 = \frac12\cdot XY\cdot (AB+CD) = \frac12\left(\frac 8r + \frac 4s\right)(r+s) = 6 + 2\cdot\frac rs + 4\cdot\frac sr.\] Thus, the ratio $\rho := \tfrac rs$ satisfies $\rho + 2\rho^{-1} = 4$ ; solving yields $\rho = \boxed{\textbf{(B)}\: 2+\sqrt{2}}$ . (Observe that the given areas of $3$ and $5$ are irrelevant to the ratio $\frac{AB}{CD}$ .)
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_b89c08071c : Prop := by
+  sorry

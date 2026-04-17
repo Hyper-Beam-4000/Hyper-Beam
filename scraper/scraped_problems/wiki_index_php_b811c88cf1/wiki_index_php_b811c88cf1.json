@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2023_AMC_12B_Problems/Problem_10",
+  "title": "2023 AMC 12B Problems/Problem 10",
+  "problem": "In the $xy$ -plane, a circle of radius $4$ with center on the positive $x$ -axis is tangent to the $y$ -axis at the origin, and a circle with radius $10$ with center on the positive $y$ -axis is tangent to the $x$ -axis at the origin. What is the slope of the line passing through the two points at which these circles intersect? $\\textbf{(A)}\\ \\dfrac{2}{7} \\qquad\\textbf{(B)}\\ \\dfrac{3}{7} \\qquad\\textbf{(C)}\\ \\dfrac{2}{\\sqrt{29}} \\qquad\\textbf{(D)}\\ \\dfrac{1}{\\sqrt{29}} \\qquad\\textbf{(E)}\\ \\dfrac{2}{5}$",
+  "solution": "The center of the first circle is $(4,0)$ .\nThe center of the second circle is $(0,10)$ .\nThus, the slope of the line that passes through these two centers is $- \\frac{10}{4} = - \\frac{5}{2}$ . Because this line is the perpendicular bisector of the line that passes through two intersecting points of two circles, the slope of the latter line is $\\frac{-1}{- \\frac{5}{2}} = \\boxed{\\textbf{(E) } \\frac{2}{5}}$ . ~Steven Chen (Professor Chen Education Palace, www.professorchenedu.com)",
+  "answer": "",
+  "year": 2023,
+  "competition": "AMC 12B",
+  "problem_number": 10,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12B",
+    "2023",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:29:37.989699+00:00"
+}

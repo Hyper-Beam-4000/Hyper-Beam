@@ -1,0 +1,18 @@
+-- 2018 AMC 12B Problems/Problem 21
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_AMC_12B_Problems/Problem_21
+
+-- Problem (LaTeX):
+/-
+In $\triangle{ABC}$ with side lengths $AB = 13$ , $AC = 12$ , and $BC = 5$ , let $O$ and $I$ denote the circumcenter and incenter, respectively. A circle with center $M$ is tangent to the legs $AC$ and $BC$ and to the circumcircle of $\triangle{ABC}$ . What is the area of $\triangle{MOI}$ ? $\textbf{(A)}\ \frac52\qquad\textbf{(B)}\ \frac{11}{4}\qquad\textbf{(C)}\ 3\qquad\textbf{(D)}\ \frac{13}{4}\qquad\textbf{(E)}\ \frac72$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+In this solution, let the brackets denote areas. We place the diagram in the coordinate plane: Let $A=(12,0),B=(0,5),$ and $C=(0,0).$ Since $\triangle ABC$ is a right triangle with $\angle ACB=90^\circ,$ its circumcenter is the midpoint of $\overline{AB},$ from which $O=\left(6,\frac52\right).$ Note that the circumradius of $\triangle ABC$ is $\frac{13}{2}.$ Let $s$ denote the semiperimeter of $\triangle ABC.$ The inradius of $\triangle ABC$ is $\frac{[ABC]}{s}=\frac{30}{15}=2,$ from which $I=(2,2).$ Since $\odot M$ is also tangent to both coordinate axes, its center is at $M=(a,a)$ and its radius is $a$ for some positive number $a.$ Let $P$ be the point of tangency of $\odot O$ and $\odot M.$ As $\overline{OP}$ and $\overline{MP}$ are both perpendicular to the common tangent line at $P,$ we conclude that $O,M,$ and $P$ are collinear. It follows that $OM=OP-MP,$ or \[\sqrt{(a-6)^2+\left(a-\frac52\right)^2}=\frac{13}{2}-a.\] Solving this equation, we have $a=4,$ from which $M=(4,4).$ Finally, we apply the Shoelace Theorem to $\triangle MOI:$ \[[MOI]=\frac12\left|\left(4\cdot\frac52+6\cdot2+2\cdot4\right)-\left(4\cdot6+\frac52\cdot2+2\cdot4\right)\right|=\boxed{\textbf{(E)}\ \frac72}.\] Remark Alternatively, we can use $\overline{MI}$ as the base and the distance from $O$ to $\overleftrightarrow{MI}$ as the height for $\triangle MOI:$ By the Distance Formula, we have $MI=2\sqrt2.$ The equation of $\overleftrightarrow{MI}$ is $x-y+0=0,$ so the distance from $O$ to $\overleftrightarrow{MI}$ is $h_O=\frac{\left|1\cdot6+(-1)\cdot\frac52+0\right|}{\sqrt{1^2+(-1)^2}}=\frac74\sqrt2.$ Therefore, we get \[[MOI]=\frac12\cdot MI\cdot h_O=\frac72.\] ~pieater314159 ~MRENTHUSIASM
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_a6f17e5f31 : Prop := by
+  sorry

@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2024_AMC_12B_Problems/Problem_2",
+  "title": "2024 AMC 10B Problems/Problem 2",
+  "problem": "What is $10! - 7! \\cdot 6!$",
+  "solution": "$10! = 10 \\cdot 9 \\cdot 8 \\cdot 7! = 720 \\cdot 7!$ $6! \\cdot 7! = 720 \\cdot 7!$ Therefore, the equation is equal to $720 \\cdot 7! - 720 \\cdot 7! = \\boxed{\\textbf{(B) }0}$ [ONLY FOR CERTAIN CHINESE TESTPAPERS] $0 - 5! = \\boxed{\\textbf{(A) }-120}$ ~Aray10 (Main Solution) and RULE101 (Modifications for certain China test papers)",
+  "answer": "",
+  "year": 2024,
+  "competition": "AMC 12B",
+  "problem_number": 2,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12B",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:30:51.454049+00:00"
+}

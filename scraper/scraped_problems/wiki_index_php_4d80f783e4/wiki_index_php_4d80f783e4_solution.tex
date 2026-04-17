@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2025 AIME I Problems/Problem 6}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+To begin with, because of tangents from the circle to the bases, the height is $2\cdot3=6.$ The formula for the area of a trapezoid is $\frac{h(b_1+b_2)}{2}.$ Plugging in our known values we have \[\frac{6(r+s)}{2}=72.\] \[r+s=24.\] Next, we use Pitot's Theorem which states for tangential quadrilaterals $AB+CD=AD+BC.$ Since we are given $ABCD$ is an isosceles trapezoid we have $AD=BC=x.$ Using Pitot's we find, \[AB+CD=r+s=2x=24.\] \[x=12.\] Finally we can use the Pythagorean Theorem by dropping an altitude from D, \[\left(\frac{r - s}{2}\right)^2 + 6^2 = 12^2.\] \[\left(\frac{r-s}{2}\right)^2=108.\] \[(r-s)^2=432.\] Noting that $\frac{(r + s)^2 + (r - s)^2}{2} = r^2 + s^2$ we find, \[\frac{(24^2+432)}{2}=\boxed{504}\] ~ mathkiddus
+
+\end{document}

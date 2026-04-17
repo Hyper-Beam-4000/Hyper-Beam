@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2024 AIME II Problems/Problem 7}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+We note that by changing a digit to $1$ for the number $\overline{abcd}$ , we are subtracting the number by either $1000(a-1)$ , $100(b-1)$ , $10(c-1)$ , or $d-1$ . Thus, $1000a + 100b + 10c + d \equiv 1000(a-1) \equiv 100(b-1) \equiv 10(c-1) \equiv d-1 \pmod{7}$ . We can casework on $a$ backwards, finding the maximum value. (Note that computing $1000 \equiv 6 \pmod{7}, 100 \equiv 2 \pmod{7}, 10 \equiv 3 \pmod{7}$ greatly simplifies computation). Applying casework on $a$ , we can eventually obtain a working value of $\overline{abcd} = 5694 \implies \boxed{699}$ . ~akliu
+
+\end{document}

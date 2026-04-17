@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2017_AMC_12A_Problems/Problem_23",
+  "title": "2017 AMC 12A Problems/Problem 23",
+  "problem": "For certain real numbers $a$ , $b$ , and $c$ , the polynomial \\[g(x) = x^3 + ax^2 + x + 10\\] has three distinct roots, and each root of $g(x)$ is also a root of the polynomial \\[f(x) = x^4 + x^3 + bx^2 + 100x + c.\\] What is $f(1)$ ? $\\textbf{(A)}\\ -9009 \\qquad\\textbf{(B)}\\ -8008 \\qquad\\textbf{(C)}\\ -7007 \\qquad\\textbf{(D)}\\ -6006 \\qquad\\textbf{(E)}\\ -5005$",
+  "solution": "Let $r_1,r_2,$ and $r_3$ be the roots of $g(x)$ . Let $r_4$ be the additional root of $f(x)$ . Then from Vieta's formulas on the quadratic term of $g(x)$ and the cubic term of $f(x)$ , we obtain the following: \\begin{align*} r_1+r_2+r_3&=-a \\\\ r_1+r_2+r_3+r_4&=-1 \\end{align*} Thus $r_4=a-1$ . Now applying Vieta's formulas on the constant term of $g(x)$ , the linear term of $g(x)$ , and the linear term of $f(x)$ , we obtain: \\begin{align*} r_1r_2r_3 & = -10\\\\ r_1r_2+r_2r_3+r_3r_1 &= 1\\\\ r_1r_2r_3+r_2r_3r_4+r_3r_4r_1+r_4r_1r_2 & = -100\\\\ \\end{align*} Substituting for $r_1r_2r_3$ in the bottom equation and factoring the remainder of the expression, we obtain: \\[-10+(r_1r_2+r_2r_3+r_3r_1)r_4=-10+r_4=-100\\] It follows that $r_4=-90$ . But $r_4=a-1$ so $a=-89$ Now we can factor $f(x)$ in terms of $g(x)$ as \\[f(x)=(x-r_4)g(x)=(x+90)g(x)\\] Then $f(1)=91g(1)$ and \\[g(1)=1^3-89\\cdot 1^2+1+10=-77\\] Hence $f(1)=91\\cdot(-77)=\\boxed{\\textbf{(C)}\\,-7007}$ .",
+  "answer": "",
+  "year": 2017,
+  "competition": "AMC 12A",
+  "problem_number": 23,
+  "difficulty_tier": "pre_gpt",
+  "tags": [
+    "AMC 12A",
+    "2017",
+    "pre_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:20:45.114009+00:00"
+}

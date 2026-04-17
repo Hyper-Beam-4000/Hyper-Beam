@@ -1,0 +1,18 @@
+-- 2021 AMC 12A Problems/Problem 24
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2021_AMC_12A_Problems/Problem_24
+
+-- Problem (LaTeX):
+/-
+Semicircle $\Gamma$ has diameter $\overline{AB}$ of length $14$ . Circle $\Omega$ lies tangent to $\overline{AB}$ at a point $P$ and intersects $\Gamma$ at points $Q$ and $R$ . If $QR=3\sqrt3$ and $\angle QPR=60^\circ$ , then the area of $\triangle PQR$ equals $\tfrac{a\sqrt{b}}{c}$ , where $a$ and $c$ are relatively prime positive integers, and $b$ is a positive integer not divisible by the square of any prime. What is $a+b+c$ ? $\textbf{(A) }110 \qquad \textbf{(B) }114 \qquad \textbf{(C) }118 \qquad \textbf{(D) }122\qquad \textbf{(E) }126$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $O=\Gamma$ be the center of the semicircle and $X=\Omega$ be the center of the circle. Applying the Extended Law of Sines to $\triangle PQR,$ we find the radius of $\odot X:$ \[XP=\frac{QR}{2\cdot\sin \angle QPR}=\frac{3\sqrt3}{2\cdot\frac{\sqrt3}{2}}=3.\] Alternatively, by the Inscribed Angle Theorem, $\triangle QRX$ is a $30^\circ\text{-}30^\circ\text{-}120^\circ$ triangle with base $QR=3\sqrt3.$ Dividing $\triangle QRX$ into two congruent $30^\circ\text{-}60^\circ\text{-}90^\circ$ triangles, we get that the radius of $\odot X$ is $XQ=XR=3$ by the side-length ratios. Let $M$ be the midpoint of $\overline{QR}.$ By the Perpendicular Chord Bisector Converse, we have $\overline{OM}\perp\overline{QR}$ and $\overline{XM}\perp\overline{QR}.$ Together, points $O, X,$ and $M$ must be collinear. By the SAS Congruence, we have $\triangle QXM\cong\triangle RXM,$ both of which are $30^\circ\text{-}60^\circ\text{-}90^\circ$ triangles. By the side-length ratios, we obtain $RM=\frac{3\sqrt3}{2}, RX=3,$ and $XM=\frac{3}{2}.$ By the Pythagorean Theorem on right $\triangle ORM,$ we get $OM=\frac{13}{2}$ and $OX=OM-XM=5.$ By the Pythagorean Theorem on right $\triangle OXP,$ we get $OP=4.$ Let $C$ be the foot of the perpendicular from $P$ to $\overline{QR},$ and $D$ be the foot of the perpendicular from $X$ to $\overline{PC},$ as shown below: [asy] /* Made by MRENTHUSIASM */ size(300); pair O, X, A, B, P, Q, R, M, C, D; O = (0,0); X = (4,3); A = (-7,0); B = (7,0); P = (4,0); Q = intersectionpoints(Circle(O,7),Circle(X,3))[0]; R = intersectionpoints(Circle(O,7),Circle(X,3))[1]; M = midpoint(Q--R); C = foot(P,Q,R); D = foot(X,P,C); fill(P--Q--R--cycle,yellow); dot("$O$",O,S); dot("$X$",X,N); dot("$A$",A,SW); dot("$B$",B,SE); dot("$P$",P,S); dot("$Q$",Q,E); dot("$R$",R,N); dot("$M$",M,dir(M)); dot("$C$",C,NE); dot("$D$",D,SE); markscalefactor=0.0375; draw(rightanglemark(O,M,R),red); draw(rightanglemark(P,C,M),red); draw(rightanglemark(P,D,X),red); draw(rightanglemark(O,P,X),red); draw(P--Q--R--cycle); draw(arc(O, 7, 0, 180)^^A--B^^Circle(X,3)); draw(O--M^^X--P); draw(P--C^^X--D,dashed); [/asy] Clearly, quadrilateral $XDCM$ is a rectangle. Since $\angle XPD=\angle OXP$ by alternate interior angles, we have $\triangle XPD\sim\triangle OXP$ by the AA Similarity, with the ratio of similitude $\frac{XP}{OX}=\frac 35.$ Therefore, we get $PD=\frac 95$ and $PC=PD+DC=PD+XM=\frac 95 + \frac 32 = \frac{33}{10}.$ The area of $\triangle PQR$ is \[\frac12\cdot QR\cdot PC=\frac12\cdot3\sqrt3\cdot\frac{33}{10}=\frac{99\sqrt3}{20},\] from which the answer is $99+3+20=\boxed{\textbf{(D) } 122}.$ ~MRENTHUSIASM
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_4f7f3a923e : Prop := by
+  sorry

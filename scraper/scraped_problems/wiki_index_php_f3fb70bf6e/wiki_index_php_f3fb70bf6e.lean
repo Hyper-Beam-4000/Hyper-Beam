@@ -1,32 +1,18 @@
-import Mathlib.Data.Finset
-import Mathlib.Data.Polynomial
+-- 2020 USAMO Problems/Problem 5
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2020_USAMO_Problems/Problem_5
+
+-- Problem (LaTeX):
+/-
+A finite set $S$ of points in the coordinate plane is called overdetermined if $|S| \ge 2$ and there exists a nonzero polynomial $P(t)$ , with real coefficients and of degree at most $|S| - 2$ , satisfying $P(x) = y$ for every point $(x, y) \in S$ . For each integer $n \ge 2$ , find the largest integer $k$ (in terms of $n$ ) such that there exists a set of $n$ distinct points that is not overdetermined, but has $k$ overdetermined subsets.
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+The answer is $2^{n-1}-n$ . To construct this, have $n-1$ points on a horizontal line and $1$ point not on it. Then, any subset that does not include the last point is overdetermined.\\ For the bound, the main idea of the problem is the following claim.\\ Claim: If $S$ and $T$ are overdetermined subsets with $|S|=|T|=k$ but $S$ and $T$ only differ by one element (one is swapped out for another), then $S\cup T$ is overdetermined.\\ Consider the minimal polynomial of $S$ . It has degree at most $k-2$ since $S$ is overdetermined, and similarly with the minimal polynomial of $T$ . However, there is a unique polynomial of degree at most $k-2$ passing through $S\cap T$ since it has $k-1$ points. Thus, this unique polynomial also passes through $S$ and $T$ . Thus, this polynomial passes through all points of $S\cup T$ , as desired.\\ We now use this claim to inductively bound the number of overdetermined subsets with $k$ elements. Let $m_k$ denote the number of overdetermined subsets of size $k$ . Clearly, $m_n=0$ .\\ Claim 2: We have \[m_k\leq \frac{m_{k+1}(k+1)+{n\choose k+1}-m_{k+1}}{n-k}.\] Proof: Each overdetermined subset of size $k+1$ can have up to $k+1$ overdetermined subsets of size $k$ , but by the previous claim each non-overdetermined subset of size $k+1$ , which there are ${n\choose k+1}-m_{k+1}$ of, can have at most one. Each subset of size $k$ feeds into $n-k$ subsets of size $k+1$ . Note that this is increasing in $m_{k+1}$ .\\ Claim 3: We have \[m_k\leq {n-1\choose k}.\] Proof: Use induction. Note that the expression in Claim 2 is nondecreasing in $m_{k+1}$ , and verify that \[\frac{{n-1\choose k+1}(k+1)+{n\choose k+1}-{n-1\choose k+1}}{n-k}={n-1\choose k}.\] Thus, we have that the number of overdetermined subsets is at most \[\sum_{k=2}^n {n-1\choose k}=2^{n-1}-n,\] as desired. 2020 USAMO ( Problems • Resources ) Preceded by Problem 4 Followed by Problem 6 1 • 2 • 3 • 4 • 5 • 6 All USAMO Problems and Solutions
+-/
+
 import Mathlib.Tactic
 
-open Finset Polynomial
-
--- Problem: For each integer n ≥ 2, find the largest integer k such that
--- there exists a set of n distinct points that is not overdetermined,
--- but has k overdetermined subsets.
-
-theorem usamo2020_p5 (n : ℕ) (hn : n ≥ 2) : ∃ S : Finset (ℝ × ℝ), S.card = n ∧
-  (∃ k : ℕ, k = 2^(n - 1) - n ∧ ∀ T ⊆ S, T.card ≥ 2 → 
-  (∃ P : Polynomial ℝ, P.degree ≤ T.card - 2 ∧ ∀ (x, y) ∈ T, P.eval x = y) ↔ T.card ≤ k) := by
-  -- Construct a set S of n points with n-1 points on a horizontal line
-  -- and 1 point not on it
-  let S := (range (n - 1)).image (λ x, (x : ℝ, 0)) ∪ {(0, 1)}
-  have hS_card : S.card = n := by
-    -- Prove that S has n elements
-    sorry
-
-  -- Show that any subset of S that does not include the point (0, 1) is overdetermined
-  have overdetermined_subsets : ∀ T ⊆ S, T.card ≥ 2 → 
-    (∃ P : Polynomial ℝ, P.degree ≤ T.card - 2 ∧ ∀ (x, y) ∈ T, P.eval x = y) ↔ T ≠ S := by
-    sorry
-
-  -- Calculate the number of overdetermined subsets
-  have k_value : ∃ k : ℕ, k = 2^(n - 1) - n ∧ ∀ T ⊆ S, T.card ≥ 2 → 
-    (∃ P : Polynomial ℝ, P.degree ≤ T.card - 2 ∧ ∀ (x, y) ∈ T, P.eval x = y) ↔ T.card ≤ k := by
-    sorry
-
-  -- Combine the results to show the existence of such a set S and integer k
-  exact ⟨S, hS_card, k_value⟩
+theorem wiki_index_php_f3fb70bf6e : Prop := by
+  sorry

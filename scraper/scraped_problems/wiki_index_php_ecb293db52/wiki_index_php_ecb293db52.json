@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2018_AMC_12B_Problems/Problem_6",
+  "title": "2018 AMC 12B Problems/Problem 6",
+  "problem": "Suppose $S$ cans of soda can be purchased from a vending machine for $Q$ quarters. Which of the following expressions describes the number of cans of soda that can be purchased for $D$ dollars, where $1$ dollar is worth $4$ quarters? $\\textbf{(A) } \\frac{4DQ}{S} \\qquad \\textbf{(B) } \\frac{4DS}{Q} \\qquad \\textbf{(C) } \\frac{4Q}{DS} \\qquad \\textbf{(D) } \\frac{DQ}{4S} \\qquad \\textbf{(E) } \\frac{DS}{4Q}$",
+  "solution": "Each can of soda costs $\\frac QS$ quarters, or $\\frac{Q}{4S}$ dollars. Therefore, $D$ dollars can purchase $\\frac{D}{\\left(\\tfrac{Q}{4S}\\right)}=\\boxed{\\textbf{(B) } \\frac{4DS}{Q}}$ cans of soda. ~MRENTHUSIASM",
+  "answer": "",
+  "year": 2018,
+  "competition": "AMC 12B",
+  "problem_number": 6,
+  "difficulty_tier": "early_gpt",
+  "tags": [
+    "AMC 12B",
+    "2018",
+    "early_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:22:26.926974+00:00"
+}

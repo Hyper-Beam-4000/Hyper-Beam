@@ -1,0 +1,18 @@
+-- 2021 AIME I Problems/Problem 13
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2021_AIME_I_Problems/Problem_13
+
+-- Problem (LaTeX):
+/-
+Circles $\omega_1$ and $\omega_2$ with radii $961$ and $625$ , respectively, intersect at distinct points $A$ and $B$ . A third circle $\omega$ is externally tangent to both $\omega_1$ and $\omega_2$ . Suppose line $AB$ intersects $\omega$ at two points $P$ and $Q$ such that the measure of minor arc $\widehat{PQ}$ is $120^{\circ}$ . Find the distance between the centers of $\omega_1$ and $\omega_2$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $O_i$ and $r_i$ be the center and radius of $\omega_i$ , and let $O$ and $r$ be the center and radius of $\omega$ . Since $\overline{AB}$ extends to an arc with arc $120^\circ$ , the distance from $O$ to $\overline{AB}$ is $r/2$ . Let $X=\overline{AB}\cap \overline{O_1O_2}$ . Consider $\triangle OO_1O_2$ . The line $\overline{AB}$ is perpendicular to $\overline{O_1O_2}$ and passes through $X$ . Let $H$ be the foot from $O$ to $\overline{O_1O_2}$ ; so $HX=r/2$ . We have by tangency $OO_1=r+r_1$ and $OO_2=r+r_2$ . Let $O_1O_2=d$ . [asy] unitsize(3cm); pointpen=black; pointfontpen=fontsize(9); pair A=dir(110), B=dir(230), C=dir(310); DPA(A--B--C--A); pair H = foot(A, B, C); draw(A--H); pair X = 0.3*B + 0.7*C; pair Y = A+X-H; draw(X--1.3*Y-0.3*X); draw(A--Y, dotted); pair R1 = 1.3*X-0.3*Y; pair R2 = 0.7*X+0.3*Y; draw(R1--X); D("O",A,dir(A)); D("O_1",B,dir(B)); D("O_2",C,dir(C)); D("H",H,dir(270)); D("X",X,dir(225)); D("A",R1,dir(180)); D("B",R2,dir(180)); draw(rightanglemark(Y,X,C,3)); [/asy] Since $X$ is on the radical axis of $\omega_1$ and $\omega_2$ , it has equal power with respect to both circles, so \[O_1X^2 - r_1^2 = O_2X^2-r_2^2 \implies O_1X-O_2X = \frac{r_1^2-r_2^2}{d}\] since $O_1X+O_2X=d$ . Now we can solve for $O_1X$ and $O_2X$ , and in particular, \begin{align*} O_1H &= O_1X - HX = \frac{d+\frac{r_1^2-r_2^2}{d}}{2} - \frac{r}{2} \\ O_2H &= O_2X + HX = \frac{d-\frac{r_1^2-r_2^2}{d}}{2} + \frac{r}{2}. \end{align*} We want to solve for $d$ . By the Pythagorean Theorem (twice): \begin{align*} &\qquad -OH^2 = O_2H^2 - (r+r_2)^2 = O_1H^2 - (r+r_1)^2 \\ &\implies \left(d+r-\tfrac{r_1^2-r_2^2}{d}\right)^2 - 4(r+r_2)^2 = \left(d-r+\tfrac{r_1^2-r_2^2}{d}\right)^2 - 4(r+r_1)^2 \\ &\implies 2dr - 2(r_1^2-r_2^2)-8rr_2-4r_2^2 = -2dr+2(r_1^2-r_2^2)-8rr_1-4r_1^2 \\ &\implies 4dr = 8rr_2-8rr_1 \\ &\implies d=2r_2-2r_1 \end{align*} Therefore, $d=2(r_2-r_1) = 2(961-625)=\boxed{672}$ .
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_d454ad9ce8 : Prop := by
+  sorry

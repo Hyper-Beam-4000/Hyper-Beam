@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2023_AMC_12A_Problems/Problem_4",
+  "title": "2023 AMC 12A Problems/Problem 4",
+  "problem": "How many digits are in the base-ten representation of $8^5 \\cdot 5^{10} \\cdot 15^5$ ? $\\textbf{(A) } 14 \\qquad\\textbf{(B) }15 \\qquad\\textbf{(C) }16 \\qquad\\textbf{(D) }17 \\qquad\\textbf{(E) } 18$",
+  "solution": "Prime factorizing this gives us $2^{15}\\cdot3^{5}\\cdot5^{15}=10^{15}\\cdot3^5=243\\cdot10^{15}$ . $10^{15}$ has $16$ digits and $243$ = $2.43*10^{2}$ gives us $3$ more digits. $16+2=\\text{\\boxed{\\textbf{(E) }18}}$ $2.43*10^{17}$ has $18$ digits ~zhenghua",
+  "answer": "",
+  "year": 2023,
+  "competition": "AMC 12A",
+  "problem_number": 4,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12A",
+    "2023",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:28:49.176286+00:00"
+}

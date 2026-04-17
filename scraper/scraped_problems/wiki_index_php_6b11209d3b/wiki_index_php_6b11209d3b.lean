@@ -1,54 +1,19 @@
-import Mathlib.Data.Real.Basic
-import Mathlib.Data.List.Basic
+-- 2017 USAJMO Problems/Problem 6
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2017_USAMO_Problems/Problem_4
+
+-- Problem (LaTeX):
+/-
+Let $P_1, \ldots, P_{2n}$ be $2n$ distinct points on the unit circle $x^2 + y^2 = 1$ other than $(1,0)$ . Each point is colored either red or blue, with exactly $n$ of them red and exactly $n$ of them blue. Let $R_1, \ldots, R_n$ be any ordering of the red points. Let $B_1$ be the nearest blue point to $R_1$ traveling counterclockwise around the circle starting from $R_1$ . Then let $B_2$ be the nearest of the remaining blue points to $R_2$ traveling counterclockwise around the circle from $R_2$ , and so on, until we have labeled all the blue points $B_1, \ldots, B_n$ . Show that the number of counterclockwise arcs of the form $R_i \rightarrow B_i$ that contain the point $(1,0)$ is independent of the way we chose the ordering $R_1, \ldots, R_n$ of the red points.
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+I define a sequence to be, starting at $(1,0)$ and tracing the circle counterclockwise, and writing the color of the points in that order - either R or B. For example, possible sequences include $RB$ , $RBBR$ , $BBRRRB$ , $BRBRRBBR$ , etc.
+Note that choosing an $R_1$ is equivalent to choosing an $R$ in a sequence, and $B_1$ is defined as the $B$ closest to $R_1$ when moving rightwards. If no $B$ s exist to the right of $R_1$ , start from the far left. For example, if I have the above example $RBBR$ , and I define the 2nd $R$ to be $R_1$ , then the first $B$ will be $B_1$ . Because no $R$ or $B$ can be named twice, I can simply remove $R_1$ and $B_1$ from my sequence when I choose them. I define this to be a move. Hence, a possible move sequence of $BBRRRB$ is: $BBR_1RRB_1\implies B_2BRR_2\implies B_3R_3$
+-/
+
 import Mathlib.Tactic
 
-open List
-
--- Define the problem setup
-structure Point where
-  x : ℝ
-  y : ℝ
-  on_unit_circle : x^2 + y^2 = 1
-
--- Define the problem statement
-theorem usajmo_2017_p6 (n : ℕ) (h : n > 0) :
-  ∀ (points : List Point) (colors : List Bool),
-    length points = 2 * n →
-    length (filter id colors) = n →
-    length (filter not colors) = n →
-    (∀ p ∈ points, p ≠ ⟨1, 0, by norm_num⟩) →
-    let red_points := filter (λ (p : Point) (i : ℕ), colors.nthLe i sorry) points.enum;
-    let blue_points := filter (λ (p : Point) (i : ℕ), ¬colors.nthLe i sorry) points.enum;
-    ∀ (ordering : List Point),
-      ordering ~ red_points →
-      let arcs := map (λ (r : Point), find_nearest_blue r blue_points) ordering;
-      count_contains_one_zero arcs = count_contains_one_zero (map (λ (r : Point), find_nearest_blue r blue_points) red_points)
-:= by
-  -- Introduce the variables and assumptions
-  intros points colors h1 h2 h3 h4 red_points blue_points ordering h_ordering arcs
-  -- The proof strategy involves showing the count of arcs containing (1,0) is invariant
-  -- Step 1: Show that the sequence of colors around the circle is invariant
-  have h_sequence : ∀ (p : Point), p ∈ points → p ≠ ⟨1, 0, by norm_num⟩ := by
-    intro p hp
-    apply h4
-    exact hp
-  -- Step 2: Define the process of selecting nearest blue points
-  have h_blue_selection : ∀ (r : Point), r ∈ red_points → ∃ b ∈ blue_points, is_nearest_blue r b := by
-    sorry
-  -- Step 3: Show that the count of arcs containing (1,0) is invariant
-  have h_invariant : count_contains_one_zero arcs = count_contains_one_zero (map (λ (r : Point), find_nearest_blue r blue_points) red_points) := by
-    sorry
-  -- Conclude the proof
-  exact h_invariant
-
--- Placeholder for the function to find the nearest blue point
-def find_nearest_blue (r : Point) (blue_points : List Point) : Point :=
-  sorry
-
--- Placeholder for the function to count arcs containing (1,0)
-def count_contains_one_zero (arcs : List (Point × Point)) : ℕ :=
-  sorry
-
--- Placeholder for the predicate to check if a blue point is the nearest
-def is_nearest_blue (r b : Point) : Prop :=
+theorem wiki_index_php_6b11209d3b : Prop := by
   sorry

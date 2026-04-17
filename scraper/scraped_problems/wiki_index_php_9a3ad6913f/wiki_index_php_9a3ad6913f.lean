@@ -1,0 +1,18 @@
+-- 2017 AIME I Problems/Problem 15
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2017_AIME_I_Problems/Problem_15
+
+-- Problem (LaTeX):
+/-
+The area of the smallest equilateral triangle with one vertex on each of the sides of the right triangle with side lengths $2\sqrt{3},~5,$ and $\sqrt{37},$ as shown, is $\frac{m\sqrt{p}}{n},$ where $m,~n,$ and $p$ are positive integers, $m$ and $n$ are relatively prime, and $p$ is not divisible by the square of any prime. Find $m+n+p.$ [asy] size(5cm); pair C=(0,0),B=(0,2*sqrt(3)),A=(5,0); real t = .385, s = 3.5*t-1; pair R = A*t+B*(1-t), P=B*s; pair Q = dir(-60) * (R-P) + P; fill(P--Q--R--cycle,gray); draw(A--B--C--A^^P--Q--R--P); dot(A--B--C--P--Q--R); [/asy]
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Lemma: If $x,y$ satisfy $px+qy=1$ , then the minimal value of $\sqrt{x^2+y^2}$ is $\frac{1}{\sqrt{p^2+q^2}}$ . Proof: Recall that the distance between the point $(x_0,y_0)$ and the line $px+qy+r = 0$ is given by $\frac{|px_0+qy_0+r|}{\sqrt{p^2+q^2}}$ . In particular, the distance between the origin and any point $(x,y)$ on the line $px+qy=1$ is at least $\frac{1}{\sqrt{p^2+q^2}}$ . --- Let the vertices of the right triangle be $(0,0),(5,0),(0,2\sqrt{3}),$ and let $(a,0),(0,b)$ be the two vertices of the equilateral triangle on the legs of the right triangle. Then, the third vertex of the equilateral triangle is $\left(\frac{a+b\sqrt{3}}{2},\frac{a\sqrt{3}+b}{2}\right)$ . This point must lie on the hypotenuse $\frac{x}{5} + \frac{y}{2\sqrt{3}} = 1$ , i.e. $a,b$ must satisfy \[\frac{a+b\sqrt{3}}{10}+\frac{a\sqrt{3}+b}{4\sqrt{3}} = 1,\] which can be simplified to \[\frac{7}{20}a + \frac{11\sqrt{3}}{60}b = 1.\] By the lemma, the minimal value of $\sqrt{a^2+b^2}$ is \[\frac{1}{\sqrt{\left(\frac{7}{20}\right)^2 + \left(\frac{11\sqrt{3}}{60}\right)^2}} = \frac{10\sqrt{3}}{\sqrt{67}},\] so the minimal area of the equilateral triangle is \[\frac{\sqrt{3}}{4} \cdot \left(\frac{10\sqrt{3}}{\sqrt{67}}\right)^2 = \frac{\sqrt{3}}{4} \cdot \frac{300}{67} = \frac{75\sqrt{3}}{67},\] and hence the answer is $75+3+67=\boxed{145}$ .
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_9a3ad6913f : Prop := by
+  sorry

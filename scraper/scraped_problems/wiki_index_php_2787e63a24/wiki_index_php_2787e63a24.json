@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2024_AMC_12B_Problems/Problem_7",
+  "title": "2024 AMC 10B Problems/Problem 11",
+  "problem": "In the figure below $WXYZ$ is a rectangle with $WX=4$ and $WZ=8$ . Point $M$ lies $\\overline{XY}$ , point $A$ lies on $\\overline{YZ}$ , and $\\angle WMA$ is a right angle. The areas of $\\triangle WXM$ and $\\triangle WAZ$ are equal. What is the area of $\\triangle WMA$ ? [asy] pair X = (0, 0); pair W = (0, 4); pair Y = (8, 0); pair Z = (8, 4); label(\"$X$\", X, dir(180)); label(\"$W$\", W, dir(180)); label(\"$Y$\", Y, dir(0)); label(\"$Z$\", Z, dir(0)); draw(W--X--Y--Z--cycle); dot(X); dot(Y); dot(W); dot(Z); pair M = (2, 0); pair A = (8, 3); label(\"$A$\", A, dir(0)); dot(M); dot(A); draw(W--M--A--cycle); markscalefactor = 0.05; draw(rightanglemark(W, M, A)); label(\"$M$\", M, dir(-90)); [/asy] Note: On certain tests that took place in China, the problem asked for the area of $\\triangle MAY$ . $\\textbf{(A) }13 \\qquad \\textbf{(B) }14 \\qquad \\textbf{(C) }15 \\qquad \\textbf{(D) }16 \\qquad \\textbf{(E) }17 \\qquad$",
+  "solution": "We know that $WX = 4$ , $WZ = 8$ , so $YZ = 4$ and $YX = 8$ . Since $\\angle WMA = 90^\\circ$ , triangles $WXM$ and $MYA$ are similar. Therefore, $\\frac{WX}{MY} = \\frac{XM}{YA}$ , which gives $\\frac{4}{8 - XM} = \\frac{XM}{4 - ZA}$ . We also know that the areas of triangles $WXM$ and $WAZ$ are equal, so $WX \\cdot XM = WZ \\cdot ZA$ , which implies $4 \\cdot XM = 8 \\cdot ZA$ . Substituting this into the previous equation, we get $\\frac{4}{8 - 2ZA} = \\frac{2ZA}{4 - ZA}$ , yielding $ZA = 1$ and $XM = 2$ . Thus, \\[\\triangle WMA = 4 \\cdot 8 - \\frac{4 \\cdot 2}{2} - \\frac{8 \\cdot 1}{2} - \\frac{6 \\cdot 3}{2} = \\boxed{\\textbf{(C) }15}\\] ~ Athmyx",
+  "answer": "",
+  "year": 2024,
+  "competition": "AMC 12B",
+  "problem_number": 7,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12B",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:30:59.218863+00:00"
+}

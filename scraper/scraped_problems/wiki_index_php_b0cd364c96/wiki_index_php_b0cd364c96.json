@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AIME_II_Problems/Problem_7",
+  "title": "2025 AIME II Problems/Problem 7",
+  "problem": "Let $A$ be the set of positive integer divisors of $2025$ . Let $B$ be a randomly selected subset of $A$ . The probability that $B$ is a nonempty set with the property that the least common multiple of its elements is $2025$ is $\\frac{m}{n}$ , where $m$ and $n$ are relatively prime positive integers. Find $m+n$ .",
+  "solution": "We split into different conditions: Note that the numbers in the set need to have a least common multiple of $2025$ , so we need to ensure that the set has at least 1 number that is a multiple of $3^4$ and a number that is a multiple of $5^2$ . Multiples of $3^4$ : $81, 405, 2025$ Multiples of $5^2$ : $25, 75, 225, 675, 2025$ If the set $B$ contains $2025$ , then all of the rest $14$ factors is no longer important. The valid cases are $2^{14}$ , which can be thought of as selecting either \"Yes\" or \"No\" ( $2$ possibilities) for each of the remaining $14$ factors. If the set $B$ doesn't contain $2025$ , but contains $405$ , we just need another multiple of $5^2$ . It could be 1 of them, 2 of them, 3 of them, or 4 of them, which has $2^4 - 1 = 15$ cases. Excluding $2025, 405, 25, 75, 225, 675,$ the rest 9 numbers could appear or not appear. Therefore, this case has a valid case of $15 \\cdot 2^9$ . If set $B$ doesn't contain $2025$ nor $405$ , it must contain $81$ . It also needs to contain at least 1 of the multiples from $5^2$ , where it would be $15 \\cdot 2^8$ . The total valid cases are $2^{14} + 15 \\cdot (2^9 + 2^8)$ , and the total cases are $2^{15}$ . The answer is $\\cfrac{2^8 \\cdot (64 + 30 + 15)}{2^8 \\cdot 2^7}= \\frac{109}{128}$ . Desired answer: $109 + 128 = \\boxed{237}$ . ~ Mitsuihisashi14 ~ $\\LaTeX$ by eevee9046 ~ Additional edits by aoum ~ Additional edits by fermat_sLastAMC ~ Additional edits by Christian",
+  "answer": "",
+  "year": 2025,
+  "competition": "AIME II",
+  "problem_number": 7,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AIME II",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:38:46.636313+00:00"
+}

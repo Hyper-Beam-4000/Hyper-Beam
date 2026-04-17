@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2017_AMC_12B_Problems/Problem_21",
+  "title": "2017 AMC 12B Problems/Problem 21",
+  "problem": "Last year, Isabella took 7 math tests and received 7 different scores, each an integer between 91 and 100, inclusive. After each test she noticed that the average of her test scores was an integer. Her score on the seventh test was 95. What was her score on the sixth test? $\\textbf{(A)}\\ 92\\qquad\\textbf{(B)}\\ 94\\qquad\\textbf{(C)}\\ 96\\qquad\\textbf{(D)}\\ 98\\qquad\\textbf{(E)}\\ 100$",
+  "solution": "First, remove all the 90s, since they make no impact. So, we have numbers from $1$ to $10$ . Then, $5$ is the 7th number. Let the sum of the first $6$ numbers be $k$ . Then, $k\\equiv 0 \\mod 6$ and $k\\equiv 2 \\mod 7$ . We easily solve this as $k \\equiv 30 \\mod 42$ . Clearly, the sum of the first $6$ numbers must be $570$ . In order for the first $5$ numbers to sum to a multiple of $5$ , the sixth number must also be a multiple of $5$ , since $30$ is a multiple of $5$ . Thus, the only option is the sixth number is $10$ , which gives $10+90= \\boxed{\\textbf{(E) }100}$ ~ firebolt360",
+  "answer": "",
+  "year": 2017,
+  "competition": "AMC 12B",
+  "problem_number": 21,
+  "difficulty_tier": "pre_gpt",
+  "tags": [
+    "AMC 12B",
+    "2017",
+    "pre_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:21:23.039897+00:00"
+}

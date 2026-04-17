@@ -1,0 +1,18 @@
+-- 2022 AIME I Problems/Problem 1
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2022_AIME_I_Problems/Problem_1
+
+-- Problem (LaTeX):
+/-
+Quadratic polynomials $P(x)$ and $Q(x)$ have leading coefficients $2$ and $-2,$ respectively. The graphs of both polynomials pass through the two points $(16,54)$ and $(20,53).$ Find $P(0) + Q(0).$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let $R(x)=P(x)+Q(x).$ Since the $x^2$ -terms of $P(x)$ and $Q(x)$ cancel, we conclude that $R(x)$ is a linear polynomial. Note that \begin{alignat*}{8} R(16) &= P(16)+Q(16) &&= 54+54 &&= 108, \\ R(20) &= P(20)+Q(20) &&= 53+53 &&= 106, \end{alignat*} so the slope of $R(x)$ is $\frac{106-108}{20-16}=-\frac12.$ It follows that the equation of $R(x)$ is \[R(x)=-\frac12x+c\] for some constant $c,$ and we wish to find $R(0)=c.$ We substitute $x=20$ into this equation to get $106=-\frac12\cdot20+c,$ from which $c=\boxed{116}.$ ~MRENTHUSIASM
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_7ff2526bd8 : Prop := by
+  sorry

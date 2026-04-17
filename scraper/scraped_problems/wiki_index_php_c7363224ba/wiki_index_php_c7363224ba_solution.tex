@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2023 AMC 12A Problems/Problem 24}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Consider any sequence with $n$ terms. Every number has such choices: never appear, appear the first time in the first spot, appear the first time in the second spot ..., and appear the first time in the $n$ th spot, which means every number has $(n+1)$ choices to show up in the sequence. Consequently, for each sequence with length $n$ , there are $(n+1)^{10}$ possible ways. Thus, the desired value is $\sum_{n=1}^{10}(n+1)^{10}\equiv \boxed{\textbf{(C) } 5}\pmod{10}$ . ~bluesoul
+
+\end{document}

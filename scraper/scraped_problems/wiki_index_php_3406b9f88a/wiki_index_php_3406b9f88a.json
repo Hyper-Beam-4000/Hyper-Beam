@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12A_Problems/Problem_15",
+  "title": "2025 AMC 12A Problems/Problem 15",
+  "problem": "A set of numbers is called sum-free if whenever $x$ and $y$ are (not necessarily distinct) elements of the set, $x+y$ is not an element of the set. For example, $\\{1,4,6\\}$ and the empty set are sum-free, but $\\{1,4,5\\}$ is not. What is the greatest possible number of elements in a sum-free subset of $\\{1,2,3,...,20\\}$ ? $\\textbf{(A) } 8 \\qquad\\textbf{(B) } 9 \\qquad\\textbf{(C) } 10 \\qquad\\textbf{(D) } 11 \\qquad\\textbf{(E) } 12$",
+  "solution": "Let our subset be $\\{11,12,13,...,20\\}.$ If we add any element from the set $\\{1,2,3,...,10\\}$ to our current subset, we will have to remove at least one element from our subset. Hence, the maximum size of our subset is $\\boxed{\\text{(C) }10}$ . ~Tacos_are_yummy_1 ~nithins minor edit",
+  "answer": "",
+  "year": 2025,
+  "competition": "AMC 12A",
+  "problem_number": 15,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12A",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:31:51.720737+00:00"
+}

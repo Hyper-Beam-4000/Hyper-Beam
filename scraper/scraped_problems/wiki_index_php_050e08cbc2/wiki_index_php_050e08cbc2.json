@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2024_AIME_I_Problems/Problem_12",
+  "title": "2024 AIME I Problems/Problem 12",
+  "problem": "Define $f(x)=|| x|-\\tfrac{1}{2}|$ and $g(x)=|| x|-\\tfrac{1}{4}|$ . Find the number of intersections of the graphs of \\[y=4 g(f(\\sin (2 \\pi x))) \\quad\\text{ and }\\quad x=4 g(f(\\cos (3 \\pi y))).\\]",
+  "solution": "If we graph $4g(f(x))$ , we see it forms a sawtooth graph that oscillates between $0$ and $1$ (for values of $x$ between $-1$ and $1$ , which is true because the arguments are between $-1$ and $1$ ). Thus by precariously drawing the graph of the two functions in the square bounded by $(0,0)$ , $(0,1)$ , $(1,1)$ , and $(1,0)$ , and hand-counting each of the intersections, we get $\\boxed{385}$",
+  "answer": "",
+  "year": 2024,
+  "competition": "AIME I",
+  "problem_number": 12,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AIME I",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:37:52.744428+00:00"
+}

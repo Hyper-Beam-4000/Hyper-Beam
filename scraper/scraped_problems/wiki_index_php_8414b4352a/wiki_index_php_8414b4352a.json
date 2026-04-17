@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2020_AMC_12A_Problems/Problem_3",
+  "title": "2020 AMC 10A Problems/Problem 4",
+  "problem": "A driver travels for $2$ hours at $60$ miles per hour, during which her car gets $30$ miles per gallon of gasoline. She is paid $\\$0.50$ per mile, and her only expense is gasoline at $\\$2.00$ per gallon. What is her net rate of pay, in dollars per hour, after this expense? $\\textbf{(A)}\\ 20\\qquad\\textbf{(B)}\\ 22\\qquad\\textbf{(C)}\\ 24\\qquad\\textbf{(D)}\\ 25\\qquad\\textbf{(E)}\\ 26$",
+  "solution": "Since the driver travels $60$ miles per hour and each hour she uses $2$ gallons of gasoline, she spends $\\$4$ per hour on gas. If she gets $\\$0.50$ per mile, then she gets $\\$30$ per hour of driving. Subtracting the gas cost, her net rate of money earned per hour is $\\boxed{\\textbf{(E)}\\ 26}$ .\n~mathsmiley",
+  "answer": "",
+  "year": 2020,
+  "competition": "AMC 12A",
+  "problem_number": 3,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12A",
+    "2020",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:24:32.090970+00:00"
+}

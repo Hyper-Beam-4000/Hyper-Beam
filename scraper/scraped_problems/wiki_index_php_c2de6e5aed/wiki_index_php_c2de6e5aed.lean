@@ -1,0 +1,18 @@
+-- 2023 AIME I Problems/Problem 9
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2023_AIME_I_Problems/Problem_9
+
+-- Problem (LaTeX):
+/-
+Find the number of cubic polynomials $p(x) = x^3 + ax^2 + bx + c,$ where $a, b,$ and $c$ are integers in $\{-20,-19,-18,\ldots,18,19,20\},$ such that there is a unique integer $m \not= 2$ with $p(m) = p(2).$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Plugging $2$ and $m$ into the expression for $p(x)$ and equating them, we get $8+4a+2b+c = m^3+am^2+bm+c$ . Rearranging, we have \[(m^3-8) + (m^2 - 4)a + (m-2)b = 0.\] Note that the value of $c$ won't matter as it can be anything in the provided range, giving a total of $41$ possible choices for $c.$ So we only need to find the number of ordered pairs $(a, b)$ that work, and multiply it by $41.$ We can start by first dividing both sides by $m-2.$ (Note that this is valid since $m\neq2:$ \[m^2 + 2m + 4 + (m+2)a + b = 0.\] We can rearrange this so it is a quadratic in $m$ : \[m^2 + (a+2)m + (4 + 2a + b) = 0.\] Remember that $m$ has to be unique and not equal to $2.$ We can split this into two cases: case $1$ being that $m$ has exactly one solution, and it isn't equal to $2$ ; case $2$ being that $m$ has two solutions, one being $2,$ but the other is a unique solution not equal to $2.$ $\textbf{Case 1:}$ There is exactly one solution for $m,$ and that solution is not $2.$ This means that the discriminant of the quadratic equation is $0,$ using that, we have $(a+2)^2 = 4(4 + 2a + b)$ . Rearranging, we have \[(a-2)^2 = 4(4 + b)\Longrightarrow a = 2\pm2\sqrt{4+b}.\] Using the fact that $4+b$ must be a perfect square, we can easily see that the values for $b$ can be $-4, -3, 0, 5,$ and $12.$ Also since it's a " $\pm$ " there will usually be $2$ solutions for $a$ for each value of $b.$ The two exceptions for this would be if $b = -4$ and $b = 12.$ For $b=-4$ because it would be a $\pm0,$ which only gives one solution, instead of two. For $b=12$ , because then $a = -6$ , the solution for $m$ would equal $2,$ , and we don't want this. (We can know this by replacing the solutions into the quadratic formula). So we have $5$ solutions for $b,$ each of which gives $2$ values for $a,$ except for $2$ and $b = -4,$ both of which only give one. So in total, there are $5*2 - 2 = 8$ ordered pairs of $(a,b)$ in this case. $\textbf{Case 2:}$ $m$ has two solutions, but exactly one of them isn't equal to $2.$ This ensures that $1$ of the solutions is equal to $2.$ Let $r$ be the other value of $m$ that isn't $2.$ By Vieta: \begin{align*} r+2 &= -a-2\\ 2r &= 4+2a+b. \end{align*} From the first equation, we subtract both sides by $2$ and double both sides to get $2r = -2a - 8$ which also equals to $4+2a+b$ from the second equation. Equating both, we have $4a + b + 12 = 0.$ We can easily count that there would be $11$ ordered pairs $(a,b)$ that satisfy that. However, there's an outlier case in which $r$ happens to also equal $2,$ and we don't want that. We can reverse engineer and find out that $r=2$ when $(a,b) = (-6, 12),$ which we overcounted. So we subtract by one and we conclude that there are $10$ ordered pairs of $(a,b)$ that satisfy this case. This all shows that there is a total of $8+10 = 18$ amount of ordered pairs $(a,b).$ Multiplying this by $41$ (the amount of values for $c$ ) we get $18\cdot41=\boxed{738}$ as our final answer. ~s214425
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_c2de6e5aed : Prop := by
+  sorry

@@ -1,0 +1,18 @@
+-- 2020 AMC 10B Problems/Problem 25
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2020_AMC_12B_Problems/Problem_24
+
+-- Problem (LaTeX):
+/-
+Let $D(n)$ denote the number of ways of writing the positive integer $n$ as a product \[n = f_1\cdot f_2\cdots f_k,\] where $k\ge1$ , the $f_i$ are integers strictly greater than $1$ , and the order in which the factors are listed matters (that is, two representations that differ only in the order of the factors are counted as distinct). For example, the number $6$ can be written as $6$ , $2\cdot 3$ , and $3\cdot2$ , so $D(6) = 3$ . What is $D(96)$ ? $\textbf{(A) } 112 \qquad\textbf{(B) } 128 \qquad\textbf{(C) } 144 \qquad\textbf{(D) } 172 \qquad\textbf{(E) } 184$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Note that $96 = 2^5 \cdot 3$ . Since there are at most six not necessarily distinct factors $>1$ multiplying to $96$ , we have six cases: $k=1, 2, ..., 6.$ Now we look at each of the six cases. $k=1$ : We see that there is $1$ way, merely $96$ . $k=2$ : This way, we have the $3$ in one slot and $2$ in another, and symmetry. The four other $2$ 's leave us with $5$ ways and symmetry doubles us so we have $10$ . $k=3$ : We have $3, 2, 2$ as our baseline. We need to multiply by $2$ in $3$ places, and see that we can split the remaining three powers of $2$ in a manner that is $3-0-0$ , $2-1-0$ or $1-1-1$ . A $3-0-0$ split has $6 + 3 = 9$ ways of happening ( $24-2-2$ and symmetry; $2-3-16$ and symmetry), a $2-1-0$ split has $6 \cdot 3 = 18$ ways of happening (due to all being distinct) and a $1-1-1$ split has $3$ ways of happening ( $6-4-4$ and symmetry) so in this case we have $9+18+3=30$ ways. $k=4$ : We have $3, 2, 2, 2$ as our baseline, and for the two other $2$ 's, we have a $2-0-0-0$ or $1-1-0-0$ split. The former grants us $4+12=16$ ways ( $12-2-2-2$ and symmetry and $3-8-2-2$ and symmetry) and the latter grants us also $12+12=24$ ways ( $6-4-2-2$ and symmetry and $3-4-4-2$ and symmetry) for a total of $16+24=40$ ways. $k=5$ : We have $3, 2, 2, 2, 2$ as our baseline and one place to put the last two: on another two or on the three. On the three gives us $5$ ways due to symmetry and on another two gives us $5 \cdot 4 = 20$ ways due to symmetry. Thus, we have $5+20=25$ ways. $k=6$ : We have $3, 2, 2, 2, 2, 2$ and symmetry and no more twos to multiply, so by symmetry, we have $6$ ways. Thus, adding, we have $1+10+30+40+25+6=\boxed{\textbf{(A) } 112}$ . ~kevinmathz
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_c9a63553ce : Prop := by
+  sorry

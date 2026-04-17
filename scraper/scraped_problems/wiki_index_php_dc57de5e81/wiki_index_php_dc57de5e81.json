@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12B_Problems/Problem_4",
+  "title": "2025 AMC 12B Problems/Problem 4",
+  "problem": "The value of the two-digit number $\\underline{a}~\\underline{b}$ in base seven equals the value of the two-digit number $\\underline{b}~\\underline{a}$ in base nine. What is $a+b?$ $\\textbf{(A)}~7\\qquad\\textbf{(B)}~9\\qquad\\textbf{(C)}~10\\qquad\\textbf{(D)}~11\\qquad\\textbf{(E)}~14$",
+  "solution": "By definition of bases, $\\underline{a}~\\underline{b}$ base seven is equal to $7a+b$ , and $\\underline{b}~\\underline{a}$ base nine is equal to $9b+a$ . Therefore, we must have $7a+b=9b+a$ , or $6a=8b$ , or $3a=4b$ . But in base seven, we must have $a,b<7$ . Testing cases yields $a=4,b=3$ as the only solution. Their sum is $\\boxed{\\textbf{(A)}~7}$ . ~Note that $lcm(6,8) = 24$ , which should reveal the answer a lot faster than testing. ~ eevee9406 ~ CW",
+  "answer": "Since $a$ and $b$ are both digits base $7$ , they must be from $0$ to $6$ . Furthermore, $\\underline{a}$ must be strictly greater than $b$ because two-digit representations in base $7$ exceed the values of those in base $9$ . Starting from testing $\\text{(A)}$ , we see that the combination $(a, b) = (4, 3)$ satisfies the condition. The answer is $\\boxed{\\textbf{(A)}~7}$ . ~megaboy6679",
+  "year": 2025,
+  "competition": "AMC 12B",
+  "problem_number": 4,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12B",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:32:17.821811+00:00"
+}

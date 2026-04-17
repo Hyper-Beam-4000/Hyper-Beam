@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2020_AIME_II_Problems/Problem_3",
+  "title": "2020 AIME II Problems/Problem 3",
+  "problem": "The value of $x$ that satisfies $\\log_{2^x} 3^{20} = \\log_{2^{x+3}} 3^{2020}$ can be written as $\\frac{m}{n}$ , where $m$ and $n$ are relatively prime positive integers. Find $m+n$ .",
+  "solution": "Let $\\log _{2^x}3^{20}=\\log _{2^{x+3}}3^{2020}=n$ . Based on the equation, we get $(2^x)^n=3^{20}$ and $(2^{x+3})^n=3^{2020}$ . Expanding the second equation, we get $8^n\\cdot2^{xn}=3^{2020}$ . Substituting the first equation in, we get $8^n\\cdot3^{20}=3^{2020}$ , so $8^n=3^{2000}$ . Taking the 100th root, we get $8^{\\frac{n}{100}}=3^{20}$ . Therefore, $(2^{\\frac{3}{100}})^n=3^{20}$ , and using the our first equation( $2^{xn}=3^{20}$ ), we get $x=\\frac{3}{100}$ and the answer is $\\boxed{103}$ .\n~rayfish",
+  "answer": "",
+  "year": 2020,
+  "competition": "AIME II",
+  "problem_number": 3,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME II",
+    "2020",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:35:18.890624+00:00"
+}

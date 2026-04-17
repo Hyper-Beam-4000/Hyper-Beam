@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2022 AIME II Problems/Problem 11}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+[asy] defaultpen(fontsize(12)+0.6); size(300); pair A,B,C,D,M,H; real xb=71, xd=121; A=origin; D=(7,0); B=2*dir(xb); C=3*dir(xd)+D; M=(B+C)/2; H=foot(M,A,D); path c=CR(D,3); pair A1=bisectorpoint(D,A,B), D1=bisectorpoint(C,D,A), Bp=IP(CR(A,2),A--H), Cp=IP(CR(D,3),D--H); draw(B--A--D--C--B); draw(A--M--D^^M--H^^Bp--M--Cp, gray+0.4); draw(rightanglemark(A,H,M,5)); dot("$A$",A,SW); dot("$D$",D,SE); dot("$B$",B,NW); dot("$C$",C,NE); dot("$M$",M,up); dot("$H$",H,down); dot("$B'$",Bp,down); dot("$C'$",Cp,down); [/asy] According to the problem, we have $AB=AB'=2$ , $DC=DC'=3$ , $MB=MB'$ , $MC=MC'$ , and $B'C'=7-2-3=2$ Because $M$ is the midpoint of $BC$ , we have $BM=MC$ , so: \[MB=MB'=MC'=MC.\] Then, we can see that $\bigtriangleup{MB'C'}$ is an isosceles triangle with $MB'=MC'$ Therefore, we could start our angle chasing: $\angle{MB'C'}=\angle{MC'B'}=180^\circ-\angle{MC'D}=180^\circ-\angle{MCD}$ . This is when we found that points $M$ , $C$ , $D$ , and $B'$ are on a circle. Thus, $\angle{BMB'}=\angle{CDC'} \Rightarrow \angle{B'MA}=\angle{C'DM}$ . This is the time we found that $\bigtriangleup{AB'M} \sim \bigtriangleup{MC'D}$ . Thus, $\frac{AB'}{B'M}=\frac{MC'}{C'D} \Longrightarrow (B'M)^2=AB' \cdot C'D = 6$ Point $H$ is the midpoint of $B'C'$ , and $MH \perp AD$ . $B'H=HC'=1 \Longrightarrow MH=\sqrt{B'M^2-B'H^2}=\sqrt{6-1}=\sqrt{5}$ . The area of this quadrilateral is the sum of areas of triangles: \[S_{\bigtriangleup{ABM}}+S_{\bigtriangleup{AB'M}}+S_{\bigtriangleup{CDM}}+S_{\bigtriangleup{C'DM}}+S_{\bigtriangleup{B'C'M}}\] \[=S_{\bigtriangleup{AB'M}}\cdot 2 + S_{\bigtriangleup{B'C'M}} + S_{\bigtriangleup{C'DM}}\cdot 2\] \[=2 \cdot \frac{1}{2} \cdot AB' \cdot MH + \frac{1}{2} \cdot B'C' \cdot MH + 2 \cdot \frac{1}{2} \cdot C'D \cdot MH\] \[=2\sqrt{5}+\sqrt{5}+3\sqrt{5}=6\sqrt{5}\] Finally, the square of the area is $(6\sqrt{5})^2=\boxed{180}$
+
+\end{document}

@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AIME_I_Problems/Problem_9",
+  "title": "2025 AIME I Problems/Problem 9",
+  "problem": "The parabola with equation $y = x^2 - 4$ is rotated $60^\\circ$ counterclockwise around the origin. The unique point in the fourth quadrant where the original parabola and its image intersect has $y$ -coordinate $\\frac{a - \\sqrt{b}}{c}$ , where $a$ , $b$ , and $c$ are positive integers, and $a$ and $c$ are relatively prime. Find $a + b + c$ .",
+  "solution": "We need to relate the rotation to something simpler because substituting the equation of the rotated parabola into the original will give us a quartic. [asy] size(300); import graph; // View window real L = 6; // Original parabola y = x^2 - 4 real f(real x){ return x^2 - 4; } // Rotation by +60 degrees about the origin pair rot60(pair P){ real ang = pi/3; return (P.x*cos(ang) - P.y*sin(ang), P.x*sin(ang) + P.y*cos(ang)); } // Axes draw((-L,0)--(L,0), gray(0.65), Arrows(4)); draw((0,-L)--(0,L), gray(0.65), Arrows(4)); // Plot original parabola real xmin=-3.5, xmax=3.5; path parab = graph(f, xmin, xmax); draw(parab, blue+1.2bp); // Build rotated parabola by sampling, then connecting smoothly int N=220; pair[] pts; for(int i=0; i<=N; ++i){ real x = xmin + (xmax - xmin)*i/N; pts.push(rot60((x, f(x)))); } path rpar = pts[0]; for(int i=1; i<=N; ++i) rpar = rpar..pts[i]; draw(rpar, red+1.2bp); // Line y = -sqrt(3) x draw((-L, sqrt(3)*L)--(L, -sqrt(3)*L), rgb(0,0.45,0)+1.2bp); // Vertices pair v1 = (0,-4); // original vertex pair v2 = rot60(v1); // rotated vertex dot(v1, blue+4bp); dot(v2, red+4bp); [/asy] Notice that the vertices of the original parabola and its image are symmetrical about the angle bisector of the 60 degree rotation (shown in green). The equation of this line is $y = -\\tan60^\\circ \\cdot y = -\\sqrt{3}x.$ This means that the point lying on this line and the original parabola must be the intersection of the new and original images since it won't change position with the rotation. We substitute $y = x^2 - 4:$ \\[x^2 - 4 = -\\sqrt{3}x\\] \\[x = \\frac{-\\sqrt{3} + \\sqrt{19}}{2}.\\] Then $y = (\\frac{-\\sqrt{3} + \\sqrt{19}}{2})^2 - 4 = \\frac{3 - \\sqrt{57}}{2}.$ $57 + 3 + 2 = \\boxed{62}.$ ~ grogg007 , ~ mathkiddus , ~ athreyay",
+  "answer": "",
+  "year": 2025,
+  "competition": "AIME I",
+  "problem_number": 9,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AIME I",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:38:29.086412+00:00"
+}

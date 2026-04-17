@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_AMC_12B_Problems/Problem_8",
+  "title": "2019 AMC 12B Problems/Problem 8",
+  "problem": "Let $f(x) = x^{2}(1-x)^{2}$ . What is the value of the sum \\[f \\left(\\frac{1}{2019} \\right)-f \\left(\\frac{2}{2019} \\right)+f \\left(\\frac{3}{2019} \\right)-f \\left(\\frac{4}{2019} \\right)+\\cdots + f \\left(\\frac{2017}{2019} \\right) - f \\left(\\frac{2018}{2019} \\right)?\\] $\\textbf{(A) }0\\qquad\\textbf{(B) }\\frac{1}{2019^{4}}\\qquad\\textbf{(C) }\\frac{2018^{2}}{2019^{4}}\\qquad\\textbf{(D) }\\frac{2020^{2}}{2019^{4}}\\qquad\\textbf{(E) }1$",
+  "solution": "First, note that $f(x) = f(1-x)$ . We can see this since \\[f(x) = x^2(1-x)^2 = (1-x)^2x^2 = (1-x)^{2}\\left(1-\\left(1-x\\right)\\right)^{2} = f(1-x)\\] Using this result, we regroup the terms accordingly: \\[\\left( f \\left(\\frac{1}{2019} \\right) - f \\left(\\frac{2018}{2019} \\right) \\right) + \\left( f \\left(\\frac{2}{2019} \\right) - f \\left(\\frac{2017}{2019} \\right) \\right) + \\cdots + \\left( f \\left(\\frac{1009}{2019} \\right) - f \\left(\\frac{1010}{2019} \\right) \\right)\\] \\[= \\left( f \\left(\\frac{1}{2019} \\right) - f \\left(\\frac{1}{2019} \\right) \\right) + \\left( f \\left(\\frac{2}{2019} \\right) - f \\left(\\frac{2}{2019} \\right) \\right) + \\cdots + \\left( f \\left(\\frac{1009}{2019} \\right) - f \\left(\\frac{1009}{2019} \\right) \\right)\\] Now it is clear that all the terms will cancel out (the series telescopes), so the answer is $\\boxed{\\textbf{(A) }0}$ .",
+  "answer": "",
+  "year": 2019,
+  "competition": "AMC 12B",
+  "problem_number": 8,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12B",
+    "2019",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:23:56.626495+00:00"
+}

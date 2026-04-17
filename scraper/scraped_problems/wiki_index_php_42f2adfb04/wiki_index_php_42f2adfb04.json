@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2024_AIME_I_Problems/Problem_15",
+  "title": "2024 AIME I Problems/Problem 15",
+  "problem": "Let $\\mathcal{B}$ be the set of rectangular boxes with surface area $54$ and volume $23$ . Let $r$ be the radius of the smallest sphere that can contain each of the rectangular boxes that are elements of $\\mathcal{B}$ . The value of $r^2$ can be written as $\\frac{p}{q}$ , where $p$ and $q$ are relatively prime positive integers. Find $p+q$ .",
+  "solution": "Observe that the \"worst\" possible box is one of the maximum possible length.\nBy symmetry, the height and the width are the same in this antioptimal box. (If the height and width weren't the same, the extra difference between them could be used to make the length longer.) Thus, let the width and height be of length $a$ and the length be $L$ . We're given that the volume is $23$ ; thus, $a^2L=23$ . We're also given that the surface area is $54=2\\cdot27$ ; thus, $a^2+2aL=27$ . From the first equation, we can get $L=\\dfrac{23}{a^2}$ . We do a bunch of algebra: \\begin{align*}\nL&=\\dfrac{23}{a^2} \\\\\n27&=a^2+2aL \\\\\n&=a^2+2a\\left(\\dfrac{23}{a^2}\\right) \\\\\n&=a^2+\\dfrac{46}a \\\\\n27a&=a^3+46 \\\\\na^3-27a+46&=0. \\\\\n\\end{align*} We can use the Rational Root Theorem and test a few values. It turns out that $a=2$ works. We use synthetic division to divide by $a-2$ : As we expect, the remainder is $0$ , and we are left with the polynomial $x^2+2x-23$ . We can now simply use the quadratic formula and find that the remaining roots are $\\dfrac{-2\\pm\\sqrt{4-4(-23)}}2=\\dfrac{-2\\pm\\sqrt{96}}2=\\dfrac{-2\\pm4\\sqrt{6}}2=-1\\pm2\\sqrt6$ . We want the smallest $a$ to maximize $L$ , and it turns out that $a=2$ is in fact the smallest root. Thus, we let $a=2$ . Substituting this into $L=\\dfrac{23}{a^2}$ , we find that $L=\\dfrac{23}4$ . However, this is not our answer! This is simply the length of the box; we want the radius of the sphere enclosing it. We know that the diameter of the sphere is the diagonal of the box, and the 3D Pythagorean Theorem can give us the space diagonal. Applying it, we find that the diagonal has length $\\sqrt{2^2+2^2+\\left(\\dfrac{23}4\\right)^2}=\\sqrt{8+\\dfrac{529}{16}}=\\sqrt{\\dfrac{128+529}{16}}=\\dfrac{\\sqrt{657}}4$ . This is the diameter; we halve it to find the radius, $\\dfrac{\\sqrt{657}}8$ . We then square this and end up with $\\dfrac{657}{64}$ , giving us an answer of $657+64=\\boxed{721}$ . ~Technodoggo",
+  "answer": "",
+  "year": 2024,
+  "competition": "AIME I",
+  "problem_number": 15,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AIME I",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:37:56.858482+00:00"
+}

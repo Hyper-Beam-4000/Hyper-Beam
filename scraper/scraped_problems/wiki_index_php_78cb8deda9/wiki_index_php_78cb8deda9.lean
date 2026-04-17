@@ -1,0 +1,18 @@
+-- 2023 AMC 12B Problems/Problem 3
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2023_AMC_12B_Problems/Problem_3
+
+-- Problem (LaTeX):
+/-
+A $3-4-5$ right triangle is inscribed in circle $A$ , and a $5-12-13$ right triangle is inscribed in circle $B$ . What is the ratio of the area of circle $A$ to the area of circle $B$ ? $\textbf{(A) }\frac{9}{25}\qquad\textbf{(B) }\frac{1}{9}\qquad\textbf{(C) }\frac{1}{5}\qquad\textbf{(D) }\frac{25}{169}\qquad\textbf{(E) }\frac{4}{25}$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Because the triangles are right triangles, we know the hypotenuses are diameters of circles $A$ and $B$ . Thus, their radii are 2.5 and 6.5 (respectively). Square the two numbers and multiply $\pi$ to get $6.25\pi$ and $42.25\pi$ as the areas of the circles. Multiply 4 on both numbers to get $25\pi$ and $169\pi$ . Cancel out the $\pi$ , and lastly, divide, to get your answer $=\boxed{\textbf{(D) }\frac{25}{169}}.$ ~Failure
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_78cb8deda9 : Prop := by
+  sorry

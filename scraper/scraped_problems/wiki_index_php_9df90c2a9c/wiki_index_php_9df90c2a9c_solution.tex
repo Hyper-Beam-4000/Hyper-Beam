@@ -1,0 +1,12 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2025 AMC 12B Problems/Problem 14}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Since the mean of the first three terms is $2025$ , their sum is $2025 * 3 = 6075$ .
+Then, incorporating the fourth term makes the mean $2025-1=2024$ , so their sum must be $2024 * 4 = 8096$ , implying that the 4th term is $8096-6075=2021$ Doing the same for the 5th term, $2023 * 5= 10115$ , 5th term is $10115-8096=2019$ Algebraically, we can model this pattern for the $k$ th term = x as $(k-1)(2029-k) + x = (k)(2028-k)$ $2029k-2029-k^2+k+x=2028k-k^2$ $x=2029-2k$ So the maximum $k\le n$ for which $x$ is positive is 1014, giving our answer $n=\boxed{\textbf{(B) }1014}$ ~Failure.net
+
+\end{document}

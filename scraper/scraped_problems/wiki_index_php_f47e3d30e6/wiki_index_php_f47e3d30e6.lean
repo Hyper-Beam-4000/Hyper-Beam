@@ -1,0 +1,18 @@
+-- 2021 AIME I Problems/Problem 8
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2021_AIME_I_Problems/Problem_8
+
+-- Problem (LaTeX):
+/-
+Find the number of integers $c$ such that the equation \[\left||20|x|-x^2|-c\right|=21\] has $12$ distinct real solutions.
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+We take cases for the outermost absolute value, then rearrange: \[\left|20|x|-x^2\right|=c\pm21.\] Let $f(x)=\left|20|x|-x^2\right|.$ We rewrite $f(x)$ as a piecewise function without using absolute values: \[f(x) = \begin{cases} \left|-20x-x^2\right| & \mathrm{if} \ x \le 0 \begin{cases} 20x+x^2 & \mathrm{if} \ x\le-20 \\ -20x-x^2 & \mathrm{if} \ -20<x\leq0 \end{cases} \\ \left|20x-x^2\right| & \mathrm{if} \ x > 0 \begin{cases} 20x-x^2 & \mathrm{if} \ 0<x\leq20 \\ -20x+x^2 & \mathrm{if} \ x>20 \end{cases} \end{cases}.\] We graph $y=f(x)$ with all extremum points labeled, as shown below. The fact that $f(x)$ is an even function ( $f(x)=f(-x)$ holds for all real numbers $x,$ so the graph of $y=f(x)$ is symmetric about the $y$ -axis) should facilitate the process of graphing. [asy] /* Made by MRENTHUSIASM */ size(1200,300); real xMin = -65; real xMax = 65; real yMin = -50; real yMax = 125; draw((xMin,0)--(xMax,0),black+linewidth(1.5),EndArrow(5)); draw((0,yMin)--(0,yMax),black+linewidth(1.5),EndArrow(5)); label("$x$",(xMax,0),(2,0)); label("$y$",(0,yMax),(0,2)); real f(real x) { return abs(20*abs(x)-x^2); } real g(real x) { return 21; } real h(real x) { return -21; } draw(graph(f,-25,25),red,"$y=\left|20|x|-x^2\right|$"); draw(graph(g,-65,65),blue,"$y=\pm21$"); draw(graph(h,-65,65),blue); pair A[]; A[0] = (-20,0); A[1] = (-10,100); A[2] = (0,0); A[3] = (10,100); A[4] = (20,0); for(int i = 0; i <= 4; ++i) { dot(A[i],red+linewidth(4.5)); } label("$(-20,0)$",A[0],(-1.5,-1.5),red,UnFill); label("$(-10,100)$",A[1],(-1.5,1.5),red); label("$(0,0)$",A[2],(0,-1.5),red,UnFill); label("$(10,100)$",A[3],(1.5,1.5),red); label("$(20,0)$",A[4],(1.5,-1.5),red,UnFill); add(legend(),point(E),40E,UnFill); [/asy] Since $f(x)=c\pm21$ has $12$ distinct real solutions, it is clear that each case has $6$ distinct real solutions geometrically. We shift the graphs of $y=\pm21$ up $c$ units, where $c\geq0:$ For $f(x)=c+21$ to have $6$ distinct real solutions, we need $0\leq c<79.$ For $f(x)=c-21$ to have $6$ distinct real solutions, we need $21<c<121.$ Taking the intersection of these two cases gives $21<c<79,$ from which there are $79-21-1=\boxed{057}$ such integers $c.$ ~MRENTHUSIASM
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_f47e3d30e6 : Prop := by
+  sorry

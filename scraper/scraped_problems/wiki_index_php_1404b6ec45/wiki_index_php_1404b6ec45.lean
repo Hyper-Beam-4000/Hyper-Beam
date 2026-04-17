@@ -1,36 +1,19 @@
-import Mathlib.Data.Nat.Basic
+-- 2020 USAMO Problems/Problem 2
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2020_USAMO_Problems/Problem_2
+
+-- Problem (LaTeX):
+/-
+An empty $2020 \times 2020 \times 2020$ cube is given, and a $2020 \times 2020$ grid of square unit cells is drawn on each of its six faces. A beam is a $1 \times 1 \times 2020$ rectangular prism. Several beams are placed inside the cube subject to the following conditions: The two $1 \times 1$ faces of each beam coincide with unit cells lying on opposite faces of the cube. (Hence, there are $3 \cdot 2020^2$ possible positions for a beam.) No two beams have intersecting interiors. The interiors of each of the four $1 \times 2020$ faces of each beam touch either a face of the cube or the interior of the face of another beam. What is the smallest positive number of beams that can be placed to satisfy these conditions?
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Take one vertex of the cube as origin and establish 3D coordinates along the cube's edges. Define a beam as $x-dir$ if its long edge is parallel to x-axis. Similarly for $y-dir$ and $z-dir$ . Define a beam's location as (direction, ( $1 \times 1$ face's location in 2D coordinate). For example, (y, 2, 4) indicates the beam with vertex (1, 0, 3) and (2, 2020, 4) Apparently $x$ beam needs the other $x$ or $y$ beams to touch its $xy$ faces, $x$ or $z$ beams to touch its $xz$ faces. Similarly for $y$ and $z$ beam. If there are only 1-dir or 2-dirs beams, it is easy to approve that $2020 \times 2020$ is the minimal number beams. (for example, if only use $x-dir$ and $y-dir$ beams, all the $x-dir$ beams's xz faces can only be touched by $x-dir$ beams. In the other word, $2020 x-dir$ beams will be stacked to meet xz faces touch requirements in that xz layer) Consider cases with all $3-dirs$ beams.
+WLOG there is a $x-dir$ beam and it needs $x-dir$ or $y-dir$ beams to touch its $xy$ faces (unless it touches the cube surface). And this $y-dir$ beam also needs a $x-dir$ or $y-dir$ to touch it's $xy$ faces. And so on until one which touches cube surface. So from $xy$ face perspective, it needs $2020$ beams. Similarly from $xz$ and $yz$ face perspective, it also needs $2020$ and $2020$ beams. Consider one beam has four $1 \times 2020$ faces and it can be counted twice. So there should be at least $2020 \times 3 \div 2=3030$ beams. Here is one solution with 3030 beams. $(x, 1, 1),\ (y, 1, 2),\ (z, 2, 2),$ $\cdots ,$ $(x, (2n+1), (2n+1)),\ (y, (2n+1), (2n+2)),\ (z, (2n+2), (2n+2)),$ $\cdots ,$ $(x, (2019, 2019)),\ (y, 2019, 2020),\ (z, 2020, 2020)$ 2020 USAMO ( Problems • Resources ) Preceded by Problem 1 Followed by Problem 3 1 • 2 • 3 • 4 • 5 • 6 All USAMO Problems and Solutions
+-/
+
 import Mathlib.Tactic
 
-open Nat
-
--- Problem: Find the smallest positive number of beams that can be placed in a 2020 x 2020 x 2020 cube
--- such that each beam touches either the face of the cube or another beam on all its long faces.
-
-theorem usamo_2020_problem_2 : ∃ n : ℕ, n = 3030 ∧ 
-  (∀ m : ℕ, m < 3030 → ¬(m satisfies the beam placement conditions)) := by
-  -- We need to show that 3030 beams can satisfy the conditions and that fewer beams cannot.
-  constructor
-  -- First, show that 3030 beams can satisfy the conditions.
-  · have h1 : 3030 satisfies the beam placement conditions := by
-      -- Outline of the solution:
-      -- 1. Consider beams in three directions: x-dir, y-dir, and z-dir.
-      -- 2. Place beams such that each beam's long faces are either on the cube's surface or touching another beam.
-      -- 3. Use a pattern to ensure that all beams are supported.
-      sorry
-    exact h1
-
-  -- Now, show that fewer than 3030 beams cannot satisfy the conditions.
-  · intro m
-    intro h2 : m < 3030
-    -- Assume for contradiction that m beams can satisfy the conditions.
-    -- We will show a contradiction.
-    have h3 : ¬(m satisfies the beam placement conditions) := by
-      -- Outline of the argument:
-      -- 1. Each beam must have its long faces supported by either the cube surface or another beam.
-      -- 2. Calculate the minimum number of beams required to support all faces.
-      -- 3. Show that fewer than 3030 beams cannot provide the necessary support.
-      sorry
-    exact h3
-
-  -- Conclude the proof by combining the two parts.
-  exact ⟨3030, ⟨h1, h3⟩⟩
+theorem wiki_index_php_1404b6ec45 : Prop := by
+  sorry

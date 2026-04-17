@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2024_AMC_12B_Problems/Problem_18",
+  "title": "2024 AMC 10B Problems/Problem 23",
+  "problem": "The Fibonacci numbers are defined by $F_1 = 1, F_2 = 1,$ and $F_n = F_{n-1} + F_{n-2}$ for $n \\geq 3.$ What is \\[{\\frac{F_2}{F_1}} + {\\frac{F_4}{F_2}} + {\\frac{F_6}{F_3}} + ... + {\\frac{F_{20}}{F_{10}}}?\\] $\\textbf{(A) } 318 \\qquad\\textbf{(B) } 319 \\qquad\\textbf{(C) } 320 \\qquad\\textbf{(D) } 321 \\qquad\\textbf{(E) } 322$",
+  "solution": "The first $20$ terms are $F_n = 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765$ So the answer is $1 + 3 + 4 + 7 + 11 + 18 + 29 + 47 + 76 + 123 = \\boxed{(B) 319}$ . Do not do this unless you have no other option or no time to find a smarter way ~ luckuso",
+  "answer": "",
+  "year": 2024,
+  "competition": "AMC 12B",
+  "problem_number": 18,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12B",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:31:14.942114+00:00"
+}

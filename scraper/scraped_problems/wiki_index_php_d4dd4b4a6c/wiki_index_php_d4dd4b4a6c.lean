@@ -1,41 +1,20 @@
-import Mathlib.Data.Nat.Factorial
-import Mathlib.Data.Nat.Prime
+-- 2024 USAMO Problems/Problem 1
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2024_USAMO_Problems/Problem_1
+
+-- Problem (LaTeX):
+/-
+Find all integers $n \geq 3$ such that the following property holds: if we list the divisors of $n !$ in increasing order as $1=d_1<d_2<\cdots<d_k=n!$ , then we have \[d_2-d_1 \leq d_3-d_2 \leq \cdots \leq d_k-d_{k-1} .\] Contents 1 Solution (Explanation of Video Solution) 2 Solution 2 3 Video Solution 4 See Also Solution (Explanation of Video Solution) We can start by verifying that $n=3$ and $n=4$ work by listing out the factors of $3!$ and $4!$ . We can also see that $n=5$ does not work because the terms $15, 20$ , and $24$ are consecutive factors of $5!$ . Also, $n=6$ does not work because the terms $6, 8$ , and $9$ appear consecutively in the factors of $6!$ . Note that if we have a prime number $p>n$ and an integer $k>p$ such that both $k$ and $k+1$ are factors of $n!$ , then the condition cannot be satisfied. If $n\geq7$ is odd, then $(2)(\frac{n-1}{2})(n-1)=n^2-2n+1$ is a factor of $n!$ . Also, $(n-2)(n)=n^2-2n$ is a factor of $n!$ . Since $2n<n^2-2n$ for all $n\geq7$ , we can use Bertrand's Postulate to show that there is at least one prime number $p$ such that $n<p<n^2-2n$ . Since we have two consecutive factors of $n!$ and a prime number between the smaller of these factors and $n$ , the condition will not be satisfied for all odd $n\geq7$ . If $n\geq8$ is even, then $(2)(\frac{n-2}{2})(n-2)=n^2-4n+4$ is a factor of $n!$ . Also, $(n-3)(n-1)=n^2-4n+3$ is a factor of $n!$ . Since $2n<n^2-4n+3$ for all $n\geq8$ , we can use Bertrand's Postulate again to show that there is at least one prime number $p$ such that $n<p<n^2-4n+3$ . Since we have two consecutive factors of $n!$ and a prime number between the smaller of these factors and $n$ , the condition will not be satisfied for all even $n\geq8$ . Therefore, the only numbers that work are $n=3$ and $n=4$ . ~alexanderruan As listed above, $n=3$ and $n=4$ work but $n=5$ and $n=6$ don't. Assume $n>6$ , let $p$ be the smallest positive integer that doesn't divide $n!$ . It is easy to see $p$ is the smallest prime greater than $n$ . It is easy to see that both $p-1$ and $p+1$ are divisors of $n!$ Let $q$ be the smallest positive integer greater than $p$ that is 2 mod 6. We see that either $q=p+3$ or $q=p+1$ but $q$ , $q+1$ , $q+2$ must all be divisors of $n!$ giving a difference of 1 after a difference of 2. Therefore, all $n>6$ fail.
+~mathophobia Solution 2 We claim only $n = 3$ and $n = 4$ are the only two solutions. First, it is clear that both solutions work. Next, we claim that $n < 5$ . For $n \geq 5$ , let $x$ be the smallest $x$ such that $x+1$ is not a factor of $n!$ . Let the smallest factor larger than $x$ be $x+k$ . Now we consider $\frac{n!}{x-1}$ , $\frac{n!}{x}$ and $\frac{n!}{x+k}$ . Since $\frac{n!}{x-1} > \frac{n!}{x} > \frac{n!}{x+k}$ , if $n$ were to satisfy the conditions, then $\frac{n!}{x-1}-\frac{n!}{x} \geq \frac{n!}{x} - \frac{n!}{x+k}$ . However, note that this is not true for $x \geq 5$ and $k > 1$ . Note that the inequality is equivalent to showing $\frac{1}{x(x-1)} \geq \frac{k}{x(x+k)}$ , which simplifies to $x+k \geq kx-k$ , or $\frac{x}{x-2} \geq k \geq 2$ . This implies $x \geq 2x-4$ , $x \leq 4$ , a contradiction, since the set of numbers $\{1, 2, 3, 4, 5\}$ are all factors of $n!$ , and the value of $x$ must exist. Hence, no solutions for $n \geq 5$ . Video Solution https://youtu.be/ZcdBpaLC5p0 [video contains problem 1 and problem 4]
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+We can start by verifying that $n=3$ and $n=4$ work by listing out the factors of $3!$ and $4!$ . We can also see that $n=5$ does not work because the terms $15, 20$ , and $24$ are consecutive factors of $5!$ . Also, $n=6$ does not work because the terms $6, 8$ , and $9$ appear consecutively in the factors of $6!$ . Note that if we have a prime number $p>n$ and an integer $k>p$ such that both $k$ and $k+1$ are factors of $n!$ , then the condition cannot be satisfied. If $n\geq7$ is odd, then $(2)(\frac{n-1}{2})(n-1)=n^2-2n+1$ is a factor of $n!$ . Also, $(n-2)(n)=n^2-2n$ is a factor of $n!$ . Since $2n<n^2-2n$ for all $n\geq7$ , we can use Bertrand's Postulate to show that there is at least one prime number $p$ such that $n<p<n^2-2n$ . Since we have two consecutive factors of $n!$ and a prime number between the smaller of these factors and $n$ , the condition will not be satisfied for all odd $n\geq7$ . If $n\geq8$ is even, then $(2)(\frac{n-2}{2})(n-2)=n^2-4n+4$ is a factor of $n!$ . Also, $(n-3)(n-1)=n^2-4n+3$ is a factor of $n!$ . Since $2n<n^2-4n+3$ for all $n\geq8$ , we can use Bertrand's Postulate again to show that there is at least one prime number $p$ such that $n<p<n^2-4n+3$ . Since we have two consecutive factors of $n!$ and a prime number between the smaller of these factors and $n$ , the condition will not be satisfied for all even $n\geq8$ . Therefore, the only numbers that work are $n=3$ and $n=4$ . ~alexanderruan As listed above, $n=3$ and $n=4$ work but $n=5$ and $n=6$ don't. Assume $n>6$ , let $p$ be the smallest positive integer that doesn't divide $n!$ . It is easy to see $p$ is the smallest prime greater than $n$ . It is easy to see that both $p-1$ and $p+1$ are divisors of $n!$ Let $q$ be the smallest positive integer greater than $p$ that is 2 mod 6. We see that either $q=p+3$ or $q=p+1$ but $q$ , $q+1$ , $q+2$ must all be divisors of $n!$ giving a difference of 1 after a difference of 2. Therefore, all $n>6$ fail.
+~mathophobia
+-/
+
 import Mathlib.Tactic
 
-open Nat
-
--- Problem: Find all integers n ≥ 3 such that the divisors of n! satisfy the given condition
-theorem usamo_2024_p1 (n : ℕ) (hn : n ≥ 3) : 
-  (∀ i : ℕ, i < n → i + 1 < n → (∃ d : ℕ, d ∣ n! ∧ d = i + 1)) → 
-  n = 3 ∨ n = 4 := by
-  -- We start by verifying the base cases n = 3 and n = 4
-  have h3 : (∀ i : ℕ, i < 3 → i + 1 < 3 → (∃ d : ℕ, d ∣ 3! ∧ d = i + 1)), from sorry
-  have h4 : (∀ i : ℕ, i < 4 → i + 1 < 4 → (∃ d : ℕ, d ∣ 4! ∧ d = i + 1)), from sorry
-
-  -- Show that n = 3 and n = 4 satisfy the condition
-  constructor
-  { exact Or.inl rfl }
-  { exact Or.inr rfl }
-
-  -- Assume n ≥ 5 and show contradiction
-  intro h
-  have h5 : n ≥ 5 := by linarith
-
-  -- Let p be the smallest prime greater than n
-  obtain ⟨p, hp⟩ : ∃ p, Prime p ∧ n < p := sorry
-
-  -- Show that both p - 1 and p + 1 are divisors of n!
-  have hp1 : p - 1 ∣ n! := sorry
-  have hp2 : p + 1 ∣ n! := sorry
-
-  -- Show that there exists a prime q such that q, q + 1, q + 2 are divisors of n!
-  obtain ⟨q, hq⟩ : ∃ q, Prime q ∧ q > p ∧ q % 6 = 2 := sorry
-
-  -- Show that this leads to a contradiction in the sequence of divisors
-  have hcontradiction : ¬(∀ i : ℕ, i < n → i + 1 < n → (∃ d : ℕ, d ∣ n! ∧ d = i + 1)) := sorry
-
-  -- Conclude that n cannot be ≥ 5
-  exact absurd h hcontradiction
-
--- The proof is structured but relies on several complex steps marked with sorry
--- These steps involve verifying base cases, using Bertrand's Postulate, and showing contradictions for n ≥ 5
+theorem wiki_index_php_d4dd4b4a6c : Prop := by
+  sorry

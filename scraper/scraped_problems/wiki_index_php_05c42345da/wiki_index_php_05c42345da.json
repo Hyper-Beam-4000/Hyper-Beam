@@ -6,6 +6,13 @@
   "solution": "https://www.youtube.com/watch?v=137-z4WahKQ",
   "answer": "",
   "year": 2022,
-  "scraped_at": "2026-03-24T05:43:12.094032+00:00",
-  "lean_code": "import Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic\n\nopen Nat\n\n-- Problem: Given an (a+b+1) x (a+b+1) grid with at least a^2+ab-b amber cells and at least b^2+ab-a bronze cells,\n-- prove that we can choose a amber cells and b bronze cells such that no two chosen cells lie in the same row or column.\ntheorem USAMO_2022_Problem1 (a b : ℕ) (h_amber : ∃ amber_cells : Fin (a+b+1) → Fin (a+b+1) → Bool, \n  (∑ i j, if amber_cells i j then 1 else 0) ≥ a^2 + a * b - b) \n  (h_bronze : ∃ bronze_cells : Fin (a+b+1) → Fin (a+b+1) → Bool, \n  (∑ i j, if bronze_cells i j then 1 else 0) ≥ b^2 + a * b - a) : \n  ∃ amber_choice : Fin a → Fin (a+b+1) × Fin (a+b+1), \n  ∃ bronze_choice : Fin b → Fin (a+b+1) × Fin (a+b+1),\n  (∀ i j, amber_choice i ≠ bronze_choice j) ∧ \n  (∀ i j, amber_choice i.1 ≠ amber_choice j.1 ∧ amber_choice i.2 ≠ amber_choice j.2) ∧ \n  (∀ i j, bronze_choice i.1 ≠ bronze_choice j.1 ∧ bronze_choice i.2 ≠ bronze_choice j.2) := by\n  -- We will use a combinatorial argument to construct the required sets of cells.\n  -- Step 1: Consider the grid as a bipartite graph with rows and columns as partitions.\n  -- Step 2: Use Hall's Marriage Theorem to find the required matchings.\n  sorry"
+  "competition": "USAMO",
+  "problem_number": 1,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "USAMO",
+    "2022",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:19:45.130840+00:00"
 }

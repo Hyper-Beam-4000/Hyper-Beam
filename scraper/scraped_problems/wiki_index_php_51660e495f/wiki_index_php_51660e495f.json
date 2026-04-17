@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2020_AIME_I_Problems/Problem_12",
+  "title": "2020 AIME I Problems/Problem 12",
+  "problem": "Let $n$ be the least positive integer for which $149^n-2^n$ is divisible by $3^3\\cdot5^5\\cdot7^7.$ Find the number of positive integer divisors of $n.$",
+  "solution": "As usual, denote $v_p(n)$ the highest power of prime $p$ that divides $n$ . Lifting the Exponent shows that \\[3=v_3(149^n-2^n) = v_3(n) + v_3(147) = v_3(n)+1\\] so thus, $3^2$ divides $n$ . It also shows that \\[7=v_7(149^n-2^n) = v_7(n) + v_7(147) = v_7(n)+2\\] so thus, $7^5$ divides $n$ . Now, setting $n = 4c$ (necessitated by $149^n \\equiv 2^n \\pmod 5$ in order to set up LTE), we see \\[v_5(149^{4c}-2^{4c}) = v_5(149^{4c}-16^{c})\\] and since $149^{4} \\equiv 1 \\pmod{25}$ and $16^1 \\equiv 16 \\pmod{25}$ then $v_5(149^{4c}-2^{4c})=v_5(149^4-16)+v_5(c)=1+v_5(c)$ meaning that we have that by LTE, $5^4 | c$ and $4 \\cdot 5^4$ divides $n$ . Since $3^2$ , $7^5$ and $4\\cdot 5^4$ all divide $n$ , the smallest value of $n$ working is their LCM, also $3^2 \\cdot 7^5 \\cdot 4 \\cdot 5^4 = 2^2 \\cdot 3^2 \\cdot 5^4 \\cdot 7^5$ . Thus the number of divisors is $(2+1)(2+1)(4+1)(5+1) = \\boxed{270}$ . ~kevinmathz clarified by another user notation note from another user",
+  "answer": "",
+  "year": 2020,
+  "competition": "AIME I",
+  "problem_number": 12,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME I",
+    "2020",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:35:10.814248+00:00"
+}

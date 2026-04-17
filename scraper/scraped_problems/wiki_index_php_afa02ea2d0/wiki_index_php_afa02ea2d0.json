@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2024_AIME_II_Problems/Problem_5",
+  "title": "2024 AIME II Problems/Problem 5",
+  "problem": "Let ABCDEF be a convex equilateral hexagon in which all pairs of opposite sides are parallel. The triangle whose sides are extensions of segments AB, CD, and EF has side lengths 200, 240, and 300. Find the side length of the hexagon.",
+  "solution": "Draw a good diagram!\nLet $AF \\cap BC$ , $BC \\cap DE$ , and $AF \\cap DE$ be K, L, and M, respectively. Let $KL=200, KM=300, ML=240$ . Notice that because of the parallel condition, all smaller triangles formed are all similar to the larger $(200,240,300)$ triangle. Let the side length of the hexagon be $x.$ Triangle $\\triangle MEF \\sim \\triangle MLK$ , so $\\frac{KL}{KM} =\\frac{x}{FM} =\\frac{200}{300} \\implies FM=\\frac{3x}{2}$ . Triangle $\\triangle KAB \\sim \\triangle KML$ , so $\\frac{LM}{KM}=\\frac{x}{KA} = \\frac{240}{300} \\implies AK=\\frac{5x}{4}$ . We know $KA+AF+FM=300$ , so $\\frac{5}{4}x + x + \\frac{3}{2}x = 300$ . Solving, we get $x=\\boxed{080}$ . -westwoodmonster",
+  "answer": "",
+  "year": 2024,
+  "competition": "AIME II",
+  "problem_number": 5,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AIME II",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:38:03.523226+00:00"
+}

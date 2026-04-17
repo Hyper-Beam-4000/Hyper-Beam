@@ -1,22 +1,18 @@
-import Mathlib.Data.Nat.Factorial
+-- 2019 USAMO Problems/Problem 4
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2019_USAMO_Problems/Problem_4
+
+-- Problem (LaTeX):
+/-
+Let $n$ be a nonnegative integer. Determine the number of ways that one can choose $(n+1)^2$ sets $S_{i,j}\subseteq\{1,2,\ldots,2n\}$ , for integers $i,j$ with $0\leq i,j\leq n$ , such that: $\bullet$ for all $0\leq i,j\leq n$ , the set $S_{i,j}$ has $i+j$ elements; and $\bullet$ $S_{i,j}\subseteq S_{k,l}$ whenever $0\leq i\leq k\leq n$ and $0\leq j\leq l\leq n$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Note that there are $(2n)!$ ways to choose $S_{1, 0}, S_{2, 0}... S_{n, 0}, S_{n, 1}, S_{n, 2}... S_{n, n}$ , because there are $2n$ ways to choose which number $S_{1, 0}$ is, $2n-1$ ways to choose which number to append to make $S_{2, 0}$ , $2n-2$ ways to choose which number to append to make $S_{3, 0}$ , etc. After that, note that $S_{n-1, 1}$ contains the $n-1$ in $S_{n-1, 0}$ and 1 other element chosen from the 2 elements in $S_{n, 1}$ not in $S_{n-1, 0}$ so there are 2 ways for $S_{n-1, 1}$ . By the same logic there are 2 ways for $S_{n-1, 2}$ as well so $2^n$ total ways for all $S_{n-1, j}$ , so doing the same thing $n-1$ more times yields a final answer of $(2n)!\cdot 2^{\left(n^2\right)}$ . -Stormersyle
+-/
+
 import Mathlib.Tactic
 
-open Nat
-
--- Problem: Determine the number of ways to choose sets S_{i,j} satisfying given conditions
-theorem usamo_2019_p4 (n : ℕ) : 
-  let num_ways := (factorial (2 * n)) * 2^(n^2)
-  num_ways = (factorial (2 * n)) * 2^(n^2) := by
-  -- The number of ways to choose the sets S_{i,j} can be broken down into two parts:
-  -- 1. Choosing the sets S_{i,0} for 0 ≤ i ≤ n
-  -- 2. Extending these to the sets S_{i,j} for j > 0
-  -- Step 1: Choose S_{i,0} for 0 ≤ i ≤ n
-  -- There are (2n)! ways to choose S_{1,0}, S_{2,0}, ..., S_{n,0} as described in the solution sketch
-  have step1 : (factorial (2 * n)) = (factorial (2 * n)), by rfl
-  -- Step 2: Extend to S_{i,j} for j > 0
-  -- For each row, there are 2^n ways to choose the remaining elements
-  have step2 : 2^(n^2) = 2^(n^2), by rfl
-  -- Combine the results from step 1 and step 2
-  rw [step1, step2]
-  -- Conclude the proof
-  rfl
+theorem wiki_index_php_e56ccba1fc : Prop := by
+  sorry

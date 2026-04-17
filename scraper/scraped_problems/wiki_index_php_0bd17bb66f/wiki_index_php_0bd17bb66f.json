@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2021_AMC_12A_Problems/Problem_1",
+  "title": "2021 AMC 12A Problems/Problem 1",
+  "problem": "What is the value of \\[2^{1+2+3}-(2^1+2^2+2^3)?\\] $\\textbf{(A) }0 \\qquad \\textbf{(B) }50 \\qquad \\textbf{(C) }52 \\qquad \\textbf{(D) }54 \\qquad \\textbf{(E) }57$",
+  "solution": "We evaluate the given expression to get that \\[2^{1+2+3}-(2^1+2^2+2^3)=2^6-(2^1+2^2+2^3)=64-2-4-8=50 \\implies \\boxed{\\text{(B)}}\\]",
+  "answer": "",
+  "year": 2021,
+  "competition": "AMC 12A",
+  "problem_number": 1,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12A",
+    "2021",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:25:55.333116+00:00"
+}

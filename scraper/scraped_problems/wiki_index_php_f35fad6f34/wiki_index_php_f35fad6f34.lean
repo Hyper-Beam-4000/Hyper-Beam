@@ -1,0 +1,18 @@
+-- 2019 AIME II Problems/Problem 5
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2019_AIME_II_Problems/Problem_5
+
+-- Problem (LaTeX):
+/-
+Four ambassadors and one advisor for each of them are to be seated at a round table with $12$ chairs numbered in order $1$ to $12$ . Each ambassador must sit in an even-numbered chair. Each advisor must sit in a chair adjacent to his or her ambassador. There are $N$ ways for the $8$ people to be seated at the table under these conditions. Find the remainder when $N$ is divided by $1000$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let us first consider the $4$ ambassadors and the $6$ even-numbered chairs. If we consider only their relative positions, they can sit in one of $3$ distinct ways: Such that the $2$ empty even-numbered chairs are adjacent, such that they are separated by one occupied even-numbered chair, and such that they are opposite each other. For each way, there are $4!=24$ ways to assign the $4$ ambassadors to the $4$ selected seats. In the first way, there are $6$ distinct orientations. The $4$ advisors can be placed in any of the $5$ odd-numbered chairs adjacent to the ambassadors, and for each placement, there is exactly one way to assign them to the ambassadors. This means that there are $24\cdot6\cdot\binom{5}{4}=720$ total seating arrangements for this way. In the second way, there are $6$ distinct orientations. $3$ advisors can be placed in any of the $4$ chairs adjacent to the "chunk" of $3$ ambassadors, and $1$ advisor can be placed in either of the $2$ chairs adjacent to the "lonely" ambassador. Once again, for each placement, there is exactly one way to assign the advisors to the ambassadors. This means that there are $24\cdot6\cdot\binom{4}{3}\cdot\binom{2}{1}=1152$ total seating arrangements for this way. In the third way, there are $3$ distinct orientations. For both "chunks" of $2$ ambassadors, $2$ advisors can be placed in any of the $3$ chairs adjacent to them, and once again, there is exactly one way to assign them for each placement. This means that there are $24\cdot3\cdot\binom{3}{2}\cdot\binom{3}{2}=648$ total seating arrangements for this way. Totalling up the arrangements, there are $720+1152+648=2520$ total ways to seat the people, and the remainder when $2520$ is divided by $1000$ is $\boxed{520}$ . ~ emerald_block
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_f35fad6f34 : Prop := by
+  sorry

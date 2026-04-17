@@ -1,0 +1,18 @@
+-- 2019 AMC 10B Problems/Problem 20
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2019_AMC_12B_Problems/Problem_15
+
+-- Problem (LaTeX):
+/-
+As shown in the figure, line segment $\overline{AD}$ is trisected by points $B$ and $C$ so that $AB=BC=CD=2.$ Three semicircles of radius $1,$ $\overarc{AEB},\overarc{BFC},$ and $\overarc{CGD},$ have their diameters on $\overline{AD},$ lie in the same halfplane determined by line $AD$ , and are tangent to line $EG$ at $E,F,$ and $G,$ respectively. A circle of radius $2$ has its center on $F.$ The area of the region inside the circle but outside the three semicircles, shaded in the figure, can be expressed in the form \[\frac{a}{b}\cdot\pi-\sqrt{c}+d,\] where $a,b,c,$ and $d$ are positive integers and $a$ and $b$ are relatively prime. What is $a+b+c+d$ ? [asy] size(6cm); filldraw(circle((0,0),2), grey); filldraw(arc((0,-1),1,0,180) -- cycle, gray(1.0)); filldraw(arc((-2,-1),1,0,180) -- cycle, gray(1.0)); filldraw(arc((2,-1),1,0,180) -- cycle, gray(1.0)); dot((-3,-1)); label("$A$",(-3,-1),S); dot((-2,0)); label("$E$",(-2,0),NW); dot((-1,-1)); label("$B$",(-1,-1),S); dot((0,0)); label("$F$",(0,0),N); dot((1,-1)); label("$C$",(1,-1), S); dot((2,0)); label("$G$", (2,0),NE); dot((3,-1)); label("$D$", (3,-1), S); [/asy] $\textbf{(A) } 13 \qquad\textbf{(B) } 14 \qquad\textbf{(C) } 15 \qquad\textbf{(D) } 16\qquad\textbf{(E) } 17$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+This solution is essentially the same, but is much more clear and easier to understand, than Solution 2. I will TeX this at a later time, but if anyone wants to help in the mean time, please do -- thanks!! ~mathboy282
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_37a92f6f1a : Prop := by
+  sorry

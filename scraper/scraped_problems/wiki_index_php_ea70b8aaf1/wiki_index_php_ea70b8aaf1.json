@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AIME_II_Problems/Problem_12",
+  "title": "2025 AIME II Problems/Problem 12",
+  "problem": "Let $A_1A_2\\dots A_{11}$ be a non-convex $11$ -gon such that • The area of $A_iA_1A_{i+1}$ is $1$ for each $2 \\le i \\le 10$ , • $\\cos(\\angle A_iA_1A_{i+1})=\\frac{12}{13}$ for each $2 \\le i \\le 10$ , • The perimeter of $A_1A_2\\dots A_{11}$ is $20$ . If $A_1A_2+A_1A_{11}$ can be expressed as $\\frac{m\\sqrt{n}-p}{q}$ for positive integers $m,n,p,q$ with $n$ squarefree and $\\gcd(m,p,q)=1$ , find $m+n+p+q$ .",
+  "solution": "Set $A_1A_2 = x$ and $A_1A_3 = y$ . By the first condition, we have $\\frac{1}{2}xy\\sin\\theta = 1$ , where $\\theta = \\angle A_2 A_1 A_3$ . Since $\\cos\\theta = \\frac{12}{13}$ , we have $\\sin\\theta = \\frac{5}{13}$ , so $xy = \\frac{26}{5}$ . Repeating this process for $\\triangle A_i A_1 A_{i+1}$ , we get $A_1A_2 = A_1A_4 = \\ldots A_1A_{10} = x$ and $A_1A_3 = A_1A_5 = \\ldots A_1A_{11} = y$ . Since the included angle of these $9$ triangles is $\\theta$ , the square of the third side is \\[x^2 + y^2 - 2xy\\cos\\theta = x^2 + y^2 - \\frac{52}{5}\\cdot \\frac{12}{13} = x^2 + y^2 - \\frac{48}{5} = (x+y)^2 - 20.\\] Thus the third side has length $\\sqrt{(x+y)^2 - 20}.$ The perimeter is constructed from $9$ of these lengths, plus $A_{11}A_1 + A_1A_2 = x + y$ , so $9\\sqrt{(x+y)^2 - 20} + x + y = 20$ . We seek the value of $x + y,$ so let $x + y = a$ so \\begin{align*} 9\\sqrt{a^2 - 20} + a &= 20\\\\ 81(a^2 - 20) &= 400 - 40a + a^2\\\\ 4a^2 + 2a - 101 &= 0 \\\\ a &= \\frac{-2 \\pm \\sqrt{1620}}{8} = \\frac{-1 \\pm \\sqrt{405}}{4} = \\frac{-1 \\pm 9\\sqrt{5}}{4}. \\end{align*} Taking the positive solution gives $m + n + p + q = 1 + 9 + 5 + 4 = \\boxed{\\textbf{(019)}}.$ -Benedict T (countmath1)",
+  "answer": "",
+  "year": 2025,
+  "competition": "AIME II",
+  "problem_number": 12,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AIME II",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:38:53.244528+00:00"
+}

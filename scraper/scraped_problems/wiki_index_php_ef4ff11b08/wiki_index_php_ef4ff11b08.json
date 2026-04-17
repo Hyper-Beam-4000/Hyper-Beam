@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2017_AIME_I_Problems/Problem_5",
+  "title": "2017 AIME I Problems/Problem 5",
+  "problem": "A rational number written in base eight is $\\underline{ab} . \\underline{cd}$ , where all digits are nonzero. The same number in base twelve is $\\underline{bb} . \\underline{ba}$ . Find the base-ten number $\\underline{abc}$ .",
+  "solution": "First, note that the first two digits will always be a positive number. We will start with base twelve because of its repetition. List all the positive numbers in base eight that have equal tens and ones digits in base 12. $11_{12}=15_8$ $22_{12}=32_8$ $33_{12}=47_8$ $44_{12}=64_8$ $55_{12}=101_8$ We stop because we only can have two-digit numbers in base 8 and 101 is not a 2 digit number.\nCompare the ones places to check if they are equal. We find that they are equal if $b=2$ or $b=4$ .\nEvaluating the places to the right side of the decimal point gives us $22.23_{12}$ or $44.46_{12}$ .\nWhen the numbers are converted into base 8, we get $32.14_8$ and $64.30_8$ . Since $d\\neq0$ , the first value is correct. Compiling the necessary digits leaves us a final answer of $\\boxed{321}$",
+  "answer": "",
+  "year": 2017,
+  "competition": "AIME I",
+  "problem_number": 5,
+  "difficulty_tier": "pre_gpt",
+  "tags": [
+    "AIME I",
+    "2017",
+    "pre_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:32:59.714598+00:00"
+}

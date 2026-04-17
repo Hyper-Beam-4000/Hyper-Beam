@@ -1,0 +1,18 @@
+-- 2019 AIME I Problems/Problem 15
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2019_AIME_I_Problems/Problem_15
+
+-- Problem (LaTeX):
+/-
+Let $\overline{AB}$ be a chord of a circle $\omega$ , and let $P$ be a point on the chord $\overline{AB}$ . Circle $\omega_1$ passes through $A$ and $P$ and is internally tangent to $\omega$ . Circle $\omega_2$ passes through $B$ and $P$ and is internally tangent to $\omega$ . Circles $\omega_1$ and $\omega_2$ intersect at points $P$ and $Q$ . Line $PQ$ intersects $\omega$ at $X$ and $Y$ . Assume that $AP=5$ , $PB=3$ , $XY=11$ , and $PQ^2 = \frac{m}{n}$ , where $m$ and $n$ are relatively prime positive integers. Find $m+n$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+[asy] size(8cm); pair O, A, B, P, O1, O2, Q, X, Y; O=(0, 0); A=dir(140); B=dir(40); P=(3A+5B)/8; O1=extension((A+P)/2, (A+P)/2+(0, 1), A, O); O2=extension((B+P)/2, (B+P)/2+(0, 1), B, O); Q=intersectionpoints(circle(O1, length(A-O1)), circle(O2, length(B-O2)))[1]; X=intersectionpoint(P -- (P+(P-Q)*100), circle(O, 1)); Y=intersectionpoint(Q -- (Q+(Q-P)*100), circle(O, 1)); draw(circle(O, 1)); draw(circle(O1, length(A-O1))); draw(circle(O2, length(B-O2))); draw(A -- B); draw(X -- Y); draw(A -- O -- B); draw(O1 -- P -- O2); dot("$O$", O, S); dot("$A$", A, A); dot("$B$", B, B); dot("$P$", P, dir(70)); dot("$Q$", Q, dir(200)); dot("$O_1$", O1, SW); dot("$O_2$", O2, SE); dot("$X$", X, X); dot("$Y$", Y, Y); [/asy] Let $O_1$ and $O_2$ be the centers of $\omega_1$ and $\omega_2$ , respectively. There is a homothety at $A$ sending $\omega$ to $\omega_1$ that sends $B$ to $P$ and $O$ to $O_1$ , so $\overline{OO_2}\parallel\overline{O_1P}$ . Similarly, $\overline{OO_1}\parallel\overline{O_2P}$ , so $OO_1PO_2$ is a parallelogram. Moreover, \[\angle O_1QO_2=\angle O_1PO_2=\angle O_1OO_2,\] hence $OO_1O_2Q$ is cyclic. However, \[OO_1=O_2P=O_2Q,\] so $OO_1O_2Q$ is an isosceles trapezoid. Since $\overline{O_1O_2}\perp\overline{XY}$ , $\overline{OQ}\perp\overline{XY}$ , so $Q$ is the midpoint of $\overline{XY}$ . By Power of a Point, $PX\cdot PY=PA\cdot PB=15$ . Since $PX+PY=XY=11$ and $XQ=11/2$ , \[XP=\frac{11-\sqrt{61}}2\implies PQ=XQ-XP=\frac{\sqrt{61}}2\implies PQ^2=\frac{61}4,\] and the requested sum is $61+4=\boxed{065}$ . (Solution by TheUltimate123)
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_a9360545a6 : Prop := by
+  sorry

@@ -1,0 +1,18 @@
+-- 2021 AMC 12B Problems/Problem 23
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2021_AMC_12B_Problems/Problem_23
+
+-- Problem (LaTeX):
+/-
+Three balls are randomly and independently tossed into bins numbered with the positive integers so that for each ball, the probability that it is tossed into bin $i$ is $2^{-i}$ for $i=1,2,3,....$ More than one ball is allowed in each bin. The probability that the balls end up evenly spaced in distinct bins is $\frac pq,$ where $p$ and $q$ are relatively prime positive integers. (For example, the balls are evenly spaced if they are tossed into bins $3,17,$ and $10.$ ) What is $p+q?$ $\textbf{(A) }55 \qquad \textbf{(B) }56 \qquad \textbf{(C) }57\qquad \textbf{(D) }58 \qquad \textbf{(E) }59$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+"Evenly spaced" just means the bins form an arithmetic sequence. Suppose the middle bin in the sequence is $x$ . There are $x-1$ different possibilities for the first bin, and these two bins uniquely determine the final bin. Now, the probability that these $3$ bins are chosen is $6\cdot 2^{-3x} = 6\cdot \frac{1}{8^x}$ , so the probability $x$ is the middle bin is $6\cdot\frac{x-1}{8^x}$ . Then, we want the sum \begin{align*} 6\sum_{x=2}^{\infty}\frac{x-1}{8^x} &= \frac{6}{8}\left[\frac{1}{8} + \frac{2}{8^2} + \frac{3}{8^3}\cdots\right]\\ &= \frac34\left[\left(\frac{1}{8} + \frac{1}{8^2} + \frac{1}{8^3}+\cdots \right) + \left(\frac{1}{8^2} + \frac{1}{8^3} + \frac{1}{8^4} + \cdots \right) + \cdots\right]\\ &= \frac34\left[\frac17\cdot \left(1 + \frac{1}{8} + \frac{1}{8^2} + \frac{1}{8^3} + \cdots \right)\right]\\ &= \frac34\cdot \frac{8}{49}\\ &= \frac{6}{49} \end{align*} The answer is $6+49=\boxed{\textbf{(A) }55}.$
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_4c7a933098 : Prop := by
+  sorry

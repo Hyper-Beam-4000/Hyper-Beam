@@ -1,0 +1,19 @@
+-- 2025 AMC 12B Problems/Problem 15
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12B_Problems/Problem_15
+
+-- Problem (LaTeX):
+/-
+A container has a $1\times 1$ square bottom, a $3\times 3$ open square top, and four congruent trapezoidal sides, as shown. Starting when the container is empty, a hose that runs water at a constant rate takes $35$ minutes to fill the container up to the midline of the trapezoids. [asy] /* Made by Mathemagician108 */ import graph3; size(200); real a = 1; real d = 0.6; real h = 0.9; triple A1 = (a,0,0); triple B1 = (0,a,0); triple C1 = (-a,0,0); triple D1 = (0,-a,0); triple A2 = (a+d,0,h); triple B2 = (0,a+d,h); triple C2 = (-(a+d),0,h); triple D2 = (0,-(a+d),h); triple A3 = (a+2*d,0,2*h); triple B3 = (0,a+2*d,2*h); triple C3 = (-(a+2*d),0,2*h); triple D3 = (0,-(a+2*d),2*h); path3 bottom = A1--B1--C1--D1--cycle; path3 backright = A1--B1--B2--A2--cycle; path3 backleft = B1--C1--C2--B2--cycle; path3 frontleft = C1--D1--D3--C3--cycle; path3 frontright = D1--A1--A3--D3--cycle; defaultpen(1); pen blue = rgb(202, 201, 255); pen red = rgb(255, 164, 164); // colored surfaces draw(surface(bottom), emissive(gray)); draw(surface(backright), emissive(blue)); draw(surface(backleft), emissive(blue)); draw(surface(frontleft), emissive(red)); draw(surface(frontright), emissive(red)); // black outlines draw(A1--D1--C1); draw(A2--D2--C2); draw(A3--D3--C3, linewidth(1.4)); draw((0.32,0.68,0)--B1--(-0.32,0.68,0)); draw((1.25,0.35,h)--B2--(-1.25,0.35,h)); draw(A3--B3--C3); draw(A1--A3); draw(B1--B3); draw(C1--C3); draw(D1--D3, linewidth(1.4)); currentprojection=perspective((0,-4,3)); [/asy] How many more minutes will it take to fill the remainder of the container? $\text{(A) }70 \qquad \text{(B) }85 \qquad \text{(C) }90 \qquad \text{(D) }95 \qquad \text{(E) }105$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Extend the edges pointing downwards to converge at a point $A$ to form a square pyramid. Consider 3 square pyramids, the large one formed by the top vertices of the original figure and $A$ , the middle one formed by the medians running through the sides of the original figure and point $A$ , and the smaller one formed by the bottom vertices of the original figure and point $A$ . Note that all pyramids are similar since they are all essentially scaled by a certain factor. The median length is $\frac{3+1}{2}=2$ Using side length to volume ratios, find that the volumes must have ratios $1:8:27$ Then, you get that the ratio of the volume thus filled to the volume that we must fill is equivalent to $8-1:27-8 = 7:19$ .
+Thus, it will take $\frac{19}{7}$ more time to fill the remaining volume giving us an answer of $\frac{19}{7} * 35 = \boxed{\textbf{(D) }95}$ -Failure.net
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_1e5402836c : Prop := by
+  sorry

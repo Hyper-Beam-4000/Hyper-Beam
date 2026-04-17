@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12B_Problems/Problem_9",
+  "title": "2025 AMC 12B Problems/Problem 9",
+  "problem": "What is the tens digit of $6^{6^6}$ ? $\\textbf{(A)}~1 \\qquad \\textbf{(B)}~3 \\qquad \\textbf{(C)}~5 \\qquad \\textbf{(D)}~7 \\qquad \\textbf{(E)}~9$",
+  "solution": "We wish to find $6^{6^6}\\pmod{100}$ and find the tens digit. By the Chinese Remainder Theorem, it suffices to find $6^{6^6}\\pmod{4}$ and $6^{6^6}\\pmod{25}$ and find the solution to the system. We know that $6^{6^6}\\equiv 0\\pmod{4}$ , so we just need to find the remainder modulo $25$ . By Euler’s Totient Theorem, $6^{6^6}\\equiv 6^r\\pmod{25}$ , where $r\\equiv 6^6\\pmod{\\varphi(25)=20}$ . Hence we need to find $6^6\\pmod{20}$ . Now we again use the Chinese Remainder Theorem. We know that $6^6\\equiv 0\\pmod{4}$ and $6^6\\equiv 1^6\\equiv 1\\pmod{5}$ . Testing cases yields $6^6\\equiv 16\\pmod{20}$ . Therefore, we know that $6^{6^6}\\equiv 6^{16}\\pmod{25}$ . Now we can simplify: \\[6^{6^6}\\equiv 6^{16}\\equiv (6^4)^4\\equiv 1296^4\\equiv (-4)^4\\equiv 256\\equiv 6\\pmod{25}\\] Solving the system $6^{6^6}\\equiv 6\\pmod{25}$ and $6^{6^6}\\equiv 0\\pmod{4}$ yields $6^{6^6}\\equiv 56\\pmod{100}$ . Hence the answer is $\\boxed{\\textbf{(C)}~5}$ . ~ eevee9406",
+  "answer": "",
+  "year": 2025,
+  "competition": "AMC 12B",
+  "problem_number": 9,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12B",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:32:24.415904+00:00"
+}

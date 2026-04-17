@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2017 AIME I Problems/Problem 12}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+We shall solve this problem by doing casework on the lowest element of the subset. Note that the number $1$ cannot be in the subset because $1*1=1$ . Let $S$ be a product-free set. If the lowest element of $S$ is $2$ , we consider the set $\{3, 6, 9\}$ . We see that 5 of these subsets can be a subset of $S$ ( $\{3\}$ , $\{6\}$ , $\{9\}$ , $\{6, 9\}$ , and the empty set). Now consider the set $\{5, 10\}$ . We see that 3 of these subsets can be a subset of $S$ ( $\{5\}$ , $\{10\}$ , and the empty set). Note that $4$ cannot be an element of $S$ , because $2$ is. Now consider the set $\{7, 8\}$ . All four of these subsets can be a subset of $S$ . So if the smallest element of $S$ is $2$ , there are $5*3*4=60$ possible such sets. If the smallest element of $S$ is $3$ , the only restriction we have is that $9$ is not in $S$ . This leaves us $2^6=64$ such sets. If the smallest element of $S$ is not $2$ or $3$ , then $S$ can be any subset of $\{4, 5, 6, 7, 8, 9, 10\}$ , including the empty set. This gives us $2^7=128$ such subsets. So our answer is $60+64+128=\boxed{252}$ .
+
+\end{document}

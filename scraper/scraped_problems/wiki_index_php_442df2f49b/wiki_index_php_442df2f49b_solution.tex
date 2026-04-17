@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2017 AIME I Problems/Problem 1}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Every triangle is uniquely determined by 3 points. There are $\binom{15}{3}=455$ ways to choose 3 points, but that counts the degenerate triangles formed by choosing three points on a line. There are $\binom{5}{3}$ invalid cases on segment $AB$ , $\binom{6}{3}$ invalid cases on segment $BC$ , and $\binom{7}{3}$ invalid cases on segment $CA$ for a total of $65$ invalid cases. The answer is thus $455-65=\boxed{390}$ .
+
+\end{document}

@@ -1,0 +1,18 @@
+-- 2020 AIME II Problems/Problem 5
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2020_AIME_II_Problems/Problem_5
+
+-- Problem (LaTeX):
+/-
+For each positive integer $n$ , let $f(n)$ be the sum of the digits in the base-four representation of $n$ and let $g(n)$ be the sum of the digits in the base-eight representation of $f(n)$ . For example, $f(2020) = f(133210_{\text{4}}) = 10 = 12_{\text{8}}$ , and $g(2020) = \text{the digit sum of }12_{\text{8}} = 3$ . Let $N$ be the least value of $n$ such that the base-sixteen representation of $g(n)$ cannot be expressed using only the digits $0$ through $9$ . Find the remainder when $N$ is divided by $1000$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Let's work backwards. The minimum base-sixteen representation of $g(n)$ that cannot be expressed using only the digits $0$ through $9$ is $A_{16}$ , which is equal to $10$ in base 10. Thus, the sum of the digits of the base-eight representation of the sum of the digits of $f(n)$ is $10$ . The minimum value for which this is achieved is $37_8$ . We have that $37_8 = 31$ . Thus, the sum of the digits of the base-four representation of $n$ is $31$ . The minimum value for which this is achieved is $13,333,333,333_4$ . We just need this value in base 10 modulo 1000. We get $13,333,333,333_4 = 3(1 + 4 + 4^2 + \dots + 4^8 + 4^9) + 4^{10} = 3\left(\dfrac{4^{10} - 1}{3}\right) + 4^{10} = 2*4^{10} - 1$ . Taking this value modulo $1000$ , we get the final answer of $\boxed{151}$ . (If you are having trouble with this step, note that $2^{10} = 1024 \equiv 24 \pmod{1000}$ ) ~ TopNotchMath
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_a650ec7da1 : Prop := by
+  sorry

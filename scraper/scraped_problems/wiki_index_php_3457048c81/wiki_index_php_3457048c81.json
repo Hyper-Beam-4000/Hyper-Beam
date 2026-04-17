@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_AMC_12B_Problems/Problem_1",
+  "title": "2019 AMC 10B Problems/Problem 1",
+  "problem": "Alicia had two containers. The first was $\\tfrac{5}{6}$ full of water and the second was empty. She poured all the water from the first container into the second container, at which point the second container was $\\tfrac{3}{4}$ full of water. What is the ratio of the volume of the first container to the volume of the second container? $\\textbf{(A) } \\frac{5}{8} \\qquad \\textbf{(B) } \\frac{4}{5} \\qquad \\textbf{(C) } \\frac{7}{8} \\qquad \\textbf{(D) } \\frac{9}{10} \\qquad \\textbf{(E) } \\frac{11}{12}$",
+  "solution": "",
+  "answer": "",
+  "year": 2019,
+  "competition": "AMC 12B",
+  "problem_number": 1,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12B",
+    "2019",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:23:46.408762+00:00"
+}

@@ -1,0 +1,18 @@
+-- 2023 AMC 12B Problems/Problem 5
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2023_AMC_12B_Problems/Problem_5
+
+-- Problem (LaTeX):
+/-
+You are playing a game. A $2 \times 1$ rectangle covers two adjacent squares (oriented either horizontally or vertically) of a $3 \times 3$ grid of squares, but you are not told which two squares are covered. Your goal is to find at least one square that is covered by the rectangle. A "turn" consists of you guessing a square, after which you are told whether that square is covered by the hidden rectangle. What is the minimum number of turns you need to ensure that at least one of your guessed squares is covered by the rectangle? $\textbf{(A)}~3\qquad\textbf{(B)}~5\qquad\textbf{(C)}~4\qquad\textbf{(D)}~8\qquad\textbf{(E)}~6$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Notice that the $3\times3$ square grid has a total of $12$ possible $2\times1$ rectangles. Suppose you choose the middle square for one of your turns. The middle square is covered by $4$ rectangles, and each of the remaining $8$ squares is covered by a maximum of $2$ uncounted rectangles. This means that the number of turns is at least $1+\frac{12-4}{2}=1+4=5$ . Now suppose you don't choose the middle square. The squares on the middle of the sides are covered by at most 3 uncounted rectangles, and the squares on the corners are covered by at most 2 uncounted rectangles. In this case, we see that the least number of turns needed to account for all 12 rectangles is $12\div 3=4.$ To prove that choosing only side squares indeed does cover all 12 rectangles, we need to show that the 3 rectangles per square that cover each side square do not overlap. Drawing the rectangles that cover one square, we see they form a $T$ shape and they do not cover any other side square. Hence, our answer is $4.$ [asy] draw((0,0)--(0.5,0)--(0.5,0.5)--(0,0.5)--(0,0)); draw((0,1)--(0.5,1)--(0.5,1.5)--(0,1.5)--(0,1)); draw((0.5,0.5)--(1,0.5)--(1,1)--(0.5,1)--(0.5,0.5)); draw((1,0)--(1.5,0)--(1.5,0.5)--(1,0.5)--(1,0)); draw((1,1)--(1.5,1)--(1.5,1.5)--(1,1.5)--(1,1)); draw((0,0.5)--(0.5,0.5)--(0.5,1)--(0,1)--(0,0.5)); draw((0.5,0)--(1,0)--(1,0.5)--(0.5,0.5)--(0.5,0)); draw((0.5,1)--(1,1)--(1,1.5)--(0.5,1.5)--(0.5,1)); draw((1,0.5)--(1.5,0.5)--(1.5,1)--(1,1)--(1,0.5)); filldraw((0,0.5)--(0.5,0.5)--(0.5,1)--(0,1)--(0,0.5)--cycle, red, black+linewidth(1)); filldraw((0,0)--(0.5,0)--(0.5,0.5)--(0,0.5)--(0,0)--cycle, red, black+linewidth(1)); filldraw((0,1)--(0.5,1)--(0.5,1.5)--(0,1.5)--(0,1)--cycle, red, black+linewidth(1)); filldraw((0.5,0.5)--(1,0.5)--(1,1)--(0.5,1)--(0.5,0.5)--cycle, red, black+linewidth(1)); [/asy]
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_038044b9ce : Prop := by
+  sorry

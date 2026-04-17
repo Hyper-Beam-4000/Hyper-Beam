@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2017_AMC_12A_Problems/Problem_16",
+  "title": "2017 AMC 12A Problems/Problem 16",
+  "problem": "In the figure below, semicircles with centers at $A$ and $B$ and with radii 2 and 1, respectively, are drawn in the interior of, and sharing bases with, a semicircle with diameter $JK$ . The two smaller semicircles are externally tangent to each other and internally tangent to the largest semicircle. A circle centered at $P$ is drawn externally tangent to the two smaller semicircles and internally tangent to the largest semicircle. What is the radius of the circle centered at $P$ ? [asy] size(5cm); draw(arc((0,0),3,0,180)); draw(arc((2,0),1,0,180)); draw(arc((-1,0),2,0,180)); draw((-3,0)--(3,0)); pair P = (-1,0)+(2+6/7)*dir(36.86989); draw(circle(P,6/7)); dot((-1,0)); dot((2,0)); dot(P); [/asy] $\\textbf{(A)}\\ \\frac{3}{4} \\qquad \\textbf{(B)}\\ \\frac{6}{7} \\qquad\\textbf{(C)}\\ \\frac{\\sqrt{3}}{2} \\qquad\\textbf{(D)}\\ \\frac{5}{8}\\sqrt{2} \\qquad\\textbf{(E)}\\ \\frac{11}{12}$",
+  "solution": "Connect the centers of the tangent circles! (call the center of the large circle $C$ ) [asy] size(5cm); draw(arc((0,0),3,0,180)); draw(arc((2,0),1,0,180)); draw(arc((-1,0),2,0,180)); draw((-3,0)--(3,0)); pair P = (9/7,12/7); pair A = (-1,0); pair C = (0,0); pair B = (2,0); draw(circle(P,6/7)); dot((-1,0)); dot((2,0)); dot((0,0)); dot(P); draw((-1,0)--P); draw((2,0)--P); draw((0,0)--(9/5,12/5)); label(\"$A$\",A,SW); label(\"$C$\",C,S); label(\"$B$\",B,SE); label(\"$P$\",P,N); [/asy] Notice that we don't even need the circles anymore; thus, draw triangle $\\Delta ABP$ with cevian $PC$ : [asy] size(5cm); draw((-1,0)--(2,0)); pair P = (9/7,12/7); pair A = (-1,0); pair C = (0,0); pair B = (2,0); dot((-1,0)); dot((2,0)); dot((0,0)); dot(P); draw((-1,0)--P); draw((2,0)--P); draw((0,0)--P); label(\"$A$\",A,SW); label(\"$C$\",C,S); label(\"$B$\",B,SE); label(\"$P$\",P,N); [/asy] and use Stewart's Theorem : \\[AB \\cdot AC \\cdot BC + AB \\cdot {CP}^2 = AC \\cdot {BP}^2 + BC \\cdot {AP}^2\\] From what we learned from the tangent circles, we have $AB = 3$ , $AC = 1$ , $BC = 2$ , $AP = 2 + r$ , $BP = 1 + r$ , and $CP = 3 - r$ , where $r$ is the radius of the circle centered at $P$ that we seek. Thus: \\[3 \\cdot 1 \\cdot 2 + 3 {\\left(3-r\\right)}^2 = 1 {\\left(1+r\\right)}^2 + 2 {\\left(2+r\\right)}^2\\] \\[6 + 3\\left(9 - 6r + r^2\\right) = \\left(1 + 2r + r^2\\right) + 2\\left(4 + 4r + r^2\\right)\\] \\[33 - 18r + 3r^2 = 9 + 10r + 3r^2\\] \\[28r = 24\\] \\[r = \\boxed{\\frac{6}{7}} \\to \\boxed{\\textbf{(B)}}\\]",
+  "answer": "",
+  "year": 2017,
+  "competition": "AMC 12A",
+  "problem_number": 16,
+  "difficulty_tier": "pre_gpt",
+  "tags": [
+    "AMC 12A",
+    "2017",
+    "pre_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:20:36.004814+00:00"
+}

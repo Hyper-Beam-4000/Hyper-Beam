@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12A_Problems/Problem_7",
+  "title": "2025 AMC 12A Problems/Problem 7",
+  "problem": "In a certain alien world, the maximum running speed $v$ of an organism is dependent on its number of toes $n$ and number of eyes $m$ . The relationship can be expressed as $v = kn^am^b$ centimeters per hour, where k, a, b are integer constants. In a population where all organisms have 5 toes, $\\log v = 4+2\\log m$ ; and in a population where all organisms have 25 eyes, $\\log v = 4 + 4 \\log n$ , where all logs are in base 10. What is $k+a+b$ ? $\\textbf{(A) } 20 \\qquad \\textbf{(B) } 21 \\qquad \\textbf{(C) } 22 \\qquad \\textbf{(D) } 23 \\qquad \\textbf{(E) } 24$",
+  "solution": "Substituting $v$ in the equation where $n=5$ , we have: $\\log(k \\cdot 5^a m^b)$ $=$ $4+2\\log m$ . Using logarithmic properties, we can write this as: $\\log(k \\cdot 5^a m^b)$ $=$ $\\log(10^4 \\cdot m^2)$ We can do this with the other equation where m=25: $\\log(k \\cdot n^a 25^b)$ $=$ $\\log(10^4 \\cdot n^4)$ Now we can get rid of the logs on both sides and are left with the following system of equations: $k \\cdot 5^am^b = 10^4 m^2$ $k \\cdot n^a25^b = 10^4 n^4$ Notice that in the first equation, we can change $m$ arbitrarily, so we know that the exponent of $m$ must be the same - hence $b=2$ . Similarly, from the second equation, we get $a=4$ . $10^4$ can be written as $2^4 \\cdot 5^4$ , which means that $k=2^4 = 16$ . Thus the answer is $2+4+16 = \\boxed{(C) 22}$ . -Cyrus825 ~ScoutViolet (mostly minor fixes) ~knight10 (minor fixes)",
+  "answer": "",
+  "year": 2025,
+  "competition": "AMC 12A",
+  "problem_number": 7,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12A",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:31:41.055702+00:00"
+}

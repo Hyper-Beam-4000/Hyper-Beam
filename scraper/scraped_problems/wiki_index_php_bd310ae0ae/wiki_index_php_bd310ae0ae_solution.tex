@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2024 AIME II Problems/Problem 13}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+\[\prod_{k=0}^{12} \left(2- 2\omega^k + \omega^{2k}\right) = \prod_{k=0}^{12} \left((1 - \omega^k)^2 + 1\right) = \prod_{k=0}^{12} \left((1 + i) - \omega^k)((1 - i) - \omega^k\right)\] Now, we consider the polynomial $x^{13} - 1$ whose roots are the 13th roots of unity. Taking our rewritten product from $0$ to $12$ , we see that both instances of $\omega^k$ cycle through each of the 13th roots. Then, our answer is: \[((1 + i)^{13} - 1)((1 - i)^{13} - 1)\] \[= (-64(1 + i) - 1)(-64(1 - i) - 1)\] \[= (65 + 64i)(65 - 64i)\] \[= 65^2 + 64^2\] \[= \boxed{\textbf{321}}\] ~Mqnic_
+
+\end{document}

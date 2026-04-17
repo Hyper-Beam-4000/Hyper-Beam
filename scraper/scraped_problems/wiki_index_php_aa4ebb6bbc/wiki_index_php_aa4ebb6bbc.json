@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2025_AMC_12A_Problems/Problem_6",
+  "title": "2025 AMC 12A Problems/Problem 6",
+  "problem": "Six chairs are arranged around a round table. Two students and two teachers randomly select four of the chairs to sit in. What is the probability that the two students will sit in two adjacent chairs and the two teachers will also sit in two adjacent chairs? $\\textbf{(A) } \\frac 16 \\qquad \\textbf{(B) } \\frac 15 \\qquad \\textbf{(C) } \\frac 29 \\qquad \\textbf{(D) } \\frac 3{13} \\qquad \\textbf{(E) } \\frac 14$",
+  "solution": "Pair two students together and put them adjacent on any two seats. There are 6 ways to do this. Considering one of these cases (they are all the same), there are 4 seats left, in which we wish to arrange the teachers together. So pair the teachers together and put them adjacent on any two seats not already occupied by two of the students. There are 3 ways to do this. For all 6 cases, there are \\( 6 \\times 3 = 18 \\) favorable outcomes. The number of ways to arrange the 2 students and 2 teachers is $\\binom{6}{2} \\times \\binom{4}{2} = 90$ . Our probability is \\( \\frac{18}{90} = \\) $\\boxed{\\textbf{(B) } \\frac 15}$ ~Pinotation",
+  "answer": "",
+  "year": 2025,
+  "competition": "AMC 12A",
+  "problem_number": 6,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12A",
+    "2025",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:31:39.746239+00:00"
+}

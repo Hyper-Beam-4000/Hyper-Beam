@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_AIME_I_Problems/Problem_6",
+  "title": "2019 AIME I Problems/Problem 6",
+  "problem": "In convex quadrilateral $KLMN$ side $\\overline{MN}$ is perpendicular to diagonal $\\overline{KM}$ , side $\\overline{KL}$ is perpendicular to diagonal $\\overline{LN}$ , $MN = 65$ , and $KL = 28$ . The line through $L$ perpendicular to side $\\overline{KN}$ intersects diagonal $\\overline{KM}$ at $O$ with $KO = 8$ . Find $MO$ .",
+  "solution": "Let $\\angle MKN=\\alpha$ and $\\angle LNK=\\beta$ . Let $P$ be the project of $L$ onto line $NK$ . Note $\\angle KLP=\\beta$ . Then, $KP=28\\sin\\beta=8\\cos\\alpha$ .\nFurthermore, $KN=\\frac{65}{\\sin\\alpha}=\\frac{28}{\\sin\\beta} \\Rightarrow 65\\sin\\beta=28\\sin\\alpha$ . Dividing the equations gives \\[\\frac{65}{28}=\\frac{28\\sin\\alpha}{8\\cos\\alpha}=\\frac{7}{2}\\tan\\alpha\\Rightarrow \\tan\\alpha=\\frac{65}{98}\\] Thus, $MK=\\frac{MN}{\\tan\\alpha}=98$ , so $MO=MK-KO=\\boxed{090}$ .",
+  "answer": "",
+  "year": 2019,
+  "competition": "AIME I",
+  "problem_number": 6,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME I",
+    "2019",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:34:22.066209+00:00"
+}

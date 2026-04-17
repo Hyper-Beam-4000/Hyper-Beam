@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2022_AIME_I_Problems/Problem_4",
+  "title": "2022 AIME I Problems/Problem 4",
+  "problem": "Let $w = \\dfrac{\\sqrt{3} + i}{2}$ and $z = \\dfrac{-1 + i\\sqrt{3}}{2},$ where $i = \\sqrt{-1}.$ Find the number of ordered pairs $(r,s)$ of positive integers not exceeding $100$ that satisfy the equation $i \\cdot w^r = z^s.$",
+  "solution": "We rewrite $w$ and $z$ in polar form: \\begin{align*} w &= e^{i\\cdot\\frac{\\pi}{6}}, \\\\ z &= e^{i\\cdot\\frac{2\\pi}{3}}. \\end{align*} The equation $i \\cdot w^r = z^s$ becomes \\begin{align*} e^{i\\cdot\\frac{\\pi}{2}} \\cdot \\left(e^{i\\cdot\\frac{\\pi}{6}}\\right)^r &= \\left(e^{i\\cdot\\frac{2\\pi}{3}}\\right)^s \\\\ e^{i\\left(\\frac{\\pi}{2}+\\frac{\\pi}{6}r\\right)} &= e^{i\\left(\\frac{2\\pi}{3}s\\right)} \\\\ \\frac{\\pi}{2}+\\frac{\\pi}{6}r &= \\frac{2\\pi}{3}s+2\\pi k \\\\ 3+r &= 4s+12k \\\\ 3+r &= 4(s+3k). \\end{align*} for some integer $k.$ Since $4\\leq 3+r\\leq 103$ and $4\\mid 3+r,$ we conclude that \\begin{align*} 3+r &\\in \\{4,8,12,\\ldots,100\\}, \\\\ s+3k &\\in \\{1,2,3,\\ldots,25\\}. \\end{align*} Note that the values for $s+3k$ and the values for $r$ have one-to-one correspondence. We apply casework to the values for $s+3k:$ $s+3k\\equiv0\\pmod{3}$ There are $8$ values for $s+3k,$ so there are $8$ values for $r.$ It follows that $s\\equiv0\\pmod{3},$ so there are $33$ values for $s.$ There are $8\\cdot33=264$ ordered pairs $(r,s)$ in this case. $s+3k\\equiv1\\pmod{3}$ There are $9$ values for $s+3k,$ so there are $9$ values for $r.$ It follows that $s\\equiv1\\pmod{3},$ so there are $34$ values for $s.$ There are $9\\cdot34=306$ ordered pairs $(r,s)$ in this case. $s+3k\\equiv2\\pmod{3}$ There are $8$ values for $s+3k,$ so there are $8$ values for $r.$ It follows that $s\\equiv2\\pmod{3},$ so there are $33$ values for $s.$ There are $8\\cdot33=264$ ordered pairs $(r,s)$ in this case. There are $8$ values for $s+3k,$ so there are $8$ values for $r.$ It follows that $s\\equiv0\\pmod{3},$ so there are $33$ values for $s.$ There are $8\\cdot33=264$ ordered pairs $(r,s)$ in this case. There are $9$ values for $s+3k,$ so there are $9$ values for $r.$ It follows that $s\\equiv1\\pmod{3},$ so there are $34$ values for $s.$ There are $9\\cdot34=306$ ordered pairs $(r,s)$ in this case. There are $8$ values for $s+3k,$ so there are $8$ values for $r.$ It follows that $s\\equiv2\\pmod{3},$ so there are $33$ values for $s.$ There are $8\\cdot33=264$ ordered pairs $(r,s)$ in this case. Together, the answer is $264+306+264=\\boxed{834}.$ ~MRENTHUSIASM",
+  "answer": "",
+  "year": 2022,
+  "competition": "AIME I",
+  "problem_number": 4,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME I",
+    "2022",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:36:20.833763+00:00"
+}

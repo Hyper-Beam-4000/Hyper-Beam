@@ -1,0 +1,18 @@
+-- 2018 AIME I Problems/Problem 4
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2018_AIME_I_Problems/Problem_4
+
+-- Problem (LaTeX):
+/-
+In $\triangle ABC, AB = AC = 10$ and $BC = 12$ . Point $D$ lies strictly between $A$ and $B$ on $\overline{AB}$ and point $E$ lies strictly between $A$ and $C$ on $\overline{AC}$ so that $AD = DE = EC$ . Then $AD$ can be expressed in the form $\dfrac{p}{q}$ , where $p$ and $q$ are relatively prime positive integers. Find $p+q$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+[asy] import olympiad; import cse5; unitsize(10mm); pathpen=black; dotfactor=3; pair B = (0,0), A = (6,8), C = (12,0), D = intersectionpoints(circle(A,250/39),A--B)[0], E = intersectionpoints(circle(D,250/39),A--C)[0], F=intersectionpoints(circle(B,9.6),A--C)[0], G=A/2+E/2; pair[] dotted = {A,B,C,D,E,F,G}; D(A--B); D(C--B); D(A--C); D(D--E); pathpen=dashed; D(B--F); D(D--G); dot(dotted); label("$A$",A,N); label("$B$",B,SW); label("$C$",C,SE); label("$D$",D,NW); label("$E$",E,NE); label("$F$",F,NE); label("$G$",G,NE); label("$x$",A--D,NW); label("$x$",D--E,NW); label("$x$",E--C,NE); draw(rightanglemark(D,G,E)); draw(rightanglemark(B,F,E)); [/asy] We draw the altitude from $B$ to $\overline{AC}$ to get point $F$ . We notice that the triangle's height from $A$ to $\overline{BC}$ is 8 because it is a $3-4-5$ Right Triangle. To find the length of $\overline{BF}$ , we let $h$ represent $\overline{BF}$ and set up an equation by finding two ways to express the area. The equation is $(8)(12)=(10)(h)$ , which leaves us with $h=9.6$ . We then solve for the length $\overline{AF}$ , which is done through pythagorean theorm and get $\overline{AF}$ = $2.8$ . We can now see that $\triangle AFB$ is a $7-24-25$ Right Triangle. Thus, we set $\overline{AG}$ as $5-$ $\tfrac{x}{2}$ , and yield that $\overline{AD}$ $=$ $($ $5-$ $\tfrac{x}{2}$ $)$ $($ $\tfrac{25}{7}$ $)$ . Now, we can see $x$ = $($ $5-$ $\tfrac{x}{2}$ $)$ $($ $\tfrac{25}{7}$ $)$ . Solving this equation, we yield $39x=250$ , or $x=$ $\tfrac{250}{39}$ . Thus, our final answer is $250+39=\boxed{289}$ . ~bluebacon008 Diagram edited by Afly
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_70bf625fea : Prop := by
+  sorry

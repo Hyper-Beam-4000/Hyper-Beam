@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2025 AMC 12B Problems/Problem 19}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Let's say $n$ is one of the numbers that got written twice in the same box. Suppose it is at column $x$ and row $y$ . We will write an expression for $n$ in terms of $x$ and $y$ in two ways: from Horace's perspective and Vera's perspective. From Horace's perspective, $n = (y-1)(141) + x$ . This is because there are $y-1$ full rows before $n$ , and we then need $x$ more numbers to reach $n$ . Similarly, Vera will say $n = (x-1)(91) + y$ . We now have the Diophantine equation \[(y-1)(141) + x = (x-1)(91)+y\] \[141y-141+x = 91x-91+y\] \[140y=90x+50\] \[14y = 9x + 5\] One such solution is, of course, $x=y=1$ . We find further solutions by adding $14$ to $x$ and $9$ to $y$ . For example, the second solution is $(15,10)$ . This continues until $(141,91)$ is reached. There are $\boxed{11}$ ordered pairs in this list. ~lprado
+
+\end{document}

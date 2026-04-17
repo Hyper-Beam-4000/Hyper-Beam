@@ -1,36 +1,18 @@
-import Mathlib.Data.Real.Basic
+-- 2022 USAMO Problems/Problem 2
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2022_USAMO_Problems/Problem_2
+
+-- Problem (LaTeX):
+/-
+Let $b\geq2$ and $w\geq2$ be fixed integers, and $n=b+w$ . Given are $2b$ identical black rods and $2w$ identical white rods, each of side length $1$ . We assemble a regular $2n$ -gon using these rods so that parallel sides are the same color. Then, a convex $2b$ -gon $B$ is formed by translating the black rods, and a convex $2w$ -gon $W$ is formed by translating the white rods. An example of one way of doing the assembly when $b=3$ and $w=2$ is shown below, as well as the resulting polygons $B$ and $W$ . [asy] size(10cm); real w = 2*Sin(18); real h = 0.10 * w; real d = 0.33 * h; picture wht; picture blk; draw(wht, (0,0)--(w,0)--(w+d,h)--(-d,h)--cycle); fill(blk, (0,0)--(w,0)--(w+d,h)--(-d,h)--cycle, black); // draw(unitcircle, blue+dotted); // Original polygon add(shift(dir(108))*blk); add(shift(dir(72))*rotate(324)*blk); add(shift(dir(36))*rotate(288)*wht); add(shift(dir(0))*rotate(252)*blk); add(shift(dir(324))*rotate(216)*wht); add(shift(dir(288))*rotate(180)*blk); add(shift(dir(252))*rotate(144)*blk); add(shift(dir(216))*rotate(108)*wht); add(shift(dir(180))*rotate(72)*blk); add(shift(dir(144))*rotate(36)*wht); // White shifted real Wk = 1.2; pair W1 = (1.8,0.1); pair W2 = W1 + w*dir(36); pair W3 = W2 + w*dir(108); pair W4 = W3 + w*dir(216); path Wgon = W1--W2--W3--W4--cycle; draw(Wgon); pair WO = (W1+W3)/2; transform Wt = shift(WO)*scale(Wk)*shift(-WO); draw(Wt * Wgon); label("$W$", WO); /* draw(W1--Wt*W1); draw(W2--Wt*W2); draw(W3--Wt*W3); draw(W4--Wt*W4); */ // Black shifted real Bk = 1.10; pair B1 = (1.5,-0.1); pair B2 = B1 + w*dir(0); pair B3 = B2 + w*dir(324); pair B4 = B3 + w*dir(252); pair B5 = B4 + w*dir(180); pair B6 = B5 + w*dir(144); path Bgon = B1--B2--B3--B4--B5--B6--cycle; pair BO = (B1+B4)/2; transform Bt = shift(BO)*scale(Bk)*shift(-BO); fill(Bt * Bgon, black); fill(Bgon, white); label("$B$", BO); [/asy] Prove that the difference of the areas of $B$ and $W$ depends only on the numbers $b$ and $w$ , and not on how the $2n$ -gon was assembled.
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+First notice that the black rods and the white rods form polygons iff in the original $2n$ -gon, if a side is a color $x$ , then the side that is parallel to that side in the original $2n$ -gon is also the color $x$ . We can prove that the difference in areas is only affected by the values of $b$ and $w$ by showing that for any valid arrangement of $2b$ rods and $2w$ rods, we may switch any two adjacent black and white rods(and their "parallel pairs"), and end up with the same area difference. In the figure above (click to expand), after the switch, we can see that after removing the mutually congruent parts, we are left with two parallelograms from each color. Let $x$ , $\alpha{}$ , $y$ , and $\beta{}$ be defined as shown. Notice that if we angle chase, the sides of the other parallelogram are the same, but if the angles of the original $2n$ -gon all have measure $2k$ , the angles of the new parallelograms are $\alpha{}+180-2k$ and $\beta{}+180-2k$ , as shown. We must prove that the differences between the areas are the same. Using area formulas, the change in the difference of areas is $x\sin{\alpha{}}-y\sin{\beta{}}+y\sin{(2k-\beta{})}-x\sin{(2k-\alpha{})}$ , which is equal to $x(\sin{k}(2\cos^2{k})-2\sin{k}\cos{k}\cos{\alpha{}})-y(\sin{k}(2\cos^2{k}))+y(\sin{k}\cos{k}\cos{\beta{}})$ , or $2\cos{k}(x\sin{(\alpha{}-k)}+y\sin{(k-\beta{}}))$ . Since $\cos{k}$ is not $0$ because $n\geq{}3$ , we are left with proving that $x\sin{(\alpha{}-k)}+y\sin{(k-\beta{}})=0$ . Now we rotate the polygon so that the vertex between the two sides that we switched is at the point $(0,0)$ , the angle bisector of that vertex is $y=0$ , and the black side is in the positive $y$ -direction. Now think of all the sides as vectors, all pointing in the clockwise direction of the $2n$ -gon. Notice the part labeled $a$ in the black polygons. We have that the vector labeled $x$ is really just the sum of all of the vectors in the part labeled $a$ - or all the vectors in the $2n$ -gon that are in the positive $y$ -direction excluding the one that was interchanged. Also notice that the angle of this vector $x$ has a signed angle of $\alpha{}-k$ with $y=0$ and has length $x$ - meaning that the vertical displacement of the vector $x$ from $y=0$ is equal to $x\sin{(\alpha{}-k)}$ ! Similarly, we get that the vertical displacement of the vector $y$ is equivalent to $y\sin{(k-\beta{}})$ . Adding these two together, we get that $x\sin{(\alpha{}-k)}+y\sin{(k-\beta{}})$ is simply the vertical displacement of the sum of the vectors $x$ and $y$ . Since the sum of the vectors $x$ and $y$ is equivalent to the sum of the vectors in the positive half of the polygon minus the sum of the black vector that would be switched with the white vector(the leftmost vector in the positive half of the polygon) and the rightmost vector in the positive half(which is the parallel pair of the white vector that would be interchanged later), and we know that this sum happens to have a vertical displacement of $0$ , along with the fact that the positive half of the polygon summed together also has a vertical displacement of $0$ , we get that the total vertical displacement is $0$ , meaning that $x\sin{(\alpha{}-k)}+y\sin{(k-\beta{}})=0$ , and we are done. ~by @peppapig_
+-/
+
 import Mathlib.Tactic
 
-open Real
-
--- Problem: Prove that the difference of the areas of B and W depends only on b and w
-theorem area_difference_invariant (b w : ℕ) (hb : b ≥ 2) (hw : w ≥ 2) :
-    ∀ (assembly : List (ℝ × ℝ)), 
-    (∀ (i : ℕ), i < 2 * (b + w) → (assembly.nth i).isSome) →
-    (∀ (i : ℕ), i < b + w → assembly.nth (2 * i) = assembly.nth (2 * i + 1)) →
-    let B := List.filter (λ (x : ℝ × ℝ), x.1 = 0) assembly
-    let W := List.filter (λ (x : ℝ × ℝ), x.1 = 1) assembly
-    abs (polygon_area B - polygon_area W) = f b w := by
-  -- Introduce the variables and assumptions
-  intros assembly h_assembly h_parallel
-  let n := b + w
-  -- Define the polygons B and W
-  let B := List.filter (λ (x : ℝ × ℝ), x.1 = 0) assembly
-  let W := List.filter (λ (x : ℝ × ℝ), x.1 = 1) assembly
-  -- We need to show the area difference is invariant
-  have h_invariant : ∀ (swap : ℕ), swap < n → 
-    abs (polygon_area (swap_parallel B W swap) - polygon_area (swap_parallel W B swap)) = abs (polygon_area B - polygon_area W) := by
-    intro swap h_swap
-    -- Assume a swap of adjacent black and white rods
-    sorry
-  -- Conclude the proof by showing the area difference depends only on b and w
+theorem wiki_index_php_3d6cfe993b : Prop := by
   sorry
-
--- Helper function to calculate the area of a polygon given its vertices
-def polygon_area (vertices : List (ℝ × ℝ)) : ℝ := sorry
-
--- Helper function to swap parallel rods in the assembly
-def swap_parallel (B W : List (ℝ × ℝ)) (swap : ℕ) : List (ℝ × ℝ) := sorry
-
--- Function f that represents the area difference based on b and w
-def f (b w : ℕ) : ℝ := sorry

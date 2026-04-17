@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_AMC_12A_Problems/Problem_19",
+  "title": "2019 AMC 12A Problems/Problem 19",
+  "problem": "In $\\triangle ABC$ with integer side lengths, $\\cos A = \\frac{11}{16}$ , $\\cos B = \\frac{7}{8}$ , and $\\cos C = -\\frac{1}{4}$ . What is the least possible perimeter for $\\triangle ABC$ ? $\\textbf{(A) } 9 \\qquad \\textbf{(B) } 12 \\qquad \\textbf{(C) } 23 \\qquad \\textbf{(D) } 27 \\qquad \\textbf{(E) } 44$",
+  "solution": "Notice that by the Law of Sines, $a:b:c = \\sin{A}:\\sin{B}:\\sin{C}$ , so let's flip all the cosines using $\\sin^{2}{x} + \\cos^{2}{x} = 1$ ( $\\sin{x}$ is positive for $0^{\\circ} < x < 180^{\\circ}$ , so we're good there). $\\sin A=\\frac{3\\sqrt{15}}{16}, \\qquad \\sin B= \\frac{\\sqrt{15}}{8}, \\qquad \\text{and} \\qquad\\sin C=\\frac{\\sqrt{15}}{4}$ These are in the ratio $3:2:4$ , so our minimal triangle has side lengths $2$ , $3$ , and $4$ . $\\boxed{\\textbf{(A) } 9}$ is our answer.",
+  "answer": "",
+  "year": 2019,
+  "competition": "AMC 12A",
+  "problem_number": 19,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12A",
+    "2019",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:23:29.103990+00:00"
+}

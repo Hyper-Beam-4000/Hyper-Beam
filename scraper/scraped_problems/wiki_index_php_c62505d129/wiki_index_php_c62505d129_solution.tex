@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2021 AIME I Problems/Problem 4}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Suppose we have $1$ coin in the first pile. Then $(1, 2, 63), (1, 3, 62), \ldots, (1, 32, 33)$ all work for a total of $31$ piles. Suppose we have $2$ coins in the first pile, then $(2, 3, 61), (2, 4, 60), \ldots, (2, 31, 33)$ all work, for a total of $29$ . Continuing this pattern until $21$ coins in the first pile, we have the sum \begin{align*} 31+29+28+26+25+\cdots+4+2+1 &= (31+28+25+22+\cdots+1)+(29+26+23+\cdots+2) \\ &= 176+155 \\ &= \boxed{331}. \end{align*}
+
+\end{document}

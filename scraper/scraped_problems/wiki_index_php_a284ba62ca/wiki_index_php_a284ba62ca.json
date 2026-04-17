@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2024_AMC_12B_Problems/Problem_8",
+  "title": "2024 AMC 12B Problems/Problem 8",
+  "problem": "What value of $x$ satisfies \\[\\frac{\\log_2x \\cdot \\log_3x}{\\log_2x+\\log_3x}=2?\\] $\\textbf{(A) } 25 \\qquad\\textbf{(B) } 32 \\qquad\\textbf{(C) } 36 \\qquad\\textbf{(D) } 42 \\qquad\\textbf{(E) } 48$",
+  "solution": "We have\n\\begin{align*}\n\\log_2x\\cdot\\log_3x&=2(\\log_2x+\\log_3x) \\\\\n1&=\\frac{2(\\log_2x+\\log_3x)}{\\log_2x\\cdot\\log_3x} \\\\\n1&=2(\\frac{1}{\\log_3x}+\\frac{1}{\\log_2x}) \\\\\n1&=2(\\log_x3+\\log_x2) \\\\\n\\log_x6&=\\frac{1}{2} \\\\\nx^{\\frac{1}{2}}&=6 \\\\\nx&=36\n\\end{align*}\nso $\\boxed{\\textbf{(C) }36}$ ~kafuu_chino",
+  "answer": "",
+  "year": 2024,
+  "competition": "AMC 12B",
+  "problem_number": 8,
+  "difficulty_tier": "post_cutoff",
+  "tags": [
+    "AMC 12B",
+    "2024",
+    "post_cutoff"
+  ],
+  "scraped_at": "2026-04-17T13:31:00.515470+00:00"
+}

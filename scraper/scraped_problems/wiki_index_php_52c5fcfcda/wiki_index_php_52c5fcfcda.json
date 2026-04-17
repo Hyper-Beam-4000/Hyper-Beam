@@ -6,6 +6,13 @@
   "solution": "Label the bottom right cell as $\\omega^0$ where $\\omega = e^{i2\\pi/3}$ . Then label each cell with $\\omega^d$ where $d$ is the Manhattan distance of the current cell from the bottom right cell. No matter where an L-shaped tromino is placed, the sum of the labels in the cells is, \\[\\omega^0 + \\omega^1 + \\omega^2 = \\frac{\\omega^3 - 1}{\\omega - 1} = \\frac{0}{\\omega - 1} = 0\\] If $n = 3k + 1$ . Then the sum of all the labels in the cells in a row or column is, \\[k(\\omega^0 + \\omega^1 + \\omega^2)+\\omega^0 = 1\\] If $n = 3k + 2$ . Then the sum of all the labels in cells in a row or column is, \\[k(\\omega^0 + \\omega^1 + \\omega^2) + \\omega^0 + \\omega^1 = 1 + \\omega\\] Let $S$ be the sum of all the labels of cells containing a stone. In either above case, placing an L-shaped Tromino leaves $S$ invariant but removing a row or column of stone causes $\\textrm{Re}(S)$ to decrease (by $1$ or $1/2$ in each case). However the empty grid has $S=0$ , so this can't be reached. Hence $n=3k$ . We now provide a sequence of moves which empties the grid. Divide the grid into $3\\times 3$ grids and do the following to every sub-grid. (When I refer to placing an L-shaped tromino on a cell, I am refering to the position of the bottom left stone) Add an L-shaped tromino to the bottom left cell and middle cell Remove the middle row Add an L-shaped tromino to the middle left cell Remove the left and middle columns and we're done, the grid is empty",
   "answer": "",
   "year": 2021,
-  "scraped_at": "2026-03-24T05:42:38.233872+00:00",
-  "lean_code": "import Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic\n\nopen Nat\n\n-- Problem: Determine for which n it is possible to empty the board after some moves\ntheorem usamo_2021_p3 (n : ℕ) (h : n ≥ 2) : (∃ m : ℕ, m > 0 ∧ can_empty_board n m) ↔ n % 3 = 0 := by\n  constructor\n  · intro h1\n    -- Assume there exists a sequence of moves that empties the board\n    -- We will show that n must be divisible by 3\n    sorry\n  · intro h2\n    -- Assume n is divisible by 3\n    -- We will construct a sequence of moves to empty the board\n    sorry\n\n-- Define the predicate that checks if the board can be emptied after m moves\ndef can_empty_board (n m : ℕ) : Prop :=\n  -- This predicate should capture the logic of placing and removing stones\n  sorry"
+  "competition": "USAMO",
+  "problem_number": 3,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "USAMO",
+    "2021",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:19:39.847905+00:00"
 }

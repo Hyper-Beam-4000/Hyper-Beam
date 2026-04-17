@@ -1,37 +1,21 @@
-import Mathlib.Data.Polynomial.Basic
-import Mathlib.Data.Real.Basic
+-- 2025 USAMO Problems/Problem 2
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2025_USAMO_Problems/Problem_2
+
+-- Problem (LaTeX):
+/-
+Let $n$ and $k$ be positive integers with $k<n$ . Let $P(x)$ be a polynomial of degree $n$ with real coefficients, nonzero constant term, and no repeated roots. Suppose that for any real numbers $a_0, a_1, \dots, a_k$ such that the polynomial $a_kx^k+\cdots+a_1x+a_0$ divides $P(x)$ , the product $a_0a_1\cdots a_k$ is zero. Prove that $P(x)$ has a nonreal root.
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+We proceed by contradiction. Assume that all roots of $P(x)$ are real. Let the distinct roots be $r_1, r_2, \ldots, r_n$ , all nonzero since the constant term is nonzero. Consider any subset of $k$ roots $\{r_{i_1}, r_{i_2}, \ldots, r_{i_k}\}$ and form the polynomial: \[Q(x) = \prod_{j=1}^k (x - r_{i_j}) =a_{k} x^k + a_{k-1}x^{k-1} + \cdots + a_0\] By Vieta's formulas: $a_0 = (-1)^k \prod_{j=1}^k r_{i_j} \neq 0$ $a_{k-1} = -\sum_{j=1}^k r_{i_j}$ $a_{k-2} = \sum_{1\leq m<n\leq k} r_{i_m}r_{i_n}$ The given condition requires that $a_0a_1\cdots a_k = 0$ . Since $a_0 \neq 0$ , at least one other coefficient must be zero. Case $k=2$ :
+For any pair of roots $(r_i, r_j)$ , we have: \[Q(x) = x^2 - (r_i+r_j)x + r_ir_j\] The condition implies $-r_ir_j(r_i+r_j) = 0$ , so $r_i + r_j = 0$ for all pairs. But with $n \geq 3$ , considering three roots $r_1, r_2, r_3$ gives: \[r_1 + r_2 = 0 \quad \text{and} \quad r_1 + r_3 = 0 \implies r_2 = r_3\] contradicting distinct roots.
+In General:
+For any $k$ roots, some symmetric sum must be zero. For $k=3$ , this would require: \[r_i + r_j + r_m = 0 \quad \text{for all triples}\] which leads to contradictions for any $n \geq 4$ as it would force roots to be equal. Thus, our initial assumption is false, and $P(x)$ must have at least one nonreal root.~Jonathan
+-/
+
 import Mathlib.Tactic
 
-open Polynomial
-
--- Problem: Prove that if P(x) is a polynomial of degree n with no repeated roots and nonzero constant term,
--- and for any polynomial Q(x) of degree k < n dividing P(x), the product of its coefficients is zero,
--- then P(x) must have a nonreal root.
-theorem usamo_2025_p2 (n k : ℕ) (hkn : k < n) (P : Polynomial ℝ) 
-  (hdeg : P.degree = n) (hconst : P.coeff 0 ≠ 0) (hnorep : ∀ r : ℝ, P.is_root r → ¬P.derivative.is_root r) 
-  (hdiv : ∀ (Q : Polynomial ℝ), Q.degree = k → Q ∣ P → Q.coeff 0 * Q.coeff 1 * ... * Q.coeff k = 0) :
-  ∃ z : ℂ, ¬z.im = 0 ∧ P.map (algebraMap ℝ ℂ) .is_root z := by
-  -- Assume for contradiction that all roots of P are real
-  by_contra h
-  -- Let the distinct roots be r_1, r_2, ..., r_n, all nonzero since the constant term is nonzero
-  have hroots : ∀ r : ℝ, P.is_root r → r ≠ 0 := by
-    intro r hr
-    sorry -- Show that roots are nonzero using the nonzero constant term
-
-  -- Consider any subset of k roots and form the polynomial Q(x)
-  have : ∀ (roots : Finset ℝ), roots.card = k → (∀ r ∈ roots, P.is_root r) → 
-    let Q := ∏ r in roots, (X - C r) in Q.coeff 0 ≠ 0 := by
-    intro roots hcard hroots
-    sorry -- Use Vieta's formulas to show Q.coeff 0 ≠ 0
-
-  -- Use the given condition that Q.coeff 0 * Q.coeff 1 * ... * Q.coeff k = 0
-  -- Since Q.coeff 0 ≠ 0, at least one other coefficient must be zero
-  have : ∃ (roots : Finset ℝ), roots.card = k ∧ (∀ r ∈ roots, P.is_root r) ∧ 
-    let Q := ∏ r in roots, (X - C r) in Q.coeff 1 = 0 := by
-    sorry -- Derive contradiction from the assumption that all roots are real
-
-  -- Conclude that P must have a nonreal root
-  sorry -- Finalize the proof by contradiction
-
-  -- Therefore, P(x) must have at least one nonreal root
+theorem wiki_index_php_0bc8c3c36e : Prop := by
   sorry

@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2019_AMC_12A_Problems/Problem_11",
+  "title": "2019 AMC 10A Problems/Problem 18",
+  "problem": "For some positive integer $k$ , the repeating base- $k$ representation of the (base-ten) fraction $\\frac{7}{51}$ is $0.\\overline{23}_k = 0.232323..._k$ . What is $k$ ? $\\textbf{(A) } 13 \\qquad\\textbf{(B) } 14 \\qquad\\textbf{(C) } 15 \\qquad\\textbf{(D) } 16 \\qquad\\textbf{(E) } 17$",
+  "solution": "We can expand the fraction $0.\\overline{23}_k$ as follows: $0.\\overline{23}_k = 2\\cdot k^{-1} + 3 \\cdot k^{-2} + 2 \\cdot k^{-3} + 3 \\cdot k^{-4} + \\cdots$ Notice that this is equivalent to \\[2( k^{-1} + k^{-3} + k^{-5} + ... ) + 3 (k^{-2} + k^{-4} + k^{-6} + \\cdots )\\] By summing the geometric series and simplifying, we have $\\frac{2k+3}{k^2-1} = \\frac{7}{51}$ . Solving this quadratic equation (or simply testing the answer choices) yields the answer $k = \\boxed{\\textbf{(D) }16}$ .",
+  "answer": "We can find that we just estimate the first two digits and can get $\\frac{2}{k} + \\frac{2}{k^2} = \\frac{7}{51}$ and plug in some values and expand into $\\frac{2k+2}{k^2} = \\frac{7}{51}$ and plugin some values and find that for 16, $\\frac{34}{256}$ is very close to our target of $\\frac{7}{51}$ so our answer is $\\boxed{\\textbf{(D) }16}$ . ~ catattackskeyboard",
+  "year": 2019,
+  "competition": "AMC 12A",
+  "problem_number": 11,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12A",
+    "2019",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:23:17.982711+00:00"
+}

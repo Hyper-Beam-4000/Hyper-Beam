@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2017_AIME_I_Problems/Problem_12",
+  "title": "2017 AIME I Problems/Problem 12",
+  "problem": "Call a set $S$ product-free if there do not exist $a, b, c \\in S$ (not necessarily distinct) such that $a b = c$ . For example, the empty set and the set $\\{16, 20\\}$ are product-free, whereas the sets $\\{4, 16\\}$ and $\\{2, 8, 16\\}$ are not product-free. Find the number of product-free subsets of the set $\\{1, 2, 3, 4,..., 7, 8, 9, 10\\}$ .",
+  "solution": "We shall solve this problem by doing casework on the lowest element of the subset. Note that the number $1$ cannot be in the subset because $1*1=1$ . Let $S$ be a product-free set. If the lowest element of $S$ is $2$ , we consider the set $\\{3, 6, 9\\}$ . We see that 5 of these subsets can be a subset of $S$ ( $\\{3\\}$ , $\\{6\\}$ , $\\{9\\}$ , $\\{6, 9\\}$ , and the empty set). Now consider the set $\\{5, 10\\}$ . We see that 3 of these subsets can be a subset of $S$ ( $\\{5\\}$ , $\\{10\\}$ , and the empty set). Note that $4$ cannot be an element of $S$ , because $2$ is. Now consider the set $\\{7, 8\\}$ . All four of these subsets can be a subset of $S$ . So if the smallest element of $S$ is $2$ , there are $5*3*4=60$ possible such sets. If the smallest element of $S$ is $3$ , the only restriction we have is that $9$ is not in $S$ . This leaves us $2^6=64$ such sets. If the smallest element of $S$ is not $2$ or $3$ , then $S$ can be any subset of $\\{4, 5, 6, 7, 8, 9, 10\\}$ , including the empty set. This gives us $2^7=128$ such subsets. So our answer is $60+64+128=\\boxed{252}$ .",
+  "answer": "",
+  "year": 2017,
+  "competition": "AIME I",
+  "problem_number": 12,
+  "difficulty_tier": "pre_gpt",
+  "tags": [
+    "AIME I",
+    "2017",
+    "pre_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:33:09.270152+00:00"
+}

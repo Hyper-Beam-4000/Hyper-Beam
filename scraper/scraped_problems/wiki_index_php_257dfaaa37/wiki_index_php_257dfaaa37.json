@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2022_AMC_12A_Problems/Problem_11",
+  "title": "2022 AMC 12A Problems/Problem 11",
+  "problem": "What is the product of all real numbers $x$ such that the distance on the number line between $\\log_6x$ and $\\log_69$ is twice the distance on the number line between $\\log_610$ and $1$ ? $\\textbf{(A) } 10 \\qquad \\textbf{(B) } 18 \\qquad \\textbf{(C) } 25 \\qquad \\textbf{(D) } 36 \\qquad \\textbf{(E) } 81$",
+  "solution": "Let $a = 2 \\cdot |\\log_6 10 - 1| = |\\log_6 9 - \\log_6 x| = \\left|\\log_6 \\frac{9}{x}\\right|$ . $\\pm a = \\log_6 \\frac{9}{x} \\implies 6^{\\pm a} = b^{\\pm 1} = \\frac{9}{x} \\implies x = 9 \\cdot b^{\\pm 1}$ $9b^1 \\cdot 9b^{-1} = \\boxed{81}$ . ~ oinava",
+  "answer": "",
+  "year": 2022,
+  "competition": "AMC 12A",
+  "problem_number": 11,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12A",
+    "2022",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:27:32.793765+00:00"
+}

@@ -1,0 +1,18 @@
+-- 2021 AMC 12A Problems/Problem 12
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2021_AMC_12A_Problems/Problem_12
+
+-- Problem (LaTeX):
+/-
+All the roots of the polynomial $z^6-10z^5+Az^4+Bz^3+Cz^2+Dz+16$ are positive integers, possibly repeated. What is the value of $B$ ? $\textbf{(A) }{-}88 \qquad \textbf{(B) }{-}80 \qquad \textbf{(C) }{-}64 \qquad \textbf{(D) }{-}41\qquad \textbf{(E) }{-}40$
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+By Vieta's formulas, the sum of the six roots is $10$ and the product of the six roots is $16$ . By inspection, we see the roots are $1, 1, 2, 2, 2,$ and $2$ , so the function is $(z-1)^2(z-2)^4=(z^2-2z+1)(z^4-8z^3+24z^2-32z+16)$ . Therefore, calculating just the $z^3$ terms, we get $B = -32 - 48 - 8 = \boxed{\textbf{(A) }{-}88}$ . ~JHawk0224
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_1236b24bde : Prop := by
+  sorry

@@ -1,24 +1,19 @@
-import Mathlib.Data.Nat.Basic
+-- 2022 USAMO Problems/Problem 6
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2022_USAMO_Problems/Problem_6
+
+-- Problem (LaTeX):
+/-
+There are $2022$ users on a social network called Mathbook, and some of them are Mathbook-friends. (On Mathbook, friendship is always mutual and permanent.) Starting now, Mathbook will only allow a new friendship to be formed between two users if they have at least two friends in common. What is the minimum number of friendships that must already exist so that every user could eventually become friends with every other user?
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+(but 4044 seems to be the wrong answer?)
+To answer this question, we need to consider how friendships on Mathbook are formed. If two users have at least two friends in common, then they will be able to become friends with each other. This means that the minimum number of friendships that must already exist in order for every user to eventually become friends with every other user is the smallest number of friendships that guarantees that each pair of users has at least two friends in common. One way to guarantee that each pair of users has at least two friends in common is to create a complete graph, where each user is friends with every other user. In this case, each pair of users has exactly $2022 - 2 = 2020$ friends in common. However, this is not the minimum number of friendships required, since some pairs of users may have more than two friends in common without forming a complete graph. To find the minimum number of friendships required, we can use the fact that a friendship between two users implies that they share all of their mutual friends. In other words, if two users are friends, then they must have at least two friends in common. This means that if we want to guarantee that each pair of users has at least two friends in common, we can do so by ensuring that each user has at least two friends. Therefore, the minimum number of friendships that must already exist in order for every user to eventually become friends with every other user is $2 \cdot 2022 = \boxed{4044}$ .
+-/
+
 import Mathlib.Tactic
 
-open Nat
-
--- Problem: Determine the minimum number of friendships required so that every user can eventually become friends with every other user.
-theorem mathbook_friendship (n : ℕ) (h : n = 2022) : ∃ m, m = 4044 := by
-  -- Assume each user must have at least two friends initially
-  have h1 : ∀ u : ℕ, u < n → ∃ v w : ℕ, v < n ∧ w < n ∧ v ≠ w ∧ u ≠ v ∧ u ≠ w := by
-    sorry
-  
-  -- Calculate the minimum number of friendships needed
-  have h2 : ∃ m, m = 2 * n := by
-    -- Each user must have at least two friends
-    use 2 * n
-    rw [h]
-    norm_num
-    -- This ensures that every user can eventually become friends with every other user
-    sorry
-
-  -- Conclude that the minimum number of friendships is 4044
-  obtain ⟨m, hm⟩ := h2
-  use m
-  exact hm
+theorem wiki_index_php_edb60e1b8b : Prop := by
+  sorry

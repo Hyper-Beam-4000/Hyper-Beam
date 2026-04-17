@@ -1,42 +1,19 @@
-import Mathlib.Data.Polynomial.Basic
+-- 2019 USAMO Problems/Problem 6
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2019_USAMO_Problems/Problem_6
+
+-- Problem (LaTeX):
+/-
+Find all polynomials $P$ with real coefficients such that \[\frac{P(x)}{yz}+\frac{P(y)}{zx}+\frac{P(z)}{xy}=P(x-y)+P(y-z)+P(z-x)\] holds for all nonzero real numbers $x,y,z$ satisfying $2xyz=x+y+z$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+If $P(x)=c$ for a constant $c,$ then $\dfrac{c(x+y+z)}{xyz}=3c$ . We have $2c=3c.$ Therefore $c=0.$ Now consider the case of non-constant polynomials.
+First we have \[xP(x)+yP(y)+zP(z)=xyz(P(x-y)+P(y-z)+P(z-x))\] for all nonzero real numbers $x,y,z$ satisfying $2xyz=x+y+z$ . Both sides of the equality are polynomials (of $x,y,z$ ). They have the same values on the 2-dimensional surface $2xyz=x+y+z$ , except for some 1-dimensional curves in it. By continuity, the equality holds for all points on the surface, including those with $z=0.$ Let $z=0,$ we have $y=-x$ and $x(P(x)-P(-x))=0.$ Therefore $P$ is an even function. (Here is a sketch of an elementary proof. Let $z=\dfrac{x+y}{2xy-1}.$ We have \[xP(x)+yP(y)+\dfrac{x+y}{2xy-1}P(\dfrac{x+y}{2xy-1})=xy\dfrac{x+y}{2xy-1}(P(x-y)+P(y-\dfrac{x+y}{2xy-1})+P(\dfrac{x+y}{2xy-1}-x)).\] This is an equality of rational expressions. By multiplying $(2xy-1)^N$ on both sides for a sufficiently large $N$ , they become polynomials, say $A(x,y)=B(x,y)$ for all real $x, y$ with $x\ne 0, y\ne 0, x+y\ne 0$ and $2xy-1\ne 0.$ For a fixed $x,$ we have two polynomials (of $y$ ) having same values for infinitely many $y$ . They must be identical. Let $y=0,$ we have $x^{N+1}(P(x)-P(-x))=0.$ ) Notice that if $P(x)$ is a solution, then is $cP(x)$ for any constant $c.$ For simplicity, we assume the leading coefficient of $P$ is $1$ : \[P(x)=x^n+a_{n-2}x^{n-2}+\cdots +a_2x^2+a_0,\] where $n$ is a positive even number. Let $y=\dfrac{1}{x}$ , $z=x+\dfrac{1}{x}.$ we have \[xP(x)+\dfrac{1}{x}P\left (\dfrac{1}{x}\right )+\left ( x+\dfrac{1}{x}\right ) P\left ( x+\dfrac{1}{x}\right ) =\left (x+\dfrac{1}{x}\right )\left ( P\left (x-\dfrac{1}{x}\right )+P(-x)+P\left (\dfrac{1}{x}\right )\right ).\] Simplify using $P(x)=P(-x),$ \[\left (x+\dfrac{1}{x}\right ) \left (P\left (x+\dfrac{1}{x}\right )-P\left (x-\dfrac{1}{x}\right )\right )=\dfrac{1}{x}P(x)+xP\left (\dfrac{1}{x}\right ).\] Expand and combine like terms, both sides are of the form \[c_{n-1}x^{n-1}+c_{n-3}x^{n-3}+\cdots+c_1x+c_{-1}x^{-1}+\cdots+c_{-n+1}x^{-n+1}.\] They have the same values for infinitely many $x.$ They must be identical. We just compare their leading terms. On the left hand side it is $2nx^{n-1}$ . There are two cases for the right hand sides: If $n>2$ , it is $x^{n-1}$ ; If $n=2$ , it is $(1+a_0)x.$ It does not work for $n>2.$ When $n=2,$ we have $4=1+a_0.$ therefore $a_0=3.$ The solution: $P(x)=c(x^2+3)$ for any constant $c.$ -JZ
+-/
+
 import Mathlib.Tactic
 
-open Polynomial
-
--- Problem: Find all polynomials P with real coefficients such that
--- (P(x)/yz) + (P(y)/zx) + (P(z)/xy) = P(x-y) + P(y-z) + P(z-x)
--- holds for all nonzero real numbers x, y, z satisfying 2xyz = x + y + z.
-
-theorem usamo_2019_p6 (P : ℝ[X]) :
-  (∀ x y z : ℝ, x ≠ 0 → y ≠ 0 → z ≠ 0 → 2 * x * y * z = x + y + z →
-    (P.eval x / (y * z) + P.eval y / (z * x) + P.eval z / (x * y) =
-    P.eval (x - y) + P.eval (y - z) + P.eval (z - x))) ↔
-  ∃ c : ℝ, P = c • (X^2 + 3) := by
-  -- Assume the condition holds for all x, y, z
-  constructor
-  · intro h
-    -- Consider the case where P is constant
-    by_cases h_const : P.degree = 0
-    · -- If P is constant, then it must be zero
-      have hP : ∀ x, P.eval x = P.eval 0 := by
-        intro x
-        rw [Polynomial.eval_eq_sum_range, Polynomial.eval_eq_sum_range, h_const]
-        simp
-      -- Substitute into the condition and solve
-      sorry
-    · -- If P is non-constant, assume P is of the form P(x) = x^n + ...
-      -- We will show that P is even
-      have h_even : ∀ x, P.eval x = P.eval (-x) := by
-        intro x
-        -- Use the condition with z = 0 to show P is even
-        sorry
-      -- Assume P is of the form x^n + a_{n-2}x^{n-2} + ... + a_0
-      -- Show n must be 2 and a_0 = 3
-      sorry
-  · -- Prove the converse: if P = c(x^2 + 3), the condition holds
-    rintro ⟨c, rfl⟩
-    intro x y z hx hy hz hxyz
-    -- Substitute P = c(x^2 + 3) into the condition
-    simp
-    -- Simplify both sides and show equality
-    sorry
+theorem wiki_index_php_592941facf : Prop := by
+  sorry

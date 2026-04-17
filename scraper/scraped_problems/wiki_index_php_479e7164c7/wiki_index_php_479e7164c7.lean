@@ -1,0 +1,19 @@
+-- 2022 AIME II Problems/Problem 3
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2022_AIME_II_Problems/Problem_3
+
+-- Problem (LaTeX):
+/-
+A right square pyramid with volume $54$ has a base with side length $6.$ The five vertices of the pyramid all lie on a sphere with radius $\frac mn$ , where $m$ and $n$ are relatively prime positive integers. Find $m+n$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+Although I can't draw the exact picture of this problem, but it is quite easy to imagine that four vertices of the base of this pyramid is on a circle (Radius $\frac{6}{\sqrt{2}} = 3\sqrt{2}$ ). Since all five vertices are on the sphere, the distances of the spherical center and the vertices are the same: $l$ . Because of the symmetrical property of the pyramid,
+we can imagine that the line of the apex and the (sphere's) center will intersect the square at the (base's) center. Since the volume is $54 = \frac{1}{3} \cdot S \cdot h = \frac{1}{3} \cdot 6^2 \cdot h$ , where $h=\frac{9}{2}$ is the height of this pyramid, we have: $l^2=\left(\frac{9}{2}-l\right)^2+\left(3\sqrt{2}\right)^2$ according to the Pythagorean theorem. Solve this equation will give us $l = \frac{17}{4},$ therefore $m+n=\boxed{021}.$
+-/
+
+import Mathlib.Tactic
+
+theorem wiki_index_php_479e7164c7 : Prop := by
+  sorry

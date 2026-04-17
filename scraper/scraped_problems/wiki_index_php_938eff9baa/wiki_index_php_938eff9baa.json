@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2021_AMC_12B_Problems/Problem_1",
+  "title": "2021 AMC 12B Problems/Problem 1",
+  "problem": "How many integer values of $x$ satisfy $|x|<3\\pi$ ? $\\textbf{(A)} ~9 \\qquad\\textbf{(B)} ~10 \\qquad\\textbf{(C)} ~18 \\qquad\\textbf{(D)} ~19 \\qquad\\textbf{(E)} ~20$",
+  "solution": "Since $3\\pi\\approx9.42$ , we multiply $9$ by $2$ for the integers from $1$ to $9$ and the integers from $-1$ to $-9$ and add $1$ to account for $0$ to get $\\boxed{\\textbf{(D)} ~19}$ . ~smarty101 and edited by Tony_Li2007 and sl_hc",
+  "answer": "",
+  "year": 2021,
+  "competition": "AMC 12B",
+  "problem_number": 1,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AMC 12B",
+    "2021",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:26:36.365206+00:00"
+}

@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2020_AIME_II_Problems/Problem_15",
+  "title": "2020 AIME II Problems/Problem 15",
+  "problem": "Let $\\triangle ABC$ be an acute scalene triangle with circumcircle $\\omega$ . The tangents to $\\omega$ at $B$ and $C$ intersect at $T$ . Let $X$ and $Y$ be the projections of $T$ onto lines $AB$ and $AC$ , respectively. Suppose $BT = CT = 16$ , $BC = 22$ , and $TX^2 + TY^2 + XY^2 = 1143$ . Find $XY^2$ .",
+  "solution": "Let $O$ be the circumcenter of $\\triangle ABC$ ; say $OT$ intersects $BC$ at $M$ ; draw segments $XM$ , and $YM$ . We have $MT=3\\sqrt{15}$ . Since $\\angle A=\\angle CBT=\\angle BCT$ , we have $\\cos A=\\tfrac{11}{16}$ . Notice that $AXTY$ is cyclic, so $\\angle XTY=180^{\\circ}-A$ , so $\\cos XTY=-\\cos A$ , and the cosine law in $\\triangle TXY$ gives \\[1143-2XY^2=-\\frac{11}{8}\\cdot XT\\cdot YT.\\] Since $\\triangle BMT \\cong \\triangle CMT$ , we have $TM\\perp BC$ , and therefore quadrilaterals $BXTM$ and $CYTM$ are cyclic. Let $P$ (resp. $Q$ ) be the midpoint of $BT$ (resp. $CT$ ). So $P$ (resp. $Q$ ) is the center of $(BXTM)$ (resp. $CYTM$ ). Then $\\theta=\\angle ABC=\\angle MTX$ and $\\phi=\\angle ACB=\\angle YTM$ . So $\\angle XPM=2\\theta$ , so \\[\\frac{\\frac{XM}{2}}{XP}=\\sin \\theta,\\] which yields $XM=2XP\\sin \\theta=BT(=CT)\\sin \\theta=TY$ . Similarly we have $YM=XT$ . Ptolemy's theorem in $BXTM$ gives \\[16TY=11TX+3\\sqrt{15}BX,\\] while Pythagoras' theorem gives $BX^2+XT^2=16^2$ . Similarly, Ptolemy's theorem in $YTMC$ gives \\[16TX=11TY+3\\sqrt{15}CY\\] while Pythagoras' theorem in $\\triangle CYT$ gives $CY^2+YT^2=16^2$ . Solve this for $XT$ and $TY$ and substitute into the equation about $\\cos XTY$ to obtain the result $XY^2=\\boxed{717}$ . (Notice that $MXTY$ is a parallelogram, which is an important theorem in Olympiad, and there are some other ways of computation under this observation.) -Fanyuchen20020715",
+  "answer": "",
+  "year": 2020,
+  "competition": "AIME II",
+  "problem_number": 15,
+  "difficulty_tier": "training_data",
+  "tags": [
+    "AIME II",
+    "2020",
+    "training_data"
+  ],
+  "scraped_at": "2026-04-17T13:35:35.120653+00:00"
+}

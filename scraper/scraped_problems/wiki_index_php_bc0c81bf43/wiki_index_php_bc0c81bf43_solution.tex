@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2017 AIME I Problems/Problem 9}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Writing out the recursive statement for $a_n, a_{n-1}, \dots, a_{10}$ and summing them gives \[a_n+\dots+a_{10}=(a_n+\cdots+a_{11})+a_{10}=100(a_{n-1}+\dots+a_{10})+n+\dots+10\] Which simplifies to \[a_n=99(a_{n-1}+\dots+a_{10})+\frac{1}{2}(n+10)(n-9)\] Therefore, $a_n$ is divisible by 99 if and only if $\frac{1}{2}(n+10)(n-9)$ is divisible by 99, so $(n+10)(n-9)$ needs to be divisible by 9 and 11. Since our goal is just finding the minimum $n$ , we can do casework on whether the $n+10$ or $n-9$ is a multiple of 11 (We choose 11 because it is prime). Assume that $n+10$ is a multiple of 11. Writing out a few terms, $n=12, 23, 34, 45$ , we see that $n=45$ is the smallest $n$ that works in this case. Next, assume that $n-9$ is a multiple of 11. Writing out a few terms, $n=20, 31, 42, 53$ , we see that $n=53$ is the smallest $n$ that works in this case. The smallest $n$ is $\boxed{045}$ . Note that we can also construct the solution using CRT by assuming either $11$ divides $n+10$ and $9$ divides $n-9$ , or $9$ divides $n+10$ and $11$ divides $n-9$ , and taking the smaller solution. (We know this because it's impossible for both $n+10$ and $n-9$ to be divisible by 3).
+
+\end{document}

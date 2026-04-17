@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2018_AIME_I_Problems/Problem_3",
+  "title": "2018 AIME I Problems/Problem 3",
+  "problem": "Kathy has $5$ red cards and $5$ green cards. She shuffles the $10$ cards and lays out $5$ of the cards in a row in a random order. She will be happy if and only if all the red cards laid out are adjacent and all the green cards laid out are adjacent. For example, card orders $RRGGG$ , $GGGGR$ , or $RRRRR$ will make Kathy happy, but $RRRGR$ will not. The probability that Kathy will be happy is $\\frac{m}{n}$ , where $m$ and $n$ are relatively prime positive integers. Find $m + n$ .",
+  "solution": "We have $2+4\\cdot 2$ cases total. The two are all red and all green. Then, you have 4 of one, 1 of other. 3 of one, 2 of other. 2 of one, 3 of other. 1 of one, 4 of other. Then flip the order, so times two. Obviously the denominator is $10\\cdot 9\\cdot 8\\cdot 7\\cdot 6$ , since we are choosing a card without replacement. Then, we have for the numerator for the two of all red and green: \\[5\\cdot 4\\cdot 3\\cdot 2\\cdot 1.\\] For the 4 and 1, we have: \\[5\\cdot 4\\cdot 3\\cdot 2\\cdot 5.\\] For the 3 and 2, we have: \\[5\\cdot 4\\cdot 3\\cdot 5\\cdot 4.\\] For the 2 and 3, we have: \\[5\\cdot 4\\cdot 5\\cdot 4\\cdot 3.\\] For the 1 and 4, we have: \\[5\\cdot 5\\cdot 4\\cdot 3\\cdot 2.\\] Adding up and remembering to double all of them, since they can be reversed and the 5's can be red or green, we get, after simplifying: $\\dfrac{31}{126}$ Thus the answer is $31 + 126 = \\boxed{157}$ .\n-gorefeebuddie",
+  "answer": "",
+  "year": 2018,
+  "competition": "AIME I",
+  "problem_number": 3,
+  "difficulty_tier": "early_gpt",
+  "tags": [
+    "AIME I",
+    "2018",
+    "early_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:33:37.373911+00:00"
+}

@@ -1,0 +1,18 @@
+{
+  "source": "AoPS Wiki",
+  "url": "https://artofproblemsolving.com/wiki/index.php?title=2017_AIME_I_Problems/Problem_1",
+  "title": "2017 AIME I Problems/Problem 1",
+  "problem": "Fifteen distinct points are designated on $\\triangle ABC$ : the 3 vertices $A$ , $B$ , and $C$ ; $3$ other points on side $\\overline{AB}$ ; $4$ other points on side $\\overline{BC}$ ; and $5$ other points on side $\\overline{CA}$ . Find the number of triangles with positive area whose vertices are among these $15$ points.",
+  "solution": "Every triangle is uniquely determined by 3 points. There are $\\binom{15}{3}=455$ ways to choose 3 points, but that counts the degenerate triangles formed by choosing three points on a line. There are $\\binom{5}{3}$ invalid cases on segment $AB$ , $\\binom{6}{3}$ invalid cases on segment $BC$ , and $\\binom{7}{3}$ invalid cases on segment $CA$ for a total of $65$ invalid cases. The answer is thus $455-65=\\boxed{390}$ .",
+  "answer": "",
+  "year": 2017,
+  "competition": "AIME I",
+  "problem_number": 1,
+  "difficulty_tier": "pre_gpt",
+  "tags": [
+    "AIME I",
+    "2017",
+    "pre_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:32:54.434108+00:00"
+}

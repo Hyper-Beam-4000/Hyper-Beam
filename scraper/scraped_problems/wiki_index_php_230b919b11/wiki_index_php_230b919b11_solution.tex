@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\section*{{2024 AIME II Problems/Problem 6}}
+Source: AoPS Wiki
+
+\subsection*{Solution}
+Let $k$ be one of the elements in Alices set $A$ of positive integers. The number of sets that Bob lists with the property that their maximum element is k is $2^{k-1}$ , since every positive integer less than k can be in the set or out. Thus, for the number of sets bob have listed to be 2024, we want to find a sum of unique powers of two that can achieve this. 2024 is equal to $2^{10}+2^9+2^8+2^7+2^6+2^5+2^3$ . We must increase each power by 1 to find the elements in set $A$ , which are $(11,10,9,8,7,6,4)$ . Add these up to get $\boxed{055}$ . -westwoodmonster Note: The power of two expansion can be found from the binary form of $2024$ , which is $11111101000_2$ . ~cxsmi
+
+\end{document}

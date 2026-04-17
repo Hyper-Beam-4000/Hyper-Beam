@@ -6,6 +6,13 @@
   "solution": "",
   "answer": "",
   "year": 2017,
-  "scraped_at": "2026-03-24T05:39:24.640883+00:00",
-  "lean_code": "import Mathlib.Data.List.Perm\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic\n\nopen List\n\n-- Define what it means for a pair to be an A-inversion\ndef is_A_inversion (A : List ℤ) (w : List ℤ) (i j : ℕ) : Prop :=\n  i < j ∧ ((A.get! i ≥ w.get! i ∧ w.get! i > w.get! j) ∨ \n           (w.get! j > A.get! i ∧ A.get! i ≥ w.get! i) ∨ \n           (w.get! i > w.get! j ∧ w.get! j > A.get! i))\n\n-- Count the number of A-inversions in a permutation\ndef count_A_inversions (A w : List ℤ) : ℕ :=\n  (List.range w.length).bind (λ i, \n    (List.range w.length).filter (λ j, is_A_inversion A w i j)).length\n\n-- The main theorem statement\ntheorem usamo_2017_p2 (m : List ℕ) (A B : List ℤ) (k : ℕ) :\n    (∃ w : List ℤ, w ~ m ∧ count_A_inversions A w = k) ↔ \n    (∃ w : List ℤ, w ~ m ∧ count_A_inversions B w = k) := by\n  -- Introduce the variables and assumptions\n  intro\n  -- The proof will rely on showing a bijection between permutations with k A-inversions and k B-inversions\n  -- Step 1: Show that the number of A-inversions is invariant under certain transformations\n  -- Step 2: Construct a bijection between permutations with k A-inversions and k B-inversions\n  -- Step 3: Use the invariance and bijection to conclude the proof\n  sorry"
+  "competition": "USAMO",
+  "problem_number": 2,
+  "difficulty_tier": "pre_gpt",
+  "tags": [
+    "USAMO",
+    "2017",
+    "pre_gpt"
+  ],
+  "scraped_at": "2026-04-17T13:19:07.250165+00:00"
 }

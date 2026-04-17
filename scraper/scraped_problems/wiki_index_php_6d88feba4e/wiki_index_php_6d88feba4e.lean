@@ -1,46 +1,18 @@
-import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Polynomial
+-- 2019 USAMO Problems/Problem 3
+-- Source: AoPS Wiki
+-- URL: https://artofproblemsolving.com/wiki/index.php?title=2019_USAMO_Problems/Problem_3
+
+-- Problem (LaTeX):
+/-
+Let $K$ be the set of all positive integers that do not contain the digit $7$ in their base- $10$ representation. Find all polynomials $f$ with nonnegative integer coefficients such that $f(n)\in K$ whenever $n\in K$ .
+-/
+
+-- Solution/Answer (LaTeX):
+/-
+I claim the only such polynomials are of the form $f(n)=k$ where $k\in K$ , or $f(n)=an+b$ where $a$ is a power of 10, $b\in K$ , and $b<a$ . Obviously, these polynomials satisfy the conditions. We now prove that no other polynomial works. That is, we prove that for any other polynomial $f$ with nonnegative coefficients, there is some $n\in K$ such that $f(n)\notin K$ . We first prove the result for monomials, polynomials in which only one coefficient is nonzero. This is obvious for constant polynomials $f(n)=k\notin K$ . The next simplest case is $f(n)=an$ with $a$ not a power of 10, and hence $\lg a$ is irrational. By Dirichlet's approximation theorem, the set of multiples of $\lg a$ is dense $\bmod\ 1$ , and thus contains an element with fractional part in the interval $[\lg 7,\lg 8)$ . In other words, there is a power of $a$ whose decimal expansion starts with a 7. Let $a^x$ be the smallest power of $a$ that is not in $K$ . Obviously, $x>0$ , so letting $n=a^{x-1}$ completes the proof of this part. We have now proven that for any $a$ that is not a power of 10, there is some $n\in K$ such that $an\notin K$ . We proceed to the case where $f(n)=an^x$ for $x>1$ . This splits into 2 cases. If $ax$ is not a power of 10, then pick $m\in K$ such that $axm\notin K$ . For any $y$ , we have \[f(10^y+m)=a10^{yx}+axm*10^{y(x-1)}+...+am^x\] If we choose $y$ to be large enough, then the terms in the expression above will not interfere with each other, and the resulting number will contain a 7 in the decimal expansion, and thus not be in $K$ . On the other hand, if $ax$ is a power of 10, then $a$ and $x$ are both powers of 10, and $x\ge10$ . Obviously, $\frac12ax(x-1)$ is not a power of 10. By the previous step, which establishes the result for $x=2$ , we can pick $m\in K$ such that $\frac12ax(x-1)m^2\notin K$ . Then, for any $y$ , \[f(10^y+m)=a10^{yx}+axm*10^{y(x-1)}+\frac12ax(x-1)m^2*10^{y(x-2)}+...+am^x\] Similarly, picking a sufficient large $y$ settles this case. Now, we extend our proof to general polynomials. If a polynomial $f(n)=a_0+a_1n+a_2n^2+...+a_xn^x$ satisfies the conditions of the problem, then for any $m,y>0$ : \[f(m*10^y)=a_xm^x*10^{yx}+...+a_1m*10^y+a_0\] Similarly, choosing $y$ to be sufficiently large results in the terms not interfering with each other. If $f$ contains any monomials that do not satisfy the conditions of the problem, then picking suitable $m$ and sufficiently large $y$ causes $f(m*10^y)$ to not be in $K$ . Thus, $f$ is a linear polynomial of the form $ax+b$ where $a$ is 0 or a power of 10, and $b\in K$ . It suffices to rule out those polynomials where $a>0$ and $b>a$ . If this is the case, then since the digit of $b$ corresponding to $a$ is not 7, there must be a single-digit number $n$ such that the digit of $f(n)$ corresponding to $a$ is 7. Therefore, we are done. -wzs26843545602
+-/
+
 import Mathlib.Tactic
 
-open Polynomial
-
--- Define the set K of positive integers not containing the digit 7
-def K (n : ℕ) : Prop :=
-  ∀ d ∈ n.digits 10, d ≠ 7
-
--- The main theorem: Characterize polynomials with nonnegative integer coefficients
--- such that f(n) ∈ K whenever n ∈ K
-theorem characterize_polynomials (f : Polynomial ℕ) :
-  (∀ n, K n → K (f.eval n)) ↔
-  (∃ (k : ℕ), K k ∧ f = Polynomial.C k) ∨
-  (∃ (a b : ℕ), a > 0 ∧ b < a ∧ K b ∧ f = Polynomial.C a * Polynomial.X + Polynomial.C b) := by
-  constructor
-  · intro h
-    -- Case 1: f is a constant polynomial
-    by_cases hc : f.degree = 0
-    · obtain ⟨k, hk⟩ := exists_eq_C_of_degree_eq_zero hc
-      left
-      use k
-      constructor
-      · -- Show k ∈ K
-        specialize h 1 (by simp [K])
-        rw [hk, eval_C] at h
-        exact h
-      · exact hk
-    -- Case 2: f is a non-constant polynomial
-    right
-    -- Assume f is of the form an + b
-    sorry
-  · intro h
-    cases h
-    · -- Case: f is a constant polynomial
-      obtain ⟨k, hk, rfl⟩ := h
-      intro n hn
-      rw [eval_C]
-      exact hk
-    · -- Case: f is of the form an + b
-      obtain ⟨a, b, ha, hb, hbK, rfl⟩ := h
-      intro n hn
-      rw [eval_add, eval_mul, eval_C, eval_X]
-      -- Show that an + b ∈ K
-      sorry
+theorem wiki_index_php_6d88feba4e : Prop := by
+  sorry
