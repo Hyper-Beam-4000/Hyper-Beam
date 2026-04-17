@@ -13,8 +13,8 @@ except Exception:
 
 DEMO_CONTEST_META = {
     "id": "demo-contest",
-    "name": "Hyper Beam — USAMO Benchmark",
-    "description": "54 USAMO problems (2017–2025) evaluated across 9 multi-dimensional metrics.",
+    "name": "Hyper Beam — Math Benchmark",
+    "description": "774 problems across USAMO, AMC 12, and AIME (2017–2025) evaluated across 9 multi-dimensional metrics.",
     "start_date": "2026-02-24",
     "end_date": "2026-04-18T23:59:00-12:00",
     "is_active": True,

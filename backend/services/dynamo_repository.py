@@ -103,6 +103,21 @@ def save_problem_record(
     table.put_item(Item=item)
 
 
+def list_all_problems() -> List[Dict[str, Any]]:
+    """Paginate through the entire hyperbeam-problem table and return every item."""
+    table = _get_table(DDB_TABLE_PROBLEM())
+    items: List[Dict[str, Any]] = []
+    scan_kwargs: Dict[str, Any] = {}
+    while True:
+        resp = table.scan(**scan_kwargs)
+        items.extend(resp.get("Items", []))
+        last_key = resp.get("LastEvaluatedKey")
+        if not last_key:
+            break
+        scan_kwargs["ExclusiveStartKey"] = last_key
+    return items
+
+
 def get_problem(problem_id: str) -> Optional[Dict[str, Any]]:
     table = _get_table(DDB_TABLE_PROBLEM())
     resp = table.get_item(Key={"id": problem_id})

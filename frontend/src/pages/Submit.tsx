@@ -176,7 +176,7 @@ const Submit = () => {
             <h1 className="text-4xl font-bold">Submit Model</h1>
           </div>
           <p className="text-muted-foreground text-lg">
-            Submit your model API endpoint for evaluation against USAMO problems
+            Submit your model API endpoint for evaluation against AOPS problems
           </p>
         </div>
 

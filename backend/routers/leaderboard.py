@@ -50,7 +50,7 @@ async def get_leaderboard(contest_id: str):
 
     return {
         "contest_id": contest_id,
-        "contest_name": "Hyper Beam — USAMO Benchmark",
+        "contest_name": "Hyper Beam — Math Benchmark",
         "contest_ended": True,
         "entries": entries,
     }

@@ -54,7 +54,7 @@ const Leaderboard = () => {
             <h1 className="text-4xl font-bold">Math Benchmark Leaderboard</h1>
           </div>
           <p className="text-muted-foreground text-lg">
-            Full metric breakdown — USAMO 2017–2025 benchmark
+            Full metric breakdown — USAMO/AMC 12/AIME 2017–2025 benchmark
           </p>
         </div>
 

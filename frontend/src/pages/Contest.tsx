@@ -142,7 +142,7 @@ const ContestPage = () => {
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             {contest?.description ||
-              "A holistic benchmark for evaluating Large Language Models on mathematical reasoning\u2014continuously updated with fresh problems."}
+              "A holistic benchmark for evaluating Large Language Models on mathematical reasoning — 774 problems across USAMO, AMC 12, and AIME (2017–2025), continuously updated with fresh problems."}
           </p>
         </div>
 
@@ -261,22 +261,34 @@ const ContestPage = () => {
           <CardHeader>
             <CardTitle>Problem Sources</CardTitle>
             <CardDescription>
-              Fresh problems collected from competitive mathematics platforms
+              774 problems from three AMC-series competitions (2017–2025)
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="flex flex-wrap gap-3">
-              {["USAMO 2017–2025"].map((source) => (
-                <Badge key={source} variant="outline" className="px-4 py-2 text-sm">
-                  {source}
-                </Badge>
+            <div className="flex flex-wrap gap-3 mb-4">
+              {[
+                { label: "USAMO 2017–2025",   count: "54 problems",  detail: "6 per year" },
+                { label: "AMC 12A 2017–2025",  count: "225 problems", detail: "25 per year" },
+                { label: "AMC 12B 2017–2025",  count: "225 problems", detail: "25 per year" },
+                { label: "AIME I 2017–2025",   count: "135 problems", detail: "15 per year" },
+                { label: "AIME II 2017–2025",  count: "135 problems", detail: "15 per year" },
+              ].map((src) => (
+                <div key={src.label} className="flex flex-col items-start px-4 py-2 rounded-md border border-border bg-muted/40">
+                  <span className="text-sm font-semibold">{src.label}</span>
+                  <span className="text-xs text-muted-foreground">{src.count} · {src.detail}</span>
+                </div>
               ))}
             </div>
-            <p className="text-sm text-muted-foreground mt-4">
-              54 problems from the USA Mathematical Olympiad (2017–2025), grouped by training-data era.
-              Problems from 2024–2025 serve as post-cutoff held-out test data for most current models.
-              Anti-contamination filtering uses submitted model training cutoff dates.
-            </p>
+            <div className="grid sm:grid-cols-2 gap-3 text-sm text-muted-foreground">
+              <div className="p-3 rounded-md bg-muted/30 border border-border">
+                <span className="font-medium text-foreground">Difficulty tiers</span><br />
+                USAMO (olympiad) → AIME (proof-style computation) → AMC 12 (multiple-choice), spanning a wide range of difficulty.
+              </div>
+              <div className="p-3 rounded-md bg-muted/30 border border-border">
+                <span className="font-medium text-foreground">Training-data eras</span><br />
+                Pre-GPT (2017), Early GPT (2018), Likely in training data (2019–2023), Post-cutoff held-out (2024–2025). Anti-contamination filtering uses each model's submitted training cutoff date.
+              </div>
+            </div>
           </CardContent>
         </Card>
 

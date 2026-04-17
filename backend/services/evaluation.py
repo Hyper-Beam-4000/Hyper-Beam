@@ -55,8 +55,8 @@ def evaluate_submission(submission_id: str, contest_id: str) -> None:
             ) if not api_endpoint.startswith(("http://localhost", "http://127.")) else api_endpoint
             print(f"[evaluation] endpoint rewritten to: {api_endpoint}")
 
-        # Fetch all problems from DynamoDB
-        problems_raw, _ = ddb.list_problems(limit=500)
+        # Fetch all problems from DynamoDB (paginated — table may exceed 500 items)
+        problems_raw = ddb.list_all_problems()
 
         problems = []
         for p in problems_raw:
@@ -149,9 +149,14 @@ def evaluate_submission(submission_id: str, contest_id: str) -> None:
 
 
 def _extract_lean_block(text: str) -> str | None:
-    """Extract the first ```lean ... ``` fenced block from a model response."""
+    """Extract the first Lean fenced block from a model response.
+
+    Matches ```lean, ```Lean, ```lean4, ```Lean4 (case-insensitive tag).
+    Works whether the block appears after prose or at the start of the response.
+    Returns None if no Lean block is found.
+    """
     import re
-    match = re.search(r"```lean\s*\n(.*?)```", text, re.DOTALL)
+    match = re.search(r"```lean4?\s*\n(.*?)```", text, re.DOTALL | re.IGNORECASE)
     if match:
         return match.group(1).strip()
     return None
