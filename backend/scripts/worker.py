@@ -8,6 +8,10 @@ import sys
 import time
 from typing import Any, Dict
 
+# Prevent huggingface tokenizers parallelism warning when sentence-transformers
+# is loaded in a process that later gets forked by asyncio/multiprocessing.
+os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
+
 import boto3
 from botocore.exceptions import ClientError
 

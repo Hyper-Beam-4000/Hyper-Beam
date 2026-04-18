@@ -207,7 +207,8 @@ async def groq_proxy(model_id: str, request: Request):
     Use e.g. http://localhost:8000/api/groq-proxy/deepseek-r1-distill-llama-70b
     """
     import os
-    from openai import AsyncOpenAI
+    import asyncio
+    from openai import AsyncOpenAI, RateLimitError, APIStatusError
 
     api_key = os.environ.get("GROQ_API_KEY", "")
     if not api_key:
@@ -219,6 +220,25 @@ async def groq_proxy(model_id: str, request: Request):
     client = AsyncOpenAI(
         api_key=api_key,
         base_url="https://api.groq.com/openai/v1",
+        timeout=120.0,
     )
-    completion = await client.chat.completions.create(model=model_id, messages=messages, temperature=0)
-    return {"choices": [{"message": {"content": completion.choices[0].message.content}}]}
+
+    # Retry up to 4 times on rate limit with exponential backoff
+    delays = [15, 30, 60, 120]
+    last_exc = None
+    for attempt, delay in enumerate(delays + [None]):
+        try:
+            completion = await client.chat.completions.create(
+                model=model_id, messages=messages, temperature=0
+            )
+            return {"choices": [{"message": {"content": completion.choices[0].message.content}}]}
+        except RateLimitError as e:
+            last_exc = e
+            if delay is None:
+                raise HTTPException(status_code=429, detail=f"Groq rate limit exceeded after retries: {e}")
+            print(f"[groq-proxy] 429 rate limit — retrying in {delay}s (attempt {attempt + 1})")
+            await asyncio.sleep(delay)
+        except APIStatusError as e:
+            raise HTTPException(status_code=e.status_code, detail=f"Groq API error: {e.message}")
+        except Exception as e:
+            raise HTTPException(status_code=502, detail=f"Groq proxy error: {type(e).__name__}: {e}")
